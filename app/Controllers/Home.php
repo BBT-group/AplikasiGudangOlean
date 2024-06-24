@@ -2,10 +2,22 @@
 
 namespace App\Controllers;
 
+use App\Models\BarangModel as barangModel;
+
 class Home extends BaseController
 {
+    protected $barangModel;
+
+    public function __construct()
+    {
+        $this->barangModel = new BarangModel();
+    }
     public function index(): string
     {
-        return view('welcome_message');
+        $data = [
+            'semua' => $this->barangModel->getBarang()
+        ];
+
+        return view('admin\index', $data);
     }
 }

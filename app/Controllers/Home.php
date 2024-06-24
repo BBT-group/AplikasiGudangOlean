@@ -18,6 +18,6 @@ class Home extends BaseController
             'semua' => $this->barangModel->getBarang()
         ];
 
-        return view('admin\index', $data);
+        return view('dashboard', $data);
     }
 }

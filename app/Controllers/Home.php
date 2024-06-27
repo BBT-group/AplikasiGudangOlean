@@ -6,7 +6,6 @@ class Home extends BaseController
 {
     public function index(): string
     {
-        echo view('header');
-        return view('dashboard');
+        return view('v_login');
     }
 }

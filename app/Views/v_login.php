@@ -13,15 +13,15 @@
 
     <div class="container" id="container">
         <div class="form-container sign-in">
-            <form>
+            <form method="post">
                 <h1>Login</h1>
                 <span>Masukan username dan password</span>
                 <br>
                 <div class="username-container">
-                    <input type="username" placeholder="Username">
+                    <input type="username" placeholder="Username" name="username">
                 </div>
                 <div class="password-container">
-                    <input type="password" placeholder="Password">
+                    <input type="password" placeholder="Password" name="password">
                     <i class="fa fa-eye-slash" id="togglePassword" style="cursor: pointer;"></i>
                 </div>
                 <br>
@@ -31,7 +31,7 @@
         <div class="toggle-container">
             <div class="toggle">
                 <div class="toggle-panel toggle-right">
-                    <img src="logo.png" alt="">
+                    <img src="/img/logo.png" alt="">
                     <br>
                     <h1>STOK BARANG</h1>
                     <span>PT. OLEAN PERMATA TELEMATIKA</span>

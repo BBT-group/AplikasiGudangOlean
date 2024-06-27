@@ -13,10 +13,10 @@
     <div class="container mt-5">
         <div class="row mb-3">
             <div class="col-md-6">
-                <a href="<?= base_url('barang/tambah') ?>" class="btn btn-primary">Tambah Barang</a>
+                <a href="<?= base_url('barangtambah/index') ?>" class="btn btn-primary">Tambah Barang</a>
             </div>
             <div class="col-md-6">
-                <form action="<?= base_url('barang') ?>" method="get" class="form-inline float-right">
+                <form action="<?= base_url('barang/search') ?>" method="get" class="form-inline float-right">
                     <input type="text" name="search" class="form-control mr-2" placeholder="Search" value="<?= isset($search) ? $search : '' ?>">
                     <button type="submit" class="btn btn-secondary">Search</button>
                 </form>

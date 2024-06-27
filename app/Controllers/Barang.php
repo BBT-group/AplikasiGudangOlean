@@ -21,6 +21,15 @@ class Barang extends Controller
         $this->dataList = $this->loadExistingData();
     }
 
+    public function index()
+    {
+
+        $data = [
+            'barang' => session()->get('datalist'),
+            'kategori' => $this->kategoriModel->findAll()
+        ];
+        return view('admin\percobaan', $data);
+    }
     public function loadExistingData()
     {
         session();
@@ -49,15 +58,7 @@ class Barang extends Controller
         }
     }
 
-    public function index()
-    {
-        d($this->request->getVar('searchinput'));
-        $data = [
-            'barang' => session()->get('datalist'),
-            'kategori' => $this->kategoriModel->findAll()
-        ];
-        return view('admin\percobaan', $data);
-    }
+
 
     public function simpan()
     {
@@ -91,30 +92,5 @@ class Barang extends Controller
     }
     public function search()
     {
-        // Load necessary libraries and helpers
-        helper('url');
-        $validation = \Config\Services::validation();
-
-        // Set form validation rules
-        $validation->setRules([
-            'searchInput' => 'required'
-        ]);
-
-        if (!$validation->withRequest($this->request)->run()) {
-            // Validation failed
-            echo '<p>' . $validation->listErrors() . '</p>';
-        } else {
-            // Validation successful
-            $searchInput = $this->request->getVar('searchInput');
-
-
-            $results = $this->barangModel->getBarangByName($searchInput);
-
-            foreach ($results as $result) {
-                echo '<p>' . $result['nama'] . '</p>';
-                echo '<p>' . $result['nama_kategori'] . '</p>';
-            }
-            return dd($results);
-        }
     }
 }

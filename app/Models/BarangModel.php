@@ -29,6 +29,7 @@ class BarangModel extends Model
             ->groupStart()
             ->like('barang.name', $name)
             ->orLike('kategori.name', $name)
+            ->orLike('barang.id_barang', $name)
             ->groupEnd()
             ->findAll();
     }

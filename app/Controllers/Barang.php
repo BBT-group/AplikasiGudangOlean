@@ -24,6 +24,7 @@ class Barang extends Controller
     public function index()
     {
 
+
         $data = [
             'barang' => session()->get('datalist'),
             'kategori' => $this->kategoriModel->findAll()
@@ -89,8 +90,5 @@ class Barang extends Controller
             ];
             return redirect()->to(base_url('/barang/index'));
         }
-    }
-    public function search()
-    {
     }
 }

@@ -24,14 +24,13 @@ class BarangModel extends Model
 
     public function getBarangByName($name)
     {
-        return $this->select('barang.*, kategori.name as category_name')
+        return $this->select('barang.*, kategori.nama_kategori as category_name')
             ->join('kategori', 'kategori.id_kategori = barang.id_kategori')
             ->groupStart()
-            ->like('barang.name', $name)
-            ->orLike('kategori.name', $name)
+            ->like('barang.nama', $name)
+            ->orLike('kategori.nama_kategori', $name)
             ->orLike('barang.id_barang', $name)
-            ->groupEnd()
-            ->findAll();
+            ->groupEnd();
     }
     public function insertBarang($data)
     {

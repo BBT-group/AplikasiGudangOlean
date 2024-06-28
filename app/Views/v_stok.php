@@ -1,22 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+<div class="dash-content">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Barang</title>
-    <!-- Tambahkan link ke CSS Bootstrap untuk styling -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body>
     <div class="container mt-5">
         <div class="row mb-3">
             <div class="col-md-6">
                 <a href="<?= base_url('barangtambah/index') ?>" class="btn btn-primary">Tambah Barang</a>
             </div>
             <div class="col-md-6">
-                <form action="<?= base_url('barang/search') ?>" method="get" class="form-inline float-right">
+                <form action="" method="get" class="form-inline float-right">
                     <input type="text" name="search" class="form-control mr-2" placeholder="Search" value="<?= isset($search) ? $search : '' ?>">
                     <button type="submit" class="btn btn-secondary">Search</button>
                 </form>
@@ -36,7 +26,10 @@
                 </tr>
             </thead>
             <tbody>
-                <?php if (!empty($barang)) : ?>
+                <?php
+
+
+                if (!empty($barang)) : ?>
                     <?php foreach ($barang as $item) : ?>
                         <tr>
 
@@ -61,11 +54,18 @@
                     </tr>
                 <?php endif; ?>
             </tbody>
+
         </table>
+        <!-- <div class="baru">
+            <?php #echo $pager->links(); 
+            ?>
+        </div> -->
+
     </div>
-    <!-- Tambahkan link ke JS Bootstrap dan jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</div>
+</section>
+<script src="/js/scripts.js"></script>
 </body>
 
 </html>

@@ -54,6 +54,7 @@ class Barang_Tambah extends Controller
                 'harga_beli' => $this->request->getVar('harga_beli'),
                 'id_kategori' => $newID['id_kategori'],
             ];
+            $this->barangModel->insertBarang($data);
             return redirect()->to(base_url('/stok/index'));
         }
     }

@@ -33,6 +33,12 @@ class BarangModel extends Model
             ->groupEnd()
             ->findAll();
     }
+    public function getBarangWithKategori()
+    {
+        return $this
+                    ->join('kategori', 'kategori.id_kategori = barang.id_kategori')
+                    ->findAll();
+    }
     public function insertBarang($data)
     {
         $this->insert($data);

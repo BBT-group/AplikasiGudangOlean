@@ -22,8 +22,8 @@
                 </form>
             </div>
         </div>
-        <table class="table table-bordered">
-            <thead>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
                 <tr>
                     <th>ID Barang</th>
                     <th>Nama</th>
@@ -32,14 +32,13 @@
                     <th>Merk</th>
                     <th>Stok</th>
                     <th>Harga Beli</th>
-                    <th>ID Kategori</th>
+                    <th>Kategori</th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (!empty($barang)) : ?>
                     <?php foreach ($barang as $item) : ?>
                         <tr>
-
                             <td><?= $item['id_barang'] ?></td>
                             <td><?= $item['nama'] ?></td>
                             <td><?= $item['satuan'] ?></td>
@@ -47,11 +46,14 @@
                             <td><?= $item['merk'] ?></td>
                             <td><?= $item['stok'] ?></td>
                             <td><?= $item['harga_beli'] ?></td>
-                            <td><?php foreach ($kategori as $k) {
-                                    if ($k['id_kategori'] === $item['id_kategori']) {
-                                        echo $k['nama_kategori'];
-                                    };
-                                }; ?>
+                            <td>
+                                <?php 
+                                    foreach ($kategori as $k) {
+                                        if ($k['id_kategori'] === $item['id_kategori']) {
+                                            echo $k['nama_kategori'];
+                                        }
+                                    }
+                                ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

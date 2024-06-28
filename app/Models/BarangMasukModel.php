@@ -8,8 +8,7 @@ class BarangMasukModel extends Model
 {
     protected $table = 'barang_masuk';
     protected $primaryKey = 'id_barang_masuk';
-
-    protected $useTimestamps = true;
+    protected $allowedFields = ['id_barang', 'id_ms_barang_masuk', 'jumlah'];
 
     public function getBarangMasuk()
     {

@@ -12,8 +12,8 @@
                 </form>
             </div>
         </div>
-        <table class="table table-bordered table-striped">
-            <thead class="thead-dark">
+        <table class="table table-bordered">
+            <thead>
                 <tr>
                     <th>ID Barang</th>
                     <th>Nama</th>
@@ -22,7 +22,7 @@
                     <th>Merk</th>
                     <th>Stok</th>
                     <th>Harga Beli</th>
-                    <th>Kategori</th>
+                    <th>ID Kategori</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,6 +32,7 @@
                 if (!empty($barang)) : ?>
                     <?php foreach ($barang as $item) : ?>
                         <tr>
+
                             <td><?= $item['id_barang'] ?></td>
                             <td><?= $item['nama'] ?></td>
                             <td><?= $item['satuan'] ?></td>
@@ -39,14 +40,21 @@
                             <td><?= $item['merk'] ?></td>
                             <td><?= $item['stok'] ?></td>
                             <td><?= $item['harga_beli'] ?></td>
+                            <td><?php foreach ($kategori as $k) {
+                                    if ($k['id_kategori'] === $item['id_kategori']) {
+                                        echo $k['nama_kategori'];
+                                    };
+                                }; ?>
+                            </td>
                             <td>
-                                <?php 
-                                    foreach ($kategori as $k) {
-                                        if ($k['id_kategori'] === $item['id_kategori']) {
-                                            echo $k['nama_kategori'];
-                                        }
-                                    }
-                                ?>
+                                <form action=<?= base_url('/barang_masuk/savedata') ?> method="post">
+                                    <input type="text" name="id_barang" id="id_barang" value="<?= $item['id_barang'] ?>" hidden>
+                                    <input type="text" name="nama" id="nama" value="<?= $item['nama'] ?>" hidden>
+                                    <input type="text" name="satuan" id="satuan" value="<?= $item['satuan'] ?>" hidden>
+                                    <input type="text" name="stok" id="stok" value="<?= $item['stok'] ?>" hidden>
+                                    <input type="text" name="harga_beli" id="harga_beli" value="<?= $item['harga_beli'] ?>" hidden>
+                                    <button type="submit">submit</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>

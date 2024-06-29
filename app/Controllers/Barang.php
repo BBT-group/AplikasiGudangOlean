@@ -2,13 +2,12 @@
 
 namespace App\Controllers;
 
-use CodeIgniter\Controller;
 use App\Models\BarangModel;
 use App\Models\KategoriModel;
 
 
 
-class Barang extends Controller
+class Barang extends BaseController
 {
     protected $barangModel;
     protected $kategoriModel;
@@ -23,7 +22,6 @@ class Barang extends Controller
 
     public function index()
     {
-
         $data = [
             'barang' => session()->get('datalist'),
             'kategori' => $this->kategoriModel->findAll()
@@ -89,8 +87,5 @@ class Barang extends Controller
             ];
             return redirect()->to(base_url('/barang/index'));
         }
-    }
-    public function search()
-    {
     }
 }

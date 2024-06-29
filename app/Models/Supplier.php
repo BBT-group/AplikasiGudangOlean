@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class MasterBarangKeluarModel extends Model
+class Supplier extends Model
 {
-    protected $table = 'ms_barang_Keluar';
-    protected $primaryKey = 'id_barang_keluar';
+    protected $table = 'supplier';
+    protected $primaryKey = 'id_supplier';
 
     public function getBarangKeluar()
     {

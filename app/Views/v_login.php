@@ -6,23 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="/css/style.css">
-    <title>Modern Login Page | AsmrProg</title>
+    <title>Login | PT. Olean</title>
 </head>
 
 <body>
 
     <div class="container" id="container">
         <div class="form-container sign-in">
-            <form method="post">
+            <form method="post" action="<?php echo site_url('/login') ?>">
+                <?= csrf_field()?>
                 <h1>Login</h1>
                 <span>Masukan username dan password</span>
                 <br>
+                <?php if(session()->getFlashdata('error')) : ?>
+                    <div class="alert alert-denger alert-dismissible show fade">
+                        <div class="alert-body">
+                            <b>Error !</b>
+                            <?= session()->getFlashdata('error')?>
+                        </div>
+                    </div>
+                    <?php endif ?>
                 <div class="username-container">
-                    <input type="username" placeholder="Username" name="username">
+                    <input type="username" placeholder="Username" name="username" required>
                 </div>
                 <div class="password-container">
-                    <input type="password" placeholder="Password" name="password">
-                    <i class="fa fa-eye-slash" id="togglePassword" style="cursor: pointer;"></i>
+                    <input type="password" placeholder="Password" name="password" required>
+                    <!-- <i class="fa fa-eye-slash" id="togglePassword" style="cursor: pointer;"></i> -->
                 </div>
                 <br>
                 <button>Login</button>

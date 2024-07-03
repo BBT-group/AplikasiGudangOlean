@@ -20,7 +20,6 @@
                     <th>Satuan</th>
                     <th>Foto</th>
                     <th>Merk</th>
-                    <th>Stok</th>
                     <th>Harga Beli</th>
                     <th>ID Kategori</th>
                 </tr>
@@ -38,7 +37,6 @@
                             <td><?= $item['satuan'] ?></td>
                             <td><img src="<?= base_url($item['foto']) ?>" alt="<?= $item['nama'] ?>" width="50"></td>
                             <td><?= $item['merk'] ?></td>
-                            <td><?= $item['stok'] ?></td>
                             <td><?= $item['harga_beli'] ?></td>
                             <td><?php foreach ($kategori as $k) {
                                     if ($k['id_kategori'] === $item['id_kategori']) {

@@ -16,6 +16,8 @@ $routes->add('/barang_masuk/clearsession', 'Barang_Masuk::clearSession');
 $routes->add('/barang_masuk/update', 'Barang_Masuk::updateStok');
 $routes->get('/barangtambah/index', 'Barang_Tambah::index');
 $routes->add('/barangtambah/simpan', 'Barang_Tambah::simpan');
+$routes->add('/barang_masuk/update2', 'Barang_Masuk::update');
+$routes->add('/barang_masuk/carii', 'Barang_Masuk::cariStok');
 
 $routes->get('/beranda', 'Beranda::index');
 $routes->get('/barang_masuk', 'Barang_Masuk::index');

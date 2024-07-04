@@ -1,8 +1,11 @@
 <form id="addItemForm" action=<?= base_url('barangtambah/simpan') ?> method="post" enctype="multipart/form-data">
+
     <div class="dash-content">
         <div class="form-group mt-3">
             <label for="id_barang">ID Barang</label>
-            <input type="text" class="form-control" id="id_barang" name="id_barang" required autofocus>
+            <input type="text" class="form-control" id="id_barang" name="id_barang" required autofocus value="<?php if (!empty(session()->get('id_barang_temp'))) {
+                                                                                                                    echo session()->get('id_barang_temp');
+                                                                                                                } else '' ?>">
         </div>
         <div class="form-group">
             <label for="nama">Nama</label>

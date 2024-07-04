@@ -45,10 +45,10 @@ class Barang_Masuk extends BaseController
     {
         foreach ($objects as $object) {
             if ($object['id_barang'] !== $name) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
     public function saveData()
     {
@@ -116,5 +116,60 @@ class Barang_Masuk extends BaseController
         }
         session()->remove('datalist');
         return redirect()->to(base_url('/barang_masuk'));
+    }
+    public function update()
+    {
+        $session = session();
+        $datalist = $session->get('datalist') ?? [];
+
+        $index = $this->request->getPost('index');
+        $column = $this->request->getPost('column');
+        $value = $this->request->getPost('value');
+
+        if (isset($datalist[$index])) {
+            $datalist[$index][$column] = $value;
+            $session->set('datalist', $datalist);
+        }
+
+        return $this->response->setJSON(['status' => 'success']);
+    }
+
+    public function cariStok()
+    {
+        $idBarang = $this->request->getPost('idBarang');
+
+
+        if (!empty($idBarang)) {
+            $a = $this->barangModel->where(
+                'id_barang',
+                $idBarang
+            )->first();
+            if (empty($a)) {
+                session()->set('id_barang_temp', $idBarang);
+                return $this->response->setJSON([
+                    'status' => 'not_found',
+                    'message' => 'Item not found. Please go to the input form to add this item.'
+                ]);
+            }
+            if ($this->containsObjectWithName($this->dataList, $idBarang)) {
+                $this->dataList[array_search($idBarang, array_values($this->dataList))]['stok'] += 1;
+                session()->set('datalist', $this->dataList);
+                return $this->response->setJSON(['status' => 'success']);
+            }
+            $data2 = [
+                'id_barang' => $idBarang,
+                'nama' => $a['nama'],
+                'satuan' => $a['satuan'],
+                // 'merk' => $a('merk'),
+                'stok' => 1,
+                'harga_beli' => $a['harga_beli'],
+                // 'id_kategori' => $a('id_kategori'),
+            ];
+            $this->dataList[] = $data2;
+            session()->set('datalist', $this->dataList);
+            return $this->response->setJSON(['status' => 'success']);
+        } else {
+            return $this->response->setJSON(['status' => 'eror']);
+        }
     }
 }

@@ -24,7 +24,7 @@ class Home extends BaseController
         $user = $query->getRow();
         if($user) {
             if(password_verify($post['password'], $user->password)) {
-                $params = ['id_ms_user' => $user->id_ms_user, 'role' => $user->role];
+                $params = ['role' => $user->role];
                 session()->set($params);
                 return redirect()->to(site_url('beranda'));
             } else {
@@ -37,7 +37,7 @@ class Home extends BaseController
 
     public function logout()
     {
-        session()->remove('id_ms_user');
+        session()->remove('role');
         return redirect()->to(site_url('/'));
     }
 

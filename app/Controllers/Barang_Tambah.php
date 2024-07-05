@@ -29,6 +29,7 @@ class Barang_Tambah extends Controller
     }
     public function simpan()
     {
+
         $file = $this->request->getFile('foto');
         if ($file->isValid() && !$file->hasMoved()) {
             $newName = $file->getRandomName();
@@ -50,11 +51,12 @@ class Barang_Tambah extends Controller
                 'satuan' => $this->request->getVar('satuan'),
                 'foto' => $foto_path,
                 'merk' => $this->request->getVar('merk'),
-                'stok' => $this->request->getVar('stok'),
+                'stok' => 0,
                 'harga_beli' => $this->request->getVar('harga_beli'),
                 'id_kategori' => $newID['id_kategori'],
             ];
-            return redirect()->to(base_url('/stok/index'));
+            $this->barangModel->insertBarang($data);
+            return redirect()->to(base_url('/stok'));
         }
     }
 }

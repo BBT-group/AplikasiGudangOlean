@@ -1,8 +1,11 @@
 <form id="addItemForm" action=<?= base_url('barangtambah/simpan') ?> method="post" enctype="multipart/form-data">
+
     <div class="dash-content">
         <div class="form-group mt-3">
             <label for="id_barang">ID Barang</label>
-            <input type="text" class="form-control" id="id_barang" name="id_barang" required>
+            <input type="text" class="form-control" id="id_barang" name="id_barang" required autofocus value="<?php if (!empty(session()->get('id_barang_temp'))) {
+                                                                                                                    echo session()->get('id_barang_temp');
+                                                                                                                } else '' ?>">
         </div>
         <div class="form-group">
             <label for="nama">Nama</label>
@@ -21,8 +24,7 @@
             <input type="text" class="form-control" id="merk" name="merk" required maxlength="15">
         </div>
         <div class="form-group">
-            <label for="stok">Stok</label>
-            <input type="number" class="form-control" id="stok" name="stok" disabled value=0>
+            <input type="number" class="form-control" id="stok" name="stok" disabled value=0 hidden>
         </div>
         <div class="form-group">
             <label for="harga_beli">Harga Beli</label>

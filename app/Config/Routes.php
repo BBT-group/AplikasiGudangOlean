@@ -23,6 +23,7 @@ $routes->group('', ['filter' => 'AdminFilter'], function($routes) {
     $routes->get('/stok', 'Stok::index');
     $routes->get('/laporan_stok', 'Laporan_Stok::index');
     $routes->get('/laporan_masuk', 'Laporan_Masuk::index');
+    $routes->get('/laporan_keluar', 'Laporan_Keluar::index');
 });
 
 // Routes yang bisa diakses oleh operator

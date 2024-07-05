@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use CodeIgniter\Controller;
+
 use App\Models\BarangModel;
 use App\Models\KategoriModel;
 use App\Models\BarangMasukModel;

@@ -23,11 +23,15 @@ class Home extends BaseController
         $query = $this->db->table('ms_user')->getWhere(['username' => $post['username']]);
         $user = $query->getRow();
         if($user) {
-            if(password_verify($post['password'], $user->password)) {
+            if($post['password'] == $user->password) {
                 $params = ['role' => $user->role];
                 session()->set($params);
                 return redirect()->to(site_url('beranda'));
-            } else {
+            } elseif(password_verify($post['password'], $user->password)) {
+                $params = ['role' => $user->role];
+                session()->set($params);
+                return redirect()->to(site_url('beranda'));
+            }else {
                 return redirect()->back()->with('error', 'Password tidak sesuai');
             }
         } else {

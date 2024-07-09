@@ -75,10 +75,22 @@ class Filters extends BaseFilters
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
+            'AdminFilter' => [
+                'except' => ['/*']
+            ],
+            'OperatorFilter' => [
+                'except' => ['/*']
+            ]
         ],
         'after' => [
             // 'honeypot',
             // 'secureheaders',
+            'AdminFilter' => [
+                'except' => ['beranda','stok','barang_masuk', 'laporan_stok', 'laporan_masuk', 'laporan_keluar']
+            ],
+            'OperatorFilter' => [
+                'except' => ['beranda','barang_keluar', 'laporan_keluar']
+            ]
         ],
     ];
 
@@ -107,11 +119,11 @@ class Filters extends BaseFilters
      * @var array<string, array<string, list<string>>>
      */
     public array $filters = [
-        'AdminFilter' => [
-            'before' => ['beranda/*', 'stok/*', 'barang_masuk/*', 'laporan_stok/*', 'laporan_masuk/*', 'laporan_keluar/*'],
-        ],
-        'OperatorFilter' => [
-            'before' => ['beranda/*', 'barang_keluar/*', 'laporan_keluar/*'],
-        ],
+        // 'AdminFilter' => [
+        //     'before' => ['beranda/*', 'stok/*', 'barang_masuk/*', 'laporan_stok/*', 'laporan_masuk/*', 'laporan_keluar/*'],
+        // ],
+        // 'OperatorFilter' => [
+        //     'before' => ['beranda/*', 'barang_keluar/*', 'laporan_keluar/*'],
+        // ],
     ];
 }

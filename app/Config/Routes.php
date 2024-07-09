@@ -23,16 +23,16 @@ $routes->add('/barang_masuk/update2', 'Barang_Masuk::update');
 $routes->add('/barang_masuk/carii', 'Barang_Masuk::cariStok');
 
 // Routes yang bisa diakses oleh admin
-$routes->group('', ['filter' => 'AdminFilter'], function($routes) {
+// $routes->group('', ['filter' => 'AdminFilter'], function($routes) {
     $routes->get('/barang_masuk', 'Barang_Masuk::index');
     $routes->get('/stok', 'Stok::index');
     $routes->get('/laporan_stok', 'Laporan_Stok::index');
     $routes->get('/laporan_masuk', 'Laporan_Masuk::index');
     $routes->get('/laporan_keluar', 'Laporan_Keluar::index');
-});
+// });
 
 // Routes yang bisa diakses oleh operator
-$routes->group('', ['filter' => 'OperatorFilter'], function($routes) {
+// $routes->group('', ['filter' => 'OperatorFilter'], function($routes) {
     $routes->get('/barang_keluar', 'Barang_Keluar::index');
-    $routes->get('/laporan_keluar', 'Laporan_Keluar::index');
-});
+    // $routes->get('/laporan_keluar', 'Laporan_Keluar::index');
+// });

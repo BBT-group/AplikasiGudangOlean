@@ -17,6 +17,13 @@ class BarangModel extends Model
         return $this->findAll();
     }
 
+    public function getBarangWithKategori()
+    {
+        return $this->select('barang.*, kategori.nama_kategori')
+            ->join('kategori', 'kategori.id_kategori = barang.id_kategori')
+            ->findAll();
+    }
+
     public function getBarangById($id)
     {
         return $this->find($id);

@@ -2,8 +2,8 @@
 
     <div class="container mt-5">
         <h2>barang keluar Management</h2>
-        <a href="<?= base_url('barang_masuk/cari') ?>" class="btn btn-primary">cari Barang</a>
-        <form id="addItemForm" action=<?= base_url('/barang_masuk/update') ?> method="post" enctype="multipart/form-data">
+        <a href="<?= base_url('barang_keluar/cari') ?>" class="btn btn-primary">cari Barang</a>
+        <form id="addItemForm" action=<?= base_url('/barang_keluar/update') ?> method="post" enctype="multipart/form-data">
             <div class="container mt-5">
                 <div class="row">
                     <div class="col-md-6">
@@ -18,8 +18,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="input2">supplier</label>
-                            <input type="text" class="form-control" id="supplier" name="supplier">
+                            <label for="input2">penerima</label>
+                            <input type="text" class="form-control" id="penerima" name="penerima" value="<?= old('penerima') ?>">
                         </div>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
         </form>
         <button id="clear-session-btn">Clear Session</button>
         <table class="table table-bordered mt-3">
-            <?= d(session()->get('datalist')) ?>
+
             <thead>
                 <tr>
                     <th>ID Barang</th>
@@ -37,7 +37,7 @@
                     <th>Satuan</th>
                     <!-- <th>Merk</th> -->
                     <th>jumlah</th>
-                    <th>Harga Beli</th>
+
                     <!-- <th>ID Kategori</th> -->
                 </tr>
             </thead>
@@ -51,16 +51,7 @@
                         <td><?= $s['id_barang'] ?></td>
                         <td><?= $s['nama'] ?></td>
                         <td><?= $s['satuan'] ?></td>
-                        <!-- <td><? #= $s['merk'] 
-                                    ?></td> -->
                         <td><input type="number" class="update-field" data-index="<?= $index ?>" data-column="stok" value="<?= esc($s['stok']) ?>"></td>
-                        <td><input type="number" class="update-field" data-index="<?= $index ?>" data-column="harga_beli" value="<?= esc($s['harga_beli']) ?>"></td>
-                        <!-- <td><?php #echo $s['stok'] 
-                                    ?></td> -->
-                        <!-- <td><?php #echo $s['harga_beli'] 
-                                    ?></td> -->
-                        <!-- <td><? #= $s['id_kategori'] 
-                                    ?></td> -->
                     </tr>
 
                 <?php endforeach; ?>
@@ -80,7 +71,7 @@
     $(document).ready(function() {
         $('#clear-session-btn').click(function() {
             $.ajax({
-                url: '<?= base_url('barang_masuk/clearsession') ?>', // Adjust the URL as needed
+                url: '<?= base_url('barang_keluar/clearsession') ?>', // Adjust the URL as needed
                 method: 'POST',
                 success: function(response) {
                     // $('.print').text('Response from server: ' + response);
@@ -97,13 +88,13 @@
 </script>
 <script>
     $(document).ready(function() {
-        $('.update-field').on('change', function() {
+        $('.update-field').on('input', function() {
             var index = $(this).data('index');
             var column = $(this).data('column');
             var value = $(this).val();
 
             $.ajax({
-                url: '<?= base_url('barang_masuk/update2') ?>',
+                url: '<?= base_url('barang_keluar/update2') ?>',
                 method: 'POST',
                 data: {
                     index: index,
@@ -154,7 +145,7 @@
 
     function handleBarcodeScan(id) {
         $.ajax({
-            url: '<?= base_url('barang_masuk/carii') ?>',
+            url: '<?= base_url('barang_keluar/carii') ?>',
             method: 'POST',
             data: {
                 idBarang: id,

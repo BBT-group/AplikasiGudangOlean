@@ -27,8 +27,7 @@ class Stok extends BaseController
             $barang = $this->barangModel;
         }
         $data = [
-            'barang' => $barang->findAll(),
-            'kategori' => $this->kategoriModel->findAll(),
+            'barang' => $barang->getBarangWithKategori(),
             'pager' => $this->barangModel->pager
         ];
         echo view('v_header');

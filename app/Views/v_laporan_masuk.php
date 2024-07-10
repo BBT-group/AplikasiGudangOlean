@@ -7,22 +7,24 @@
     <title>Daftar Barang</title>
     <!-- Tambahkan link ke CSS Bootstrap untuk styling -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 
 <body>
     <div class="container mt-5">
         <section class="dash-content">
-        <a href="<?= base_url('/laporan_masuk/exportm') ?>" class="btn btn-primary">Export</a>
-            <!-- <form action="<?= base_url('/laporan_masuk/exportm') ?>" method="get">
-                <label for="start_date">Start Date:</label>
-                <input type="text" id="start_date" name="start_date">
-                <label for="end_date">End Date:</label>
-                <input type="text" id="end_date" name="end_date">
-                
-                <button type="submit" class="btn btn-primary">Export to Excel</button>
-            </form> -->
+            <h1>Ini Tampilan Laporan barang masuk</h1>
+            <form action="<?= base_url('/laporan_masuk/exportm') ?>" method="get" class="form-inline">
+                <div class="form-group mb-2">
+                    <label for="start_date" class="mr-2">Start Date:</label>
+                    <input type="text" id="start_date" name="start_date" class="form-control mr-2" autocomplete="off">
+                </div>
+                <div class="form-group mb-2">
+                    <label for="end_date" class="mr-2">End Date:</label>
+                    <input type="text" id="end_date" name="end_date" class="form-control mr-2" autocomplete="off">
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">Export to Excel</button>
+            </form>
         </section>
         <table class="table table-bordered">
             <thead>
@@ -59,12 +61,10 @@
             </tbody>
         </table>
     </div>
-    <!-- Tambahkan link ke JS Bootstrap dan jQuery -->
+    <!-- Tambahkan link ke JS Bootstrap, jQuery, dan jQuery UI -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="/js/scripts.js"></script>
     <script>
         $(function() {
             $("#start_date").datepicker({

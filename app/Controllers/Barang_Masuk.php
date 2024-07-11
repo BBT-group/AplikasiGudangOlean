@@ -8,6 +8,7 @@ use App\Models\KategoriModel;
 use App\Models\BarangMasukModel;
 use App\Models\MasterBarangMasukModel;
 
+use function PHPUnit\Framework\isEmpty;
 
 class Barang_Masuk extends BaseController
 {
@@ -30,9 +31,23 @@ class Barang_Masuk extends BaseController
     {
         $data = [
             'barang' => session()->get('datalist'),
-            'kategori' => $this->kategoriModel->findAll()
         ];
         echo view('v_header');
+        return view('v_barang_masuk', $data);
+    }
+
+    // fungsi tampil detail barang masuk
+    public function indexDetailMaster()
+    {
+        $idBarang = $this->request->getVar('id_ms_barang_masuk');
+        $data = [
+            // mengambil header ms barang masuk yaitu nama supp, tanggal, id master barang
+            'header' => $this->masterBarangMasukModel->getById($idBarang),
+            // mengambil data yang memiliki id ms barang masuk
+            'barang' => $this->barangMasukModel->getByMasterId($idBarang)
+        ];
+        echo view('v_header');
+        // ganti url ke detail
         return view('v_barang_masuk', $data);
     }
     public function beranda()
@@ -58,12 +73,15 @@ class Barang_Masuk extends BaseController
     }
     function containsObjectWithName($objects, $name)
     {
-        foreach ($objects as $object) {
-            if ($object['id_barang'] !== $name) {
-                return false;
+        if (!isEmpty($objects)) {
+            foreach ($objects as $object) {
+                if ($object['id_barang'] !== $name) {
+                    return false;
+                }
             }
+            return true;
         }
-        return true;
+        return false;
     }
     public function saveData()
     {
@@ -180,7 +198,7 @@ class Barang_Masuk extends BaseController
                     'message' => 'Item not found. Please go to the input form to add this item.'
                 ]);
             }
-            if ($this->containsObjectWithName($this->dataList, $idBarang)) {
+            if ($this->containsObjectWithName($this->dataList, $idBarang) || $this->dataList != null) {
                 $this->dataList[array_search($idBarang, array_values($this->dataList))]['stok'] += 1;
                 session()->set('datalist', $this->dataList);
                 return $this->response->setJSON(['status' => 'success']);
@@ -201,7 +219,7 @@ class Barang_Masuk extends BaseController
             return $this->response->setJSON(['status' => 'eror']);
         }
     }
-    public function hapusBarangDatalistKeluar()
+    public function hapusBarangDatalistMasuk()
     {
         $session = session();
         $items = $session->get('datalist') ?? [];
@@ -214,6 +232,8 @@ class Barang_Masuk extends BaseController
         }
         return $this->response->setJSON(['status' => 'success']);
     }
+
+
 
     public function cariMaster()
     {

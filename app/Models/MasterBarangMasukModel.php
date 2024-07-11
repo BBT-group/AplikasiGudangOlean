@@ -16,4 +16,10 @@ class MasterBarangMasukModel extends Model
         return $this->select('ms_barang_masuk.*, supplier.nama ')
             ->join('supplier', 'supplier.id_supplier = ms_barang_masuk.id_supplier');
     }
+
+    public function getById($id)
+    {
+        return $this->select('ms_barang_masuk.*, supplier.nama ')
+            ->join('supplier', 'supplier.id_supplier = ms_barang_masuk.id_supplier')->where('id_ms_barang_masuk', $id)->first();
+    }
 }

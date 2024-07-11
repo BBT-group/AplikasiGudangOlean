@@ -16,4 +16,9 @@ class MasterBarangKeluarModel extends Model
             ->join('penerima', 'penerima.id_penerima = ms_barang_keluar.id_penerima')
             ->findAll();
     }
+    public function getById($id)
+    {
+        return $this->select('ms_barang_keluar.*, penerima.nama ')
+            ->join('penerima', 'penerima.id_penerima = ms_barang_keluar.id_penerima')->where('id_ms_barang_keluar', $id)->first();
+    }
 }

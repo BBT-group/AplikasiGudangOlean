@@ -23,6 +23,7 @@
                     <th>Stok</th>
                     <th>Harga Beli</th>
                     <th>Kategori</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>

@@ -36,6 +36,21 @@ class Barang_Keluar extends BaseController
         return view('v_barang_keluar', $data);
     }
 
+    // fungsi tampil detail barang masuk
+    public function indexDetailMaster()
+    {
+        $idBarang = $this->request->getVar('id_ms_barang_keluar');
+        $data = [
+            // mengambil header ms barang masuk yaitu nama supp, tanggal, id master barang
+            'header' => $this->masterBarangKeluarModel->getById($idBarang),
+            // mengambil data yang memiliki id ms barang masuk
+            'barang' => $this->barangKeluarModel->getByMasterId($idBarang)
+        ];
+        echo view('v_header');
+        // ganti url ke detail
+        return view('v_barang_masuk', $data);
+    }
+
     public function beranda()
     {
         $data = [
@@ -171,7 +186,7 @@ class Barang_Keluar extends BaseController
             }
             if ($this->containsObjectWithName($this->dataList, $idBarang)) {
                 $this->dataList[array_search($idBarang, array_values($this->dataList))]['stok'] += 1;
-                session()->set('datalist', $this->dataList);
+                session()->set('datalist_keluar', $this->dataList);
                 return $this->response->setJSON(['status' => 'success']);
             }
             $data2 = [

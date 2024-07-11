@@ -35,7 +35,7 @@
                             <td><?= $item['id_ms_barang_keluar'] ?></td>
                             <td><?= $item['waktu'] ?></td>
                             <td><?= $item['nama'] ?></td>
-
+                            <td><button>detail</button></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else : ?>

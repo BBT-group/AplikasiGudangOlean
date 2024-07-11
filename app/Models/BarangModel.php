@@ -26,7 +26,8 @@ class BarangModel extends Model
 
     public function getBarangById($id)
     {
-        return $this->find($id);
+        return $this->select('barang.*, kategori.nama_kategori')
+            ->join('kategori', 'kategori.id_kategori = barang.id_kategori')->where('id_barang', $id)->first();
     }
 
     public function getBarangByName($name)

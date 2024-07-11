@@ -14,4 +14,8 @@ class BarangMasukModel extends Model
     {
         return $this->findAll();
     }
+    public function getByMasterId($id)
+    {
+        return $this->where('id_barang_masuk', $id)->findAll();
+    }
 }

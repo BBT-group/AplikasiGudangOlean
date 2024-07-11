@@ -48,7 +48,7 @@ class Barang_Tambah extends Controller
                 'foto' => $foto_path,
                 'merk' => $this->request->getVar('merk'),
                 'stok' => 0,
-                'harga_beli' => $this->request->getVar('harga_beli'),
+                'harga_beli' => 0,
                 'id_kategori' => $newID['id_kategori'],
             ];
             $this->barangModel->insertBarang($data);

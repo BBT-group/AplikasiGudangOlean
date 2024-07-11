@@ -27,7 +27,7 @@
             <input type="number" class="form-control" id="stok" name="stok" disabled value=0 hidden>
         </div>
         <div class="form-group">
-            <input type="number" class="form-control" id="harga_beli" name="harga_beli" disabled hidden value=0>
+            <input type="number" class="form-control" id="harga_beli" name="harga_beli" value=0 disabled hidden>
         </div>
         <div class="form-group">
             <label for="id_kategori">ID Kategori</label>

@@ -37,8 +37,14 @@ class Barang_Masuk extends BaseController
     }
     public function beranda()
     {
+        // $keyword = $this->request->getVar('search');
+        // if ($keyword) {
+        //     $masuk = $this->masterBarangMasukModel->getBarangByName($keyword);
+        // } else {
+        //     $masuk = $this->masterBarangMasukModel;
+        // }
         $data = [
-            'masuk' => $this->masterBarangMasukModel->getAll(),
+            'masuk' => $this->masterBarangMasukModel->getAll()->findAll(),
         ];
         echo view('v_header');
         return view('v_beranda_barang_masuk', $data);
@@ -159,8 +165,8 @@ class Barang_Masuk extends BaseController
 
     public function cariStok()
     {
-        $idBarang = $this->request->getPost('idBarang');
 
+        $idBarang = $this->request->getPost('idBarang');
 
         if (!empty($idBarang)) {
             $a = $this->barangModel->where(
@@ -207,5 +213,9 @@ class Barang_Masuk extends BaseController
             $session->set('datalist', $items);
         }
         return $this->response->setJSON(['status' => 'success']);
+    }
+
+    public function cariMaster()
+    {
     }
 }

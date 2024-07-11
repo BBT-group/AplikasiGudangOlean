@@ -14,7 +14,6 @@ class MasterBarangMasukModel extends Model
     public function getAll()
     {
         return $this->select('ms_barang_masuk.*, supplier.nama ')
-            ->join('supplier', 'supplier.id_supplier = ms_barang_masuk.id_supplier')
-            ->findAll();
+            ->join('supplier', 'supplier.id_supplier = ms_barang_masuk.id_supplier');
     }
 }

@@ -6,7 +6,7 @@
                 <a href="<?= base_url('barang_masuk/index') ?>" class="btn btn-primary">masukan barang</a>
             </div>
             <div class="col-md-6">
-                <form action="" method="get" class="form-inline float-right">
+                <form action="<?= base_url('/barang_masuk/cari') ?>" method="get" class="form-inline float-right">
                     <input type="text" name="search" class="form-control mr-2" placeholder="Search" value="<?= isset($search) ? $search : '' ?>">
                     <button type="submit" class="btn btn-secondary">Search</button>
                 </form>
@@ -27,7 +27,9 @@
 
 
                 if (!empty($masuk)) : ?>
+
                     <?php
+
                     $no = 0;
                     foreach ($masuk as $item) : ?>
                         <tr>

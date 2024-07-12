@@ -29,22 +29,18 @@ class Barang_Tambah extends Controller
     }
     public function simpan()
     {
+        if (!$this->validate([
+            'id_barang' => 'required|is_unique[barang.id_barang]'
+        ])) {
+            return redirect()->to(base_url('/barangtambah/index'));
+        }
 
         $file = $this->request->getFile('foto');
         if ($file->isValid() && !$file->hasMoved()) {
             $newName = $file->getRandomName();
             $file->move(ROOTPATH . 'public/uploads', $newName);
             $foto_path = 'uploads/' . $newName;
-            // Check if the record exists
-            $existingRecord = $this->kategoriModel->where('nama_kategori', strtolower($this->request->getVar('id_kategori')))->first();
-            if ($existingRecord) {
-                // Update the existing record
-                $this->kategoriModel->update($existingRecord['id_kategori'], $existingRecord);
-            } else {
-                // Insert a new record
-                $this->kategoriModel->insert(['nama_kategori' => $this->request->getVar('id_kategori')]);
-            }
-            $newID = $this->kategoriModel->where('nama_kategori', strtolower($this->request->getVar('id_kategori')))->first();
+            $newID = $this->kategoriModel->where('nama_kategori', $this->request->getVar('id_kategori'))->first();
             $data = [
                 'id_barang' => $this->request->getVar('id_barang'),
                 'nama' => $this->request->getVar('nama'),
@@ -52,7 +48,7 @@ class Barang_Tambah extends Controller
                 'foto' => $foto_path,
                 'merk' => $this->request->getVar('merk'),
                 'stok' => 0,
-                'harga_beli' => $this->request->getVar('harga_beli'),
+                'harga_beli' => 0,
                 'id_kategori' => $newID['id_kategori'],
             ];
             $this->barangModel->insertBarang($data);

@@ -1,9 +1,7 @@
 <div class="dash-content">
-    <div class="container mt-5" style="background-color: white; padding: 10px;">
+
+    <div class="container mt-5">
         <div class="row mb-3">
-            <div class="col-md-6">
-                <a href="<?= base_url('barangtambah/index') ?>" class="btn btn-primary">Tambah Barang</a>
-            </div>
             <div class="col-md-6">
                 <form action="" method="get" class="form-inline float-right">
                     <input type="text" name="search" class="form-control mr-2" placeholder="Search" value="<?= isset($search) ? $search : '' ?>">
@@ -26,9 +24,12 @@
             </thead>
             <tbody>
                 <?php
+
+
                 if (!empty($barang)) : ?>
                     <?php foreach ($barang as $item) : ?>
                         <tr>
+
                             <td><?= $item['id_barang'] ?></td>
                             <td><?= $item['nama'] ?></td>
                             <td><?= $item['satuan'] ?></td>
@@ -42,6 +43,16 @@
                                     };
                                 }; ?>
                             </td>
+                            <td>
+                                <form action=<?= base_url('/barang_keluar/savedata') ?> method="post">
+                                    <input type="text" name="id_barang" id="id_barang" value="<?= $item['id_barang'] ?>" hidden>
+                                    <input type="text" name="nama" id="nama" value="<?= $item['nama'] ?>" hidden>
+                                    <input type="text" name="satuan" id="satuan" value="<?= $item['satuan'] ?>" hidden>
+                                    <input type="text" name="stok" id="stok" value="<?= $item['stok'] ?>" hidden>
+                                    <input type="text" name="harga_beli" id="harga_beli" value="<?= $item['harga_beli'] ?>" hidden>
+                                    <button type="submit">submit</button>
+                                </form>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else : ?>
@@ -50,12 +61,15 @@
                     </tr>
                 <?php endif; ?>
             </tbody>
+
         </table>
         <!-- <div class="baru">
             <?php #echo $pager->links(); 
             ?>
         </div> -->
+
     </div>
+
 </div>
 </section>
 <script src="/js/scripts.js"></script>

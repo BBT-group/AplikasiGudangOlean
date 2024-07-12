@@ -12,7 +12,7 @@
             </div>
         </div>
         <table class="table table-bordered">
-            <thead style="background-color: #707070;">
+            <thead>
                 <tr>
                     <th>ID Barang</th>
                     <th>Nama</th>
@@ -21,7 +21,7 @@
                     <th>Merk</th>
                     <th>Stok</th>
                     <th>Harga Beli</th>
-                    <th>ID Kategori</th>
+                    <th>Kategori</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,11 +36,14 @@
                             <td><?= $item['merk'] ?></td>
                             <td><?= $item['stok'] ?></td>
                             <td><?= $item['harga_beli'] ?></td>
-                            <td><?php foreach ($kategori as $k) {
-                                    if ($k['id_kategori'] === $item['id_kategori']) {
-                                        echo $k['nama_kategori'];
-                                    };
-                                }; ?>
+                            <td>
+                                <?php 
+                                    foreach ($kategori as $k) {
+                                        if ($k['id_kategori'] === $item['id_kategori']) {
+                                            echo $k['nama_kategori'];
+                                        }
+                                    }
+                                ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

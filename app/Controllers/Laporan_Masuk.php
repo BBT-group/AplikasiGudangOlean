@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Models\BarangMasukModel;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use App\Models\BarangMasukModel;
 
 class Laporan_Masuk extends BaseController
 {
@@ -15,11 +15,20 @@ class Laporan_Masuk extends BaseController
         $this->barangmasukModel = new BarangMasukModel();
     }
     
-    public function index(): string
+    public function index()
     {
-        $data = [
-            'barangmasuk' => $this->barangmasukModel->getBarangMasukGabung(),
-        ];
+        $start_date = $this->request->getGet('start_date');
+        $end_date = $this->request->getGet('end_date');
+
+        if ($start_date && $end_date) {
+            $data['barangmasuk'] = $this->barangmasukModel->getBarangMasukGabungFilter($start_date, $end_date);
+        } else {
+            $data['barangmasuk'] = $this->barangmasukModel->getBarangMasukGabung();
+        }
+
+        $data['start_date'] = $start_date;
+        $data['end_date'] = $end_date;
+
         echo view('v_header');
         return view('v_laporan_masuk', $data);
     }
@@ -29,12 +38,11 @@ class Laporan_Masuk extends BaseController
         $start_date = $this->request->getGet('start_date');
         $end_date = $this->request->getGet('end_date');
 
-        // Validasi tanggal
-        if (!$start_date || !$end_date) {
-            return redirect()->back()->with('error', 'Tanggal tidak valid.');
+        if ($start_date && $end_date) {
+            $data = $this->barangmasukModel->getBarangMasukGabungFilter($start_date, $end_date);
+        } else {
+            $data = $this->barangmasukModel->getBarangMasukGabung();
         }
-
-        $data = $this->barangmasukModel->getBarangMasukGabungFilter($start_date, $end_date);
 
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
@@ -43,7 +51,7 @@ class Laporan_Masuk extends BaseController
         $sheet->mergeCells('A1:I1');
         $sheet->setCellValue('A1', 'LAPORAN MASUK STOK BARANG GUDANG PT.OLEAN PERMATA');
         $sheet->mergeCells('A2:I2');
-        $sheet->setCellValue('A2', 'Periode ' . $start_date . ' - ' . $end_date);
+        $sheet->setCellValue('A2', 'Periode ' . ($start_date ? $start_date : 'Semua') . ' - ' . ($end_date ? $end_date : 'Semua'));
 
         // Header kolom
         $sheet->setCellValue('A3', 'Id');

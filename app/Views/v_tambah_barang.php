@@ -20,9 +20,16 @@
             <input type="file" class="form-control" id="foto" name="foto" required maxlength="255">
         </div>
         <div class="form-group">
-            <label for="merk">Merk</label>
-            <input type="text" class="form-control" id="merk" name="merk" required maxlength="15">
+            <label for="jenis">jenis</label>
+            <select class="form-control" name="jenis" id="jenis">
+
+                <option value="barang">barang</option>
+                <option value="alat">alat</option>
+
+            </select>
         </div>
+
+
         <div class="form-group">
             <input type="number" class="form-control" id="stok" name="stok" disabled value=0 hidden>
         </div>
@@ -40,7 +47,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-
+,
 </div>
 </section>
 <script src="/js/scripts.js"></script>

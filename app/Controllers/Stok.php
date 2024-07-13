@@ -24,10 +24,10 @@ class Stok extends BaseController
         if ($keyword) {
             $barang = $this->barangModel->getBarangByName($keyword);
         } else {
-            $barang = $this->barangModel;
+            $barang = $this->barangModel->getBarangWithKategori();
         }
         $data = [
-            'barang' => $barang->getBarangWithKategori(),
+            'barang' => $barang->findAll(),
             'pager' => $this->barangModel->pager
         ];
         echo view('v_header');
@@ -61,9 +61,9 @@ class Stok extends BaseController
                 'nama' => $this->request->getVar('nama'),
                 'satuan' => $this->request->getVar('satuan'),
                 'foto' => $foto_path,
-                'merk' => $this->request->getVar('merk'),
-                'stok' => $this->request->getVar('merk'),
-                'harga_beli' => $this->request->getVar('merk'),
+                'jenis' => $this->request->getVar('jenis'),
+                'stok' => $this->request->getVar('stok'),
+                'harga_beli' => $this->request->getVar('harga_beli'),
                 'id_kategori' => $newID['id_kategori'],
             ];
             $this->barangModel->update($this->request->getVar('id_barang'), $data);
@@ -75,9 +75,9 @@ class Stok extends BaseController
                 'nama' => $this->request->getVar('nama'),
                 'satuan' => $this->request->getVar('satuan'),
                 'foto' => $this->request->getVar('foto'),
-                'merk' => $this->request->getVar('merk'),
-                'stok' => $this->request->getVar('merk'),
-                'harga_beli' => $this->request->getVar('merk'),
+                'jenis' => $this->request->getVar('jenis'),
+                'stok' => $this->request->getVar('stok'),
+                'harga_beli' => $this->request->getVar('harga_beli'),
                 'id_kategori' => $newID['id_kategori'],
             ];
             $this->barangModel->update($this->request->getVar('id_barang'), $data);

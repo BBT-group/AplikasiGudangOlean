@@ -134,7 +134,7 @@ class Barang_Keluar extends BaseController
                     'nama' => $barang1['nama'],
                     'satuan' => $barang1['satuan'],
                     'foto' => $barang1['foto'],
-                    'merk' => $barang1['merk'],
+                    'jenis' => $barang1['jenis'],
                     'stok' => $barang1['stok'] - $b['stok'],
                     'harga_beli' => $barang1['harga_beli'],
                     'id_kategori' => $barang1['id_kategori'],
@@ -185,7 +185,7 @@ class Barang_Keluar extends BaseController
                 ]);
             }
             if ($this->containsObjectWithName($this->dataList, $idBarang)) {
-                $this->dataList[array_search($idBarang, array_values($this->dataList))]['stok'] += 1;
+                $this->dataList[array_search($idBarang, array_values($this->dataList))]['stok'] - 1;
                 session()->set('datalist_keluar', $this->dataList);
                 return $this->response->setJSON(['status' => 'success']);
             }
@@ -193,12 +193,12 @@ class Barang_Keluar extends BaseController
                 'id_barang' => $idBarang,
                 'nama' => $a['nama'],
                 'satuan' => $a['satuan'],
-                // 'merk' => $a('merk'),
+                // 'jenis' => $a('jenis'),
                 'stok' => 1,
                 // 'id_kategori' => $a('id_kategori'),
             ];
             $this->dataList[] = $data2;
-            session()->set('datalist', $this->dataList);
+            session()->set('datalist_keluar', $this->dataList);
             return $this->response->setJSON(['status' => 'success']);
         } else {
             return $this->response->setJSON(['status' => 'eror']);

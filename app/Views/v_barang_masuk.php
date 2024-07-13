@@ -135,7 +135,7 @@
                 console.log(barcode);
                 handleBarcodeScan(id); // Call a function to handle the barcode scan
 
-                barcode = ''; // Reset the barcode string after handling the scan
+                barcode = ''; // Resde string after handling the scan
             }
         });
 

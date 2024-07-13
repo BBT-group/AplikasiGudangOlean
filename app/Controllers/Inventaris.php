@@ -2,13 +2,11 @@
 
 namespace App\Controllers;
 
-use CodeIgniter\Controller;
 use App\Models\BarangModel;
 use App\Models\KategoriModel;
 
 
-
-class Barang_Tambah extends Controller
+class Inventaris extends BaseController
 {
     protected $barangModel;
     protected $kategoriModel;
@@ -21,8 +19,7 @@ class Barang_Tambah extends Controller
     public function index()
     {
         $data = [
-            'barang' => $this->barangModel->findAll(),
-            'kategori' => $this->kategoriModel->findAll()
+            'barang' => $this->barangModel->where('jenis', 'alat')->findAll(),
         ];
         echo view('v_header');
         return view('v_tambah_barang', $data);

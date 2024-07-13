@@ -40,12 +40,7 @@ class BarangModel extends Model
             ->orLike('barang.id_barang', $name)
             ->groupEnd();
     }
-    public function getBarangWithKategori()
-    {
-        return $this
-                    ->join('kategori', 'kategori.id_kategori = barang.id_kategori')
-                    ->findAll();
-    }
+    
     public function insertBarang($data)
     {
         $this->insert($data);

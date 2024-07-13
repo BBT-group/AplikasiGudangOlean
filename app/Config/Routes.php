@@ -9,6 +9,7 @@ $routes->get('/', 'Home::index');
 $routes->post('/login', 'Home::login');
 $routes->get('/logout', 'Home::logout');
 $routes->get('/beranda', 'Beranda::index');
+$routes->get('/peminjaman', 'Peminjaman::index');
 $routes->post('/barang/simpan', 'Barang::simpan');
 $routes->post('/barang/search', 'Barang::search');
 $routes->add('/barang/index', 'Barang::index');

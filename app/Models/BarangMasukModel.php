@@ -17,6 +17,7 @@ class BarangMasukModel extends Model
         return $this->findAll();
     }
 
+
     public function getBarangMasukGabung()
     {
         return $this->db->table($this->table)
@@ -35,5 +36,11 @@ class BarangMasukModel extends Model
             ->where('DATE(waktu) <=', $end_date)
             ->get()
             ->getResultArray();
+    }
+
+    public function getByMasterId($id)
+    {
+        return $this->where('id_barang_masuk', $id)->findAll();
+
     }
 }

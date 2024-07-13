@@ -25,7 +25,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary mr-2">Tampilkan</button>
                 <a href="<?= base_url('/laporan_masuk') ?>" class="btn btn-warning mr-2">Reset</a>
-                <a href="<?= base_url('/laporan_masuk/exportm' . (isset($start_date) && isset($end_date) ? '?start_date=' . $start_date . '&end_date=' . $end_date : '')) ?>" class="btn btn-secondary">Export to Excel</a>
+                <a href="<?= base_url('/laporan_masuk/exportm?start_date=' . (isset($start_date) ? $start_date : '') . '&end_date=' . (isset($end_date) ? $end_date : '')) ?>" class="btn btn-secondary">Export to Excel</a>
             </form>
         </section>
         <table class="table table-bordered">
@@ -44,13 +44,14 @@
             <tbody>
                 <?php if (!empty($barangmasuk)) : ?>
                     <?php foreach ($barangmasuk as $item) : ?>
+                        <?php $stok_awal = $item['stok'] - $item['jumlah']; ?>
                         <tr>
                             <td><?= $item['id_barang'] ?></td>
                             <td><?= $item['waktu'] ?></td>
                             <td><?= $item['nama'] ?></td>
                             <td><?= $item['satuan'] ?></td>
                             <td><?= $item['harga_beli'] ?></td>
-                            <td><?= $item['stok'] ?></td>
+                            <td><?= $stok_awal ?></td> <!-- Mengisi stok awal -->
                             <td><?= $item['jumlah'] ?></td>
                             <td><?= $item['stok'] ?></td>
                         </tr>

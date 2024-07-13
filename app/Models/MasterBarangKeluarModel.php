@@ -8,9 +8,17 @@ class MasterBarangKeluarModel extends Model
 {
     protected $table = 'ms_barang_Keluar';
     protected $primaryKey = 'id_barang_keluar';
+    protected $allowedFields = ['waktu', 'id_penerima'];
 
-    public function getBarangKeluar()
+    public function getAll()
     {
-        return $this->findAll();
+        return $this->select('ms_barang_keluar.*, penerima.nama ')
+            ->join('penerima', 'penerima.id_penerima = ms_barang_keluar.id_penerima')
+            ->findAll();
+    }
+    public function getById($id)
+    {
+        return $this->select('ms_barang_keluar.*, penerima.nama ')
+            ->join('penerima', 'penerima.id_penerima = ms_barang_keluar.id_penerima')->where('id_ms_barang_keluar', $id)->first();
     }
 }

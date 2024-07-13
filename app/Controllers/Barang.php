@@ -28,6 +28,9 @@ class Barang extends BaseController
         ];
         return view('admin\percobaan', $data);
     }
+
+
+
     public function loadExistingData()
     {
         session();

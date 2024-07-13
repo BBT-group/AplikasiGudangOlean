@@ -3,10 +3,10 @@
     <div class="container mt-5">
         <div class="row mb-3">
             <div class="col-md-6">
-                <a href="<?= base_url('barangtambah/index') ?>" class="btn btn-primary">Tambah Barang</a>
+                <a href="<?= base_url('barang_masuk/index') ?>" class="btn btn-primary">masukan barang</a>
             </div>
             <div class="col-md-6">
-                <form action="" method="get" class="form-inline float-right">
+                <form action="<?= base_url('/barang_masuk/cari') ?>" method="get" class="form-inline float-right">
                     <input type="text" name="search" class="form-control mr-2" placeholder="Search" value="<?= isset($search) ? $search : '' ?>">
                     <button type="submit" class="btn btn-secondary">Search</button>
                 </form>
@@ -15,33 +15,29 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>ID Barang</th>
-                    <th>Nama</th>
-                    <th>Satuan</th>
-                    <th>Foto</th>
-                    <th>Merk</th>
-                    <th>Stok</th>
-                    <th>Harga Beli</th>
-                    <th>Kategori</th>
-                    <th>Aksi</th>
+                    <th>No</th>
+                    <th>Id Masuk</th>
+                    <th>Tanggal waktu</th>
+                    <th>supplier</th>
+                    <th>aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
 
 
-                if (!empty($barang)) : ?>
-                    <?php foreach ($barang as $item) : ?>
+                if (!empty($masuk)) : ?>
+
+                    <?php
+
+                    $no = 0;
+                    foreach ($masuk as $item) : ?>
                         <tr>
-                            <td><?= $item['id_barang'] ?></td>
+                            <td><?= $no += 1 ?></td>
+                            <td><?= $item['id_ms_barang_masuk'] ?></td>
+                            <td><?= $item['waktu'] ?></td>
                             <td><?= $item['nama'] ?></td>
-                            <td><?= $item['satuan'] ?></td>
-                            <td><img src="<?= base_url($item['foto']) ?>" alt="<?= $item['nama'] ?>" width="50"></td>
-                            <td><?= $item['merk'] ?></td>
-                            <td><?= $item['stok'] ?></td>
-                            <td><?= $item['harga_beli'] ?></td>
-                            <td><?= $item['nama_kategori'] ?>
-                            </td>
+                            <td><button>detail</button></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else : ?>

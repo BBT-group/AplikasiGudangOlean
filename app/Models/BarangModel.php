@@ -17,14 +17,22 @@ class BarangModel extends Model
         return $this->findAll();
     }
 
+    public function getBarangWithKategori()
+    {
+        return $this->select('barang.*, kategori.nama_kategori')
+            ->join('kategori', 'kategori.id_kategori = barang.id_kategori')
+            ;
+    }
+
     public function getBarangById($id)
     {
-        return $this->find($id);
+        return $this->select('barang.*, kategori.nama_kategori')
+            ->join('kategori', 'kategori.id_kategori = barang.id_kategori')->where('id_barang', $id)->first();
     }
 
     public function getBarangByName($name)
     {
-        return $this->select('barang.*, kategori.nama_kategori as category_name')
+        return $this->select('barang.*, kategori.nama_kategori')
             ->join('kategori', 'kategori.id_kategori = barang.id_kategori')
             ->groupStart()
             ->like('barang.nama', $name)
@@ -32,12 +40,7 @@ class BarangModel extends Model
             ->orLike('barang.id_barang', $name)
             ->groupEnd();
     }
-    public function getBarangWithKategori()
-    {
-        return $this
-                    ->join('kategori', 'kategori.id_kategori = barang.id_kategori')
-                    ->findAll();
-    }
+
     public function insertBarang($data)
     {
         $this->insert($data);

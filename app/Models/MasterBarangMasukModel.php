@@ -10,4 +10,16 @@ class MasterBarangMasukModel extends Model
     protected $primaryKey = 'id_ms_barang_masuk';
     protected $allowedFields = ['waktu', 'id_supplier'];
     protected bool $allowEmptyInserts = true;
+
+    public function getAll()
+    {
+        return $this->select('ms_barang_masuk.*, supplier.nama ')
+            ->join('supplier', 'supplier.id_supplier = ms_barang_masuk.id_supplier');
+    }
+
+    public function getById($id)
+    {
+        return $this->select('ms_barang_masuk.*, supplier.nama ')
+            ->join('supplier', 'supplier.id_supplier = ms_barang_masuk.id_supplier')->where('id_ms_barang_masuk', $id)->first();
+    }
 }

@@ -21,7 +21,7 @@ class BarangModel extends Model
     {
         return $this->select('barang.*, kategori.nama_kategori')
             ->join('kategori', 'kategori.id_kategori = barang.id_kategori')
-            ->findAll();
+            ;
     }
 
     public function getBarangById($id)
@@ -32,7 +32,7 @@ class BarangModel extends Model
 
     public function getBarangByName($name)
     {
-        return $this->select('barang.*, kategori.nama_kategori as category_name')
+        return $this->select('barang.*, kategori.nama_kategori')
             ->join('kategori', 'kategori.id_kategori = barang.id_kategori')
             ->groupStart()
             ->like('barang.nama', $name)
@@ -40,7 +40,7 @@ class BarangModel extends Model
             ->orLike('barang.id_barang', $name)
             ->groupEnd();
     }
-    
+
     public function insertBarang($data)
     {
         $this->insert($data);

@@ -24,10 +24,10 @@ class Stok extends BaseController
         if ($keyword) {
             $barang = $this->barangModel->getBarangByName($keyword);
         } else {
-            $barang = $this->barangModel;
+            $barang = $this->barangModel->getBarangWithKategori();
         }
         $data = [
-            'barang' => $barang->getBarangWithKategori(),
+            'barang' => $barang->findAll(),
             'pager' => $this->barangModel->pager
         ];
         echo view('v_header');

@@ -66,12 +66,14 @@ class Laporan_Masuk extends BaseController
         // Data
         $row = 4;
         foreach ($data as $item) {
+            $stok_awal = $item['stok'] - $item['jumlah']; // Menghitung stok awal
+
             $sheet->setCellValue('A' . $row, $item['id_barang']);
             $sheet->setCellValue('B' . $row, $item['waktu']);
             $sheet->setCellValue('C' . $row, $item['nama']);
             $sheet->setCellValue('D' . $row, $item['satuan']);
             $sheet->setCellValue('E' . $row, $item['harga_beli']);
-            $sheet->setCellValue('F' . $row, $item['stok']);
+            $sheet->setCellValue('F' . $row, $stok_awal); // Mengisi stok awal
             $sheet->setCellValue('G' . $row, $item['jumlah']);
             $sheet->setCellValue('H' . $row, $item['stok']);
             $row++;

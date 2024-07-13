@@ -1,5 +1,6 @@
 <div class="dash-content">
-    <div class="container mt-5" style="background-color: white; padding: 10px;">
+
+    <div class="container mt-5">
         <div class="row mb-3">
             <div class="col-md-6">
                 <a href="<?= base_url('barangtambah/index') ?>" class="btn btn-primary">Tambah Barang</a>
@@ -21,11 +22,14 @@
                     <th>Merk</th>
                     <th>Stok</th>
                     <th>Harga Beli</th>
-                    <th>ID Kategori</th>
+                    <th>Kategori</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
+
+
                 if (!empty($barang)) : ?>
                     <?php foreach ($barang as $item) : ?>
                         <tr>
@@ -36,11 +40,7 @@
                             <td><?= $item['merk'] ?></td>
                             <td><?= $item['stok'] ?></td>
                             <td><?= $item['harga_beli'] ?></td>
-                            <td><?php foreach ($kategori as $k) {
-                                    if ($k['id_kategori'] === $item['id_kategori']) {
-                                        echo $k['nama_kategori'];
-                                    };
-                                }; ?>
+                            <td><?= $item['nama_kategori'] ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -50,12 +50,15 @@
                     </tr>
                 <?php endif; ?>
             </tbody>
+
         </table>
         <!-- <div class="baru">
             <?php #echo $pager->links(); 
             ?>
         </div> -->
+
     </div>
+
 </div>
 </section>
 <script src="/js/scripts.js"></script>

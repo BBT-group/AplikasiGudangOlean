@@ -1,6 +1,5 @@
 <div class="dash-content">
-
-    <div class="container mt-5">
+    <div class="container mt-5" style="background-color: white; padding: 10px;">
         <div class="row mb-3">
             <div class="col-md-6">
                 <a href="<?= base_url('barangtambah/index') ?>" class="btn btn-primary">Tambah Barang</a>
@@ -13,7 +12,7 @@
             </div>
         </div>
         <table class="table table-bordered">
-            <thead>
+            <thead style="background-color: #707070;">
                 <tr>
                     <th>ID Barang</th>
                     <th>Nama</th>
@@ -28,8 +27,6 @@
             </thead>
             <tbody>
                 <?php
-
-
                 if (!empty($barang)) : ?>
                     <?php foreach ($barang as $item) : ?>
                         <tr>
@@ -50,15 +47,12 @@
                     </tr>
                 <?php endif; ?>
             </tbody>
-
         </table>
         <!-- <div class="baru">
             <?php #echo $pager->links(); 
             ?>
         </div> -->
-
     </div>
-
 </div>
 </section>
 <script src="/js/scripts.js"></script>

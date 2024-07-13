@@ -22,7 +22,7 @@
             <div class="logo-image">
                 <img src="/img/logo.png" alt="">
             </div>
-            <p class="logo_name">PT. Olean</p>
+            <span class="logo_name">PT. Olean</span>
         </div>
 
         <div class="menu-items">
@@ -31,9 +31,10 @@
                         <i class="uil uil-estate"></i>
                         <span class="link-name">Dahsboard</span>
                     </a></li>
+            <?php if(session()->role == 'admin') : ?>
                 <div class="coba">
                     <span class="line"></span>
-                    <span class="title">Master</span>
+                  <span class="title">Master</span>
                 </div>
                 <li><a href="<?php echo base_url('stok') ?>">
                         <i class="uil uil-file-copy-alt"></i>
@@ -46,10 +47,6 @@
                 <li><a href="<?php echo base_url('barang_masuk') ?>">
                         <i class="uil uil-download-alt"></i>
                         <span class="link-name">Barang Masuk</span>
-                    </a></li>
-                <li><a href="<?php echo base_url('barang_keluar') ?>">
-                        <i class="uil uil-upload-alt"></i>
-                        <span class="link-name">Barang Keluar</span>
                     </a></li>
                 <div class="coba">
                     <span class="line"></span>
@@ -68,16 +65,34 @@
                         <span class="link-name">Laporan Keluar</span>
                     </a></li>
             </ul>
+            <?php endif; ?>
+
+            <?php if(session()->role == 'operator') : ?>
+                <div class="coba">
+                    <span class="line"></span>
+                    <span class="title">Transaksi</span>
+                </div>
+                <li><a href="<?php echo base_url('barang_keluar') ?>">
+                        <i class="uil uil-upload-alt"></i>
+                        <span class="link-name">Barang Keluar</span>
+                    </a></li>
+                <div class="coba">
+                    <span class="line"></span>
+                    <span class="title">Laporan</span>
+                </div>
+                <li><a href="<?php echo base_url('laporan_keluar') ?>">
+                        <i class="uil uil-envelope-upload"></i>
+                        <span class="link-name">Laporan Keluar</span>
+                    </a></li>
+            </ul>
+            <?php endif; ?>
+                
 
             <ul class="logout-mode">
-                <li><a href="<?php echo base_url('/') ?>">
+                <li><a href="<?php echo site_url('logout') ?>">
                         <i class="uil uil-signout"></i>
                         <span class="link-name">Logout</span>
                     </a></li>
-
-                <div class="mode-toggle">
-                    <span class="switch"></span>
-                </div>
             </ul>
         </div>
     </nav>

@@ -2,29 +2,50 @@
 
 namespace App\Controllers;
 
-use App\Models\BarangModel;
-use App\Models\KategoriModel;
-
+use App\Models\InventarisModel;
 
 class Inventaris extends BaseController
 {
-    protected $barangModel;
-    protected $kategoriModel;
+    protected $inventarisModel;
+
     public function __construct()
     {
-        $this->barangModel = new BarangModel();
-        $this->kategoriModel = new KategoriModel();
+        $this->inventarisModel = new InventarisModel();
     }
 
     public function index()
     {
         $data = [
-            'barang' => $this->barangModel->where('jenis', 'alat')->findAll(),
+            'barang' => $this->inventarisModel->findAll(),
         ];
         echo view('v_header');
         return view('v_tambah_barang', $data);
     }
-    public function simpan()
+
+    public function indexTambah()
+    {
+        return view('v_tambah_barang');
+    }
+
+    public function indexUpdate()
+    {
+        $data = [
+            'barang' => $this->inventarisModel->where('id_inventaris', $this->request->getVar('id_inventaris'))->first(),
+        ];
+        echo view('v_header');
+        return view('v_tambah_barang', $data);
+    }
+
+    public function indexDetail()
+    {
+        $data = [
+            'barang' => $this->inventarisModel->where('id_inventaris', $this->request->getVar('id_inventaris'))->first(),
+        ];
+        echo view('v_header');
+        return view('v_tambah_barang', $data);
+    }
+
+    public function simpanAlat()
     {
         if (!$this->validate([
             'id_barang' => 'required|is_unique[barang.id_barang]'
@@ -37,19 +58,41 @@ class Inventaris extends BaseController
             $newName = $file->getRandomName();
             $file->move(ROOTPATH . 'public/uploads', $newName);
             $foto_path = 'uploads/' . $newName;
-            $newID = $this->kategoriModel->where('nama_kategori', $this->request->getVar('id_kategori'))->first();
             $data = [
-                'id_barang' => $this->request->getVar('id_barang'),
-                'nama' => $this->request->getVar('nama'),
-                'satuan' => $this->request->getVar('satuan'),
+                'id_inventaris' => $this->request->getVar('id_inventaris'),
+                'nama_inventaris' => $this->request->getVar('nama_inventaris'),
                 'foto' => $foto_path,
-                'jenis' => $this->request->getVar('jenis'),
                 'stok' => 0,
-                'harga_beli' => 0,
-                'id_kategori' => $newID['id_kategori'],
+                'harga_beli' => 0
             ];
-            $this->barangModel->insertBarang($data);
+            $this->inventarisModel->insertBarang($data);
             return redirect()->to(base_url('/stok'));
         }
+    }
+
+
+    // fungsi update barang
+    public function updateBarang()
+    {
+
+        $file = $this->request->getFile('foto');
+        if ($file->isValid() && !$file->hasMoved()) {
+            $dataLama = $this->inventarisModel->getAlatById($this->request->getVar('id_inventaris'));
+            $fotoLama = $dataLama['foto'];
+            unlink($fotoLama);
+            $newName = $file->getRandomName();
+            $file->move(ROOTPATH . 'public/uploads', $newName);
+            $foto_path = 'uploads/' . $newName;
+        } else {
+            $foto_path = $this->request->getVar('foto');
+        }
+        $data = [
+            'nama_inventaris' => $this->request->getVar('nama_inventaris'),
+            'foto' => $foto_path,
+            'stok' => $this->request->getVar('stok'),
+            'harga_beli' => $this->request->getVar('harga_beli'),
+        ];
+        $this->inventarisModel->update($this->request->getVar('id_inventaris'), $data);
+        return redirect()->to(base_url('/stok'));
     }
 }

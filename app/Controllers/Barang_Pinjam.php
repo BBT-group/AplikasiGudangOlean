@@ -72,7 +72,7 @@ class Barang_Pinjam extends BaseController
             $data2 = [
                 'id_barang' => $this->request->getVar('id_barang'),
                 'nama' => $this->request->getVar('nama'),
-                'satuan' => $this->request->getVar('satuan'),
+                'id_satuan' => $this->request->getVar('id_satuan'),
                 // 'jenis' => $this->request->getVar('jenis'),
                 'stok' => 1,
             ];
@@ -111,7 +111,7 @@ class Barang_Pinjam extends BaseController
                 }
                 $data = [
                     'nama' => $barang1['nama'],
-                    'satuan' => $barang1['satuan'],
+                    'id_satuan' => $barang1['id_satuan'],
                     'foto' => $barang1['foto'],
                     'jenis' => $barang1['jenis'],
                     'stok' => $stok,
@@ -174,7 +174,7 @@ class Barang_Pinjam extends BaseController
             $data2 = [
                 'id_barang' => $idBarang,
                 'nama' => $a['nama'],
-                'satuan' => $a['satuan'],
+                'id_satuan' => $a['id_satuan'],
                 'stok' => 1,
             ];
             $this->dataList[] = $data2;

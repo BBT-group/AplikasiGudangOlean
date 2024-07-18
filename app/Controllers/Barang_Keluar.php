@@ -80,7 +80,7 @@ class Barang_Keluar extends BaseController
             $data2 = [
                 'id_barang' => $this->request->getVar('id_barang'),
                 'nama' => $this->request->getVar('nama'),
-                'satuan' => $this->request->getVar('satuan'),
+                'id_satuan' => $this->request->getVar('id_satuan'),
                 'stok' => 1,
 
             ];
@@ -132,7 +132,7 @@ class Barang_Keluar extends BaseController
                 $barang1 = $this->barangModel->where('id_barang', $b['id_barang'])->first();
                 $data = [
                     'nama' => $barang1['nama'],
-                    'satuan' => $barang1['satuan'],
+                    'id_satuan' => $barang1['id_satuan'],
                     'foto' => $barang1['foto'],
                     'jenis' => $barang1['jenis'],
                     'stok' => $barang1['stok'] - $b['stok'],
@@ -192,7 +192,7 @@ class Barang_Keluar extends BaseController
             $data2 = [
                 'id_barang' => $idBarang,
                 'nama' => $a['nama'],
-                'satuan' => $a['satuan'],
+                'id_satuan' => $a['id_satuan'],
                 // 'jenis' => $a('jenis'),
                 'stok' => 1,
                 // 'id_kategori' => $a('id_kategori'),

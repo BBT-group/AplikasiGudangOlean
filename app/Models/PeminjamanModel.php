@@ -6,9 +6,7 @@ use CodeIgniter\Model;
 
 class PeminjamanModel extends Model
 {
-
     protected $table = 'peminjaman';
     protected $primaryKey = 'id_peminjaman';
-
-    protected $allowedFields = ['foto', 'id_ms_peminjaman', 'id_barang', 'jumlah'];
+    protected $allowedFields = ['id_ms_peminjaman', 'id_barang'];
 }

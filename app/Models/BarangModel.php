@@ -23,6 +23,13 @@ class BarangModel extends Model
             ->join('kategori', 'kategori.id_kategori = barang.id_kategori');
     }
 
+    public function getBarangWithAll()
+    {
+        return $this->select('barang.*, kategori.nama_kategori,satuan.nama_satuan')
+            ->join('kategori', 'kategori.id_kategori = barang.id_kategori')
+            ->join('satuan', 'satuan.id_satuan=barang.id_satuan');
+    }
+
     public function getBarangById($id)
     {
         return $this->select('barang.*, kategori.nama_kategori')

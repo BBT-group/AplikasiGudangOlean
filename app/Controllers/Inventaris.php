@@ -72,7 +72,7 @@ class Inventaris extends BaseController
 
 
     // fungsi update barang
-    public function updateBarang()
+    public function updateAlat()
     {
 
         $file = $this->request->getFile('foto');

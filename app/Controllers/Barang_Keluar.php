@@ -123,7 +123,9 @@ class Barang_Keluar extends BaseController
         $barang = session()->get('datalist_keluar');
         if (!empty($barang)) {
             $namaPenerima = $this->request->getVar('penerima');
-            $this->masterBarangKeluarModel->insert(['waktu' => date("Y-m-d H:i:s"), 'id_penerima' => $namaPenerima]);
+            date_default_timezone_set('Asia/Jakarta');
+            $currentDateTime =  date("Y-m-d H:i:s");
+            $this->masterBarangKeluarModel->insert(['waktu' => $currentDateTime, 'id_penerima' => $namaPenerima]);
 
             $idms = $this->masterBarangKeluarModel->getInsertID();
 

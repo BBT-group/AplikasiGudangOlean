@@ -30,6 +30,11 @@ class Kategori extends BaseController
 
     public function tambahKategori()
     {
+        if (!$this->validate([
+            'kategori' => 'required|is_unique[kategori.id_kategori]'
+        ])) {
+            return redirect()->to(base_url('/barang_masuk/index'))->withInput();
+        }
         $this->kategoriModel->insert(['nama_kategori' => $this->request->getVar('nama_kategori')]);
         return redirect()->to('');
     }
@@ -51,6 +56,11 @@ class Kategori extends BaseController
 
     public function updateKategori()
     {
+        if (!$this->validate([
+            'kategori' => 'required|is_not_unique[kategori.id_kategori]'
+        ])) {
+            return redirect()->to(base_url('/barang_masuk/index'))->withInput();
+        }
         $this->kategoriModel->update($this->request->getVar('id_kategori'), ['nama_kategori' => $this->request->getVar('nama_kategori')]);
         return redirect()->to('');
     }

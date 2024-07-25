@@ -9,7 +9,7 @@ use App\Models\SatuanModel;
 
 
 
-class Barang_Keluar extends BaseController
+class Satuan extends BaseController
 {
 
     protected $satuanModel;
@@ -37,12 +37,18 @@ class Barang_Keluar extends BaseController
 
     public function tambahSatuan()
     {
+        if (!$this->validate([
+            'satuan' => 'required|is_unique[satuan.id_satuan]'
+        ])) {
+            return redirect()->to(base_url('/barang_masuk/index'))->withInput();
+        }
         $this->satuanModel->insert(['nama_satuan' => $this->request->getVar('nama_satuan')]);
         return redirect()->to('');
     }
 
     public function indexUpdate()
     {
+
         $data = [
             'satuan' => $this->satuanModel->where('id_satuan', $this->request->getVar('id_satuan'))->first()
         ];
@@ -51,6 +57,11 @@ class Barang_Keluar extends BaseController
 
     public function updateSatuan()
     {
+        if (!$this->validate([
+            'satuan' => 'required|is_not_unique[satuan.id_satuan]'
+        ])) {
+            return redirect()->to(base_url('/barang_masuk/index'))->withInput();
+        }
         $this->satuanModel->update($this->request->getVar('id_satuan'), ['nama_satuan' => $this->request->getVar('nama_satuan')]);
         return redirect()->to('');
     }

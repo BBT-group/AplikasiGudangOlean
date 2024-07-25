@@ -42,7 +42,7 @@
                                                     <td><?= $item['nama_kategori'] ?></td>
                                                     <td><img src="<?= base_url($item['foto']) ?>" alt="<?= $item['nama'] ?>" width="50"></td>
                                                     <td style="display: flexbox; text-align: center;">
-                                                        <a href="<?= base_url('stok/updatebarang')?>" class="btn btn-sm btn-info" ></i></a>
+                                                        <a href="<?= base_url('stok/updatebarang')?>" class="btn btn-sm btn-info"><i class="fas fa-pencil-alt"></i></a>
                                                         <a href="<?= base_url('stok/deletebarang/'. $item['id_barang'])?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin menghapus?')"><i class="fas fa-trash"></i></a>
                                                     </td>
                                                 </tr>

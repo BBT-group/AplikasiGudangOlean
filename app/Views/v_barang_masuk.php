@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <div class="dash-content">
+=======
+                <div class="container-fluid">
+>>>>>>> parent of 7983718 (barang)
 
     <div class="container mt-5">
         <h2>Inventory Management</h2>
@@ -113,6 +117,7 @@
         let barcode = ''; // Initialize an empty string to store the scanned barcode
         let lastKeyTime = Date.now(); // Get the current timestamp in milliseconds when the last key was pressed
 
+<<<<<<< HEAD
         $(document).keypress(function(e) {
             let char = String.fromCharCode(e.which); // Convert the keypress event to the corresponding character
             let currentTime = Date.now(); // Get the current timestamp in milliseconds
@@ -132,6 +137,21 @@
                 let id = barcode; // Assign the barcode string to the ID variable
                 console.log(barcode);
                 handleBarcodeScan(id); // Call a function to handle the barcode scan
+=======
+    <!-- Bootstrap core JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+>>>>>>> parent of 7983718 (barang)
 
                 barcode = ''; // Resde string after handling the scan
             }

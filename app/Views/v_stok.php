@@ -17,7 +17,13 @@
                 <tr>
                     <th>ID Barang</th>
                     <th>Nama</th>
+<<<<<<< HEAD
                     <th>Foto</th>
+=======
+                    <th>Satuan</th>
+                    <th>Foto</th>
+                    <th>Merk</th>
+>>>>>>> parent of 7983718 (barang)
                     <th>Stok</th>
                     <th>Harga Beli</th>
                     <th>Kategori</th>
@@ -33,7 +39,13 @@
                         <tr>
                             <td><?= $item['id_barang'] ?></td>
                             <td><?= $item['nama'] ?></td>
+<<<<<<< HEAD
                             <td><img src="<?= base_url($item['foto']) ?>" alt="<?= $item['nama'] ?>" width="50"></td>
+=======
+                            <td><?= $item['satuan'] ?></td>
+                            <td><img src="<?= base_url($item['foto']) ?>" alt="<?= $item['nama'] ?>" width="50"></td>
+                            <td><?= $item['merk'] ?></td>
+>>>>>>> parent of 7983718 (barang)
                             <td><?= $item['stok'] ?></td>
                             <td><?= $item['harga_beli'] ?></td>
                             <td><?= $item['nama_kategori'] ?>
@@ -54,11 +66,7 @@
         </div> -->
 
     </div>
-    </div>
 
-</div>
-</section>
-<script src="/js/scripts.js"></script>
 </div>
 </section>
 <script src="/js/scripts.js"></script>

@@ -20,6 +20,7 @@ class Stok extends BaseController
     public function index(): string
     {
 
+<<<<<<< HEAD
         // $keyword = $this->request->getVar('search');
         // if ($keyword) {
         //     $barang = $this->barangModel->getBarangByName($keyword);
@@ -31,17 +32,26 @@ class Stok extends BaseController
         // ];
         $data = [
             'barang' => $this->barangModel->getBarangWithAll()->findAll(),
+=======
+        $keyword = $this->request->getVar('search');
+        if ($keyword) {
+            $barang = $this->barangModel->getBarangByName($keyword);
+        } else {
+            $barang = $this->barangModel->getBarangWithKategori();
+        }
+        $data = [
+            'barang' => $barang->findAll(),
+            'pager' => $this->barangModel->pager
+>>>>>>> parent of 7983718 (barang)
         ];
         echo view('v_header');
         return view('v_stok', $data);
     }
 
-
     // fungsi ke detail barang
     public function indexDetail()
     {
         $data = [
-            'barang' => $this->barangModel->getBarangById($this->request->getVar('id_barang')),
             'barang' => $this->barangModel->getBarangById($this->request->getVar('id_barang')),
         ];
         return view('admin\percobaan', $data);
@@ -59,6 +69,7 @@ class Stok extends BaseController
             $newName = $file->getRandomName();
             $file->move(ROOTPATH . 'public/uploads', $newName);
             $foto_path = 'uploads/' . $newName;
+<<<<<<< HEAD
         } else {
             $foto_path = $this->request->getVar('foto');
         }
@@ -99,10 +110,13 @@ class Stok extends BaseController
             $newName = $file->getRandomName();
             $file->move(ROOTPATH . 'public/uploads', $newName);
             $foto_path = 'uploads/' . $newName;
+=======
+>>>>>>> parent of 7983718 (barang)
             $newID = $this->kategoriModel->where('nama_kategori', $this->request->getVar('id_kategori'))->first();
             $data = [
                 'id_barang' => $this->request->getVar('id_barang'),
                 'nama' => $this->request->getVar('nama'),
+<<<<<<< HEAD
                 'id_satuan' => $this->request->getVar('id_satuan'),
                 'foto' => $foto_path,
                 'jenis' => $this->request->getVar('jenis'),
@@ -111,6 +125,30 @@ class Stok extends BaseController
                 'id_kategori' => $newID['id_kategori'],
             ];
             $this->barangModel->insertBarang($data);
+=======
+                'satuan' => $this->request->getVar('satuan'),
+                'foto' => $foto_path,
+                'merk' => $this->request->getVar('merk'),
+                'stok' => $this->request->getVar('merk'),
+                'harga_beli' => $this->request->getVar('merk'),
+                'id_kategori' => $newID['id_kategori'],
+            ];
+            $this->barangModel->update($this->request->getVar('id_barang'), $data);
+            return redirect()->to(base_url('/stok'));
+        } else {
+            $newID = $this->kategoriModel->where('nama_kategori', $this->request->getVar('id_kategori'))->first();
+            $data = [
+                'id_barang' => $this->request->getVar('id_barang'),
+                'nama' => $this->request->getVar('nama'),
+                'satuan' => $this->request->getVar('satuan'),
+                'foto' => $this->request->getVar('foto'),
+                'merk' => $this->request->getVar('merk'),
+                'stok' => $this->request->getVar('merk'),
+                'harga_beli' => $this->request->getVar('merk'),
+                'id_kategori' => $newID['id_kategori'],
+            ];
+            $this->barangModel->update($this->request->getVar('id_barang'), $data);
+>>>>>>> parent of 7983718 (barang)
             return redirect()->to(base_url('/stok'));
         }
     }

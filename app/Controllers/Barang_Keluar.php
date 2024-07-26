@@ -80,7 +80,7 @@ class Barang_Keluar extends BaseController
             $data2 = [
                 'id_barang' => $this->request->getVar('id_barang'),
                 'nama' => $this->request->getVar('nama'),
-                'satuan' => $this->request->getVar('satuan'),
+                'id_satuan' => $this->request->getVar('id_satuan'),
                 'stok' => 1,
 
             ];
@@ -123,7 +123,9 @@ class Barang_Keluar extends BaseController
         $barang = session()->get('datalist_keluar');
         if (!empty($barang)) {
             $namaPenerima = $this->request->getVar('penerima');
-            $this->masterBarangKeluarModel->insert(['waktu' => date("Y-m-d H:i:s"), 'id_penerima' => $namaPenerima]);
+            date_default_timezone_set('Asia/Jakarta');
+            $currentDateTime =  date("Y-m-d H:i:s");
+            $this->masterBarangKeluarModel->insert(['waktu' => $currentDateTime, 'id_penerima' => $namaPenerima]);
 
             $idms = $this->masterBarangKeluarModel->getInsertID();
 
@@ -132,9 +134,9 @@ class Barang_Keluar extends BaseController
                 $barang1 = $this->barangModel->where('id_barang', $b['id_barang'])->first();
                 $data = [
                     'nama' => $barang1['nama'],
-                    'satuan' => $barang1['satuan'],
+                    'id_satuan' => $barang1['id_satuan'],
                     'foto' => $barang1['foto'],
-                    'merk' => $barang1['merk'],
+                    'jenis' => $barang1['jenis'],
                     'stok' => $barang1['stok'] - $b['stok'],
                     'harga_beli' => $barang1['harga_beli'],
                     'id_kategori' => $barang1['id_kategori'],
@@ -185,20 +187,20 @@ class Barang_Keluar extends BaseController
                 ]);
             }
             if ($this->containsObjectWithName($this->dataList, $idBarang)) {
-                $this->dataList[array_search($idBarang, array_values($this->dataList))]['stok'] += 1;
+                $this->dataList[array_search($idBarang, array_values($this->dataList))]['stok'] - 1;
                 session()->set('datalist_keluar', $this->dataList);
                 return $this->response->setJSON(['status' => 'success']);
             }
             $data2 = [
                 'id_barang' => $idBarang,
                 'nama' => $a['nama'],
-                'satuan' => $a['satuan'],
-                // 'merk' => $a('merk'),
+                'id_satuan' => $a['id_satuan'],
+                // 'jenis' => $a('jenis'),
                 'stok' => 1,
                 // 'id_kategori' => $a('id_kategori'),
             ];
             $this->dataList[] = $data2;
-            session()->set('datalist', $this->dataList);
+            session()->set('datalist_keluar', $this->dataList);
             return $this->response->setJSON(['status' => 'success']);
         } else {
             return $this->response->setJSON(['status' => 'eror']);

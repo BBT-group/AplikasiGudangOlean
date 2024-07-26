@@ -14,9 +14,8 @@
                 <tr>
                     <th>ID Barang</th>
                     <th>Nama</th>
-                    <th>Satuan</th>
                     <th>Foto</th>
-                    <th>Merk</th>
+                    <th>jenis</th>
                     <th>Stok</th>
                     <th>Harga Beli</th>
                     <th>ID Kategori</th>
@@ -32,9 +31,8 @@
 
                             <td><?= $item['id_barang'] ?></td>
                             <td><?= $item['nama'] ?></td>
-                            <td><?= $item['satuan'] ?></td>
                             <td><img src="<?= base_url($item['foto']) ?>" alt="<?= $item['nama'] ?>" width="50"></td>
-                            <td><?= $item['merk'] ?></td>
+                            <td><?= $item['jenis'] ?></td>
                             <td><?= $item['stok'] ?></td>
                             <td><?= $item['harga_beli'] ?></td>
                             <td><?php foreach ($kategori as $k) {

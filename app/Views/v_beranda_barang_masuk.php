@@ -16,7 +16,6 @@
                                         <tr>
                                             <th>ID Barang</th>
                                             <th>Nama</th>
-                                            <th>Satuan</th>
                                             <th>jumlah</th>
                                             <th>Harga Beli</th>
                                             <th>Aksi</th>
@@ -27,7 +26,6 @@
                                             <tr>
                                                 <td><?= $s['id_barang'] ?></td>
                                                 <td><?= $s['nama'] ?></td>
-                                                <td><?= $s['satuan'] ?></td>
                                                 <td><input type="number" class="update-field" data-index="<?= $index ?>" data-column="stok" value="<?= esc($s['stok']) ?>"></td>
                                                 <td><input type="number" class="update-field" data-index="<?= $index ?>" data-column="harga_beli" value="<?= esc($s['harga_beli']) ?>"></td>
                                                 <td> <button class="remove-item" data-index="<?= $index ?>" data-key="<?= $s['id_barang'] ?>">Remove Item</button></td>

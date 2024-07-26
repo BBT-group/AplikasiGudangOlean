@@ -49,7 +49,8 @@
                             <td><?= $item['id_barang_keluar'] ?></td>
                             <td><?= $item['waktu'] ?></td>
                             <td><?= $item['nama_barang'] ?></td>
-                            <td><?= $item['satuan'] ?></td>
+
+
                             <td><?= $item['nama_penerima'] ?></td>
                             <td><?= $stok_awal ?></td> <!-- Mengisi stok awal -->
                             <td><?= $item['jumlah'] ?></td>

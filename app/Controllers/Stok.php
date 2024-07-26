@@ -36,10 +36,12 @@ class Stok extends BaseController
         return view('v_stok', $data);
     }
 
+
     // fungsi ke detail barang
     public function indexDetail()
     {
         $data = [
+            'barang' => $this->barangModel->getBarangById($this->request->getVar('id_barang')),
             'barang' => $this->barangModel->getBarangById($this->request->getVar('id_barang')),
         ];
         return view('admin\percobaan', $data);

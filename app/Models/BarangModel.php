@@ -10,7 +10,7 @@ class BarangModel extends Model
     protected $table = 'barang';
     protected $primaryKey = 'id_barang';
 
-    protected $allowedFields = ['id_barang', 'nama', 'satuan', 'foto', 'jenis', 'stok', 'harga_beli', 'id_kategori'];
+    protected $allowedFields = ['id_barang', 'nama', 'foto', 'merk', 'stok', 'harga_beli', 'id_kategori', 'id_satuan'];
 
     public function getBarang()
     {
@@ -23,11 +23,10 @@ class BarangModel extends Model
             ->join('kategori', 'kategori.id_kategori = barang.id_kategori');
     }
 
-    public function getBarangWithAll()
+    public function getBarangWithSatuan()
     {
-        return $this->select('barang.*, kategori.nama_kategori,satuan.nama_satuan')
-            ->join('kategori', 'kategori.id_kategori = barang.id_kategori')
-            ->join('satuan', 'satuan.id_satuan=barang.id_satuan');
+        return $this->select('barang.*, satuan.nama_satuan')
+            ->join('satuan', 'satuan.id_satuan = barang.id_satuan');
     }
 
     public function getBarangById($id)

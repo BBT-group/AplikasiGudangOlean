@@ -54,7 +54,11 @@
         </div> -->
 
     </div>
+    </div>
 
+</div>
+</section>
+<script src="/js/scripts.js"></script>
 </div>
 </section>
 <script src="/js/scripts.js"></script>

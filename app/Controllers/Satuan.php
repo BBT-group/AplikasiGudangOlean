@@ -2,56 +2,57 @@
 
 namespace App\Controllers;
 
-
-
 use App\Models\SatuanModel;
 
-
-
-
-class Barang_Keluar extends BaseController
+class Satuan extends BaseController
 {
-
-    protected $satuanModel;
-
+    protected $model;
 
     public function __construct()
     {
-
-        $this->satuanModel = new SatuanModel();
+        $this->model = new SatuanModel();
     }
 
-    public function index()
+    public function index(): string
     {
-        $data = [
-            'satuan' => $this->satuanModel->findAll()
-        ];
-        return view('', $data);
+        $data['satuan'] = $this->model->orderBy('id_satuan', 'desc')->findAll();
+        echo view('v_header');
+        return view('v_satuan', $data);
     }
 
-    public function indexTambah()
+    public function tambahsatuan()
     {
+        // Tampilkan view header dan form
+        echo view('v_header');
+        echo view('admin/v_tambah_satuan');
 
-        return view('');
+        if ($this->request->getMethod() === 'post') {
+            $nama_satuan = $this->request->getPost('nama_satuan');
+
+            if (empty($nama_satuan)) {
+                session()->setFlashdata('error', 'Nama satuan tidak boleh kosong');
+                return redirect()->back();
+            }
+
+            $data = [
+                'nama_satuan' => $nama_satuan
+            ];
+            $this->model->tambahSatuan($data);
+
+            return redirect()->to('/satuan')->with('success', 'Data satuan berhasil ditambahkan');
+        }
     }
 
-    public function tambahSatuan()
-    {
-        $this->satuanModel->insert(['nama_satuan' => $this->request->getVar('nama_satuan')]);
-        return redirect()->to('');
-    }
 
-    public function indexUpdate()
+    public function deletesatuan($id_satuan = null)
     {
-        $data = [
-            'satuan' => $this->satuanModel->where('id_satuan', $this->request->getVar('id_satuan'))->first()
-        ];
-        return view('', $data);
-    }
-
-    public function updateSatuan()
-    {
-        $this->satuanModel->update($this->request->getVar('id_satuan'), ['nama_satuan' => $this->request->getVar('nama_satuan')]);
-        return redirect()->to('');
+        if (!isset($id_satuan) || $this->model->find($id_satuan) == null) {
+            return redirect()->to('satuan')->with('error', 'Satuan tidak ditemukan');
+        } else {
+            // Attempt to delete the record from the database
+            if ($this->model->delete($id_satuan)) {
+                return redirect()->to('satuan/index');
+            } 
+        }
     }
 }

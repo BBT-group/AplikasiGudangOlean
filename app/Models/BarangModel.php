@@ -10,7 +10,7 @@ class BarangModel extends Model
     protected $table = 'barang';
     protected $primaryKey = 'id_barang';
 
-    protected $allowedFields = ['id_barang', 'nama', 'satuan', 'foto', 'merk', 'stok', 'harga_beli', 'id_kategori'];
+    protected $allowedFields = ['id_barang', 'nama', 'foto', 'merk', 'stok', 'harga_beli', 'id_kategori', 'id_satuan'];
 
     public function getBarang()
     {
@@ -20,7 +20,14 @@ class BarangModel extends Model
     public function getBarangWithKategori()
     {
         return $this->select('barang.*, kategori.nama_kategori')
-            ->join('kategori', 'kategori.id_kategori = barang.id_kategori');
+            ->join('kategori', 'kategori.id_kategori = barang.id_kategori')
+            ;
+    }
+
+    public function getBarangWithSatuan()
+    {
+        return $this->select('barang.*, satuan.nama_satuan')
+            ->join('satuan', 'satuan.id_satuan = barang.id_satuan');
     }
 
     public function getBarangById($id)
@@ -39,6 +46,7 @@ class BarangModel extends Model
             ->orLike('barang.id_barang', $name)
             ->groupEnd();
     }
+
     public function insertBarang($data)
     {
         $this->insert($data);

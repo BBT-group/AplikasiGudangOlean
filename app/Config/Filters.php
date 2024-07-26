@@ -86,7 +86,7 @@ class Filters extends BaseFilters
             // 'honeypot',
             // 'secureheaders',
             'AdminFilter' => [
-                'except' => ['beranda','stok','barang_masuk', 'laporan_stok', 'laporan_masuk', 'laporan_keluar', 'peminjaman']
+                'except' => ['beranda','stok','barang_masuk', 'laporan_stok', 'laporan_masuk', 'satuan','satuan/tambahsatuan','satuan/deletesatuan', 'laporan_keluar', 'peminjaman', 'stok/tambahbarang', 'stok/updatebarang', 'stok/indexdetail']
             ],
             'OperatorFilter' => [
                 'except' => ['beranda','barang_keluar', 'laporan_keluar']

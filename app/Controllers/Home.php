@@ -24,11 +24,11 @@ class Home extends BaseController
         $user = $query->getRow();
         if($user) {
             if($post['password'] == $user->password) {
-                $params = ['role' => $user->role];
+                $params = ['role' => $user->role, 'nama' =>$user->nama];
                 session()->set($params);
                 return redirect()->to(site_url('beranda'));
             } elseif(password_verify($post['password'], $user->password)) {
-                $params = ['role' => $user->role];
+                $params = ['role' => $user->role, 'nama' =>$user->nama];
                 session()->set($params);
                 return redirect()->to(site_url('beranda'));
             }else {

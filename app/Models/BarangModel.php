@@ -6,10 +6,8 @@ use CodeIgniter\Model;
 
 class BarangModel extends Model
 {
-
     protected $table = 'barang';
     protected $primaryKey = 'id_barang';
-
     protected $allowedFields = ['id_barang', 'nama', 'satuan', 'foto', 'merk', 'stok', 'harga_beli', 'id_kategori'];
 
     public function getBarang()
@@ -21,13 +19,15 @@ class BarangModel extends Model
     {
         return $this->select('barang.*, kategori.nama_kategori')
             ->join('kategori', 'kategori.id_kategori = barang.id_kategori')
-            ;
+            ->get()->getResultArray();
     }
 
     public function getBarangById($id)
     {
         return $this->select('barang.*, kategori.nama_kategori')
-            ->join('kategori', 'kategori.id_kategori = barang.id_kategori')->where('id_barang', $id)->first();
+            ->join('kategori', 'kategori.id_kategori = barang.id_kategori')
+            ->where('id_barang', $id)
+            ->first();
     }
 
     public function getBarangByName($name)
@@ -38,13 +38,15 @@ class BarangModel extends Model
             ->like('barang.nama', $name)
             ->orLike('kategori.nama_kategori', $name)
             ->orLike('barang.id_barang', $name)
-            ->groupEnd();
+            ->groupEnd()
+            ->get()->getResultArray();
     }
 
     public function insertBarang($data)
     {
         $this->insert($data);
     }
+
     public function updateBarang($id, $data)
     {
         $this->update($id, $data);

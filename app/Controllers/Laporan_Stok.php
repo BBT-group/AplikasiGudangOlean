@@ -8,11 +8,12 @@ use App\Models\KategoriModel;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+
 class Laporan_Stok extends BaseController
 {
-
     protected $barangModel;
     protected $kategoriModel;
+
     public function __construct()
     {
         $this->barangModel = new BarangModel();
@@ -21,7 +22,6 @@ class Laporan_Stok extends BaseController
 
     public function index(): string
     {
-
         $data = [
             'barang' => $this->barangModel->findAll(),
             'kategori' => $this->kategoriModel->findAll()
@@ -29,7 +29,6 @@ class Laporan_Stok extends BaseController
         echo view('v_header');
         return view('v_laporan_stok', $data);
     }
-
 
     public function exports()
     {
@@ -95,5 +94,4 @@ class Laporan_Stok extends BaseController
         $writer->save('php://output');
         exit;
     }
-
 }

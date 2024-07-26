@@ -1,15 +1,43 @@
-<div class="container-fluid">
+                <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
-
+                    <h1 class="h3 mb-2 text-gray-800">Inventory Management</h1>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Barang Masuk</h6>
                         </div>
                         <div class="card-body">
+                            <div class="table-responsive">
+                                <form id="addItemForm" action=<?= base_url('/barang_masuk/update') ?> method="post" enctype="multipart/form-data">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="input1">tanggal dan waktu</label>
+                                                    <input type="text" class="form-control" id="datetime" name="datetime" value="<?php
+                                                                                                                                    date_default_timezone_set('Asia/Jakarta');
+                                                                                                                                    $currentDateTime = date("l, F j, Y H:i:s");
+                                                                                                                                    echo $currentDateTime;
+                                                                                                                                    ?>" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="input2">supplier</label>
+                                                    <input type="text" class="form-control" id="supplier" name="supplier" value="<?= old('supplier'); ?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-1 p-0" style="text-align: right;">
+                                        <button id="clear-session-btn" class="btn btn-secondary">Clear Session</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                                <div class="col-12 mb-3 p-0">
+                                            <a href="<?= base_url('barang_masuk/cari') ?>" class="btn btn-primary">Tambah Barang</a>
+                                        </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -22,18 +50,10 @@
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>ID Barang</th>
-                                            <th>Nama</th>
-                                            <th>Satuan</th>
-                                            <th>jumlah</th>
-                                            <th>Harga Beli</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <?php foreach ($barang ?? [] as $index => $s) : ?>
+                                    <tbody id="inventoryTable">
+
+                                        <?php
+                                        foreach ($barang ?? [] as $index => $s) : ?>
                                             <tr>
                                                 <td><?= $s['id_barang'] ?></td>
                                                 <td><?= $s['nama'] ?></td>

@@ -10,31 +10,40 @@
                             <h6 class="m-0 font-weight-bold text-primary">Data Barang Masuk</h6>
                         </div>
                         <div class="card-body">
+                            <div class="col-12 mb-1 p-0">
+                                <a href="<?= base_url('barang_masuk/index') ?>" class="btn btn-primary">masukan barang</a>
+                            </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>ID Barang</th>
-                                            <th>Nama</th>
-                                            <th>Satuan</th>
-                                            <th>jumlah</th>
-                                            <th>Harga Beli</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($barang ?? [] as $index => $s) : ?>
-                                            <tr>
-                                                <td><?= $s['id_barang'] ?></td>
-                                                <td><?= $s['nama'] ?></td>
-                                                <td><?= $s['satuan'] ?></td>
-                                                <td><input type="number" class="update-field" data-index="<?= $index ?>" data-column="stok" value="<?= esc($s['stok']) ?>"></td>
-                                                <td><input type="number" class="update-field" data-index="<?= $index ?>" data-column="harga_beli" value="<?= esc($s['harga_beli']) ?>"></td>
-                                                <td> <button class="remove-item" data-index="<?= $index ?>" data-key="<?= $s['id_barang'] ?>">Remove Item</button></td>
-                                            </tr>
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Id Masuk</th>
+                                        <th>Tanggal waktu</th>
+                                        <th>supplier</th>
+                                        <th>aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
 
+
+                                    if (!empty($masuk)) : ?>
+
+                                        <?php
+
+                                        $no = 0;
+                                        foreach ($masuk as $item) : ?>
+                                            <tr>
+                                                <td><?= $no += 1 ?></td>
+                                                <td><?= $item['id_ms_barang_masuk'] ?></td>
+                                                <td><?= $item['waktu'] ?></td>
+                                                <td><?= $item['nama'] ?></td>
+                                                <td><button>detail</button></td>
+                                            </tr>
                                         <?php endforeach; ?>
-                                    </tbody>
+                                    <?php endif; ?>
+                                </tbody>
                                 </table>
                             </div>
                         </div>

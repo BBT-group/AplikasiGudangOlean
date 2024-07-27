@@ -15,6 +15,7 @@ $routes->post('/barang/search', 'Barang::search');
 $routes->add('/barang/index', 'Barang::index');
 $routes->add('/barang/barangsesi', 'Barang::barangSesi');
 $routes->add('/stok/indexdetail', 'Stok::indexDetail');
+$routes->add('/barang_tambah/index', 'Barang_Tambah::index');
 
 $routes->post('/barang_masuk/savedata', 'Barang_Masuk::saveData');
 $routes->add('/barang_masuk/cari', 'Barang_Masuk::index2');

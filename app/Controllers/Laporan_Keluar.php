@@ -71,7 +71,7 @@ class Laporan_Keluar extends BaseController
             $sheet->setCellValue('A' . $row, $item['id_barang_keluar']);
             $sheet->setCellValue('B' . $row, $item['waktu']);
             $sheet->setCellValue('C' . $row, $item['nama_barang']);
-            $sheet->setCellValue('D' . $row, $item['satuan']);
+            $sheet->setCellValue('D' . $row, $item['nama_satuan']);
             $sheet->setCellValue('E' . $row, $item['nama_penerima']);
             $sheet->setCellValue('F' . $row, $stok_awal); // Mengisi stok awal
             $sheet->setCellValue('G' . $row, $item['jumlah']);

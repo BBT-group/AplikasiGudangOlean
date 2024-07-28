@@ -12,12 +12,21 @@ class Home extends BaseController
     {
         $this->db = new ModelLogin();
     }
-    public function index(): string
+    public function index()
     {
-        return view('v_login');
+        return redirect()->to(base_url('login'));
     }
 
     public function login()
+    {
+        if(session('role'))
+        {
+            return redirect()->to('beranda');
+        }
+        return view('v_login');
+    }
+
+    public function loginProses()
     {
         $post = $this->request->getPost();
         $query = $this->db->table('ms_user')->getWhere(['username' => $post['username']]);
@@ -26,11 +35,11 @@ class Home extends BaseController
             if($post['password'] == $user->password) {
                 $params = ['role' => $user->role, 'nama' =>$user->nama];
                 session()->set($params);
-                return redirect()->to(site_url('beranda'));
+                return redirect()->to(base_url('beranda'));
             } elseif(password_verify($post['password'], $user->password)) {
                 $params = ['role' => $user->role, 'nama' =>$user->nama];
                 session()->set($params);
-                return redirect()->to(site_url('beranda'));
+                return redirect()->to(base_url('beranda'));
             }else {
                 return redirect()->back()->with('error', 'Password tidak sesuai');
             }
@@ -42,7 +51,7 @@ class Home extends BaseController
     public function logout()
     {
         session()->remove('role');
-        return redirect()->to(site_url('/'));
+        return redirect()->to(base_url('/login'));
     }
 
 }

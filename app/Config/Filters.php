@@ -75,21 +75,21 @@ class Filters extends BaseFilters
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
-            'AdminFilter' => [
-                'except' => ['/*']
-            ],
-            'OperatorFilter' => [
-                'except' => ['/*']
-            ]
+            // 'AdminFilter' => [
+            //     'except' => ['/','beranda','stok','barang_masuk', 'barang_masuk/*', 'laporan_stok', 'laporan_masuk', 'satuan','satuan/tambahsatuan','satuan/deletesatuan', 'laporan_keluar', 'peminjaman', 'stok/tambahbarang', 'stok/updatebarang', 'stok/indexdetail']
+            // ],
+            // 'OperatorFilter' => [
+            //     'except' => ['/','beranda','barang_keluar', 'laporan_keluar']
+            // ]
         ],
         'after' => [
             // 'honeypot',
             // 'secureheaders',
             'AdminFilter' => [
-                'except' => ['beranda','stok','barang_masuk', 'barang_masuk/index', 'barang_masuk/cari', 'barang_tambah/index', 'laporan_stok', 'laporan_masuk', 'satuan','satuan/tambahsatuan','satuan/deletesatuan', 'laporan_keluar', 'peminjaman', 'stok/tambahbarang', 'stok/updatebarang', 'stok/indexdetail']
+                'except' => ['beranda','stok','stok/*','barang_masuk', 'barang_masuk/*', 'laporan_stok', 'laporan_stok/*', 'laporan_masuk', 'laporan_masuk/*', 'satuan','satuan/*', 'laporan_keluar', 'laporan/*', 'peminjaman', 'peminjaman/*']
             ],
             'OperatorFilter' => [
-                'except' => ['beranda','barang_keluar', 'laporan_keluar']
+                'except' => ['beranda','barang_keluar', 'barang_keluar/*', 'laporan_keluar', 'laporan_keluar/*']
             ]
         ],
     ];
@@ -119,11 +119,11 @@ class Filters extends BaseFilters
      * @var array<string, array<string, list<string>>>
      */
     public array $filters = [
-        // 'AdminFilter' => [
-        //     'before' => ['beranda/*', 'stok/*', 'barang_masuk/*', 'laporan_stok/*', 'laporan_masuk/*', 'laporan_keluar/*'],
-        // ],
-        // 'OperatorFilter' => [
-        //     'before' => ['beranda/*', 'barang_keluar/*', 'laporan_keluar/*'],
-        // ],
+        'AdminFilter' => [
+            'before' => ['beranda','stok','stok/*','barang_masuk', 'barang_masuk/*', 'laporan_stok', 'laporan_stok/*', 'laporan_masuk', 'laporan_masuk/*', 'satuan','satuan/*', 'laporan_keluar', 'laporan/*', 'peminjaman', 'peminjaman/*']
+        ],
+        'OperatorFilter' => [
+            'before' => ['beranda','barang_keluar', 'barang_keluar/*', 'laporan_keluar', 'laporan_keluar/*']
+            ]
     ];
 }

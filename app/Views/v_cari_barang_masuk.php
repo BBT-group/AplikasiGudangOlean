@@ -11,11 +11,6 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <div class="flex-box pb-1">
-                                    <div class="col-12 mb-1 p-0">
-                                        <a href="<?= base_url('stok/tambahbarang') ?>" method="post" class="btn btn-primary">Tambah Barang</a>
-                                    </div>
-                                </div>
                                 <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
@@ -24,7 +19,7 @@
                                             <th>Foto</th>
                                             <th>Stok</th>
                                             <th>Harga Beli</th>
-                                            <th>ID Kategori</th>
+                                            <th>Kategori</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -53,7 +48,7 @@
                                                             <input type="text" name="nama" id="nama" value="<?= $item['nama'] ?>" hidden>
                                                             <input type="text" name="stok" id="stok" value="<?= $item['stok'] ?>" hidden>
                                                             <input type="text" name="harga_beli" id="harga_beli" value="<?= $item['harga_beli'] ?>" hidden>
-                                                            <button type="submit">submit</button>
+                                                            <button type="submit" class="">submit</button>
                                                         </form>
                                                     </td>
                                                 </tr>

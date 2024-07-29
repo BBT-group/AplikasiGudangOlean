@@ -26,24 +26,26 @@ class Satuan extends BaseController
         $data = [
             'satuan' => $this->satuanModel->findAll()
         ];
-        return view('', $data);
+        echo view('v_header');
+        return view('v_satuan', $data);
     }
 
     public function indexTambah()
     {
+        echo view('v_header');
 
-        return view('');
+        return view('admin/v_tambah_satuan');
     }
 
     public function tambahSatuan()
     {
         if (!$this->validate([
-            'satuan' => 'required|is_unique[satuan.id_satuan]'
+            'nama_satuan' => 'required'
         ])) {
-            return redirect()->to(base_url('/barang_masuk/index'))->withInput();
+            return redirect()->to(base_url('/satuan/indextambah'))->withInput();
         }
         $this->satuanModel->insert(['nama_satuan' => $this->request->getVar('nama_satuan')]);
-        return redirect()->to('');
+        return redirect()->to(base_url('satuan'));
     }
 
     public function indexUpdate()

@@ -45,7 +45,7 @@ class Barang extends BaseController
             $data2 = [
                 'id_barang' => $this->request->getVar('id_barang'),
                 'nama' => $this->request->getVar('nama'),
-                'id_satuan' => $this->request->getVar('id_satuan'),
+                'satuan' => $this->request->getVar('satuan'),
                 'merk' => $this->request->getVar('merk'),
                 'stok' => $this->request->getVar('stok'),
                 'harga_beli' => $this->request->getVar('harga_beli'),
@@ -81,7 +81,7 @@ class Barang extends BaseController
             $data = [
                 'id_barang' => $this->request->getVar('id_barang'),
                 'nama' => $this->request->getVar('nama'),
-                'id_satuan' => $this->request->getVar('id_satuan'),
+                'satuan' => $this->request->getVar('satuan'),
                 'foto' => $foto_path,
                 'merk' => $this->request->getVar('merk'),
                 'stok' => $this->request->getVar('stok'),

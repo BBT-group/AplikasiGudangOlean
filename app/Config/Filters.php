@@ -34,6 +34,8 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
+        'AdminFilter'   => \App\Filters\AdminFilter::class,
+        'OperatorFilter' => \App\Filters\OperatorFilter::class,
     ];
 
     /**
@@ -51,13 +53,14 @@ class Filters extends BaseFilters
      */
     public array $required = [
         'before' => [
-            'forcehttps', // Force Global Secure Requests
-            'pagecache',  // Web Page Caching
+            // 'forcehttps', // Force Global Secure Requests
+            // 'pagecache',  // Web Page Caching
         ],
         'after' => [
-            'pagecache',   // Web Page Caching
-            'performance', // Performance Metrics
-            'toolbar',     // Debug Toolbar
+            // 'pagecache',   // Web Page Caching
+            // 'performance', // Performance Metrics
+            // 'toolbar',     // Debug Toolbar
+
         ],
     ];
 
@@ -68,15 +71,27 @@ class Filters extends BaseFilters
      * @var array<string, array<string, array<string, string>>>|array<string, list<string>>
      */
     public array $globals = [
-        'before' => [
-            // 'honeypot',
-            // 'csrf',
-            // 'invalidchars',
-        ],
-        'after' => [
-            // 'honeypot',
-            // 'secureheaders',
-        ],
+        // 'before' => [
+        //     // 'honeypot',
+        //     // 'csrf',
+        //     // 'invalidchars',
+        //     'AdminFilter' => [
+        //         'except' => ['/*']
+        //     ],
+        //     'OperatorFilter' => [
+        //         'except' => ['/*']
+        //     ]
+        // ],
+        // 'after' => [
+        //     // 'honeypot',
+        //     // 'secureheaders',
+        //     'AdminFilter' => [
+        //         'except' => ['beranda','stok','barang_masuk', 'barang_masuk/index', 'barang_masuk/cari', 'barang_tambah/index', 'laporan_stok', 'laporan_masuk', 'satuan','satuan/tambahsatuan','satuan/deletesatuan', 'laporan_keluar', 'peminjaman', 'stok/tambahbarang', 'stok/updatebarang', 'stok/indexdetail']
+        //     ],
+        //     'OperatorFilter' => [
+        //         'except' => ['beranda','barang_keluar', 'laporan_keluar']
+        //     ]
+        // ],
     ];
 
     /**
@@ -103,5 +118,12 @@ class Filters extends BaseFilters
      *
      * @var array<string, array<string, list<string>>>
      */
-    public array $filters = [];
+    public array $filters = [
+        // 'AdminFilter' => [
+        //     'before' => ['beranda/*', 'stok/*', 'barang_masuk/*', 'laporan_stok/*', 'laporan_masuk/*', 'laporan_keluar/*'],
+        // ],
+        // 'OperatorFilter' => [
+        //     'before' => ['beranda/*', 'barang_keluar/*', 'laporan_keluar/*'],
+        // ],
+    ];
 }

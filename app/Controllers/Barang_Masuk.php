@@ -6,7 +6,6 @@ namespace App\Controllers;
 use App\Models\BarangModel;
 use App\Models\KategoriModel;
 use App\Models\BarangMasukModel;
-use App\Models\InventarisModel;
 use App\Models\MasterBarangMasukModel;
 
 use function PHPUnit\Framework\isEmpty;
@@ -17,7 +16,6 @@ class Barang_Masuk extends BaseController
     protected $kategoriModel;
     protected $barangMasukModel;
     protected $masterBarangMasukModel;
-    protected $inventarisModel;
     private $dataList = [];
 
     public function __construct()
@@ -26,7 +24,6 @@ class Barang_Masuk extends BaseController
         $this->kategoriModel = new KategoriModel();
         $this->barangMasukModel = new BarangMasukModel();
         $this->masterBarangMasukModel = new MasterBarangMasukModel();
-        $this->inventarisModel = new InventarisModel();
         $this->dataList = $this->loadExistingData();
     }
 
@@ -88,13 +85,13 @@ class Barang_Masuk extends BaseController
     }
     public function saveData()
     {
-        $idBarang = $this->request->getVar('id_barang') != null ? $this->request->getVar('id_barang') : $this->request->getVar('id_inventaris');
+        $idBarang = $this->request->getVar('id_barang');
         if ($this->containsObjectWithName($this->dataList, $idBarang) == false || $this->dataList == null) {
             $data2 = [
-                'id_barang' => $idBarang,
+                'id_barang' => $this->request->getVar('id_barang'),
                 'nama' => $this->request->getVar('nama'),
-                'id_satuan' => $this->request->getVar('id_satuan'),
-                // 'jenis' => 'barang',
+                'satuan' => $this->request->getVar('satuan'),
+                // 'merk' => $this->request->getVar('merk'),
                 'stok' => 1,
                 'harga_beli' => $this->request->getVar('harga_beli'),
                 // 'id_kategori' => $this->request->getVar('id_kategori'),
@@ -130,7 +127,6 @@ class Barang_Masuk extends BaseController
         return redirect()->to(base_url('/barang_masuk'));
         // return json_encode($this->barangModel->findAll());
     }
-
     public function updateStok()
     {
         if (!$this->validate([
@@ -141,52 +137,33 @@ class Barang_Masuk extends BaseController
         $barang = session()->get('datalist');
         if (!empty($barang)) {
             $namasupplier = $this->request->getVar('supplier');
-            date_default_timezone_set('Asia/Jakarta');
-            $currentDateTime =  date("Y-m-d H:i:s");
-            $this->masterBarangMasukModel->insert(['waktu' => $currentDateTime, 'id_supplier' => $namasupplier]);
+            $this->masterBarangMasukModel->insert(['waktu' => date("Y-m-d H:i:s"), 'id_supplier' => $namasupplier]);
 
             $idms = $this->masterBarangMasukModel->getInsertID();
+
             foreach ($barang as $b) {
-                if ($b['jenis'] == 'barang') {
+                $barang1 = $this->barangModel->where('id_barang', $b['id_barang'])->first();
+                $data = [
+                    'nama' => $barang1['nama'],
+                    'satuan' => $barang1['satuan'],
+                    'foto' => $barang1['foto'],
+                    'merk' => $barang1['merk'],
+                    'stok' => $barang1['stok'] + $b['stok'],
+                    'harga_beli' => $b['harga_beli'],
+                    'id_kategori' => $barang1['id_kategori'],
+                ];
 
-                    $barang1 = $this->barangModel->where('id_barang', $b['id_barang'])->first();
-                    $data = [
-                        'nama' => $barang1['nama'],
-                        'id_satuan' => $barang1['id_satuan'],
-                        'foto' => $barang1['foto'],
-                        'jenis' => $barang1['jenis'],
-                        'stok' => $barang1['stok'] + $b['stok'],
-                        'harga_beli' => $b['harga_beli'],
-                        'id_kategori' => $barang1['id_kategori'],
-                    ];
+                $this->barangModel->update($b['id_barang'], $data);
 
-                    $this->barangModel->update($b['id_barang'], $data);
+                $this->barangMasukModel->insert(['id_barang' => $barang1['id_barang'], 'id_ms_barang_masuk' => $idms, 'jumlah' => $b['stok']]);
 
-                    $this->barangMasukModel->insert(['id_barang' => $barang1['id_barang'], 'id_ms_barang_masuk' => $idms, 'jumlah' => $b['stok']]);
-                }
-                if ($b['jenis']  == 'alat') {
-
-                    $barang1 = $this->inventarisModel->where('id_inventaris', $b['id_barang'])->first();
-                    $data = [
-                        'nama_inventaris' => $barang1['nama'],
-                        'foto' => $barang1['foto'],
-                        'stok' => $barang1['stok'] + $b['stok'],
-                        'harga_beli' => $b['harga_beli'],
-                    ];
-
-                    $this->inventarisModel->update($b['id_barang'], $data);
-
-                    $this->barangMasukModel->insert(['id_inventaris' => $barang1['id_barang'], 'id_ms_barang_masuk' => $idms, 'jumlah' => $b['stok']]);
-                }
+                session()->remove('datalist');
+                return redirect()->to(base_url('/barang_masuk'));
             }
-
-            session()->remove('datalist');
-            return redirect()->to(base_url('/barang_masuk'));
         } else {
             return redirect()->to(base_url('/barang_masuk/index'))->withInput();
         }
     }
-
     public function update()
     {
         $session = session();
@@ -214,13 +191,6 @@ class Barang_Masuk extends BaseController
                 'id_barang',
                 $idBarang
             )->first();
-            $idSatuan = $a['id_satuan'];
-            $jenis = 'barang';
-            if ($a == null) {
-                $a = $this->inventarisModel->where('id_inventaris', $idBarang);
-                $idSatuan = 'alat';
-                $jenis = 'alat';
-            }
             if (empty($a)) {
                 session()->set('id_barang_temp', $idBarang);
                 return $this->response->setJSON([
@@ -236,8 +206,8 @@ class Barang_Masuk extends BaseController
             $data2 = [
                 'id_barang' => $idBarang,
                 'nama' => $a['nama'],
-                'id_satuan' => $idSatuan,
-                'jenis' => $jenis,
+                'satuan' => $a['satuan'],
+                // 'merk' => $a('merk'),
                 'stok' => 1,
                 'harga_beli' => $a['harga_beli'],
                 // 'id_kategori' => $a('id_kategori'),
@@ -249,7 +219,6 @@ class Barang_Masuk extends BaseController
             return $this->response->setJSON(['status' => 'eror']);
         }
     }
-
     public function hapusBarangDatalistMasuk()
     {
         $session = session();
@@ -262,5 +231,11 @@ class Barang_Masuk extends BaseController
             $session->set('datalist', $items);
         }
         return $this->response->setJSON(['status' => 'success']);
+    }
+
+
+
+    public function cariMaster()
+    {
     }
 }

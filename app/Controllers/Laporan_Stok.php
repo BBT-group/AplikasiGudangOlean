@@ -58,7 +58,7 @@ class Laporan_Stok extends BaseController
         foreach ($data as $item) {
             $sheet->setCellValue('A' . $row, $item['id_barang']);
             $sheet->setCellValue('B' . $row, $item['nama']);
-            $sheet->setCellValue('C' . $row, $item['satuan']);
+            $sheet->setCellValue('C' . $row, $item['nama_satuan']);
             $sheet->setCellValue('E' . $row, $item['merk']);
             $sheet->setCellValue('F' . $row, $item['stok']);
             $sheet->setCellValue('G' . $row, $item['harga_beli']);

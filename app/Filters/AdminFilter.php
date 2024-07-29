@@ -10,7 +10,7 @@ class AdminFilter implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        if (session()->get('role') == '') {
+        if (session()->get('role') !== 'admin') {
             return redirect()->to('/');
         }
     }

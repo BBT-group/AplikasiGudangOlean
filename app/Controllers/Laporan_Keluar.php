@@ -48,46 +48,49 @@ class Laporan_Keluar extends BaseController
         $sheet = $spreadsheet->getActiveSheet();
 
         // Set header file
-        $sheet->mergeCells('A1:H1');
+        $sheet->mergeCells('A1:I1');
         $sheet->setCellValue('A1', 'LAPORAN KELUAR STOK BARANG GUDANG PT.OLEAN PERMATA');
-        $sheet->mergeCells('A2:H2');
+        $sheet->mergeCells('A2:I2');
         $sheet->setCellValue('A2', 'Periode ' . ($start_date ? $start_date : 'Semua') . ' - ' . ($end_date ? $end_date : 'Semua'));
 
         // Header kolom
-        $sheet->setCellValue('A3', 'Id Barang Keluar');
-        $sheet->setCellValue('B3', 'Tanggal');
-        $sheet->setCellValue('C3', 'Nama Barang');
-        $sheet->setCellValue('D3', 'Satuan');
-        $sheet->setCellValue('E3', 'Nama Penerima');
-        $sheet->setCellValue('F3', 'Stok Awal');
-        $sheet->setCellValue('G3', 'Jumlah Keluar');
-        $sheet->setCellValue('H3', 'Stok Akhir');
+        $sheet->setCellValue('A3', 'No');
+        $sheet->setCellValue('B3', 'Id Barang Keluar');
+        $sheet->setCellValue('C3', 'Tanggal');
+        $sheet->setCellValue('D3', 'Nama Barang');
+        $sheet->setCellValue('E3', 'Satuan');
+        $sheet->setCellValue('F3', 'Nama Penerima');
+        $sheet->setCellValue('G3', 'Stok Awal');
+        $sheet->setCellValue('H3', 'Jumlah Keluar');
+        $sheet->setCellValue('I3', 'Stok Akhir');
 
         // Data
         $row = 4;
+        $no = 1;
         foreach ($data as $item) {
             $stok_awal = $item['stok'] - $item['jumlah']; // Menghitung stok awal
 
-            $sheet->setCellValue('A' . $row, $item['id_barang_keluar']);
-            $sheet->setCellValue('B' . $row, $item['waktu']);
-            $sheet->setCellValue('C' . $row, $item['nama_barang']);
-            $sheet->setCellValue('D' . $row, $item['nama_satuan']);
-            $sheet->setCellValue('E' . $row, $item['nama_penerima']);
-            $sheet->setCellValue('F' . $row, $stok_awal); // Mengisi stok awal
-            $sheet->setCellValue('G' . $row, $item['jumlah']);
-            $sheet->setCellValue('H' . $row, $item['stok']);
+            $sheet->setCellValue('A' . $row, $no++);
+            $sheet->setCellValue('B' . $row, $item['id_barang_keluar']);
+            $sheet->setCellValue('C' . $row, $item['waktu']);
+            $sheet->setCellValue('D' . $row, $item['nama_barang']);
+            $sheet->setCellValue('E' . $row, $item['nama_satuan']);
+            $sheet->setCellValue('F' . $row, $item['nama_penerima']);
+            $sheet->setCellValue('G' . $row, $stok_awal); // Mengisi stok awal
+            $sheet->setCellValue('H' . $row, $item['jumlah']);
+            $sheet->setCellValue('I' . $row, $item['stok']);
             $row++;
         }
 
         // Styling header
-        $sheet->getStyle('A1:H2')->getFont()->setBold(true);
-        $sheet->getStyle('A1:H2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A1:I2')->getFont()->setBold(true);
+        $sheet->getStyle('A1:I2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
         // Mengubah warna background header
-        $sheet->getStyle('A1:H1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
-        $sheet->getStyle('A1:H1')->getFill()->getStartColor()->setARGB('34a853'); // Warna hijau, gunakan kode warna hex RGB 
-        $sheet->getStyle('A2:H2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
-        $sheet->getStyle('A2:H2')->getFill()->getStartColor()->setARGB('b6d7a8'); 
+        $sheet->getStyle('A1:I2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
+        $sheet->getStyle('A1:I2')->getFill()->getStartColor()->setARGB('34a853'); // Warna hijau, gunakan kode warna hex RGB 
+        $sheet->getStyle('A3:I3')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
+        $sheet->getStyle('A3:I3')->getFill()->getStartColor()->setARGB('b6d7a8'); 
 
         // Apply border to the header and data
         $styleArray = [
@@ -99,7 +102,7 @@ class Laporan_Keluar extends BaseController
             ],
         ];
 
-        $sheet->getStyle('A1:H' . ($row - 1))->applyFromArray($styleArray);
+        $sheet->getStyle('A1:I' . ($row - 1))->applyFromArray($styleArray);
 
         $writer = new Xlsx($spreadsheet);
         $filename = 'laporan_keluar_stok_barang.xlsx';

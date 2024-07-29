@@ -31,6 +31,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
+                    <th>No</th>
                     <th>ID Barang Keluar</th>
                     <th>Tanggal</th>
                     <th>Nama Barang</th>
@@ -43,12 +44,13 @@
             </thead>
             <tbody>
                 <?php if (!empty($barangkeluar)) : ?>
-                    <?php foreach ($barangkeluar as $item) : ?>
-                        <?php $stok_awal = $item['stok'] - $item['jumlah']; ?>
+                    <?php $no = 1; foreach ($barangmasuk as $item) : ?>
+                        <?php $stok_awal = $item['stok'] + $item['jumlah']; ?>
                         <tr>
-                            <td><?= $item['id_barang_keluar'] ?></td>
+                            <td><?= $no++ ?></td>
+                            <td><?= $item['id_barang'] ?></td>
                             <td><?= $item['waktu'] ?></td>
-                            <td><?= $item['nama_barang'] ?></td>
+                            <td><?= $item['nama'] ?></td>
                             <td><?= $item['nama_satuan'] ?></td>
                             <td><?= $item['nama_penerima'] ?></td>
                             <td><?= $stok_awal ?></td> <!-- Mengisi stok awal -->
@@ -58,7 +60,7 @@
                     <?php endforeach; ?>
                 <?php else : ?>
                     <tr>
-                        <td colspan="8" class="text-center">Tidak ada data barang</td>
+                        <td colspan="9" class="text-center">Tidak ada data barang</td>
                     </tr>
                 <?php endif; ?>
             </tbody>

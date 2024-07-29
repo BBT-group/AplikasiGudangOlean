@@ -16,6 +16,8 @@ $routes->post('/barang/search', 'Barang::search');
 $routes->add('/barang/index', 'Barang::index');
 $routes->add('/barang/barangsesi', 'Barang::barangSesi');
 $routes->add('/stok/indexdetail', 'Stok::indexDetail');
+$routes->add('/stok/tambahbarang', 'Stok::tambahBarang');
+$routes->add('/stok/indextambah', 'Stok::indexTambah');
 $routes->add('/barang_tambah/index', 'Barang_Tambah::index');
 
 $routes->post('/barang_masuk/savedata', 'Barang_Masuk::saveData');
@@ -50,7 +52,13 @@ $routes->get('/stok/deletebarang/(:num)', 'Stok::deletebarang/$1');
 
 $routes->get('/satuan/deletesatuan/(:num)', 'Satuan::deletesatuan/$1');
 $routes->get('/satuan', 'Satuan::index');
-$routes->get('/satuan/tambahsatuan', 'Satuan::tambahsatuan');
-$routes->post('/satuan/tambahsatuan', 'Satuan::tambahsatuan');
+$routes->add('/satuan/indextambah', 'Satuan::indexTambah');
+$routes->add('/satuan/tambahsatuan', 'Satuan::tambahSatuan');
+
+$routes->get('/kategori/deletekategori/(:num)', 'Kategori::deleteKategori/$1');
+$routes->get('/kategori', 'Kategori::index');
+$routes->add('/kategori/indextambah', 'Kategori::indexTambah');
+$routes->add('/kategori/tambahkategori', 'Kategori::tambahKategori');
+
 
 $routes->get('/laporan_stok/exports', 'Laporan_Stok::exports');

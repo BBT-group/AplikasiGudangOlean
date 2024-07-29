@@ -7,6 +7,7 @@ use App\Models\BarangModel;
 use App\Models\KategoriModel;
 use App\Models\BarangMasukModel;
 use App\Models\MasterBarangMasukModel;
+use App\Models\SupplierModel;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -16,6 +17,7 @@ class Barang_Masuk extends BaseController
     protected $kategoriModel;
     protected $barangMasukModel;
     protected $masterBarangMasukModel;
+    protected $supplierModel;
     private $dataList = [];
 
     public function __construct()
@@ -24,6 +26,7 @@ class Barang_Masuk extends BaseController
         $this->kategoriModel = new KategoriModel();
         $this->barangMasukModel = new BarangMasukModel();
         $this->masterBarangMasukModel = new MasterBarangMasukModel();
+        $this->supplierModel = new SupplierModel();
         $this->dataList = $this->loadExistingData();
     }
 
@@ -130,14 +133,23 @@ class Barang_Masuk extends BaseController
     public function updateStok()
     {
         if (!$this->validate([
-            'supplier' => 'required|is_not_unique[supplier.id_supplier]'
+            'nama_supplier' => 'required'
         ])) {
             return redirect()->to(base_url('/barang_masuk/index'))->withInput();
         }
         $barang = session()->get('datalist');
         if (!empty($barang)) {
-            $namasupplier = $this->request->getVar('supplier');
-            $this->masterBarangMasukModel->insert(['waktu' => date("Y-m-d H:i:s"), 'id_supplier' => $namasupplier]);
+            $namasupplier = $this->request->getVar('nama_supplier');
+            if ($this->supplierModel->where('nama', $namasupplier)->first() == null) {
+                $suppId = $this->supplierModel->insert(['nama' =>
+                $namasupplier], true);
+            } else {
+                $supp = $this->supplierModel->where('nama', $namasupplier)->first();
+                $suppId = $supp['id_supplier'];
+            }
+            date_default_timezone_set('Asia/Jakarta');
+            $currentDateTime =  date("Y-m-d H:i:s");
+            $this->masterBarangMasukModel->insert(['waktu' => $currentDateTime, 'id_supplier' => $suppId]);
 
             $idms = $this->masterBarangMasukModel->getInsertID();
 
@@ -145,9 +157,9 @@ class Barang_Masuk extends BaseController
                 $barang1 = $this->barangModel->where('id_barang', $b['id_barang'])->first();
                 $data = [
                     'nama' => $barang1['nama'],
-                    'satuan' => $barang1['satuan'],
+                    'id_satuan' => $barang1['id_satuan'],
                     'foto' => $barang1['foto'],
-                    'merk' => $barang1['merk'],
+
                     'stok' => $barang1['stok'] + $b['stok'],
                     'harga_beli' => $b['harga_beli'],
                     'id_kategori' => $barang1['id_kategori'],

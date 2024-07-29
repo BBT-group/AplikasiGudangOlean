@@ -6,16 +6,16 @@
                             <div class="card">
                                 <div class="card-header">
                                     <!-- judul form -->
-                                    <div class="card-title">Tambah Data Satuan</div>
+                                    <div class="card-title">Tambah Data Kategori</div>
                                 </div>
                                 <div class="card-body">
-                                    <form id="addItemForm" action="<?= base_url('satuan/tambahsatuan') ?>" method="post" enctype="multipart/form-data">
+                                    <form id="addItemForm" action="<?= base_url('kategori/tambahkategori') ?>" method="post" enctype="multipart/form-data">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <input type="hidden" id="id_satuan">
+                                                <input type="hidden" id="id_kategori">
                                                 <div class="form-group">
-                                                    <label for="nama_satuan">Nama Satuan</label>
-                                                    <input type="text" class="form-control" id="nama_satuan" name="nama_satuan">
+                                                    <label for="nama_satuan">Nama Kategori</label>
+                                                    <input type="text" class="form-control" id="nama_kategori" name="nama_kategori">
                                                 </div>
                                             </div>
                                         </div>

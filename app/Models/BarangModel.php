@@ -20,8 +20,7 @@ class BarangModel extends Model
     public function getBarangWithKategori()
     {
         return $this->select('barang.*, kategori.nama_kategori')
-            ->join('kategori', 'kategori.id_kategori = barang.id_kategori')
-            ;
+            ->join('kategori', 'kategori.id_kategori = barang.id_kategori');
     }
 
     public function getBarangWithSatuan()
@@ -32,8 +31,10 @@ class BarangModel extends Model
 
     public function getBarangById($id)
     {
-        return $this->select('barang.*, kategori.nama_kategori')
-            ->join('kategori', 'kategori.id_kategori = barang.id_kategori')->where('id_barang', $id)->first();
+        return $this->select('barang.*, kategori.nama_kategori,satuan.nama_satuan')
+            ->join('kategori', 'kategori.id_kategori = barang.id_kategori')
+            ->join('satuan', 'satuan.id_satuan = barang.id_satuan')
+            ->where('id_barang', $id)->first();
     }
 
     public function getBarangByName($name)

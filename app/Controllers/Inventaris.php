@@ -48,12 +48,15 @@ class Inventaris extends BaseController
     public function simpanAlat()
     {
         if (!$this->validate([
-            'id_barang' => 'required|is_unique[barang.id_barang]'
+            'id_inventaris' => 'required|is_unique[inventaris.id_inventaris]',
+            'nama_inventaris' => 'required',
+            'bukti_peminjaman' => 'required',
+
         ])) {
             return redirect()->to(base_url('/barangtambah/index'));
         }
 
-        $file = $this->request->getFile('foto');
+        $file = $this->request->getFile('bukti_peminjaman');
         if ($file->isValid() && !$file->hasMoved()) {
             $newName = $file->getRandomName();
             $file->move(ROOTPATH . 'public/uploads', $newName);
@@ -61,7 +64,7 @@ class Inventaris extends BaseController
             $data = [
                 'id_inventaris' => $this->request->getVar('id_inventaris'),
                 'nama_inventaris' => $this->request->getVar('nama_inventaris'),
-                'foto' => $foto_path,
+                'bukti_peminjaman' => $foto_path,
                 'stok' => 0,
                 'harga_beli' => 0
             ];
@@ -74,11 +77,17 @@ class Inventaris extends BaseController
     // fungsi update barang
     public function updateAlat()
     {
-
-        $file = $this->request->getFile('foto');
+        if (!$this->validate([
+            'id_inventaris' => 'required|is_unique[inventaris.id_inventaris]',
+            'nama_inventaris' => 'required',
+            'bukti_peminjaman' => 'required',
+        ])) {
+            return redirect()->to(base_url('/barangtambah/index'));
+        }
+        $file = $this->request->getFile('bukti_peminjaman');
         if ($file->isValid() && !$file->hasMoved()) {
             $dataLama = $this->inventarisModel->getAlatById($this->request->getVar('id_inventaris'));
-            $fotoLama = $dataLama['foto'];
+            $fotoLama = $dataLama['bukti_peminjaman'];
             unlink($fotoLama);
             $newName = $file->getRandomName();
             $file->move(ROOTPATH . 'public/uploads', $newName);
@@ -88,7 +97,7 @@ class Inventaris extends BaseController
         }
         $data = [
             'nama_inventaris' => $this->request->getVar('nama_inventaris'),
-            'foto' => $foto_path,
+            'bukti_peminjaman' => $foto_path,
             'stok' => $this->request->getVar('stok'),
             'harga_beli' => $this->request->getVar('harga_beli'),
         ];

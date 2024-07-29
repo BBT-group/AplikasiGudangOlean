@@ -32,7 +32,7 @@ class Kategori extends BaseController
     public function tambahKategori()
     {
         if (!$this->validate([
-            'kategori' => 'required|is_unique[kategori.nama_kategori]'
+            'nama_kategori' => 'required|is_unique[kategori.nama_kategori]'
         ])) {
             return redirect()->to(base_url('kategori/indextambah'))->withInput();
         }

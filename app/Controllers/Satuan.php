@@ -40,7 +40,7 @@ class Satuan extends BaseController
     public function tambahSatuan()
     {
         if (!$this->validate([
-            'nama_satuan' => 'required'
+            'nama_satuan' => 'required|is_unique[satuan.nama_satuan]'
         ])) {
             return redirect()->to(base_url('/satuan/indextambah'))->withInput();
         }

@@ -1,19 +1,19 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Satuan</h1>
+    <h1 class="h3 mb-2 text-gray-800">Kategori</h1>
     <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data Satuan</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data Kategori</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <div class="flex-box pb-1">
                     <div class="col-12 mb-1 p-0">
-                        <a href="<?= base_url('kategori/indextambah/') ?>" method="post" class="btn btn-primary">Tambah Satuan</a>
+                        <a href="<?= base_url('kategori/indextambah/') ?>" method="post" class="btn btn-primary">Tambah Kategori</a>
                     </div>
                 </div>
                 <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">

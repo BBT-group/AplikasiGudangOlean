@@ -42,7 +42,7 @@
 
                             <td><?= $item['id_barang'] ?></td>
                             <td><?= $item['nama'] ?></td>
-                            <td><?= $item['satuan'] ?></td>
+                            <td><?= $item['nama_satuan'] ?></td>
                             <td><img src="<?= base_url($item['foto']) ?>" alt="<?= $item['nama'] ?>" width="50"></td>
                             <td><?= $item['merk'] ?></td>
                             <td><?= $item['stok'] ?></td>

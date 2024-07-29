@@ -6,9 +6,6 @@
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Barang Masuk</h6>
-                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <form action="<?= base_url('/laporan_masuk') ?>" method="get" class="form-inline mb-3">
@@ -22,36 +19,46 @@
                                     </div>
                                     <button type="submit" class="btn btn-primary mr-2">Tampilkan</button>
                                     <a href="<?= base_url('/laporan_masuk') ?>" class="btn btn-warning mr-2">Reset</a>
-                                    <a href="<?= base_url('/laporan_masuk/exportm?start_date=' . (isset($start_date) ? $start_date : '') . '&end_date=' . (isset($end_date) ? $end_date : '')) ?>" class="btn btn-secondary">Export to Excel</a>
+                                    <a href="<?= base_url('/laporan_masuk/exportm?start_date=' . (isset($start_date) ? $start_date : '') . '&end_date=' . (isset($end_date) ? $end_date : '')) ?>" class="btn btn-secondary" style="text-align: end;">Export to Excel</a>
                                 </form>
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>ID Barang</th>
-                                        <th>Tanggal</th>
-                                        <th>Nama Barang</th>
-                                        <th>Satuan</th>
-                                        <th>Harga Masuk</th>
-                                        <th>Stok Awal</th>
-                                        <th>Stok Masuk</th>
-                                        <th>Stok Akhir</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                        <?php foreach ($barangmasuk as $item) : ?>
-                                            <?php $stok_awal = $item['stok'] - $item['jumlah']; ?>
-                                            <tr>
-                                                <td><?= $item['id_barang'] ?></td>
-                                                <td><?= $item['waktu'] ?></td>
-                                                <td><?= $item['nama'] ?></td>
-                                                <td><?= $item['satuan'] ?></td>
-                                                <td><?= $item['harga_beli'] ?></td>
-                                                <td><?= $stok_awal ?></td> <!-- Mengisi stok awal -->
-                                                <td><?= $item['jumlah'] ?></td>
-                                                <td><?= $item['stok'] ?></td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                </tbody>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold ">Laporan Barang Keluar Tanggal <?= print($start_date)?> s/d <?= print($end_date)?></h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTables" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Barang</th>
+                                            <th>Tanggal</th>
+                                            <th>Nama Barang</th>
+                                            <th>Satuan</th>
+                                            <th>Harga Masuk</th>
+                                            <th>Stok Awal</th>
+                                            <th>Stok Masuk</th>
+                                            <th>Stok Akhir</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <?php foreach ($barangmasuk as $item) : ?>
+                                                <?php $stok_awal = $item['stok'] - $item['jumlah']; ?>
+                                                <tr>
+                                                    <td><?= $item['id_barang'] ?></td>
+                                                    <td><?= $item['waktu'] ?></td>
+                                                    <td><?= $item['nama'] ?></td>
+                                                    <td><?= $item['satuan'] ?></td>
+                                                    <td><?= $item['harga_beli'] ?></td>
+                                                    <td><?= $stok_awal ?></td> <!-- Mengisi stok awal -->
+                                                    <td><?= $item['jumlah'] ?></td>
+                                                    <td><?= $item['stok'] ?></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

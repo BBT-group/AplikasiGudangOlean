@@ -28,14 +28,26 @@ class Barang_Pinjam extends BaseController
 
     public function index()
     {
+        $data = [
+            'pinjam' => session()->get('datalist_pinjam'),
+        ];
         echo view('v_header');
-        return view('v_beranda_peminjaman');
+        return view('v_peminjaman', $data);
     }
 
-    public function indexPinjam()
+    public function index2()
     {
+        $keyword = $this->request->getVar('search');
+        if ($keyword) {
+            $barang = $this->inventarisModel->getByName($keyword);
+        } else {
+            $barang = $this->inventarisModel;
+        }
+        $data = [
+            'barang' => $barang->findAll()
+        ];
         echo view('v_header');
-        return view('v_peminjaman');
+        return view('v_cari_peminjaman', $data);
     }
 
     public function indexCari()
@@ -44,31 +56,54 @@ class Barang_Pinjam extends BaseController
         return view('v_cari_peminjaman');
     }
 
+    public function beranda()
+    {
+        // $keyword = $this->request->getVar('search');
+        // if ($keyword) {
+        //     $masuk = $this->masterBarangMasukModel->getBarangByName($keyword);
+        // } else {
+        //     $masuk = $this->masterBarangMasukModel;
+        // }
+        $data = [
+            'pinjam' => $this->masterPeminjamanModel->getAllWithNama()->findAll(),
+        ];
+        echo view('v_header');
+        return view('v_beranda_peminjaman', $data);
+    }
+
     function containsObjectWithName($objects, $name)
     {
-        if (!isEmpty($objects)) {
+        if ($objects != null) {
             foreach ($objects as $object) {
-                if ($object['id_barang'] !== $name) {
-                    return false;
+                if ($object['id_inventaris'] == $name) {
+                    return true;
                 }
             }
-            return true;
+            return false;
+        } else {
+            return false;
         }
-        return false;
     }
 
     public function clearSession()
     {
         session()->remove('datalist_pinjam');
         // ganti link
-        return redirect()->to(base_url('/barang_masuk'));
+        return redirect()->to(base_url('/barang_pinjam'));
         // return json_encode($this->inventarisModel->findAll());
     }
 
     public function saveData()
     {
         $idInventaris = $this->request->getVar('id_inventaris');
-        if ($this->containsObjectWithName($this->dataList, $idInventaris) == false || $this->dataList == null) {
+        d($idInventaris);
+        d($this->dataList);
+        if ($this->containsObjectWithName($this->dataList, $idInventaris)) {
+            dd($this->dataList[array_search($idInventaris, array_values($this->dataList))]);
+            $this->dataList[array_search($idInventaris, array_values($this->dataList))]['stok'] += 1;
+            session()->set('datalist_pinjam', $this->dataList);
+            return redirect()->to(base_url('/barang_pinjam/index'));
+        } else {
             $data2 = [
                 'id_inventaris' => $this->request->getVar('id_inventaris'),
                 'nama_inventaris' => $this->request->getVar('nama_inventaris'),
@@ -77,11 +112,7 @@ class Barang_Pinjam extends BaseController
             ];
             $this->dataList[] = $data2;
             session()->set('datalist_pinjam', $this->dataList);
-            return redirect()->to(base_url('/barang_masuk/index'));
-        } else {
-            $this->dataList[array_search($idInventaris, array_values($this->dataList))]['stok'] += 1;
-            session()->set('datalist_pinjam', $this->dataList);
-            return redirect()->to(base_url('/barang_masuk/index'));
+            return redirect()->to(base_url('/barang_pinjam/index'));
         }
     }
 
@@ -91,7 +122,7 @@ class Barang_Pinjam extends BaseController
             'penerima' => 'required|is_not_unique[supplier.id_supplier]'
         ])) {
             // ganti url
-            return redirect()->to(base_url('/barang_masuk/index'))->withInput();
+            return redirect()->to(base_url('/barang_pinjam/index'))->withInput();
         }
         $barang = session()->get('datalist_pinjam');
         if (!empty($barang)) {
@@ -105,7 +136,7 @@ class Barang_Pinjam extends BaseController
             foreach ($barang as $b) {
 
                 $barang1 = $this->inventarisModel->where('id_inventaris', $b['id_inventaris'])->first();
-                if (isset('kembali')) {
+                if (isset($kembali)) {
                     $stok = $barang1['stok'] + $b['stok'];
                 } else {
                     $stok =  $barang1['stok'] - $b['stok'];
@@ -123,10 +154,10 @@ class Barang_Pinjam extends BaseController
 
             session()->remove('datalist_pinjam');
             // ganti url
-            return redirect()->to(base_url('/barang_masuk'));
+            return redirect()->to(base_url('/barang_pinjam'));
         } else {
             // ganti url
-            return redirect()->to(base_url('/barang_masuk/index'))->withInput();
+            return redirect()->to(base_url('/barang_pinjam/index'))->withInput();
         }
     }
 

@@ -162,6 +162,11 @@
                         <i class="fas fa-fw fa-sign-out-alt"></i>
                         <span>Barang Keluar</span></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url('barang_pinjam') ?>">
+                        <i class="fas fa-fw fa-sign-out-alt"></i>
+                        <span>Barang pinjam</span></a>
+                </li>
                 <hr class="sidebar-divider d-none d-md-block">
 
                 <!-- <div class="text-center d-none d-md-inline">

@@ -55,7 +55,7 @@
                                             <td><?= $s['nama'] ?></td>
                                             <td><?= $s['satuan'] ?></td>
                                             <td><input type="number" class="update-field" data-index="<?= $index ?>" data-column="stok" value="<?= esc($s['stok']) ?>"></td>
-                                            <td> <button class="remove-item" data-index="<?= $index ?>" data-key="<?= $s['id_barang'] ?>">Remove Item</button></td>
+                                            <td> <button class="remove-item btn btn-danger" data-index="<?= $index ?>" data-key="<?= $s['id_barang'] ?>">Remove Item</button></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>

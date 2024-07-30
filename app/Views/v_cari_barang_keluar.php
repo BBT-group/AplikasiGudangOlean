@@ -44,7 +44,7 @@
                                                             <input type="text" name="nama" id="nama" value="<?= $item['nama'] ?>" hidden>
                                                             <input type="text" name="stok" id="stok" value="<?= $item['stok'] ?>" hidden>
                                                             <input type="text" name="harga_beli" id="harga_beli" value="<?= $item['harga_beli'] ?>" hidden>
-                                                            <button type="submit">submit</button>
+                                                            <button type="submit" class="btn btn-primary">submit</button>
                                                         </form>
                                                     </td>
                                                 </tr>

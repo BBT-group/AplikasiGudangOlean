@@ -2,9 +2,10 @@
 
 namespace App\Controllers;
 
+use App\Models\KategoriModel;
 use CodeIgniter\Controller;
 use App\Models\BarangModel;
-use App\Models\KategoriModel;
+use App\Models\SatuanModel;
 
 
 
@@ -12,9 +13,11 @@ class Barang_Tambah extends Controller
 {
     protected $barangModel;
     protected $kategoriModel;
+    protected $satuanModel;
     public function __construct()
     {
         $this->barangModel = new BarangModel();
+        $this->satuanModel = new SatuanModel();
         $this->kategoriModel = new KategoriModel();
     }
 
@@ -22,6 +25,7 @@ class Barang_Tambah extends Controller
     {
         $data = [
             'barang' => $this->barangModel->findAll(),
+            'satuan' => $this->satuanModel->findAll(),
             'kategori' => $this->kategoriModel->findAll()
         ];
         echo view('v_header');

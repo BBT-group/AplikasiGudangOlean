@@ -9,6 +9,7 @@ class BarangMasukModel extends Model
     protected $table = 'barang_masuk';
     protected $tableBarang = 'barang';
     protected $tableMsBarangMasuk = 'ms_barang_masuk';
+    protected $tableSatuan = 'satuan';
     protected $primaryKey = 'id_barang_masuk';
     protected $allowedFields = ['id_barang', 'id_ms_barang_masuk', 'jumlah'];
 
@@ -27,16 +28,17 @@ class BarangMasukModel extends Model
             ->getResultArray();
     }
 
-    public function getBarangMasukGabungFilter($start_date, $end_date)
+    public function getBarangMasukGabungFilter($startDate, $endDate)
     {
         return $this->db->table($this->table)
             ->join($this->tableBarang, 'barang.id_barang = barang_masuk.id_barang')
             ->join($this->tableMsBarangMasuk, 'ms_barang_masuk.id_ms_barang_masuk = barang_masuk.id_ms_barang_masuk')
-            ->where('DATE(waktu) >=', $start_date)
-            ->where('DATE(waktu) <=', $end_date)
+            ->where('DATE(waktu) >=', $startDate)
+            ->where('DATE(waktu) <=', $endDate)
             ->get()
             ->getResultArray();
     }
+    
 
     public function getByMasterId($id)
     {

@@ -22,4 +22,15 @@ class MasterBarangMasukModel extends Model
         return $this->select('ms_barang_masuk.*, supplier.nama ')
             ->join('supplier', 'supplier.id_supplier = ms_barang_masuk.id_supplier')->where('id_ms_barang_masuk', $id)->first();
     }
+
+    public function getBarangMasukGabungFilter($start_date, $end_date)
+    {
+        return $this->db->table($this->table)
+            ->join('barang_masuk', 'barang_masuk.id_ms_barang_masuk = ms_barang_masuk.id_ms_barang_masuk')
+            ->join('barang', 'barang.id_barang = barang_masuk.id_barang')
+            ->where('DATE(ms_barang_masuk.waktu) >=', $start_date)
+            ->where('DATE(ms_barang_masuk.waktu) <=', $end_date)
+            ->get()
+            ->getResultArray();
+    }
 }

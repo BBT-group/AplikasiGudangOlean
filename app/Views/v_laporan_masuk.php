@@ -27,47 +27,43 @@
                 <a href="<?= base_url('/laporan_masuk') ?>" class="btn btn-warning mr-2">Reset</a>
                 <a href="<?= base_url('/laporan_masuk/exportm?start_date=' . (isset($start_date) ? $start_date : '') . '&end_date=' . (isset($end_date) ? $end_date : '')) ?>" class="btn btn-secondary">Export to Excel</a>
             </form>
-        </section>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID Barang</th>
-                    <th>Tanggal</th>
-                    <th>Nama Barang</th>
-                    <th>Satuan</th>
-                    <th>Harga Masuk</th>
-                    <th>Stok Awal</th>
-                    <th>Stok Masuk</th>
-                    <th>Stok Akhir</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if (!empty($barangmasuk)) : ?>
-                    <?php foreach ($barangmasuk as $item) : ?>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>ID Barang</th>
+                        <th>Tanggal</th>
+                        <th>Nama Barang</th>
+                        <th>Satuan</th>
+                        <th>Harga Masuk</th>
+                        <th>Stok Awal</th>
+                        <th>Stok Masuk</th>
+                        <th>Stok Akhir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $no = 1; foreach ($barangmasuk as $item) : ?>
                         <?php $stok_awal = $item['stok'] - $item['jumlah']; ?>
                         <tr>
+                            <td><?= $no++ ?></td>
                             <td><?= $item['id_barang'] ?></td>
                             <td><?= $item['waktu'] ?></td>
                             <td><?= $item['nama'] ?></td>
-                            <td><?= $item['satuan'] ?></td>
+                            <td><?= $item['nama_satuan'] ?></td>
                             <td><?= $item['harga_beli'] ?></td>
                             <td><?= $stok_awal ?></td> <!-- Mengisi stok awal -->
                             <td><?= $item['jumlah'] ?></td>
                             <td><?= $item['stok'] ?></td>
                         </tr>
                     <?php endforeach; ?>
-                <?php else : ?>
-                    <tr>
-                        <td colspan="8" class="text-center">Tidak ada data barang</td>
-                    </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </section>
     </div>
-    <!-- Tambahkan link ke JS Bootstrap, jQuery, dan jQuery UI -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Tambahkan link ke jQuery dan JavaScript Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $(function() {
             $("#start_date").datepicker({

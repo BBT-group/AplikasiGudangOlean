@@ -9,8 +9,5 @@ class PenerimaModel extends Model
     protected $table = 'penerima';
     protected $primaryKey = 'id_penerima';
 
-    public function getBarangKeluar()
-    {
-        return $this->findAll();
-    }
+    protected $allowedFields = ['nama'];
 }

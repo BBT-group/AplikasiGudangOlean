@@ -13,9 +13,7 @@
 
     <!-- Custom fonts for this template-->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
@@ -43,151 +41,147 @@
             </a>
 
             <hr class="sidebar-divider my-0">
-            
-        <?php if(session()->role == 'admin') : ?>
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url('beranda')?>">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-            <hr class="sidebar-divider">
-            <div class="sidebar-heading">
-                Master
-            </div>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-layer-group"></i>
-                    <span>Stok Barang</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="<?php echo base_url('stok')?>">Data Barang</a>
-                        <a class="collapse-item" href="<?php echo base_url('jenis_barang')?>">Jenis Barang</a>
-                    </div>
+
+            <?php if (session()->role == 'admin') : ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url('beranda') ?>">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
+                </li>
+                <hr class="sidebar-divider">
+                <div class="sidebar-heading">
+                    Master
                 </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Infentaris</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="<?php echo base_url('peminjaman')?>">Peminjaman</a>
-                        <a class="collapse-item" href="<?php echo base_url('pengembalian')?>">Pengembalian</a>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-layer-group"></i>
+                        <span>Stok Barang</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="<?php echo base_url('stok') ?>">Data Barang</a>
+                            <a class="collapse-item" href="<?php echo base_url('satuan') ?>">Satuan</a>
+                            <a class="collapse-item" href="<?php echo base_url('kategori') ?>">Kategori</a>
+                        </div>
                     </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Infentaris</span>
+                    </a>
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="<?php echo base_url('peminjaman') ?>">Peminjaman</a>
+                            <a class="collapse-item" href="<?php echo base_url('pengembalian') ?>">Pengembalian</a>
+                        </div>
+                    </div>
+                </li>
+                <hr class="sidebar-divider">
+
+                <div class="sidebar-heading">
+                    Transaksi
                 </div>
-            </li>
-            <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url('barang_masuk') ?>">
+                        <i class="fas fa-fw fa-sign-in-alt"></i>
+                        <span>Barang Masuk</span>
+                    </a>
+                </li>
+                <hr class="sidebar-divider">
 
-            <div class="sidebar-heading">
-                Transaksi
-            </div>
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url('barang_masuk')?>">
-                    <i class="fas fa-fw fa-sign-in-alt"></i>
-                    <span>Barang Masuk</span>
-                </a>
-            </li>
-            <hr class="sidebar-divider">
+                <div class="sidebar-heading">
+                    Laporan
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="laporan_stok">
+                        <i class="fas fa-fw fa-file-signature"></i>
+                        <span>Laporan Stok</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url('laporan_masuk') ?>">
+                        <i class="fas fa-fw fa-file-import"></i>
+                        <span>Laporan Barang Masuk</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url('laporan_keluar') ?>">
+                        <i class="fas fa-fw fa-file-export"></i>
+                        <span>Laporan Barang Keluar</span></a>
+                </li>
 
-            <div class="sidebar-heading">
-                Laporan
-            </div>
-            <li class="nav-item">
-                <a class="nav-link" href="laporan_stok">
-                    <i class="fas fa-fw fa-file-signature"></i>
-                    <span>Laporan Stok</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url('laporan_masuk')?>">
-                    <i class="fas fa-fw fa-file-import"></i>
-                    <span>Laporan Barang Masuk</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url('laporan_keluar')?>">
-                    <i class="fas fa-fw fa-file-export"></i>
-                    <span>Laporan Barang Keluar</span></a>
-            </li>
+                <hr class="sidebar-divider d-none d-md-block">
 
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- <div class="text-center d-none d-md-inline">
+                <!-- <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div> -->
-        <?php endif; ?>
+            <?php endif; ?>
 
-        <?php if(session()->role == 'operator') : ?>
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url('beranda')?>">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-            <hr class="sidebar-divider">
-            <div class="sidebar-heading">
-                Master
-            </div>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-layer-group"></i>
-                    <span>Stok Barang</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="<?php echo base_url('stok')?>">Data Barang</a>
-                        <a class="collapse-item" href="<?php echo base_url('jenis_stok')?>">Jenis Barang</a>
-                    </div>
+            <?php if (session()->role == 'operator') : ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url('beranda') ?>">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
+                </li>
+                <hr class="sidebar-divider">
+                <div class="sidebar-heading">
+                    Master
                 </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Infentaris</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Peminjaman Alat:</h6>
-                        <a class="collapse-item" href="<?php echo base_url('peminjaman')?>">Peminjaman</a>
-                        <a class="collapse-item" href="<?php echo base_url('pengembalian')?>">Pengembalian</a>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-layer-group"></i>
+                        <span>Stok Barang</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="<?php echo base_url('stok') ?>">Data Barang</a>
+                            <a class="collapse-item" href="<?php echo base_url('jenis_stok') ?>">Jenis Barang</a>
+                            <a class="collapse-item" href="<?php echo base_url('satuan') ?>">Satuan</a>
+                        </div>
                     </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Infentaris</span>
+                    </a>
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Peminjaman Alat:</h6>
+                            <a class="collapse-item" href="<?php echo base_url('peminjaman') ?>">Peminjaman</a>
+                            <a class="collapse-item" href="<?php echo base_url('pengembalian') ?>">Pengembalian</a>
+                        </div>
+                    </div>
+                </li>
+                <hr class="sidebar-divider">
+
+                <div class="sidebar-heading">
+                    Transaksi
                 </div>
-            </li>
-            <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url('barang_keluar') ?>">
+                        <i class="fas fa-fw fa-sign-out-alt"></i>
+                        <span>Barang Keluar</span></a>
+                </li>
+                <hr class="sidebar-divider d-none d-md-block">
 
-            <div class="sidebar-heading">
-                Transaksi
-            </div>
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url('barang_keluar')?>">
-                    <i class="fas fa-fw fa-sign-out-alt"></i>
-                    <span>Barang Keluar</span></a>
-            </li>
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- <div class="text-center d-none d-md-inline">
+                <!-- <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div> -->
-        <?php endif; ?>
+            <?php endif; ?>
         </ul>
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
 
-                    <!-- Topbar -->
-                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                        <!-- Sidebar Toggle (Topbar) -->
-                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3" style="color: #206c1f;">
-                            <i class="fa fa-bars"></i>
-                        </button>
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3" style="color: #206c1f;">
+                        <i class="fa fa-bars"></i>
+                    </button>
 
-                        <!-- Topbar Search -->
-                        <!-- <form
+                    <!-- Topbar Search -->
+                    <!-- <form
                             class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div class="input-group">
                                 <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
@@ -199,23 +193,23 @@
                                 </div>
                             </div>
                         </form> -->
-                        <div class="text-center d-none d-md-inline" style="color: #fff;">
-                            <button class="rounded-circle border-0" id="sidebarToggle" style="background-color: #fff;">
-                                <i class="fa fa-bars" style="color: #206c1f;"></i>
-                            </button>
-                        </div>
+                    <div class="text-center d-none d-md-inline" style="color: #fff;">
+                        <button class="rounded-circle border-0" id="sidebarToggle" style="background-color: #fff;">
+                            <i class="fa fa-bars" style="color: #206c1f;"></i>
+                        </button>
+                    </div>
 
-                        <!-- Topbar Navbar -->
-                        <ul class="navbar-nav ml-auto">
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
 
-                            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                            <!-- <li class="nav-item dropdown no-arrow d-sm-none">
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <!-- <li class="nav-item dropdown no-arrow d-sm-none">
                                 <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-search fa-fw"></i>
                                 </a> -->
-                                <!-- Dropdown - Messages -->
-                                <!-- <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                        <!-- Dropdown - Messages -->
+                        <!-- <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                     aria-labelledby="searchDropdown">
                                     <form class="form-inline mr-auto w-100 navbar-search">
                                         <div class="input-group">
@@ -232,34 +226,31 @@
                                 </div>
                             </li> -->
 
-                            <!-- Nav Item - User Information -->
-                            <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-lg-inline text-gray-600 small">Hallo, <?php echo session()->get('nama') ?></span>
-                                    <img class="img-profile rounded-circle"
-                                        src="/img/undraw_profile.svg">
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-lg-inline text-gray-600 small">Hallo, <?php echo session()->get('nama') ?></span>
+                                <img class="img-profile rounded-circle" src="/img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
                                 </a>
-                                <!-- Dropdown - User Information -->
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                    aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Profile
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Settings
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
-                                    </a>
-                                </div>
-                            </li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
 
-                        </ul>
+                    </ul>
 
-                    </nav>
-                    <!-- End of Topbar -->
+                </nav>
+                <!-- End of Topbar -->

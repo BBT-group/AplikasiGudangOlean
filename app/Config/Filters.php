@@ -35,7 +35,7 @@ class Filters extends BaseFilters
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
         'AdminFilter'   => \App\Filters\AdminFilter::class,
-        'OperatorFilter'=> \App\Filters\OperatorFilter::class,
+        'OperatorFilter' => \App\Filters\OperatorFilter::class,
     ];
 
     /**
@@ -60,7 +60,7 @@ class Filters extends BaseFilters
             // 'pagecache',   // Web Page Caching
             // 'performance', // Performance Metrics
             // 'toolbar',     // Debug Toolbar
-            
+
         ],
     ];
 
@@ -71,27 +71,27 @@ class Filters extends BaseFilters
      * @var array<string, array<string, array<string, string>>>|array<string, list<string>>
      */
     public array $globals = [
-        'before' => [
-            // 'honeypot',
-            // 'csrf',
-            // 'invalidchars',
-            'AdminFilter' => [
-                'except' => ['/*']
-            ],
-            'OperatorFilter' => [
-                'except' => ['/*']
-            ]
-        ],
-        'after' => [
-            // 'honeypot',
-            // 'secureheaders',
-            'AdminFilter' => [
-                'except' => ['beranda','stok','barang_masuk', 'laporan_stok', 'laporan_masuk', 'laporan_keluar', 'peminjaman']
-            ],
-            'OperatorFilter' => [
-                'except' => ['beranda','barang_keluar', 'laporan_keluar']
-            ]
-        ],
+        // 'before' => [
+        //     // 'honeypot',
+        //     // 'csrf',
+        //     // 'invalidchars',
+        //     'AdminFilter' => [
+        //         'except' => ['/*']
+        //     ],
+        //     'OperatorFilter' => [
+        //         'except' => ['/*']
+        //     ]
+        // ],
+        // 'after' => [
+        //     // 'honeypot',
+        //     // 'secureheaders',
+        //     'AdminFilter' => [
+        //         'except' => ['beranda','stok','barang_masuk', 'barang_masuk/index', 'barang_masuk/cari', 'barang_tambah/index', 'laporan_stok', 'laporan_masuk', 'satuan','satuan/tambahsatuan','satuan/deletesatuan', 'laporan_keluar', 'peminjaman', 'stok/tambahbarang', 'stok/updatebarang', 'stok/indexdetail']
+        //     ],
+        //     'OperatorFilter' => [
+        //         'except' => ['beranda','barang_keluar', 'laporan_keluar']
+        //     ]
+        // ],
     ];
 
     /**

@@ -28,6 +28,7 @@ class Barang_Pinjam extends BaseController
 
     public function index()
     {
+        \Config\Services::validation();
         $data = [
             'pinjam' => session()->get('datalist_pinjam'),
         ];
@@ -93,14 +94,20 @@ class Barang_Pinjam extends BaseController
         // return json_encode($this->inventarisModel->findAll());
     }
 
+    public function getColumnValueIndices(array $array, string $column, $value)
+    {
+        foreach ($array as $index => $item) {
+            if (isset($item[$column]) && $item[$column] == $value) {
+                return $index;
+            }
+        }
+    }
+
     public function saveData()
     {
         $idInventaris = $this->request->getVar('id_inventaris');
-        d($idInventaris);
-        d($this->dataList);
         if ($this->containsObjectWithName($this->dataList, $idInventaris)) {
-            dd($this->dataList[array_search($idInventaris, array_values($this->dataList))]);
-            $this->dataList[array_search($idInventaris, array_values($this->dataList))]['stok'] += 1;
+            $this->dataList[$this->getColumnValueIndices($this->dataList, 'id_inventaris', $idInventaris)]['stok'] += 1;
             session()->set('datalist_pinjam', $this->dataList);
             return redirect()->to(base_url('/barang_pinjam/index'));
         } else {
@@ -119,14 +126,14 @@ class Barang_Pinjam extends BaseController
     public function updateStok()
     {
         if (!$this->validate([
-            'penerima' => 'required|is_not_unique[supplier.id_supplier]'
+            'nama_penerima' => 'required|is_not_unique[penerima.nama_penerima]'
         ])) {
             // ganti url
             return redirect()->to(base_url('/barang_pinjam/index'))->withInput();
         }
         $barang = session()->get('datalist_pinjam');
         if (!empty($barang)) {
-            $namaPenerima = $this->request->getVar('penerima');
+            $namaPenerima = $this->request->getVar('nama_penerima');
             date_default_timezone_set('Asia/Jakarta');
             $currentDateTime =  date("Y-m-d H:i:s");
             $this->masterPeminjamanModel->insert(['waktu' => $currentDateTime, 'id_penerima' => $namaPenerima]);

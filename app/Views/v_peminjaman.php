@@ -1,5 +1,7 @@
 <div class="container-fluid">
     <?php d(session()->get('datalist_pinjam')) ?>
+
+
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Inventory Management</h1>
     <!-- DataTales Example -->
@@ -25,7 +27,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="input2">penerima</label>
-                                    <input type="text" class="form-control" id="_inventaris_penerima" name="nama_penerima" value="<?= old('nama_penerima'); ?>">
+                                    <input type="text" class="form-control <?php if (isset($validate)) {
+                                                                                echo $validate->hasError('nama_penerima') ? 'is-invalid' : '';
+                                                                            }  ?>" id="nama_penerima" name="nama_penerima" value="<?= old('nama_penerima'); ?>">
                                 </div>
                             </div>
                         </div>

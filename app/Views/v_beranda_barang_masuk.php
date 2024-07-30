@@ -3,7 +3,24 @@
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Barang Masuk</h1>
                     <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
-
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <form method="get" action="<?= base_url('barang_masuk/beranda') ?>">
+                                <div class="form-group row">
+                                    <label for="start_date" class="col-sm-2 col-form-label">Start Date</label>
+                                    <div class="col-sm-4">
+                                        <input type="date" class="form-control" id="start_date" name="start_date" value="<?= isset($start_date) ? $start_date : '' ?>">
+                                    </div>
+                                    <label for="end_date" class="col-sm-2 col-form-label">End Date</label>
+                                    <div class="col-sm-4">
+                                        <input type="date" class="form-control" id="end_date" name="end_date" value="<?= isset($end_date) ? $end_date : '' ?>">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                                <a href="<?= base_url('barang_masuk/beranda') ?>" class="btn btn-secondary">Reset</a>
+                            </form>
+                        </div>
+                    </div>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">

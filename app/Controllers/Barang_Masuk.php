@@ -55,18 +55,25 @@ class Barang_Masuk extends BaseController
     }
     public function beranda()
     {
-        // $keyword = $this->request->getVar('search');
-        // if ($keyword) {
-        //     $masuk = $this->masterBarangMasukModel->getBarangByName($keyword);
-        // } else {
-        //     $masuk = $this->masterBarangMasukModel;
-        // }
+        $startDate = $this->request->getVar('start_date');
+        $endDate = $this->request->getVar('end_date');
+    
+        if ($startDate && $endDate) {
+            $masuk = $this->masterBarangMasukModel->getBarangMasukGabungFilter($startDate, $endDate);
+        } else {
+            $masuk = $this->masterBarangMasukModel->getAll()->findAll();
+        }
+    
         $data = [
-            'masuk' => $this->masterBarangMasukModel->getAll()->findAll(),
+            'masuk' => $masuk,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
         ];
+    
         echo view('v_header');
         return view('v_beranda_barang_masuk', $data);
     }
+    
 
     public function loadExistingData()
     {

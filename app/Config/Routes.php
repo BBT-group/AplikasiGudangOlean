@@ -39,6 +39,7 @@ $routes->add('/barang_keluar/hapusitem', 'Barang_Keluar::hapusBarangDatalistMasu
 
 $routes->get('/beranda', 'Beranda::index');
 $routes->get('/barang_masuk', 'Barang_Masuk::beranda');
+$routes->get('/barang_masuk/beranda', 'Barang_Masuk::beranda');
 $routes->get('/barang_keluar', 'Barang_Keluar::beranda');
 $routes->get('/laporan_stok', 'Laporan_Stok::index');
 $routes->get('/laporan_stok/exports', 'Laporan_Stok::exports');

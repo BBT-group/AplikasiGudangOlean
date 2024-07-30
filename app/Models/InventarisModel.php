@@ -8,7 +8,7 @@ class InventarisModel extends Model
 {
     protected $table = 'inventaris';
     protected $primaryKey = 'id_inventaris';
-    protected $allowedFields = ['nama_inventaris', 'stok', 'harga_beli', 'foto'];
+    protected $allowedFields = ['id_inventaris', 'nama_inventaris', 'stok', 'harga_beli', 'foto'];
 
     // public function getAlatById()
     // {
@@ -20,7 +20,7 @@ class InventarisModel extends Model
 
     public function insertAlat($data)
     {
-        $this->insert($data);
+        return $this->insert($data);
     }
 
     public function updateAlat($id_inventaris, $data)

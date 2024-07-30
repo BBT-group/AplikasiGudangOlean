@@ -56,4 +56,8 @@ class BarangModel extends Model
     {
         $this->update($id, $data);
     }
+
+    public function getBarangWithInventaris()
+    {
+    }
 }

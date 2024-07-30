@@ -68,7 +68,7 @@ class Stok extends BaseController
 
             $data = [
                 'id_barang' => $this->request->getPost('id_barang'),
-                'nama' => $this->request->getPost('nama_barang'),
+                'nama' => $this->request->getPost('nama'),
                 'foto' => $foto_path,
                 'stok' => 0,
                 'harga_beli' => 0,
@@ -132,7 +132,7 @@ class Stok extends BaseController
             ];
             $this->barangModel->update($this->request->getVar('id_barang'), $data);
             return redirect()->to(base_url('/stok'));
-         } else {
+        } else {
             $newID = $this->kategoriModel->where('nama_kategori', $this->request->getVar('id_kategori'))->first();
             $idSat = $this->satuanModel->where('nama_satuan', $this->request->getVar('id_satuan'))->first();
             $data = [

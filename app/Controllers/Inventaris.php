@@ -35,12 +35,11 @@ class Inventaris extends BaseController
     public function simpanAlat()
     {
         if (!$this->validate([
-            'id_inventaris' => 'required|is_unique[inventaris.id_inventaris]',
+            'id_inventaris' => 'required',
             'nama_inventaris' => 'required',
-            'foto' => 'required',
-
+            'foto' => 'uploaded[foto]',
         ])) {
-            return redirect()->to(base_url('inventaris/indextambah'));
+            return redirect()->to(base_url('inventaris/indextambah'))->withInput();
         }
 
         $file = $this->request->getFile('foto');
@@ -87,11 +86,11 @@ class Inventaris extends BaseController
     public function updateAlat()
     {
         if (!$this->validate([
-            'id_inventaris' => 'required|is_unique[inventaris.id_inventaris]',
+            'id_inventaris' => 'required|is_not_unique[inventaris.id_inventaris]',
             'nama_inventaris' => 'required',
-            'foto' => 'required',
+            'foto' => 'uploaded[foto]',
         ])) {
-            return redirect()->to(base_url('/inventaris'));
+            return redirect()->back();
         }
         $file = $this->request->getFile('foto');
         if ($file->isValid() && !$file->hasMoved()) {
@@ -99,18 +98,20 @@ class Inventaris extends BaseController
             $fotoLama = $dataLama['foto'];
             unlink($fotoLama);
             $newName = $file->getRandomName();
-            $file->move(ROOTPATH . 'public/uploads', $newName);
+            $file->move(ROOTPATH . 'public/uploads/', $newName);
             $foto_path = 'uploads/' . $newName;
         } else {
-            $foto_path = $this->request->getVar('foto');
+            $foto_path = $this->request->getFile('foto');
         }
         $data = [
             'nama_inventaris' => $this->request->getVar('nama_inventaris'),
-            'bukti_peminjaman' => $foto_path,
+            'foto' => $foto_path,
             'stok' => $this->request->getVar('stok'),
             'harga_beli' => $this->request->getVar('harga_beli'),
         ];
-        $this->inventarisModel->update($this->request->getVar('id_inventaris'), $data);
-        return redirect()->to(base_url('/inventaris'));
+        if ($this->inventarisModel->update($this->request->getVar('id_inventaris'), $data)) {
+            return redirect()->to(base_url('/inventaris'));
+        }
+        return redirect()->back()->withInput();
     }
 }

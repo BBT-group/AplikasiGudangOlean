@@ -14,10 +14,12 @@
                                 <div class="form-group">
                                     <label for="id_inventaris">ID Alat</label>
                                     <input type="text" class="form-control" id="id_inventaris" name="id_inventaris" value="<?= $alat['id_inventaris'] ?>" readonly>
+                                    <input type="text" class="form-control" id="stok" name="stok" value="<?= $alat['stok'] ?>" hidden>
+                                    <input type="text" class="form-control" id="harga_beli" name="harga_beli" value="<?= $alat['harga_beli'] ?>" hidden>
                                 </div>
                                 <div class="form-group">
                                     <label for="nama_inventaris">Nama</label>
-                                    <input type="text" class="form-control" id="nama_inventaris" name="nama_inventaris" required maxlength="45" value="<?= $alat['nama_inventaris']?>">
+                                    <input type="text" class="form-control" id="nama_inventaris" name="nama_inventaris" required maxlength="45" value="<?= $alat['nama_inventaris'] ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="foto">Foto</label>
@@ -86,4 +88,5 @@
 <script src="/js/demo/chart-pie-demo.js"></script>
 
 </body>
+
 </html>

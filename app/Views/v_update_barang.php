@@ -15,6 +15,8 @@
                                                 <div class="form-group">
                                                     <label for="id_barang">ID Barang</label>
                                                     <input type="text" class="form-control" id="id_barang" name="id_barang" value="<?= $data['id_barang'] ?>" readonly>
+                                                    <input type="text" class="form-control" id="stok" name="stok" value="<?= $data['stok'] ?>" hidden>
+                                                    <input type="text" class="form-control" id="harga_beli" name="harga_beli" value="<?= $data['harga_beli'] ?>" hidden>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="nama">Nama</label>
@@ -47,12 +49,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                                </form>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
                 <!-- /.container-fluid -->
                 </div>

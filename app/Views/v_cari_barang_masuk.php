@@ -36,17 +36,45 @@
                                                     <td><img src="<?= base_url($item['foto']) ?>" alt="<?= $item['nama'] ?>" width="50"></td>
                                                     <td><?= $item['stok'] ?></td>
                                                     <td><?= $item['harga_beli'] ?></td>
-                                                    <td><?php foreach ($kategori as $k) {
-                                                            if ($k['id_kategori'] === $item['id_kategori']) {
-                                                                echo $k['nama_kategori'];
-                                                            };
-                                                        }; ?>
-                                                    </td>
+                                                    <td><?= $item['id_kategori'] ?></td>
+
+
                                                     <td>
                                                         <form action=<?= base_url('/barang_masuk/savedata') ?> method="post">
                                                             <input type="text" name="id_barang" id="id_barang" value="<?= $item['id_barang'] ?>" hidden>
                                                             <input type="text" name="nama" id="nama" value="<?= $item['nama'] ?>" hidden>
                                                             <input type="text" name="stok" id="stok" value="<?= $item['stok'] ?>" hidden>
+                                                            <input type="text" name="jenis" id="jenis" value="barang" hidden>
+                                                            <input type="text" name="harga_beli" id="harga_beli" value="<?= $item['harga_beli'] ?>" hidden>
+                                                            <button type="submit" class="btn btn-primary" style="display: flexbox; text-align: center;">Submit</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                        <?php
+                                        if (!empty($inventaris)) : ?>
+                                            <?php foreach ($inventaris as $item) : ?>
+                                                <tr>
+
+                                                    <td><?= $item['id_inventaris'] ?></td>
+                                                    <td><?= $item['nama_inventaris'] ?></td>
+                                                    <?php if ($item['foto'] != null) : ?>
+                                                        <td><img src="<?= base_url($item['foto']) ?>" alt="<?= $item['nama_inventaris'] ?>" width="50"></td>
+                                                    <?php else :  ?>
+                                                        <td></td>
+                                                    <?php endif; ?>
+
+                                                    <td><?= $item['stok'] ?></td>
+                                                    <td><?= $item['harga_beli'] ?></td>
+                                                    <td>alat</td>
+
+                                                    <td>
+                                                        <form action=<?= base_url('/barang_masuk/savedata') ?> method="post">
+                                                            <input type="text" name="id_barang" id="id_barang" value="<?= $item['id_inventaris'] ?>" hidden>
+                                                            <input type="text" name="nama" id="nama" value="<?= $item['nama_inventaris'] ?>" hidden>
+                                                            <input type="text" name="stok" id="stok" value="<?= $item['stok'] ?>" hidden>
+                                                            <input type="text" name="jenis" id="jenis" value="alat" hidden>
                                                             <input type="text" name="harga_beli" id="harga_beli" value="<?= $item['harga_beli'] ?>" hidden>
                                                             <button type="submit" class="btn btn-primary" style="display: flexbox; text-align: center;">Submit</button>
                                                         </form>
@@ -62,67 +90,66 @@
 
                 </div>
 
-            </div>
-            <!-- End of Main Content -->
+                </div>
+                <!-- End of Main Content -->
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Your Website 2020</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+
+                </div>
+                <!-- End of Content Wrapper -->
+
+                </div>
+                <!-- End of Page Wrapper -->
+
+                <!-- Scroll to Top Button-->
+                <a class="scroll-to-top rounded" href="#page-top">
+                    <i class="fas fa-angle-up"></i>
+                </a>
+
+                <!-- Logout Modal-->
+                <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                <a class="btn btn-primary" href="<?php echo base_url('logout') ?>">Logout</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </footer>
-            <!-- End of Footer -->
 
-        </div>
-        <!-- End of Content Wrapper -->
+                <!-- Bootstrap core JavaScript-->
+                <script src="/vendor/jquery/jquery.js"></script>
+                <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
 
-    </div>
-    <!-- End of Page Wrapper -->
+                <!-- Core plugin JavaScript-->
+                <script src="/vendor/jquery-easing/jquery.easing.js"></script>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+                <!-- Custom scripts for all pages-->
+                <script src="/js/sb-admin-2.js"></script>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="<?php echo base_url('logout') ?>">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Bootstrap core JavaScript-->
-    <script src="/vendor/jquery/jquery.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+                <!-- Page level plugins -->
+                <script src="/vendor/datatables/jquery.dataTables.js"></script>
+                <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/vendor/jquery-easing/jquery.easing.js"></script>
+                <!-- Page level custom scripts -->
+                <script src="/js/demo/datatables-demo.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.js"></script>
+                </body>
 
-    <!-- Page level plugins -->
-    <script src="/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="/js/demo/datatables-demo.js"></script>
-
-</body>
-
-</html>
+                </html>

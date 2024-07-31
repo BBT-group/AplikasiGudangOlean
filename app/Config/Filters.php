@@ -35,7 +35,7 @@ class Filters extends BaseFilters
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
         'AdminFilter'   => \App\Filters\AdminFilter::class,
-        'OperatorFilter'=> \App\Filters\OperatorFilter::class,
+        'OperatorFilter' => \App\Filters\OperatorFilter::class,
     ];
 
     /**
@@ -60,7 +60,7 @@ class Filters extends BaseFilters
             // 'pagecache',   // Web Page Caching
             // 'performance', // Performance Metrics
             // 'toolbar',     // Debug Toolbar
-            
+
         ],
     ];
 
@@ -86,10 +86,10 @@ class Filters extends BaseFilters
             // 'honeypot',
             // 'secureheaders',
             'AdminFilter' => [
-                'except' => ['beranda','stok','stok/*','barang_masuk', 'barang_masuk/*', 'laporan_stok', 'laporan_stok/*', 'laporan_masuk', 'laporan_masuk/*', 'satuan','satuan/*', 'laporan_keluar', 'laporan_keluar/*', 'peminjaman', 'peminjaman/*', 'kategori', 'kategori/*', 'inventaris', 'inventaris/*']
+                'except' => ['beranda', 'stok', 'stok/*', 'barang_masuk', 'barang_masuk/*', 'laporan_stok', 'laporan_stok/*', 'laporan_masuk', 'laporan_masuk/*', 'satuan', 'satuan/*', 'laporan_keluar', 'laporan_keluar/*', 'kategori', 'kategori/*', 'inventaris', 'inventaris/*']
             ],
             'OperatorFilter' => [
-                'except' => ['beranda','barang_keluar', 'barang_keluar/*', 'stok', 'stok/*', 'satuan', 'satuan/*', 'kategori', 'kategori/*', 'inventaris', 'inventaris/*', 'barang_masuk', 'barang_masuk/*']
+                'except' => ['beranda','barang_keluar', 'barang_keluar/*', 'barang_pinjam', 'barang_pinjam/*',]
             ]
         ],
     ];
@@ -120,10 +120,10 @@ class Filters extends BaseFilters
      */
     public array $filters = [
         'AdminFilter' => [
-            'before' => ['beranda','stok','stok/*','barang_masuk', 'barang_masuk/*', 'laporan_stok', 'laporan_stok/*', 'laporan_masuk', 'laporan_masuk/*', 'satuan','satuan/*', 'laporan_keluar', 'laporan_keluar/*', 'peminjaman', 'peminjaman/*', 'kategori', 'kategori/*', 'inventaris', 'inventaris/*']
+            'before' => ['beranda', 'stok', 'stok/*', 'barang_masuk', 'barang_masuk/*', 'laporan_stok', 'laporan_stok/*', 'laporan_masuk', 'laporan_masuk/*', 'satuan', 'satuan/*', 'laporan_keluar', 'laporan_keluar/*', 'peminjaman', 'peminjaman/*', 'kategori', 'kategori/*', 'inventaris', 'inventaris/*']
         ],
         'OperatorFilter' => [
-            'before' => ['beranda','barang_keluar', 'barang_keluar/*', 'laporan_keluar', 'laporan_keluar/*']
-            ]
+            'before' => ['beranda', 'barang_keluar', 'barang_keluar/*', 'laporan_keluar', 'laporan_keluar/*']
+        ]
     ];
 }

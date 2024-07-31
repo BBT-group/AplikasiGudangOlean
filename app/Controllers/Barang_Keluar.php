@@ -7,7 +7,7 @@ use App\Models\BarangModel;
 use App\Models\KategoriModel;
 use App\Models\BarangKeluarModel;
 use App\Models\MasterBarangKeluarModel;
-
+use App\Models\PenerimaModel;
 
 class Barang_Keluar extends BaseController
 {
@@ -15,6 +15,7 @@ class Barang_Keluar extends BaseController
     protected $kategoriModel;
     protected $barangKeluarModel;
     protected $masterBarangKeluarModel;
+    protected $penerimaModel;
     private $dataList = [];
 
     public function __construct()
@@ -23,6 +24,7 @@ class Barang_Keluar extends BaseController
         $this->kategoriModel = new KategoriModel();
         $this->barangKeluarModel = new BarangKeluarModel();
         $this->masterBarangKeluarModel = new MasterBarangKeluarModel();
+        $this->penerimaModel = new PenerimaModel();
         $this->dataList = $this->loadExistingData();
     }
 
@@ -66,17 +68,19 @@ class Barang_Keluar extends BaseController
     }
     function containsObjectWithName($objects, $name)
     {
-        foreach ($objects as $object) {
-            if ($object['id_barang'] !== $name) {
-                return false;
+        if ($objects != null) {
+            foreach ($objects as $object) {
+                if ($object['id_barang'] == $name) {
+                    return true;
+                }
             }
         }
-        return true;
+        return false;
     }
     public function saveData()
     {
         $idBarang = $this->request->getVar('id_barang');
-        if (!$this->containsObjectWithName($this->dataList, $idBarang) || $this->dataList == null) {
+        if ($this->containsObjectWithName($this->dataList, $idBarang)) {
             $data2 = [
                 'id_barang' => $this->request->getVar('id_barang'),
                 'nama' => $this->request->getVar('nama'),
@@ -88,7 +92,7 @@ class Barang_Keluar extends BaseController
             session()->set('datalist_keluar', $this->dataList);
             return redirect()->to(base_url('/barang_keluar/index'));
         } else {
-            $this->dataList[array_search($idBarang, array_values($this->dataList))]['stok'] += 1;
+            $this->dataList[$this->getColumnValueIndices($this->dataList, 'id_barang', $idBarang)]['stok'] += 1;
             session()->set('datalist_keluar', $this->dataList);
             return redirect()->to(base_url('/barang_keluar/index'));
         }
@@ -116,14 +120,24 @@ class Barang_Keluar extends BaseController
     public function updateStok()
     {
         if (!$this->validate([
-            'penerima' => 'required|is_not_unique[penerima.id_penerima]'
+            'penerima' => 'required'
         ])) {
             return redirect()->to(base_url('/barang_keluar/index'))->withInput();
         }
         $barang = session()->get('datalist_keluar');
         if (!empty($barang)) {
             $namaPenerima = $this->request->getVar('penerima');
-            $this->masterBarangKeluarModel->insert(['waktu' => date("Y-m-d H:i:s"), 'id_penerima' => $namaPenerima]);
+            if ($this->penerimaModel->where('nama', $namaPenerima)->first() == null) {
+                $penerimaId = $this->penerimaModel->insert(['nama' =>
+                $namaPenerima], true);
+            } else {
+                $penerima = $this->penerimaModel->where('nama', $namaPenerima)->first();
+                $penerimaId = $penerima['id_penerima'];
+            }
+            date_default_timezone_set('Asia/Jakarta');
+            $currentDateTime =  date("Y-m-d H:i:s");
+
+            $this->masterBarangKeluarModel->insert(['waktu' => $currentDateTime, 'id_penerima' => $penerimaId]);
 
             $idms = $this->masterBarangKeluarModel->getInsertID();
 
@@ -132,9 +146,8 @@ class Barang_Keluar extends BaseController
                 $barang1 = $this->barangModel->where('id_barang', $b['id_barang'])->first();
                 $data = [
                     'nama' => $barang1['nama'],
-                    'satuan' => $barang1['satuan'],
+                    'id_satuan' => $barang1['id_satuan'],
                     'foto' => $barang1['foto'],
-                    'merk' => $barang1['merk'],
                     'stok' => $barang1['stok'] - $b['stok'],
                     'harga_beli' => $barang1['harga_beli'],
                     'id_kategori' => $barang1['id_kategori'],
@@ -167,16 +180,20 @@ class Barang_Keluar extends BaseController
         return $this->response->setJSON(['status' => 'success']);
     }
 
+    public function getColumnValueIndices(array $array, string $column, $value)
+    {
+        foreach ($array as $index => $item) {
+            if (isset($item[$column]) && $item[$column] == $value) {
+                return $index;
+            }
+        }
+    }
+
     public function cariStok()
     {
         $idBarang = $this->request->getPost('idBarang');
-
-
         if (!empty($idBarang)) {
-            $a = $this->barangModel->where(
-                'id_barang',
-                $idBarang
-            )->first();
+            $a = $this->barangModel->getBarangWithSatuan($idBarang)->first();
             if (empty($a)) {
                 session()->set('id_barang_temp', $idBarang);
                 return $this->response->setJSON([
@@ -185,20 +202,20 @@ class Barang_Keluar extends BaseController
                 ]);
             }
             if ($this->containsObjectWithName($this->dataList, $idBarang)) {
-                $this->dataList[array_search($idBarang, array_values($this->dataList))]['stok'] += 1;
+                $this->dataList[$this->getColumnValueIndices($this->dataList, 'id_barang', $idBarang)]['stok'] += 1;
                 session()->set('datalist_keluar', $this->dataList);
                 return $this->response->setJSON(['status' => 'success']);
             }
             $data2 = [
                 'id_barang' => $idBarang,
                 'nama' => $a['nama'],
-                'satuan' => $a['satuan'],
+                'satuan' => $a['nama_satuan'],
                 // 'merk' => $a('merk'),
                 'stok' => 1,
                 // 'id_kategori' => $a('id_kategori'),
             ];
             $this->dataList[] = $data2;
-            session()->set('datalist', $this->dataList);
+            session()->set('datalist_keluar', $this->dataList);
             return $this->response->setJSON(['status' => 'success']);
         } else {
             return $this->response->setJSON(['status' => 'eror']);

@@ -10,21 +10,13 @@ class InventarisModel extends Model
     protected $primaryKey = 'id_inventaris';
     protected $allowedFields = ['id_inventaris', 'nama_inventaris', 'stok', 'harga_beli', 'foto'];
 
-    // public function getAlatById()
-    // {
-    // }
-    public function getAlatById($id_inventaris)
+    public function getByName($nama)
     {
-        return $this->where('id_inventaris', $id_inventaris)->first();
-    }
 
-    public function insertAlat($data)
-    {
-        return $this->insert($data);
+        return $this->where('nama_inventaris', $nama);
     }
-
-    public function updateAlat($id_inventaris, $data)
+    public function getById($nama)
     {
-        return $this->update($id_inventaris, $data);
+        return $this->where('id_inventaris', $nama);
     }
 }

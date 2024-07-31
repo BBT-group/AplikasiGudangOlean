@@ -60,7 +60,7 @@
                                                     <td><?= $s['satuan'] ?></td>
                                                     <td><input type="number" class="update-field" data-index="<?= $index ?>" data-column="stok" value="<?= esc($s['stok']) ?>"></td>
                                                     <td><input type="number" class="update-field" data-index="<?= $index ?>" data-column="harga_beli" value="<?= esc($s['harga_beli']) ?>"></td>
-                                                    <td> <button class="remove-item btn btn-danger" data-index="<?= $index ?>" data-key="<?= $s['id_barang'] ?>" >Remove Item</button></td>
+                                                    <td> <button class="remove-item btn btn-danger" data-index="<?= $index ?>" data-key="<?= $s['id_barang'] ?>">Remove Item</button></td>
                                                 </tr>
 
                                             <?php endforeach; ?>
@@ -237,7 +237,7 @@
                                     location.reload(); // Reload the page to see updated data
                                 } else if (response.status === 'not_found') {
                                     if (confirm(response.message + "\n\nDo you want to add this item? Click 'OK' to add or 'Cancel' to close.")) {
-                                        window.location.href = '<?= base_url('/barangtambah/index') ?>'; // Redirect to the input form
+                                        window.location.href = '<?= base_url('/barang_masuk/doubleform') ?>'; // Redirect to the input form
                                     }
                                 }
                             },

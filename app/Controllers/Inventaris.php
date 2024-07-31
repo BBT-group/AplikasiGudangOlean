@@ -54,7 +54,7 @@ class Inventaris extends BaseController
                 'stok' => 0,
                 'harga_beli' => 0
             ];
-            if (!$this->inventarisModel->insertAlat($dataAlat)) {
+            if (!$this->inventarisModel->insert($dataAlat)) {
                 return redirect()->to('/inventaris')->with('success', 'Barang berhasil ditambahkan');
             } else {
                 return redirect()->back()->with('error', 'Gagal menambahkan barang');

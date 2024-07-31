@@ -52,13 +52,13 @@
                                 </thead>
                                 <tbody>
                                     <?php if (!empty($barangkeluar)) : ?>
-                                        <?php $no = 1; foreach ($barangmasuk as $item) : ?>
+                                        <?php $no = 1; foreach ($barangkeluar as $item) : ?>
                                             <?php $stok_awal = $item['stok'] + $item['jumlah']; ?>
                                             <tr>
                                                 <td><?= $no++ ?></td>
                                                 <td><?= $item['id_barang'] ?></td>
                                                 <td><?= $item['waktu'] ?></td>
-                                                <td><?= $item['nama'] ?></td>
+                                                <td><?= $item['nama_barang'] ?></td>
                                                 <td><?= $item['nama_satuan'] ?></td>
                                                 <td><?= $item['nama_penerima'] ?></td>
                                                 <td><?= $stok_awal ?></td> <!-- Mengisi stok awal -->

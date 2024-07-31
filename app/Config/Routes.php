@@ -6,17 +6,24 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
-$routes->post('/login', 'Home::login');
+$routes->add('/login', 'Home::login');
+$routes->add('/loginproses', 'Home::loginProses');
 $routes->get('/logout', 'Home::logout');
 $routes->get('/beranda', 'Beranda::index');
 $routes->get('/peminjaman', 'Peminjaman::index');
+$routes->add('/inventaris', 'Inventaris::index');
+$routes->get('/inventaris/indextambah', 'Inventaris::indexTambah');
+$routes->add('/inventaris/simpanalat', 'Inventaris::simpanAlat');
+$routes->add('/inventaris/indexdetail/(:num)', 'Inventaris::indexDetail/$1');
+$routes->add('/inventaris/indexupdate/(:num)', 'Inventaris::indexUpdate/$1');
+$routes->add('/inventaris/updatealat', 'Inventaris::updateAlat');
 $routes->post('/barang/simpan', 'Barang::simpan');
-$routes->post('/barang/search', 'Barang::search');
 $routes->add('/barang/index', 'Barang::index');
 $routes->add('/barang/barangsesi', 'Barang::barangSesi');
-$routes->add('/stok/indexdetail', 'Stok::indexDetail');
+$routes->add('/stok/indexdetail/(:num)', 'Stok::indexDetail/$1');
 $routes->add('/stok/tambahbarang', 'Stok::tambahBarang');
 $routes->add('/stok/indextambah', 'Stok::indexTambah');
+$routes->add('/stok/indexupdate/(:num)', 'Stok::indexUpdate/$1');
 $routes->add('/barang_tambah/index', 'Barang_Tambah::index');
 
 $routes->post('/barang_masuk/savedata', 'Barang_Masuk::saveData');
@@ -39,15 +46,19 @@ $routes->add('/barang_keluar/hapusitem', 'Barang_Keluar::hapusBarangDatalistMasu
 
 $routes->get('/beranda', 'Beranda::index');
 $routes->get('/barang_masuk', 'Barang_Masuk::beranda');
+$routes->get('/barang_masuk/beranda', 'Barang_Masuk::beranda');
 $routes->get('/barang_keluar', 'Barang_Keluar::beranda');
 $routes->get('/barang_pinjam', 'Barang_Pinjam::beranda');
 $routes->get('/laporan_stok', 'Laporan_Stok::index');
+$routes->get('/laporan_stok/exports', 'Laporan_Stok::exports');
 $routes->get('/laporan_masuk', 'Laporan_Masuk::index');
+$routes->get('/laporan_masuk/exportm', 'Laporan_Masuk::exportm');
 $routes->get('/laporan_keluar', 'Laporan_Keluar::index');
+$routes->get('/laporan_keluar/exportk', 'Laporan_Keluar::exportk');
 
 $routes->get('/stok', 'Stok::index');
 $routes->get('/stok/tambahbarang', 'Stok::tambahBarang');
-$routes->get('/stok/updatebarang', 'Stok::updateBarang');
+$routes->add('/stok/updatebarang', 'Stok::updateBarang');
 $routes->get('/stok/deletebarang/(:num)', 'Stok::deletebarang/$1');
 
 $routes->get('/satuan/deletesatuan/(:num)', 'Satuan::deletesatuan/$1');

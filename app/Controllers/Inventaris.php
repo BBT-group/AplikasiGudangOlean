@@ -16,92 +16,102 @@ class Inventaris extends BaseController
     public function index()
     {
         $data = [
-            'barang' => $this->inventarisModel->findAll(),
+            'alat' => $this->inventarisModel->findAll(),
         ];
         echo view('v_header');
-        return view('v_tambah_barang', $data);
+        return view('v_inventaris', $data);
     }
 
     public function indexTambah()
     {
-        return view('v_tambah_barang');
-    }
-
-    public function indexUpdate()
-    {
-        $data = [
-            'barang' => $this->inventarisModel->where('id_inventaris', $this->request->getVar('id_inventaris'))->first(),
+        $dataAlat = [
+            'inventaris' => $this->inventarisModel->findAll()
         ];
-        echo view('v_header');
-        return view('v_tambah_barang', $data);
-    }
 
-    public function indexDetail()
-    {
-        $data = [
-            'barang' => $this->inventarisModel->where('id_inventaris', $this->request->getVar('id_inventaris'))->first(),
-        ];
         echo view('v_header');
-        return view('v_tambah_barang', $data);
+        return view('v_tambah_inventaris', $dataAlat);
     }
 
     public function simpanAlat()
     {
         if (!$this->validate([
-            'id_inventaris' => 'required|is_unique[inventaris.id_inventaris]',
+            'id_inventaris' => 'required',
             'nama_inventaris' => 'required',
-            'bukti_peminjaman' => 'required',
-
+            'foto' => 'uploaded[foto]',
         ])) {
-            return redirect()->to(base_url('/barangtambah/index'));
+            return redirect()->to(base_url('inventaris/indextambah'))->withInput();
         }
 
-        $file = $this->request->getFile('bukti_peminjaman');
+        $file = $this->request->getFile('foto');
         if ($file->isValid() && !$file->hasMoved()) {
             $newName = $file->getRandomName();
             $file->move(ROOTPATH . 'public/uploads', $newName);
             $foto_path = 'uploads/' . $newName;
-            $data = [
+            $dataAlat = [
                 'id_inventaris' => $this->request->getVar('id_inventaris'),
                 'nama_inventaris' => $this->request->getVar('nama_inventaris'),
-                'bukti_peminjaman' => $foto_path,
+                'foto' => $foto_path,
                 'stok' => 0,
                 'harga_beli' => 0
             ];
-            $this->inventarisModel->insertBarang($data);
-            return redirect()->to(base_url('/stok'));
+            if (!$this->inventarisModel->insertAlat($dataAlat)) {
+                return redirect()->to('/inventaris')->with('success', 'Barang berhasil ditambahkan');
+            } else {
+                return redirect()->back()->with('error', 'Gagal menambahkan barang');
+            }
+        } else {
+            return redirect()->back()->with('error', 'Foto tidak valid atau sudah dipindahkan');
         }
     }
 
+    public function indexDetail($id_inventaris = null)
+    {
+        $data = [
+            'alat' => $this->inventarisModel->getAlatById($id_inventaris)
+        ];
+        echo view('v_header');
+        return view('admin\detailalat', $data);
+    }
 
-    // fungsi update barang
+    public function indexUpdate($id_inventaris = null)
+    {
+        $data = [
+            'alat' => $this->inventarisModel->getAlatById($id_inventaris)
+        ];
+        echo view('v_header');
+        return view('v_update_inventaris', $data);
+    }
+
+    // fungsi update alat
     public function updateAlat()
     {
         if (!$this->validate([
-            'id_inventaris' => 'required|is_unique[inventaris.id_inventaris]',
+            'id_inventaris' => 'required|is_not_unique[inventaris.id_inventaris]',
             'nama_inventaris' => 'required',
-            'bukti_peminjaman' => 'required',
+            'foto' => 'uploaded[foto]',
         ])) {
-            return redirect()->to(base_url('/barangtambah/index'));
+            return redirect()->back();
         }
-        $file = $this->request->getFile('bukti_peminjaman');
+        $file = $this->request->getFile('foto');
         if ($file->isValid() && !$file->hasMoved()) {
             $dataLama = $this->inventarisModel->getAlatById($this->request->getVar('id_inventaris'));
-            $fotoLama = $dataLama['bukti_peminjaman'];
+            $fotoLama = $dataLama['foto'];
             unlink($fotoLama);
             $newName = $file->getRandomName();
-            $file->move(ROOTPATH . 'public/uploads', $newName);
+            $file->move(ROOTPATH . 'public/uploads/', $newName);
             $foto_path = 'uploads/' . $newName;
         } else {
-            $foto_path = $this->request->getVar('foto');
+            $foto_path = $this->request->getFile('foto');
         }
         $data = [
             'nama_inventaris' => $this->request->getVar('nama_inventaris'),
-            'bukti_peminjaman' => $foto_path,
+            'foto' => $foto_path,
             'stok' => $this->request->getVar('stok'),
             'harga_beli' => $this->request->getVar('harga_beli'),
         ];
-        $this->inventarisModel->update($this->request->getVar('id_inventaris'), $data);
-        return redirect()->to(base_url('/stok'));
+        if ($this->inventarisModel->update($this->request->getVar('id_inventaris'), $data)) {
+            return redirect()->to(base_url('/inventaris'));
+        }
+        return redirect()->back()->withInput();
     }
 }

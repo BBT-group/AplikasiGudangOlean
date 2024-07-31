@@ -9,44 +9,42 @@
                                     <div class="card-title">Detail Data Barang</div>
                                 </div>
                                 <!-- detail data -->
-                                <?php foreach($barang = $satuan as $item) : ?>
                                 <div class="card-body" >
                                     <table class="table table-striped">
                                         <tbody>
                                             <tr>
                                                 <td width="120">ID Barang</td>
                                                 <td width="10">:</td>
-                                                <td style="background-color: #f2f2f2; color: gray;"><?= $item['id_barang'] ?></td>
+                                                <td style="background-color: #f2f2f2; color: gray;"><?= $data['id_barang'] ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Nama Barang</td>
                                                 <td>:</td>
-                                                <td style="color: gray;"><?= $item['nama'] ?></td>
+                                                <td style="color: gray;"><?= $data['nama'] ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Stok</td>
                                                 <td>:</td>
-                                                <td style="background-color: #f2f2f2; color: gray;"><?= $item['stok'] ?></td>
+                                                <td style="background-color: #f2f2f2; color: gray;"><?= $data['stok'] ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Satuan</td>
                                                 <td>:</td>
-                                                <td style="color: gray;" ><?= $item['id_satuan'] ?></td>
+                                                <td style="color: gray;" ><?= $data['nama_satuan'] ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Kategori</td>
                                                 <td>:</td>
-                                                <td style="background-color: #f2f2f2; color: gray;"><?= $item['id_kategori'] ?></td>
+                                                <td style="background-color: #f2f2f2; color: gray;"><?= $data['nama_kategori'] ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Harga Beli</td>
                                                 <td>:</td>
-                                                <td style="color: gray;"><?= $item['harga_beli'] ?></td>
+                                                <td style="color: gray;"><?= $data['harga_beli'] ?></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <?php endforeach;?>
                             </div>
                         </div>
                         <div class="col-md-4">

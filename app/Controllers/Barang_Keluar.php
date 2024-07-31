@@ -68,17 +68,19 @@ class Barang_Keluar extends BaseController
     }
     function containsObjectWithName($objects, $name)
     {
-        foreach ($objects as $object) {
-            if ($object['id_barang'] !== $name) {
-                return false;
+        if ($objects != null) {
+            foreach ($objects as $object) {
+                if ($object['id_barang'] == $name) {
+                    return true;
+                }
             }
         }
-        return true;
+        return false;
     }
     public function saveData()
     {
         $idBarang = $this->request->getVar('id_barang');
-        if (!$this->containsObjectWithName($this->dataList, $idBarang) || $this->dataList == null) {
+        if ($this->containsObjectWithName($this->dataList, $idBarang)) {
             $data2 = [
                 'id_barang' => $this->request->getVar('id_barang'),
                 'nama' => $this->request->getVar('nama'),
@@ -90,7 +92,7 @@ class Barang_Keluar extends BaseController
             session()->set('datalist_keluar', $this->dataList);
             return redirect()->to(base_url('/barang_keluar/index'));
         } else {
-            $this->dataList[array_search($idBarang, array_values($this->dataList))]['stok'] += 1;
+            $this->dataList[$this->getColumnValueIndices($this->dataList, 'id_barang', $idBarang)]['stok'] += 1;
             session()->set('datalist_keluar', $this->dataList);
             return redirect()->to(base_url('/barang_keluar/index'));
         }
@@ -178,16 +180,20 @@ class Barang_Keluar extends BaseController
         return $this->response->setJSON(['status' => 'success']);
     }
 
+    public function getColumnValueIndices(array $array, string $column, $value)
+    {
+        foreach ($array as $index => $item) {
+            if (isset($item[$column]) && $item[$column] == $value) {
+                return $index;
+            }
+        }
+    }
+
     public function cariStok()
     {
         $idBarang = $this->request->getPost('idBarang');
-
-
         if (!empty($idBarang)) {
-            $a = $this->barangModel->where(
-                'id_barang',
-                $idBarang
-            )->first();
+            $a = $this->barangModel->getBarangWithSatuan($idBarang)->first();
             if (empty($a)) {
                 session()->set('id_barang_temp', $idBarang);
                 return $this->response->setJSON([
@@ -196,20 +202,20 @@ class Barang_Keluar extends BaseController
                 ]);
             }
             if ($this->containsObjectWithName($this->dataList, $idBarang)) {
-                $this->dataList[array_search($idBarang, array_values($this->dataList))]['stok'] += 1;
+                $this->dataList[$this->getColumnValueIndices($this->dataList, 'id_barang', $idBarang)]['stok'] += 1;
                 session()->set('datalist_keluar', $this->dataList);
                 return $this->response->setJSON(['status' => 'success']);
             }
             $data2 = [
                 'id_barang' => $idBarang,
                 'nama' => $a['nama'],
-                'satuan' => $a['satuan'],
+                'satuan' => $a['nama_satuan'],
                 // 'merk' => $a('merk'),
                 'stok' => 1,
                 // 'id_kategori' => $a('id_kategori'),
             ];
             $this->dataList[] = $data2;
-            session()->set('datalist', $this->dataList);
+            session()->set('datalist_keluar', $this->dataList);
             return $this->response->setJSON(['status' => 'success']);
         } else {
             return $this->response->setJSON(['status' => 'eror']);

@@ -53,12 +53,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                                </form>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
                 <!-- /.container-fluid -->
                 </div>

@@ -31,9 +31,9 @@
                         if (!empty($pinjam)) : ?>
 
                             <?php
-
                             $no = 0;
-                            foreach ($pinjam as $item) : ?>
+                            foreach ($pinjam as $item) :
+                            ?>
                                 <tr>
                                     <td><?= $no += 1 ?></td>
                                     <td><?= $item['id_ms_peminjaman'] ?></td>

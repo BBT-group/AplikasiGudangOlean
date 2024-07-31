@@ -20,6 +20,7 @@
 
     <!-- Custom styles for this page -->
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 
 </head>
@@ -82,12 +83,7 @@
                         <span>Barang Masuk</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url('peminjaman') ?>">
-                        <i class="fas fa-fw fa-sign-in-alt"></i>
-                        <span>Peminjaman</span>
-                    </a>
-                </li>
+
                 <hr class="sidebar-divider">
 
                 <div class="sidebar-heading">
@@ -126,25 +122,7 @@
                 <div class="sidebar-heading">
                     Master
                 </div>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-fw fa-layer-group"></i>
-                        <span>Stok Barang</span>
-                    </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="<?php echo base_url('stok') ?>">Data Barang</a>
-                            <a class="collapse-item" href="<?php echo base_url('kategori') ?>">Kategori</a>
-                            <a class="collapse-item" href="<?php echo base_url('satuan') ?>">Satuan</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url('inventaris') ?>">
-                        <i class="fas fa-fw fa-wrench"></i>
-                        <span>Inventaris Alat</span>
-                    </a>
-                </li>
+
                 <hr class="sidebar-divider">
 
                 <div class="sidebar-heading">
@@ -249,7 +227,7 @@
                         </li>
 
                     </ul>
-                    
+
                     <!-- Logout Modal-->
                     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">

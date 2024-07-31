@@ -28,10 +28,9 @@ class Stok extends BaseController
             $barang = $this->barangModel->getBarangByName($keyword);
         } else {
             $barang = $this->barangModel->getBarangWithKategori();
-            $satuan = $this->barangModel->getBarangWithSatuan();
         }
         $data = [
-            'satuan' => $satuan->findAll(),
+
             'barang' => $barang->findAll(),
             'pager' => $this->barangModel->pager
         ];

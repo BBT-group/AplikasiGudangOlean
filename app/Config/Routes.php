@@ -82,3 +82,5 @@ $routes->add('/barang_pinjam/update', 'Barang_pinjam::updateStok');
 $routes->add('/barang_pinjam/update2', 'Barang_pinjam::update');
 $routes->add('/barang_pinjam/carii', 'Barang_pinjam::cariStok');
 $routes->add('/barang_pinjam/hapusitem', 'Barang_pinjam::hapusBarangDatalistPinjam');
+
+$routes->add('/barang_masuk/doubleform', 'Barang_Masuk::doubleForm');

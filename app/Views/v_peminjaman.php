@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <?php d(session()->get('datalist_pinjam')) ?>
+
 
 
     <!-- Page Heading -->

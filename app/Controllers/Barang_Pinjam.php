@@ -68,6 +68,7 @@ class Barang_Pinjam extends BaseController
         $data = [
             'pinjam' => $this->masterPeminjamanModel->getAllWithNama()->findAll(),
         ];
+
         echo view('v_header');
         return view('v_beranda_peminjaman', $data);
     }
@@ -195,6 +196,9 @@ class Barang_Pinjam extends BaseController
         return $this->response->setJSON(['status' => 'success']);
     }
 
+
+
+
     public function cariStok()
     {
         $idInventaris = $this->request->getPost('id_inventaris');
@@ -212,12 +216,12 @@ class Barang_Pinjam extends BaseController
                 ]);
             }
             if ($this->containsObjectWithName($this->dataList, $idInventaris) || $this->dataList != null) {
-                $this->dataList[array_search($idInventaris, array_values($this->dataList))]['stok'] += 1;
+                $this->dataList[$this->getColumnValueIndices($this->dataList, 'id_inventaris', $idInventaris)]['stok'] += 1;
                 session()->set('datalist', $this->dataList);
                 return $this->response->setJSON(['status' => 'success']);
             }
             $data2 = [
-                'id_barang' => $idInventaris,
+                'id_inventaris' => $idInventaris,
                 'nama_inventaris' => $a['nama_inventaris'],
                 'stok' => 1,
             ];

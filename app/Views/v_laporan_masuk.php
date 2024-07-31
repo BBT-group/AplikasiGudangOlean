@@ -7,33 +7,39 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <form action="<?= base_url('/laporan_masuk') ?>" method="get" class="form-inline mb-3">
-                                    <div class="form-group mr-2">
-                                        <label for="start_date" class="mr-2">Start Date:</label>
-                                        <input type="text" id="start_date" name="start_date" class="form-control" autocomplete="off" value="<?= isset($start_date) ? $start_date : '' ?>">
+                            <form method="get" action="<?= base_url('/laporan_masuk') ?>">
+                                <div class="form-group row">
+                                    <label for="start_date" class="col-sm-2 col-form-label">Start Date</label>
+                                    <div class="col-sm-4">
+                                        <input type="date" class="form-control" id="start_date" name="start_date" value="<?= isset($start_date) ? $start_date : '' ?>">
                                     </div>
-                                    <div class="form-group mr-2">
-                                        <label for="end_date" class="mr-2">End Date:</label>
-                                        <input type="text" id="end_date" name="end_date" class="form-control" autocomplete="off" value="<?= isset($end_date) ? $end_date : '' ?>">
+                                    <label for="end_date" class="col-sm-2 col-form-label">End Date</label>
+                                    <div class="col-sm-4">
+                                        <input type="date" class="form-control" id="end_date" name="end_date" value="<?= isset($end_date) ? $end_date : '' ?>">
                                     </div>
-                                    <button type="submit" class="btn btn-primary mr-2">Tampilkan</button>
-                                    <a href="<?= base_url('/laporan_masuk') ?>" class="btn btn-warning mr-2">Reset</a>
-                                    <a href="<?= base_url('/laporan_masuk/exportm?start_date=' . (isset($start_date) ? $start_date : '') . '&end_date=' . (isset($end_date) ? $end_date : '')) ?>" class="btn btn-secondary" style="text-align: end;">Export to Excel</a>
-                                </form>
-                            </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <a href="<?= base_url('/laporan_masuk') ?>" class="btn btn-secondary mr-2">Reset</a>
+                                        <button type="submit" class="btn btn-primary mr-2">Tampilkan</button>
+                                    </div>
+                                    <div class="col-md-6" style="text-align: end;">
+                                        <a href="<?= base_url('/laporan_masuk/exportm?start_date=' . (isset($start_date) ? $start_date : '') . '&end_date=' . (isset($end_date) ? $end_date : '')) ?>" class="btn btn-success">Export to Excel</a>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold ">Laporan Barang Keluar Tanggal <?= print($start_date)?> s/d <?= print($end_date)?></h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Barang Masuk dari <?= $start_date?> s/d <?= $end_date?></h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTables" width="100%" cellspacing="0">
+                                <table class="table table-striped table-bordered" id="dataTables" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th>No</th>
                                             <th>ID Barang</th>
                                             <th>Tanggal</th>
                                             <th>Nama Barang</th>
@@ -45,19 +51,20 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                            <?php foreach ($barangmasuk as $item) : ?>
-                                                <?php $stok_awal = $item['stok'] - $item['jumlah']; ?>
-                                                <tr>
-                                                    <td><?= $item['id_barang'] ?></td>
-                                                    <td><?= $item['waktu'] ?></td>
-                                                    <td><?= $item['nama'] ?></td>
-                                                    <td><?= $item['satuan'] ?></td>
-                                                    <td><?= $item['harga_beli'] ?></td>
-                                                    <td><?= $stok_awal ?></td> <!-- Mengisi stok awal -->
-                                                    <td><?= $item['jumlah'] ?></td>
-                                                    <td><?= $item['stok'] ?></td>
-                                                </tr>
-                                            <?php endforeach; ?>
+                                        <?php $no = 1; foreach ($barangmasuk as $item) : ?>
+                                            <?php $stok_awal = $item['stok'] - $item['jumlah']; ?>
+                                            <tr>
+                                                <td><?= $no++ ?></td>
+                                                <td><?= $item['id_barang'] ?></td>
+                                                <td><?= $item['waktu'] ?></td>
+                                                <td><?= $item['nama'] ?></td>
+                                                <td><?= $item['nama_satuan'] ?></td>
+                                                <td><?= $item['harga_beli'] ?></td>
+                                                <td><?= $stok_awal ?></td> <!-- Mengisi stok awal -->
+                                                <td><?= $item['jumlah'] ?></td>
+                                                <td><?= $item['stok'] ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -91,8 +98,7 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -104,22 +110,11 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="<?php echo base_url('logout') ?>">Logout</a>
                 </div>
             </div>
         </div>
     </div>
-    
-    <script>
-        $(function() {
-            $("#start_date").datepicker({
-                dateFormat: 'yy-mm-dd'
-            });
-            $("#end_date").datepicker({
-                dateFormat: 'yy-mm-dd'
-            });
-        });
-    </script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="/vendor/jquery/jquery.js"></script>
@@ -137,6 +132,17 @@
 
     <!-- Page level custom scripts -->
     <script src="/js/demo/datatables-demo.js"></script>
+
+    <script>
+        $(function() {
+            $("#start_date").datepicker({
+                dateFormat: 'yy-mm-dd'
+            });
+            $("#end_date").datepicker({
+                dateFormat: 'yy-mm-dd'
+            });
+        });
+    </script>
 
 </body>
 

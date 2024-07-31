@@ -46,10 +46,14 @@ $routes->add('/barang_keluar/hapusitem', 'Barang_Keluar::hapusBarangDatalistMasu
 
 $routes->get('/beranda', 'Beranda::index');
 $routes->get('/barang_masuk', 'Barang_Masuk::beranda');
+$routes->get('/barang_masuk/beranda', 'Barang_Masuk::beranda');
 $routes->get('/barang_keluar', 'Barang_Keluar::beranda');
 $routes->get('/laporan_stok', 'Laporan_Stok::index');
+$routes->get('/laporan_stok/exports', 'Laporan_Stok::exports');
 $routes->get('/laporan_masuk', 'Laporan_Masuk::index');
+$routes->get('/laporan_masuk/exportm', 'Laporan_Masuk::exportm');
 $routes->get('/laporan_keluar', 'Laporan_Keluar::index');
+$routes->get('/laporan_keluar/exportk', 'Laporan_Keluar::exportk');
 
 $routes->get('/stok', 'Stok::index');
 $routes->get('/stok/tambahbarang', 'Stok::tambahBarang');
@@ -67,4 +71,4 @@ $routes->add('/kategori/indextambah', 'Kategori::indexTambah');
 $routes->add('/kategori/tambahkategori', 'Kategori::tambahKategori');
 
 
-$routes->get('/laporan_stok/exports', 'Laporan_Stok::exports');
+

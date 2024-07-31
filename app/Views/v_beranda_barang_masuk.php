@@ -16,8 +16,8 @@
                                         <input type="date" class="form-control" id="end_date" name="end_date" value="<?= isset($end_date) ? $end_date : '' ?>">
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Filter</button>
                                 <a href="<?= base_url('barang_masuk/beranda') ?>" class="btn btn-secondary">Reset</a>
+                                <button type="submit" class="btn btn-primary">Filter</button>
                             </form>
                         </div>
                     </div>

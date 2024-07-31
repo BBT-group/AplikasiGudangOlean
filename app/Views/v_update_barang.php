@@ -9,26 +9,22 @@
                                 </div>
 
                                 <div class="card-body">
-                                    <form id="addItemForm" action="<?= base_url('stok/tambahbarang') ?>" method="post" enctype="multipart/form-data">
+                                    <form id="addItemForm" action="<?= base_url('stok/updatebarang') ?>" method="post" enctype="multipart/form-data">
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="id_barang">ID Barang</label>
-                                                    <input type="text" class="form-control" id="id_barang" name="id_barang" autofocus value="<?php if (old('id_barang') != null) {
-                                                                                                                                                    echo old('id_barang');
-                                                                                                                                                } elseif (session()->get('id_barang_temp')) {
-                                                                                                                                                    echo session()->get('id_barang_temp');
-                                                                                                                                                } else {
-                                                                                                                                                    '';
-                                                                                                                                                } ?>">
+                                                    <input type="text" class="form-control" id="id_barang" name="id_barang" value="<?= $data['id_barang'] ?>" readonly>
+                                                    <input type="text" class="form-control" id="stok" name="stok" value="<?= $data['stok'] ?>" hidden>
+                                                    <input type="text" class="form-control" id="harga_beli" name="harga_beli" value="<?= $data['harga_beli'] ?>" hidden>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="nama">Nama</label>
-                                                    <input type="text" class="form-control" id="nama" name="nama" required maxlength="45" value="<?= old('nama') ?? '' ?>">
+                                                    <input type="text" class="form-control" id="nama" name="nama" required maxlength="45" value="<?= $data['nama'] ?>">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="satuan">Satuan</label>
-                                                    <input type="text" class="form-control" id="id_satuan" name="id_satuan" required maxlength="15" list="satuan-list" value="<?= old('id_satuan') ?? '' ?>">
+                                                    <input type="text" class="form-control" id="id_satuan" name="id_satuan" required maxlength="15" list="satuan-list" value="<?= $data['nama_satuan'] ?>">
                                                     <datalist id="satuan-list">
                                                         <?php foreach ($satuan as $sat) : ?>
                                                             <option value="<?= $sat['nama_satuan']; ?>">
@@ -37,7 +33,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="id_kategori">ID Kategori</label>
-                                                    <input type="text" class="form-control" id="id_kategori" name="id_kategori" required list="item-list" maxlength="15" value="<?= old('id_kategori') ?? '' ?>">
+                                                    <input type="text" class="form-control" id="id_kategori" name="id_kategori" required list="item-list" maxlength="15" value="<?= $data['nama_kategori'] ?>">
                                                     <datalist id="item-list">
                                                         <?php foreach ($kategori as $kat) : ?>
                                                             <option value="<?= $kat['nama_kategori']; ?>">
@@ -53,12 +49,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                                </form>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
                 <!-- /.container-fluid -->
                 </div>

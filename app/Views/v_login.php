@@ -13,7 +13,7 @@
 
     <div class="container" id="container">
         <div class="form-container sign-in">
-            <form method="post" action="<?php echo site_url('/login') ?>">
+            <form method="post" action="<?php echo base_url('/loginproses') ?>">
                 <?= csrf_field()?>
                 <h1>Login</h1>
                 <span>Masukan username dan password</span>

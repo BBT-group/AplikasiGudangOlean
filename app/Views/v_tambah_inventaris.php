@@ -9,56 +9,35 @@
                                 </div>
 
                                 <div class="card-body">
-                                    <form id="addItemForm" action="<?= base_url('stok/tambahbarang') ?>" method="post" enctype="multipart/form-data">
+                                    <form id="addItemForm" action="<?= base_url('inventaris/simpanalat') ?>" method="post" enctype="multipart/form-data">
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label for="id_barang">ID Barang</label>
-                                                    <input type="text" class="form-control" id="id_barang" name="id_barang" autofocus value="<?php if (old('id_barang') != null) {
-                                                                                                                                                    echo old('id_barang');
-                                                                                                                                                } elseif (session()->get('id_barang_temp')) {
-                                                                                                                                                    echo session()->get('id_barang_temp');
-                                                                                                                                                } else {
-                                                                                                                                                    '';
-                                                                                                                                                } ?>">
+                                                    <label for="id_inventaris">ID Alat</label>
+                                                    <input type="text" class="form-control" id="id_inventaris" name="id_inventaris" autofocus value="<?php if (old('id_inventaris') != null) {
+                                                                                                                                                            echo old('id_inventaris');
+                                                                                                                                                        } elseif (session()->get('id_inventaris_temp') != null) {
+                                                                                                                                                            echo session()->get('id_inventaris_temp');
+                                                                                                                                                        } else {
+                                                                                                                                                            '';
+                                                                                                                                                        } ?>">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="nama">Nama</label>
-                                                    <input type="text" class="form-control" id="nama" name="nama" required maxlength="45" value="<?= old('nama') ?? '' ?>">
+                                                    <label for="nama_inventaris">Nama</label>
+                                                    <input type="text" class="form-control" id="nama_inventaris" name="nama_inventaris" required maxlength="45" value="<?= old('nama_inventaris') ?? '' ?>">
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="satuan">Satuan</label>
-                                                    <input type="text" class="form-control" id="id_satuan" name="id_satuan" required maxlength="15" list="satuan-list" value="<?= old('id_satuan') ?? '' ?>">
-                                                    <datalist id="satuan-list">
-                                                        <?php foreach ($satuan as $sat) : ?>
-                                                            <option value="<?= $sat['nama_satuan']; ?>">
-                                                            <?php endforeach; ?>
-                                                    </datalist>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="id_kategori">ID Kategori</label>
-                                                    <input type="text" class="form-control" id="id_kategori" name="id_kategori" required list="item-list" maxlength="15" value="<?= old('id_kategori') ?? '' ?>">
-                                                    <datalist id="item-list">
-                                                        <?php foreach ($kategori as $kat) : ?>
-                                                            <option value="<?= $kat['nama_kategori']; ?>">
-                                                            <?php endforeach; ?>
-                                                    </datalist>
-                                                </div>
-
-
-
                                                 <div class="form-group">
                                                     <label for="foto">Foto</label>
                                                     <input type="file" class="form-control" id="foto" name="foto" required maxlength="255">
                                                 </div>
                                             </div>
                                         </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                                </form>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
                 <!-- /.container-fluid -->
                 </div>

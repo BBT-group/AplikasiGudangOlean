@@ -1,78 +1,55 @@
 <div class="container-fluid">
-    <?php d(session()->get('datalist_pinjam')) ?>
-
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Inventory Management</h1>
+    <h1 class="h3 mb-2 text-gray-800">pinjam alat</h1>
+    <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
+
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data Pinjam Barang</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data peminjaman</h6>
         </div>
         <div class="card-body">
+            <div class="col-12 mb-1 p-0">
+                <a href="<?= base_url('barang_pinjam/index') ?>" class="btn btn-primary">pinjam alat</a>
+            </div>
             <div class="table-responsive">
-                <form id="addItemForm" action=<?= base_url('/barang_pinjam/update') ?> method="post" enctype="multipart/form-data">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="input1">tanggal dan waktu</label>
-                                    <input type="text" class="form-control" id="datetime" name="datetime" value="<?php
-                                                                                                                    date_default_timezone_set('Asia/Jakarta');
-                                                                                                                    $currentDateTime = date("l, F j, Y H:i:s");
-                                                                                                                    echo $currentDateTime;
-                                                                                                                    ?>" disabled>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="input2">penerima</label>
-                                    <input type="text" class="form-control <?php if (isset($validate)) {
-                                                                                echo $validate->hasError('nama_penerima') ? 'is-invalid' : '';
-                                                                            }  ?>" id="nama_penerima" name="nama_penerima" value="<?= old('nama_penerima'); ?>">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 mb-1 p-0" style="text-align: right;">
-                        <button id="clear-session-btn" class="btn btn-secondary">Clear Session</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-                <div class="col-12 mb-3 p-0">
-                    <a href="<?= base_url('barang_pinjam/cari') ?>" class="btn btn-primary">Tambah Barang</a>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Id inventaris</th>
-                                <th>Nama</th>
-                                <th>stok</th>
-                                <th>jumlah</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="inventoryTable">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Id pinjam</th>
+                            <th>Tanggal pinjam</th>
+                            <th>teknisi</th>
+                            <th>aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+
+
+                        if (!empty($pinjam)) : ?>
 
                             <?php
-                            foreach ($pinjam ?? [] as $index => $s) : ?>
-                                <tr>
-                                    <td><?= $s['id_inventaris'] ?></td>
-                                    <td><?= $s['nama_inventaris'] ?></td>
-                                    <td><?= $s['stok'] ?></td>
-                                    <td><input type="number" class="update-field" data-index="<?= $index ?>" data-column="stok" value="<?= esc($s['stok']) ?>"></td>
-                                    <td> <button class="remove-item" data-index="<?= $index ?>" data-key="<?= $s['id_inventaris'] ?>">Remove Item</button></td>
-                                </tr>
 
+                            $no = 0;
+                            foreach ($pinjam as $item) : ?>
+                                <tr>
+                                    <td><?= $no += 1 ?></td>
+                                    <td><?= $item['id_ms_peminjaman'] ?></td>
+                                    <td><?= $item['tanggal_pinjam'] ?></td>
+                                    <td><?= $item['nama'] ?></td>
+                                    <td><button>detail</button></td>
+                                </tr>
                             <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
             </div>
         </div>
-
     </div>
+
+</div>
 
 </div>
 <!-- End of Main Content -->
@@ -111,32 +88,16 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
+                <a class="btn btn-primary" href="<?php echo base_url('logout') ?>">Logout</a>
             </div>
         </div>
     </div>
 </div>
-<!-- Bootstrap core JavaScript-->
-<script src="/vendor/jquery/jquery.js"></script>
-<script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="/vendor/jquery-easing/jquery.easing.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="/js/sb-admin-2.js"></script>
-
-<!-- Page level plugins -->
-<script src="/vendor/datatables/jquery.dataTables.js"></script>
-<script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="/js/demo/datatables-demo.js"></script>
 <script>
     $(document).ready(function() {
         $('#clear-session-btn').click(function() {
             $.ajax({
-                url: '<?= base_url('barang_pinjam/clearsession') ?>', // Adjust the URL as needed
+                url: '<?= base_url('barang_masuk/clearsession') ?>', // Adjust the URL as needed
                 method: 'POST',
                 success: function(response) {
                     // $('.print').text('Response from server: ' + response);
@@ -159,7 +120,7 @@
             var value = $(this).val();
 
             $.ajax({
-                url: '<?= base_url('barang_pinjam/update2') ?>',
+                url: '<?= base_url('barang_masuk/update2') ?>',
                 method: 'POST',
                 data: {
                     index: index,
@@ -210,7 +171,7 @@
             var index = $(this).data('index');
             console.log(key);
             $.ajax({
-                url: '<?= base_url('/barang_pinjam/hapusitem') ?>',
+                url: '<?= base_url('/barang_masuk/hapusitem') ?>',
                 type: 'POST',
                 data: {
                     key: key,
@@ -228,7 +189,7 @@
 
     function handleBarcodeScan(id) {
         $.ajax({
-            url: '<?= base_url('barang_pinjam/carii') ?>',
+            url: '<?= base_url('barang_masuk/carii') ?>',
             method: 'POST',
             data: {
                 idBarang: id,
@@ -251,7 +212,22 @@
     }
 </script>
 
+<!-- Bootstrap core JavaScript-->
+<script src="/vendor/jquery/jquery.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
 
+<!-- Core plugin JavaScript-->
+<script src="/vendor/jquery-easing/jquery.easing.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="/js/sb-admin-2.js"></script>
+
+<!-- Page level plugins -->
+<script src="/vendor/datatables/jquery.dataTables.js"></script>
+<script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="/js/demo/datatables-demo.js"></script>
 
 </body>
 

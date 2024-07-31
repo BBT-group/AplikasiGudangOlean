@@ -29,12 +29,12 @@ class BarangModel extends Model
             ->join('satuan', 'satuan.id_satuan = barang.id_satuan');
     }
 
-    public function getBarangById($id)
+    public function getBarangById($id_barang)
     {
         return $this->select('barang.*, kategori.nama_kategori,satuan.nama_satuan')
             ->join('kategori', 'kategori.id_kategori = barang.id_kategori')
             ->join('satuan', 'satuan.id_satuan = barang.id_satuan')
-            ->where('id_barang', $id)->first();
+            ->where('id_barang', $id_barang)->first();
     }
 
     public function getBarangByName($name)
@@ -55,5 +55,9 @@ class BarangModel extends Model
     public function updateBarang($id, $data)
     {
         $this->update($id, $data);
+    }
+
+    public function getBarangWithInventaris()
+    {
     }
 }

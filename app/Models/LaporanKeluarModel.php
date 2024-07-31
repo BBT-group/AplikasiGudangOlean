@@ -22,11 +22,11 @@ class LaporanKeluarModel extends Model
     public function getBarangKeluarGabung()
     {
         return $this->db->table($this->table)
-            ->select('barang_keluar.*, barang.nama as nama_barang,barang.stok, barang.harga_beli, penerima.nama as nama_penerima, ms_barang_keluar.waktu')
+            ->select('barang_keluar.*, barang.nama as nama_barang,barang.stok, barang.harga_beli, penerima.nama as nama_penerima, ms_barang_keluar.waktu,satuan.nama_satuan')
             ->join($this->tableBarang, 'barang.id_barang = barang_keluar.id_barang')
             ->join($this->tableMsBarangKeluar, 'ms_barang_keluar.id_ms_barang_keluar = barang_keluar.id_ms_barang_keluar')
             ->join($this->tablePenerima, 'penerima.id_penerima = ms_barang_keluar.id_penerima')
-            ->join($this->tableSatuan, 'satuan.nama_satuan = barang.id_satuan')
+            ->join($this->tableSatuan, 'satuan.id_satuan = barang.id_satuan') // Corrected the join condition
             ->get()
             ->getResultArray();
     }
@@ -34,11 +34,11 @@ class LaporanKeluarModel extends Model
     public function getBarangKeluarGabungFilter($start_date, $end_date)
     {
         return $this->db->table($this->table)
-            ->select('barang_keluar.*, barang.nama as nama_barang, barang.stok, barang.harga_beli, penerima.nama as nama_penerima, ms_barang_keluar.waktu')
+            ->select('barang_keluar.*, barang.nama as nama_barang, barang.stok, barang.harga_beli, penerima.nama as nama_penerima, ms_barang_keluar.waktu,satuan.nama_satuan')
             ->join($this->tableBarang, 'barang.id_barang = barang_keluar.id_barang')
             ->join($this->tableMsBarangKeluar, 'ms_barang_keluar.id_ms_barang_keluar = barang_keluar.id_ms_barang_keluar')
             ->join($this->tablePenerima, 'penerima.id_penerima = ms_barang_keluar.id_penerima')
-            ->join($this->tableSatuan, 'satuan.nama_satuan = barang.id_satuan')
+            ->join($this->tableSatuan, 'satuan.id_satuan = barang.id_satuan') // Corrected the join condition
             ->where('DATE(ms_barang_keluar.waktu) >=', $start_date)
             ->where('DATE(ms_barang_keluar.waktu) <=', $end_date)
             ->get()
@@ -50,3 +50,4 @@ class LaporanKeluarModel extends Model
         return $this->where('id_barang_keluar', $id)->findAll();
     }
 }
+?>

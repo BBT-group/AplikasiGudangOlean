@@ -6,6 +6,7 @@ namespace App\Controllers;
 use App\Models\BarangModel;
 use App\Models\KategoriModel;
 use App\Models\BarangMasukModel;
+use App\Models\InventarisModel;
 use App\Models\MasterBarangMasukModel;
 use App\Models\SupplierModel;
 
@@ -18,6 +19,7 @@ class Barang_Masuk extends BaseController
     protected $barangMasukModel;
     protected $masterBarangMasukModel;
     protected $supplierModel;
+    protected $inventarisModel;
     private $dataList = [];
 
     public function __construct()
@@ -26,6 +28,7 @@ class Barang_Masuk extends BaseController
         $this->kategoriModel = new KategoriModel();
         $this->barangMasukModel = new BarangMasukModel();
         $this->masterBarangMasukModel = new MasterBarangMasukModel();
+        $this->inventarisModel = new InventarisModel();
         $this->supplierModel = new SupplierModel();
         $this->dataList = $this->loadExistingData();
     }
@@ -57,23 +60,23 @@ class Barang_Masuk extends BaseController
     {
         $startDate = $this->request->getVar('start_date');
         $endDate = $this->request->getVar('end_date');
-    
+
         if ($startDate && $endDate) {
             $masuk = $this->masterBarangMasukModel->getBarangMasukGabungFilter($startDate, $endDate);
         } else {
             $masuk = $this->masterBarangMasukModel->getAll()->findAll();
         }
-    
+
         $data = [
             'masuk' => $masuk,
             'start_date' => $startDate,
             'end_date' => $endDate,
         ];
-    
+
         echo view('v_header');
         return view('v_beranda_barang_masuk', $data);
     }
-    
+
 
     public function loadExistingData()
     {
@@ -102,6 +105,7 @@ class Barang_Masuk extends BaseController
                 'nama' => $this->request->getVar('nama'),
                 'satuan' => $this->request->getVar('satuan'),
                 // 'merk' => $this->request->getVar('merk'),
+                'jenis' => $this->request->getVar('jenis'),
                 'stok' => 1,
                 'harga_beli' => $this->request->getVar('harga_beli'),
                 // 'id_kategori' => $this->request->getVar('id_kategori'),
@@ -120,12 +124,14 @@ class Barang_Masuk extends BaseController
         $keyword = $this->request->getVar('search');
         if ($keyword) {
             $barang = $this->barangModel->getBarangByName($keyword);
+            $inventaris = $this->inventarisModel->getByName($keyword);
         } else {
             $barang = $this->barangModel;
+            $inventaris = $this->inventarisModel;
         }
         $data = [
             'barang' => $barang->findAll(),
-            'kategori' => $this->kategoriModel->findAll()
+            'inventaris' => $inventaris->findAll(),
         ];
         echo view('v_header');
         return view('v_cari_barang_masuk', $data);
@@ -162,19 +168,33 @@ class Barang_Masuk extends BaseController
 
             foreach ($barang as $b) {
                 $barang1 = $this->barangModel->where('id_barang', $b['id_barang'])->first();
-                $data = [
-                    'nama' => $barang1['nama'],
-                    'id_satuan' => $barang1['id_satuan'],
-                    'foto' => $barang1['foto'],
+                if ($b['jenis'] == 'barang') {
+                    $data = [
+                        'nama' => $barang1['nama'],
+                        'id_satuan' => $barang1['id_satuan'],
+                        'foto' => $barang1['foto'],
 
-                    'stok' => $barang1['stok'] + $b['stok'],
-                    'harga_beli' => $b['harga_beli'],
-                    'id_kategori' => $barang1['id_kategori'],
-                ];
+                        'stok' => $barang1['stok'] + $b['stok'],
+                        'harga_beli' => $b['harga_beli'],
+                        'id_kategori' => $barang1['id_kategori'],
+                    ];
 
-                $this->barangModel->update($b['id_barang'], $data);
+                    $this->barangModel->update($b['id_barang'], $data);
 
-                $this->barangMasukModel->insert(['id_barang' => $barang1['id_barang'], 'id_ms_barang_masuk' => $idms, 'jumlah' => $b['stok']]);
+                    $this->barangMasukModel->insert(['id_barang' => $barang1['id_barang'], 'id_ms_barang_masuk' => $idms, 'jumlah' => $b['stok']]);
+                } elseif ($b['jenis'] == 'alat') {
+                    $barang1 = $this->inventarisModel->where('id_inventaris', $b['id_barang'])->first();
+                    $data = [
+                        'nama_inventaris' => $barang1['nama_inventaris'],
+                        'foto' => $barang1['foto'],
+                        'stok' => $barang1['stok'] + $b['stok'],
+                        'harga_beli' => $b['harga_beli'],
+                    ];
+
+                    $this->inventarisModel->update($b['id_barang'], $data);
+
+                    $this->barangMasukModel->insert(['id_inventaris' => $barang1['id_inventaris'], 'id_ms_barang_masuk' => $idms, 'jumlah' => $b['stok']]);
+                }
 
                 session()->remove('datalist');
                 return redirect()->to(base_url('/barang_masuk'));
@@ -197,7 +217,8 @@ class Barang_Masuk extends BaseController
             $session->set('datalist', $datalist);
         }
 
-        return $this->response->setJSON(['status' => 'success']);
+        $this->response->setJSON(['status' => 'success']);
+        return redirect()->to('beranda');
     }
 
     public function cariStok()

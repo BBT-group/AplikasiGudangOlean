@@ -68,7 +68,7 @@ class Laporan_Keluar extends BaseController
         $row = 4;
         $no = 1;
         foreach ($data as $item) {
-            $stok_awal = $item['stok'] - $item['jumlah']; // Menghitung stok awal
+            $stok_awal = $item['stok'] + $item['jumlah']; // Menghitung stok awal
 
             $sheet->setCellValue('A' . $row, $no++);
             $sheet->setCellValue('B' . $row, $item['id_barang_keluar']);

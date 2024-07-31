@@ -1,69 +1,74 @@
-<div class="container-fluid">
-    <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Barang Masuk</h1>
+                <div class="container-fluid">
 
-    <!-- Date Filter Form -->
-    <div class="card mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Filter by Date</h6>
-        </div>
-        <div class="card-body">
-            <form method="get" action="<?= base_url('barang_masuk/beranda') ?>">
-                <div class="form-group row">
-                    <label for="start_date" class="col-sm-2 col-form-label">Start Date</label>
-                    <div class="col-sm-4">
-                        <input type="date" class="form-control" id="start_date" name="start_date" value="<?= isset($start_date) ? $start_date : '' ?>">
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Barang Masuk</h1>
+                    <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <form method="get" action="<?= base_url('barang_masuk/beranda') ?>">
+                                <div class="form-group row">
+                                    <label for="start_date" class="col-sm-2 col-form-label">Start Date</label>
+                                    <div class="col-sm-4">
+                                        <input type="date" class="form-control" id="start_date" name="start_date" value="<?= isset($start_date) ? $start_date : '' ?>">
+                                    </div>
+                                    <label for="end_date" class="col-sm-2 col-form-label">End Date</label>
+                                    <div class="col-sm-4">
+                                        <input type="date" class="form-control" id="end_date" name="end_date" value="<?= isset($end_date) ? $end_date : '' ?>">
+                                    </div>
+                                </div>
+                                <a href="<?= base_url('barang_masuk/beranda') ?>" class="btn btn-secondary">Reset</a>
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                            </form>
+                        </div>
                     </div>
-                    <label for="end_date" class="col-sm-2 col-form-label">End Date</label>
-                    <div class="col-sm-4">
-                        <input type="date" class="form-control" id="end_date" name="end_date" value="<?= isset($end_date) ? $end_date : '' ?>">
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Filter</button>
-                <a href="<?= base_url('barang_masuk/beranda') ?>" class="btn btn-secondary">Reset</a>
-            </form>
-        </div>
-    </div>
-
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data Barang Masuk</h6>
-        </div>
-        <div class="card-body">
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Data Barang Masuk</h6>
+                        </div>
+                        <div class="card-body">
                             <div class="col-12 mb-1 p-0">
                                 <a href="<?= base_url('barang_masuk/index') ?>" class="btn btn-primary">masukan barang</a>
                             </div>
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Id Masuk</th>
-                            <th>Tanggal waktu</th>
-                            <th>Supplier</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if (!empty($masuk)) : ?>
-                            <?php $no = 0; ?>
-                            <?php foreach ($masuk as $item) : ?>
-                                <tr>
-                                    <td><?= ++$no ?></td>
-                                    <td><?= $item['id_ms_barang_masuk'] ?></td>
-                                    <td><?= $item['waktu'] ?></td>
-                                    <td><?= $item['nama'] ?></td>
-                                    <td><button>Detail</button></td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Id Masuk</th>
+                                        <th>Tanggal waktu</th>
+                                        <th>supplier</th>
+                                        <th>aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+
+
+                                    if (!empty($masuk)) : ?>
+
+                                        <?php
+
+                                        $no = 0;
+                                        foreach ($masuk as $item) : ?>
+                                            <tr>
+                                                <td><?= $no += 1 ?></td>
+                                                <td><?= $item['id_ms_barang_masuk'] ?></td>
+                                                <td><?= $item['waktu'] ?></td>
+                                                <td><?= $item['nama'] ?></td>
+                                                <td><button>detail</button></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
-        </div>
-    </div>
-</div>
             <!-- End of Main Content -->
 
             <!-- Footer -->

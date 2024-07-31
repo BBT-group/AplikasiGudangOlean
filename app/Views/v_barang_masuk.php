@@ -60,7 +60,7 @@
                                                     <td><?= $s['satuan'] ?></td>
                                                     <td><input type="number" class="update-field" data-index="<?= $index ?>" data-column="stok" value="<?= esc($s['stok']) ?>"></td>
                                                     <td><input type="number" class="update-field" data-index="<?= $index ?>" data-column="harga_beli" value="<?= esc($s['harga_beli']) ?>"></td>
-                                                    <td> <button class="remove-item" data-index="<?= $index ?>" data-key="<?= $s['id_barang'] ?>">Remove Item</button></td>
+                                                    <td> <button class="remove-item btn btn-danger" data-index="<?= $index ?>" data-key="<?= $s['id_barang'] ?>" >Remove Item</button></td>
                                                 </tr>
 
                                             <?php endforeach; ?>
@@ -109,7 +109,7 @@
                             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                <a class="btn btn-primary" href="login.html">Logout</a>
+                                <a class="btn btn-primary" href="<?= base_url('logout') ?>">Logout</a>
                             </div>
                         </div>
                     </div>

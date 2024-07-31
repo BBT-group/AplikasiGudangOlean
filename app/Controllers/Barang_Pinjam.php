@@ -28,14 +28,27 @@ class Barang_Pinjam extends BaseController
 
     public function index()
     {
+
+        $data = [
+            'pinjam' => session()->get('datalist_pinjam'),
+        ];
         echo view('v_header');
-        return view('v_beranda_peminjaman');
+        return view('v_peminjaman', $data);
     }
 
-    public function indexPinjam()
+    public function index2()
     {
+        $keyword = $this->request->getVar('search');
+        if ($keyword) {
+            $barang = $this->inventarisModel->getByName($keyword);
+        } else {
+            $barang = $this->inventarisModel;
+        }
+        $data = [
+            'barang' => $barang->findAll()
+        ];
         echo view('v_header');
-        return view('v_peminjaman');
+        return view('v_cari_peminjaman', $data);
     }
 
     public function indexCari()
@@ -44,31 +57,60 @@ class Barang_Pinjam extends BaseController
         return view('v_cari_peminjaman');
     }
 
+    public function beranda()
+    {
+        // $keyword = $this->request->getVar('search');
+        // if ($keyword) {
+        //     $masuk = $this->masterBarangMasukModel->getBarangByName($keyword);
+        // } else {
+        //     $masuk = $this->masterBarangMasukModel;
+        // }
+        $data = [
+            'pinjam' => $this->masterPeminjamanModel->getAllWithNama()->findAll(),
+        ];
+        echo view('v_header');
+        return view('v_beranda_peminjaman', $data);
+    }
+
     function containsObjectWithName($objects, $name)
     {
-        if (!isEmpty($objects)) {
+        if ($objects != null) {
             foreach ($objects as $object) {
-                if ($object['id_barang'] !== $name) {
-                    return false;
+                if ($object['id_inventaris'] == $name) {
+                    return true;
                 }
             }
-            return true;
+            return false;
+        } else {
+            return false;
         }
-        return false;
     }
 
     public function clearSession()
     {
         session()->remove('datalist_pinjam');
         // ganti link
-        return redirect()->to(base_url('/barang_masuk'));
+        return redirect()->to(base_url('/barang_pinjam'));
         // return json_encode($this->inventarisModel->findAll());
+    }
+
+    public function getColumnValueIndices(array $array, string $column, $value)
+    {
+        foreach ($array as $index => $item) {
+            if (isset($item[$column]) && $item[$column] == $value) {
+                return $index;
+            }
+        }
     }
 
     public function saveData()
     {
         $idInventaris = $this->request->getVar('id_inventaris');
-        if ($this->containsObjectWithName($this->dataList, $idInventaris) == false || $this->dataList == null) {
+        if ($this->containsObjectWithName($this->dataList, $idInventaris)) {
+            $this->dataList[$this->getColumnValueIndices($this->dataList, 'id_inventaris', $idInventaris)]['stok'] += 1;
+            session()->set('datalist_pinjam', $this->dataList);
+            return redirect()->to(base_url('/barang_pinjam/index'));
+        } else {
             $data2 = [
                 'id_inventaris' => $this->request->getVar('id_inventaris'),
                 'nama_inventaris' => $this->request->getVar('nama_inventaris'),
@@ -77,56 +119,62 @@ class Barang_Pinjam extends BaseController
             ];
             $this->dataList[] = $data2;
             session()->set('datalist_pinjam', $this->dataList);
-            return redirect()->to(base_url('/barang_masuk/index'));
-        } else {
-            $this->dataList[array_search($idInventaris, array_values($this->dataList))]['stok'] += 1;
-            session()->set('datalist_pinjam', $this->dataList);
-            return redirect()->to(base_url('/barang_masuk/index'));
+            return redirect()->to(base_url('/barang_pinjam/index'));
         }
     }
 
     public function updateStok()
     {
         if (!$this->validate([
-            'penerima' => 'required|is_not_unique[supplier.id_supplier]'
+            'nama_penerima' => 'required'
         ])) {
             // ganti url
-            return redirect()->to(base_url('/barang_masuk/index'))->withInput();
+            return redirect()->to(base_url('/barang_pinjam/index'))->withInput();
         }
+
         $barang = session()->get('datalist_pinjam');
         if (!empty($barang)) {
-            $namaPenerima = $this->request->getVar('penerima');
+
+            $namaPenerima = $this->request->getVar('nama_penerima');
+            if ($this->penerimaModel->where('nama', $namaPenerima)->first() == null) {
+                $penerimaId = $this->penerimaModel->insert(['nama' =>
+                $namaPenerima], true);
+            } else {
+                $penerima = $this->penerimaModel->where('nama', $namaPenerima)->first();
+                $penerimaId = $penerima['id_penerima'];
+            }
+
             date_default_timezone_set('Asia/Jakarta');
             $currentDateTime =  date("Y-m-d H:i:s");
-            $this->masterPeminjamanModel->insert(['waktu' => $currentDateTime, 'id_penerima' => $namaPenerima]);
+            $this->masterPeminjamanModel->insert(['tanggal_pinjam' => $currentDateTime, 'id_penerima' => $penerimaId]);
 
             $idms = $this->masterPeminjamanModel->getInsertID();
 
             foreach ($barang as $b) {
 
                 $barang1 = $this->inventarisModel->where('id_inventaris', $b['id_inventaris'])->first();
-                if (isset('kembali')) {
+                if (isset($kembali)) {
                     $stok = $barang1['stok'] + $b['stok'];
                 } else {
                     $stok =  $barang1['stok'] - $b['stok'];
                 }
                 $data = [
                     'nama_inventaris' => $barang1['nama_inventaris'],
-                    'bukti_peminjaman' => $barang1['bukti_peminjaman'],
+                    'foto' => $barang1['foto'],
                     'stok' => $stok,
                 ];
 
-                $this->inventarisModel->update($b['id_inventaris'], $data);
+                $this->inventarisModel->update($barang1['id_inventaris'], $data);
                 $this->peminjamanModel->insert(['id_inventaris' => $barang1['id_inventaris'], 'id_ms_peminjaman' => $idms, 'jumlah' => $b['stok']]);
             }
 
 
             session()->remove('datalist_pinjam');
             // ganti url
-            return redirect()->to(base_url('/barang_masuk'));
+            return redirect()->to(base_url('/barang_pinjam'));
         } else {
             // ganti url
-            return redirect()->to(base_url('/barang_masuk/index'))->withInput();
+            return redirect()->to(base_url('/barang_pinjam/index'))->withInput();
         }
     }
 

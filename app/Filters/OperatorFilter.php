@@ -10,16 +10,14 @@ class OperatorFilter implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        $session = session();
-
-        if ($session->get('role') == '') {
-            return redirect()->to('/');
+        if (!session('role')) {
+            return redirect()->to(base_url('login'));
         }
     }
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        if (session()->get('role') == 'operator') {
+        if (session()->role == 'operator') {
             return redirect()->to('beranda');
         }
     }

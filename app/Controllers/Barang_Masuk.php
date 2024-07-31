@@ -197,8 +197,7 @@ class Barang_Masuk extends BaseController
             $session->set('datalist', $datalist);
         }
 
-        $this->response->setJSON(['status' => 'success']);
-        return redirect()->to('beranda');
+        return $this->response->setJSON(['status' => 'success']);
     }
 
     public function cariStok()

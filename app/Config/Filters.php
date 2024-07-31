@@ -89,7 +89,7 @@ class Filters extends BaseFilters
                 'except' => ['beranda','stok','stok/*','barang_masuk', 'barang_masuk/*', 'laporan_stok', 'laporan_stok/*', 'laporan_masuk', 'laporan_masuk/*', 'satuan','satuan/*', 'laporan_keluar', 'laporan_keluar/*', 'peminjaman', 'peminjaman/*', 'kategori', 'kategori/*', 'inventaris', 'inventaris/*']
             ],
             'OperatorFilter' => [
-                'except' => ['beranda','barang_keluar', 'barang_keluar/*', 'stok', 'stok/*', 'satuan', 'satuan/*', 'kategori', 'kategori/*', 'inventaris', 'inventaris/*']
+                'except' => ['beranda','barang_keluar', 'barang_keluar/*', 'stok', 'stok/*', 'satuan', 'satuan/*', 'kategori', 'kategori/*', 'inventaris', 'inventaris/*', 'barang_masuk', 'barang_masuk/*']
             ]
         ],
     ];

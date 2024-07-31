@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Barang</title>
+    <title>Daftar Barang Keluar</title>
     <!-- Tambahkan link ke CSS Bootstrap untuk styling -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -44,13 +44,13 @@
             </thead>
             <tbody>
                 <?php if (!empty($barangkeluar)) : ?>
-                    <?php $no = 1; foreach ($barangmasuk as $item) : ?>
+                    <?php $no = 1; foreach ($barangkeluar as $item) : ?>
                         <?php $stok_awal = $item['stok'] + $item['jumlah']; ?>
                         <tr>
                             <td><?= $no++ ?></td>
-                            <td><?= $item['id_barang'] ?></td>
+                            <td><?= $item['id_barang_keluar'] ?></td>
                             <td><?= $item['waktu'] ?></td>
-                            <td><?= $item['nama'] ?></td>
+                            <td><?= $item['nama_barang'] ?></td>
                             <td><?= $item['nama_satuan'] ?></td>
                             <td><?= $item['nama_penerima'] ?></td>
                             <td><?= $stok_awal ?></td> <!-- Mengisi stok awal -->

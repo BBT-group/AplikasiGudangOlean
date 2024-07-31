@@ -68,7 +68,7 @@ class Stok extends BaseController
 
             $data = [
                 'id_barang' => $this->request->getPost('id_barang'),
-                'nama' => $this->request->getPost('nama_barang'),
+                'nama' => $this->request->getPost('nama'),
                 'foto' => $foto_path,
                 'stok' => 0,
                 'harga_beli' => 0,

@@ -28,7 +28,7 @@ class Barang_Pinjam extends BaseController
 
     public function index()
     {
-        \Config\Services::validation();
+
         $data = [
             'pinjam' => session()->get('datalist_pinjam'),
         ];
@@ -126,17 +126,27 @@ class Barang_Pinjam extends BaseController
     public function updateStok()
     {
         if (!$this->validate([
-            'nama_penerima' => 'required|is_not_unique[penerima.nama_penerima]'
+            'nama_penerima' => 'required'
         ])) {
             // ganti url
             return redirect()->to(base_url('/barang_pinjam/index'))->withInput();
         }
+
         $barang = session()->get('datalist_pinjam');
         if (!empty($barang)) {
+
             $namaPenerima = $this->request->getVar('nama_penerima');
+            if ($this->penerimaModel->where('nama', $namaPenerima)->first() == null) {
+                $penerimaId = $this->penerimaModel->insert(['nama' =>
+                $namaPenerima], true);
+            } else {
+                $penerima = $this->penerimaModel->where('nama', $namaPenerima)->first();
+                $penerimaId = $penerima['id_penerima'];
+            }
+
             date_default_timezone_set('Asia/Jakarta');
             $currentDateTime =  date("Y-m-d H:i:s");
-            $this->masterPeminjamanModel->insert(['waktu' => $currentDateTime, 'id_penerima' => $namaPenerima]);
+            $this->masterPeminjamanModel->insert(['tanggal_pinjam' => $currentDateTime, 'id_penerima' => $penerimaId]);
 
             $idms = $this->masterPeminjamanModel->getInsertID();
 
@@ -150,11 +160,11 @@ class Barang_Pinjam extends BaseController
                 }
                 $data = [
                     'nama_inventaris' => $barang1['nama_inventaris'],
-                    'bukti_peminjaman' => $barang1['bukti_peminjaman'],
+                    'foto' => $barang1['foto'],
                     'stok' => $stok,
                 ];
 
-                $this->inventarisModel->update($b['id_inventaris'], $data);
+                $this->inventarisModel->update($barang1['id_inventaris'], $data);
                 $this->peminjamanModel->insert(['id_inventaris' => $barang1['id_inventaris'], 'id_ms_peminjaman' => $idms, 'jumlah' => $b['stok']]);
             }
 

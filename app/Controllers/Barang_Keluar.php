@@ -7,7 +7,7 @@ use App\Models\BarangModel;
 use App\Models\KategoriModel;
 use App\Models\BarangKeluarModel;
 use App\Models\MasterBarangKeluarModel;
-
+use App\Models\PenerimaModel;
 
 class Barang_Keluar extends BaseController
 {
@@ -15,6 +15,7 @@ class Barang_Keluar extends BaseController
     protected $kategoriModel;
     protected $barangKeluarModel;
     protected $masterBarangKeluarModel;
+    protected $penerimaModel;
     private $dataList = [];
 
     public function __construct()
@@ -23,6 +24,7 @@ class Barang_Keluar extends BaseController
         $this->kategoriModel = new KategoriModel();
         $this->barangKeluarModel = new BarangKeluarModel();
         $this->masterBarangKeluarModel = new MasterBarangKeluarModel();
+        $this->penerimaModel = new PenerimaModel();
         $this->dataList = $this->loadExistingData();
     }
 
@@ -122,8 +124,18 @@ class Barang_Keluar extends BaseController
         }
         $barang = session()->get('datalist_keluar');
         if (!empty($barang)) {
-            $namaPenerima = $this->request->getVar('penerima');
-            $this->masterBarangKeluarModel->insert(['waktu' => date("Y-m-d H:i:s"), 'id_penerima' => $namaPenerima]);
+            $namaPenerima = $this->request->getVar('nama_penerima');
+            if ($this->penerimaModel->where('nama', $namaPenerima)->first() == null) {
+                $penerimaId = $this->penerimaModel->insert(['nama' =>
+                $namaPenerima], true);
+            } else {
+                $penerima = $this->penerimaModel->where('nama', $namaPenerima)->first();
+                $penerimaId = $penerima['id_supplier'];
+            }
+            date_default_timezone_set('Asia/Jakarta');
+            $currentDateTime =  date("Y-m-d H:i:s");
+
+            $this->masterBarangKeluarModel->insert(['waktu' => $currentDateTime, 'id_penerima' => $penerimaId]);
 
             $idms = $this->masterBarangKeluarModel->getInsertID();
 

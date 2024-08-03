@@ -127,6 +127,15 @@
         <!-- Page level custom scripts -->
         <script src="/js/demo/datatables-demo.js"></script>
         <script>
+            window.onload = function() {
+                <?php if (session()->has('error')) : ?>
+                    alert("<?= addslashes(session('error')) ?>");
+                <?php elseif (session()->has('message')) : ?>
+                    alert("<?= addslashes(session('message')) ?>");
+                <?php endif; ?>
+            };
+        </script>
+        <script>
             $(document).ready(function() {
                 $('#clear-session-btn').click(function() {
                     $.ajax({

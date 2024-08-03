@@ -14,13 +14,13 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="id_barang">ID Barang</label>
-                                                    <input type="text" class="form-control" id="id_barang" name="id_barang" autofocus value="<?php if (old('id_barang') != null) {
-                                                                                                                                                    echo old('id_barang');
-                                                                                                                                                } elseif (session()->get('id_barang_temp')) {
-                                                                                                                                                    echo session()->get('id_barang_temp');
-                                                                                                                                                } else {
-                                                                                                                                                    '';
-                                                                                                                                                } ?>">
+                                                    <input type="text" class="form-control barcode-input" id="id_barang" name="id_barang" autofocus value="<?php if (old('id_barang') != null) {
+                                                                                                                                                                echo old('id_barang');
+                                                                                                                                                            } elseif (session()->get('id_temp')) {
+                                                                                                                                                                echo session()->get('id_temp');
+                                                                                                                                                            } else {
+                                                                                                                                                                '';
+                                                                                                                                                            } ?>">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="nama">Nama</label>

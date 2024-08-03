@@ -16,8 +16,8 @@
                                                     <label for="id_inventaris">ID Alat</label>
                                                     <input type="text" class="form-control" id="id_inventaris" name="id_inventaris" autofocus value="<?php if (old('id_inventaris') != null) {
                                                                                                                                                             echo old('id_inventaris');
-                                                                                                                                                        } elseif (session()->get('id_inventaris_temp') != null) {
-                                                                                                                                                            echo session()->get('id_inventaris_temp');
+                                                                                                                                                        } elseif (session()->get('id_temp') != null) {
+                                                                                                                                                            echo session()->get('id_temp');
                                                                                                                                                         } else {
                                                                                                                                                             '';
                                                                                                                                                         } ?>">

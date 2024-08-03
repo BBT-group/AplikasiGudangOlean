@@ -40,6 +40,7 @@ class Stok extends BaseController
 
     public function indexTambah()
     {
+        session()->set('id_temp', '');
         $data = [
             'kategori' => $this->kategoriModel->findAll(),
             'satuan' => $this->satuanModel->findAll()

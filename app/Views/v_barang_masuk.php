@@ -166,7 +166,7 @@
                                 },
                                 success: function(response) {
 
-                                    if (response.status === 'success') {
+                                    if (response.status == 'success') {
                                         console.log('Data updated successfully');
                                     } else {
                                         console.log('Data updated not');
@@ -177,30 +177,44 @@
 
                         // Function to capture barcode scan
                         let barcode = ''; // Initialize an empty string to store the scanned barcode
-                        let lastKeyTime = Date.now(); // Get the current timestamp in milliseconds when the last key was pressed
-
+                        let timeoutId = null; // Initialize a variable to store the timeout ID
+                        let lastKeyTime = Date.now();
                         $(document).keypress(function(e) {
                             let char = String.fromCharCode(e.which); // Convert the keypress event to the corresponding character
-                            let currentTime = Date.now(); // Get the current timestamp in milliseconds
-
-                            // Reset barcode string if more than 100ms passed between keystrokes
-                            if (currentTime - lastKeyTime > 100) {
-                                barcode = ''; // Reset the barcode string if more than 100ms passed since the last keypress
+                            let currentTime = Date.now();
+                            // Clear any existing timeout
+                            if (timeoutId) {
+                                clearTimeout(timeoutId);
                             }
+
+
+                            barcode += char;
+                            if (currentTime - lastKeyTime < 10) {
+
+                                timeoutId = setTimeout(function() {
+
+                                    let id = barcode; // Assign the barcode string to the ID variable
+                                    console.log(barcode);
+
+                                    handleBarcodeScan(id);
+                                    // Call a function to handle the barcode scan}
+
+
+                                    barcode = ''; // Reset the barcode string after handling the scan
+                                    timeoutId = null; // Reset the timeout ID
+                                }, 200); // Reset the barcode string if more than 100ms passed since the last keypress
+                            } else {
+                                barcode = '';
+                            }
+
+                            lastKeyTime = currentTime;
+
 
                             // Append character to barcode string
-                            barcode += char; // Append the current character to the barcode string
-                            lastKeyTime = currentTime; // Update the timestamp of the last keypress
+                            // Append the current character to the barcode string
 
-                            // Assuming barcode length of 12 characters (adjust as needed)
-                            if (barcode.length >= 1) {
-                                // Handle the complete barcode
-                                let id = barcode; // Assign the barcode string to the ID variable
-                                console.log(barcode);
-                                handleBarcodeScan(id); // Call a function to handle the barcode scan
+                            // Set a timeout to handle the complete barcode after 200ms of no input
 
-                                barcode = ''; // Reset the barcode string after handling the scan
-                            }
                         });
 
                         $('.remove-item').on('click', function() {

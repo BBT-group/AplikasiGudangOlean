@@ -209,7 +209,7 @@ class Barang_Pinjam extends BaseController
                 $idInventaris
             )->first();
             if (empty($a)) {
-                session()->set('id_barang_temp', $idInventaris);
+                session()->set('id_temp', $idInventaris);
                 return $this->response->setJSON([
                     'status' => 'not_found',
                     'message' => 'Item not found. Please go to the input form to add this item.'

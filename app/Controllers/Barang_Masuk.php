@@ -220,8 +220,7 @@ class Barang_Masuk extends BaseController
             $session->set('datalist', $datalist);
         }
 
-        $this->response->setJSON(['status' => 'success']);
-        return redirect()->to('beranda');
+        return $this->response->setJSON(['status' => 'success']);
     }
 
     public function getColumnValueIndices(array $array, string $column, $value)
@@ -248,7 +247,7 @@ class Barang_Masuk extends BaseController
             }
 
             if (empty($a)) {
-                session()->set('id_barang_temp', $idBarang);
+                session()->set('id_temp', $idBarang);
                 return $this->response->setJSON([
                     'status' => 'not_found',
                     'message' => 'Item not found. Please go to the input form to add this item.'

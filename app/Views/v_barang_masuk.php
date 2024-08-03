@@ -193,7 +193,7 @@
                             lastKeyTime = currentTime; // Update the timestamp of the last keypress
 
                             // Assuming barcode length of 12 characters (adjust as needed)
-                            if (barcode.length >= 13) {
+                            if (barcode.length >= 1) {
                                 // Handle the complete barcode
                                 let id = barcode; // Assign the barcode string to the ID variable
                                 console.log(barcode);

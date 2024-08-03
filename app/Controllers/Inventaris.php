@@ -35,7 +35,7 @@ class Inventaris extends BaseController
     public function simpanAlat()
     {
         if (!$this->validate([
-            'id_inventaris' => 'required',
+            'id_inventaris' => 'required|is_unique[inventaris.id_inventaris]',
             'nama_inventaris' => 'required',
             'foto' => 'uploaded[foto]',
         ])) {

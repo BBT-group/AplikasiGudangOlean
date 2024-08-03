@@ -107,6 +107,17 @@
 
                 <hr class="sidebar-divider d-none d-md-block">
 
+                <div class="sidebar-heading">
+                    Akun
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url('user') ?>">
+                        <i class="fas fa-fw fa-users"></i>
+                        <span>Manajemen Akun</span></a>
+                </li>
+
+                <hr class="sidebar-divider">
+
                 <!-- <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div> -->
@@ -214,9 +225,9 @@
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="<?php echo base_url('user/changePassword'); ?>">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
+                                    Ubah Password
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">

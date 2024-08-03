@@ -84,3 +84,17 @@ $routes->add('/barang_pinjam/carii', 'Barang_pinjam::cariStok');
 $routes->add('/barang_pinjam/hapusitem', 'Barang_pinjam::hapusBarangDatalistPinjam');
 
 $routes->add('/barang_masuk/doubleform', 'Barang_Masuk::doubleForm');
+
+
+$routes->get('/user', 'User::index');
+$routes->get('/user/create', 'User::create');
+$routes->post('/user/store', 'User::store');
+$routes->get('/user/edit/(:num)', 'User::edit/$1');
+$routes->post('/user/update/(:num)', 'User::update/$1');
+$routes->get('/user/delete/(:num)', 'User::delete/$1');
+$routes->match(['get', 'post'], '/user/updatePassword/(:num)', 'User::updatePassword/$1');
+
+$routes->get('/user/changePassword', 'UserController::changePasswordForm');
+$routes->post('/user/updatePassword', 'UserController::updatePassword');
+
+

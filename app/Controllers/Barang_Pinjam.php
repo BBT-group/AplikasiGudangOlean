@@ -107,11 +107,7 @@ class Barang_Pinjam extends BaseController
     public function saveData()
     {
         $idInventaris = $this->request->getVar('id_inventaris');
-        if ($this->containsObjectWithName($this->dataList, $idInventaris)) {
-            $this->dataList[$this->getColumnValueIndices($this->dataList, 'id_inventaris', $idInventaris)]['stok'] += 1;
-            session()->set('datalist_pinjam', $this->dataList);
-            return redirect()->to(base_url('/barang_pinjam/index'));
-        } else {
+        if (!$this->containsObjectWithName($this->dataList, $idInventaris) || $this->dataList == null) {
             $data2 = [
                 'id_inventaris' => $this->request->getVar('id_inventaris'),
                 'nama_inventaris' => $this->request->getVar('nama_inventaris'),
@@ -119,6 +115,10 @@ class Barang_Pinjam extends BaseController
                 'stok' => 1,
             ];
             $this->dataList[] = $data2;
+            session()->set('datalist_pinjam', $this->dataList);
+            return redirect()->to(base_url('/barang_pinjam/index'));
+        } else {
+            $this->dataList[$this->getColumnValueIndices($this->dataList, 'id_inventaris', $idInventaris)]['stok'] += 1;
             session()->set('datalist_pinjam', $this->dataList);
             return redirect()->to(base_url('/barang_pinjam/index'));
         }

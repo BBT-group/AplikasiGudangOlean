@@ -9,6 +9,8 @@ use App\Models\BarangKeluarModel;
 use App\Models\MasterBarangKeluarModel;
 use App\Models\PenerimaModel;
 
+use CodeIgniter\Database\Exceptions\DatabaseException;
+
 class Barang_Keluar extends BaseController
 {
     protected $barangModel;
@@ -80,7 +82,7 @@ class Barang_Keluar extends BaseController
     public function saveData()
     {
         $idBarang = $this->request->getVar('id_barang');
-        if ($this->containsObjectWithName($this->dataList, $idBarang)) {
+        if (!$this->containsObjectWithName($this->dataList, $idBarang) || $this->dataList == null) {
             $data2 = [
                 'id_barang' => $this->request->getVar('id_barang'),
                 'nama' => $this->request->getVar('nama'),
@@ -88,6 +90,7 @@ class Barang_Keluar extends BaseController
                 'stok' => 1,
 
             ];
+
             $this->dataList[] = $data2;
             session()->set('datalist_keluar', $this->dataList);
             return redirect()->to(base_url('/barang_keluar/index'));
@@ -126,40 +129,81 @@ class Barang_Keluar extends BaseController
         }
         $barang = session()->get('datalist_keluar');
         if (!empty($barang)) {
-            $namaPenerima = $this->request->getVar('penerima');
-            if ($this->penerimaModel->where('nama', $namaPenerima)->first() == null) {
-                $penerimaId = $this->penerimaModel->insert(['nama' =>
-                $namaPenerima], true);
-            } else {
-                $penerima = $this->penerimaModel->where('nama', $namaPenerima)->first();
-                $penerimaId = $penerima['id_penerima'];
+            $db = \Config\Database::connect();
+
+            try {
+                // Set the isolation level if needed
+                $db->query("SET TRANSACTION ISOLATION LEVEL READ COMMITTED"); // Change as required
+
+                // Start the transaction
+                $db->transBegin();
+
+                $namaPenerima = $this->request->getVar('penerima');
+                if ($this->penerimaModel->where('nama', $namaPenerima)->first() == null) {
+                    $penerimaId = $this->penerimaModel->insert(['nama' =>
+                    $namaPenerima], true);
+                } else {
+                    $penerima = $this->penerimaModel->where('nama', $namaPenerima)->first();
+                    $penerimaId = $penerima['id_penerima'];
+                }
+                date_default_timezone_set('Asia/Jakarta');
+                $currentDateTime =  date("Y-m-d H:i:s");
+
+                $this->masterBarangKeluarModel->insert(['waktu' => $currentDateTime, 'id_penerima' => $penerimaId]);
+
+                $idms = $this->masterBarangKeluarModel->getInsertID();
+
+
+                foreach ($barang as $b) {
+                    $barang1 = $this->barangModel->where('id_barang', $b['id_barang'])->first();
+                    $sisa = $barang1['stok'] - $b['stok'];
+                    if ($sisa < 0) {
+                        // If the post insert fails, rollback transaction
+                        throw new DatabaseException('Failed to insert post: kurang dari 0');
+                    }
+                    $data = [
+                        'nama' => $barang1['nama'],
+                        'id_satuan' => $barang1['id_satuan'],
+                        'foto' => $barang1['foto'],
+                        'stok' => $sisa,
+                        'harga_beli' => $barang1['harga_beli'],
+                        'id_kategori' => $barang1['id_kategori'],
+                    ];
+
+                    if (!$this->barangModel->update($b['id_barang'], $data)) {
+                        // If the post insert fails, rollback transaction
+                        throw new DatabaseException('Failed to insert post: ' . implode(', ', $this->barangModel->errors()));
+                    }
+
+                    if (!$this->barangKeluarModel->insert(['id_barang' => $barang1['id_barang'], 'id_ms_barang_keluar' => $idms, 'jumlah' => $b['stok']])) {
+                        // If the post insert fails, rollback transaction
+                        throw new DatabaseException('Failed to insert post: ' . implode(', ', $this->barangKeluarModel->errors()));
+                    }
+                }
+
+
+                // Commit the transaction
+                if ($db->transStatus() === FALSE) {
+                    // If something went wrong, rollback transaction
+                    $db->transRollback();
+                    throw new DatabaseException('Transaction failed.');
+                } else {
+                    // Otherwise, commit the transaction
+                    $db->transCommit();
+
+                    session()->remove('datalist_keluar');
+                    session()->setFlashdata('message', 'Transaction successful.');
+                    return redirect()->to(base_url('/barang_keluar'))->withInput();
+                }
+            } catch (DatabaseException $e) {
+                // Rollback transaction on any exception
+                $db->transRollback();
+
+                session()->setFlashdata('error', 'Transaction failed: ' . $e->getMessage());
+                return redirect()->to(base_url('/barang_keluar/index'))->withInput();
             }
-            date_default_timezone_set('Asia/Jakarta');
-            $currentDateTime =  date("Y-m-d H:i:s");
-
-            $this->masterBarangKeluarModel->insert(['waktu' => $currentDateTime, 'id_penerima' => $penerimaId]);
-
-            $idms = $this->masterBarangKeluarModel->getInsertID();
-
-
-            foreach ($barang as $b) {
-                $barang1 = $this->barangModel->where('id_barang', $b['id_barang'])->first();
-                $data = [
-                    'nama' => $barang1['nama'],
-                    'id_satuan' => $barang1['id_satuan'],
-                    'foto' => $barang1['foto'],
-                    'stok' => $barang1['stok'] - $b['stok'],
-                    'harga_beli' => $barang1['harga_beli'],
-                    'id_kategori' => $barang1['id_kategori'],
-                ];
-
-                $this->barangModel->update($b['id_barang'], $data);
-
-                $this->barangKeluarModel->insert(['id_barang' => $barang1['id_barang'], 'id_ms_barang_keluar' => $idms, 'jumlah' => $b['stok']]);
-            }
-            session()->remove('datalist_keluar');
-            return redirect()->to(base_url('/barang_keluar'));
         } else {
+            session()->setFlashdata('error', 'data kosong');
             return redirect()->to(base_url('/barang_keluar/index'))->withInput();
         }
     }

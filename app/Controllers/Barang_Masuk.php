@@ -101,7 +101,7 @@ class Barang_Masuk extends BaseController
     public function saveData()
     {
         $idBarang = $this->request->getVar('id_barang');
-        if ($this->containsObjectWithName($this->dataList, $idBarang)) {
+        if (!$this->containsObjectWithName($this->dataList, $idBarang) || $this->dataList == null) {
             $data2 = [
                 'id_barang' => $this->request->getVar('id_barang'),
                 'nama' => $this->request->getVar('nama'),

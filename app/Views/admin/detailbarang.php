@@ -51,7 +51,7 @@
                             <div class="card">
                                 <div class="card-body text-center">
                                     <!-- tampilkan foto default -->
-                                    <img style="max-height:375px" src="images/no_image.png" class="img-fluid" alt="Foto Barang">
+                                    <img style="max-height:375px" src="<?= base_url($data['foto']) ?>" class="img-fluid" alt="<?= $data['id_barang'] ?>">
                                 </div>
                             </div>
                         </div>

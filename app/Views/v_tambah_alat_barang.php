@@ -19,8 +19,8 @@
                                     <label for="id_inventaris">ID Alat</label>
                                     <input type="text" class="form-control" id="id_inventaris" name="id_inventaris" autofocus value="<?php if (old('id_inventaris') != null) {
                                                                                                                                             echo old('id_inventaris');
-                                                                                                                                        } elseif (session()->get('id_barang_temp') != null) {
-                                                                                                                                            echo session()->get('id_barang_temp');
+                                                                                                                                        } elseif (session()->get('id_temp') != null) {
+                                                                                                                                            echo session()->get('id_temp');
                                                                                                                                         } else {
                                                                                                                                             '';
                                                                                                                                         } ?>">
@@ -48,8 +48,8 @@
                                     <label for="id_barang">ID Barang</label>
                                     <input type="text" class="form-control" id="id_barang" name="id_barang" autofocus value="<?php if (old('id_barang') != null) {
                                                                                                                                     echo old('id_barang');
-                                                                                                                                } elseif (session()->get('id_barang_temp')) {
-                                                                                                                                    echo session()->get('id_barang_temp');
+                                                                                                                                } elseif (session()->get('id_temp')) {
+                                                                                                                                    echo session()->get('id_temp');
                                                                                                                                 } else {
                                                                                                                                     '';
                                                                                                                                 } ?>">

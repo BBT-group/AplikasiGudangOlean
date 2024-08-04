@@ -178,6 +178,7 @@
         });
 
         // Function to capture barcode scan
+        let first = true;
         let barcode = ''; // Initialize an empty string to store the scanned barcode
         let timeoutId = null; // Initialize a variable to store the timeout ID
         let lastKeyTime = Date.now();
@@ -185,6 +186,9 @@
             let char = String.fromCharCode(e.which); // Convert the keypress event to the corresponding character
             let currentTime = Date.now();
             // Clear any existing timeout
+            if (first) {
+
+            }
             if (timeoutId) {
                 clearTimeout(timeoutId);
             }
@@ -208,7 +212,10 @@
             } else {
                 barcode = '';
             }
-
+            if (first) {
+                barcode += char;
+                first = false;
+            }
             lastKeyTime = currentTime;
 
 

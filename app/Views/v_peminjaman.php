@@ -14,7 +14,7 @@
                 <form id="addItemForm" action=<?= base_url('/barang_pinjam/update') ?> method="post" enctype="multipart/form-data">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="input1">tanggal dan waktu</label>
                                     <input type="text" class="form-control" id="datetime" name="datetime" value="<?php
@@ -24,9 +24,17 @@
                                                                                                                     ?>" disabled>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="input2">penerima</label>
+                                    <label for="input2">Penerima</label>
+                                    <input type="text" class="form-control <?php if (isset($validate)) {
+                                                                                echo $validate->hasError('nama_penerima') ? 'is-invalid' : '';
+                                                                            }  ?>" id="nama_penerima" name="nama_penerima" value="<?= old('nama_penerima'); ?>">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="input2">Keterangan</label>
                                     <input type="text" class="form-control <?php if (isset($validate)) {
                                                                                 echo $validate->hasError('nama_penerima') ? 'is-invalid' : '';
                                                                             }  ?>" id="nama_penerima" name="nama_penerima" value="<?= old('nama_penerima'); ?>">
@@ -34,13 +42,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 mb-1 p-0" style="text-align: right;">
+                </form>
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <a href="<?= base_url('barang_pinjam/cari') ?>" class="btn btn-primary">Tambah Barang</a>
+                    </div>
+                    <div class="col-6 mb-1" style="text-align: right;">
                         <button id="clear-session-btn" class="btn btn-secondary">Clear Session</button>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
-                </form>
-                <div class="col-12 mb-3 p-0">
-                    <a href="<?= base_url('barang_pinjam/cari') ?>" class="btn btn-primary">Tambah Barang</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

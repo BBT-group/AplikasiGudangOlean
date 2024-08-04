@@ -90,7 +90,11 @@ class Laporan_Masuk extends BaseController
 
             $sheet->setCellValue('A' . $row, $no++);
             $sheet->setCellValue('B' . $row, $item['id_ms_barang_masuk']);
-            $sheet->setCellValue('C' . $row, $item['waktu']);
+            
+            $datetime = \PhpOffice\PhpSpreadsheet\Shared\Date::PHPToExcel(new \DateTime($item['waktu']));
+            $sheet->setCellValue('C' . $row, $datetime);
+            $sheet->getStyle('C' . $row)->getNumberFormat()->setFormatCode('dd/mm/yyyy hh:mm:ss');
+            
             $sheet->setCellValue('D' . $row, $item['nama']);
             $sheet->setCellValue('E' . $row, $item['nama_satuan']);
             $sheet->setCellValue('F' . $row, $item['harga_beli']);
@@ -121,6 +125,10 @@ class Laporan_Masuk extends BaseController
         ];
 
         $sheet->getStyle('A1:I' . ($row - 1))->applyFromArray($styleArray);
+
+        foreach (range('A', 'I') as $columnID) {
+            $sheet->getColumnDimension($columnID)->setAutoSize(true);
+        }
 
         $writer = new Xlsx($spreadsheet);
         $filename = 'laporan_masuk_stok_barang.xlsx';

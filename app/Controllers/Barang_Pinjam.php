@@ -65,13 +65,29 @@ class Barang_Pinjam extends BaseController
         // } else {
         //     $masuk = $this->masterBarangMasukModel;
         // }
+        $startDate = $this->request->getVar('start_date');
+        $endDate = $this->request->getVar('end_date');
+        
+        $query = $this->masterPeminjamanModel->getAllWithNama();
+
+        if ($startDate) {
+            $query = $query->where('tanggal_pinjam >=', $startDate);
+        }
+
+        if ($endDate) {
+            $query = $query->where('tanggal_pinjam <=', $endDate);
+        }
+
         $data = [
-            'pinjam' => $this->masterPeminjamanModel->getAllWithNama()->findAll(),
+            'pinjam' => $query->findAll(),
+            'start_date' => $startDate,
+            'end_date' => $endDate
         ];
 
         echo view('v_header');
         return view('v_beranda_peminjaman', $data);
     }
+
 
     function containsObjectWithName($objects, $name)
     {

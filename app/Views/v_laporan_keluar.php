@@ -58,7 +58,7 @@
                                             <tr>
                                                 <td><?= $no++ ?></td>
                                                 <td><?= $item['id_barang'] ?></td>
-                                                <td><?= $item['waktu'] ?></td>
+                                                <td><?= date('d/m/Y H:i:s', strtotime($item['waktu'])) ?></td>
                                                 <td><?= $item['nama_barang'] ?></td>
                                                 <td><?= $item['nama_satuan'] ?></td>
                                                 <td><?= $item['nama_penerima'] ?></td>

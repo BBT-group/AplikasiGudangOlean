@@ -57,7 +57,7 @@
                                             <tr>
                                                 <td><?= $no++ ?></td>
                                                 <td><?= $item['id_ms_barang_masuk'] ?></td>
-                                                <td><?= $item['waktu'] ?></td>
+                                                <td><?= date('d/m/Y H:i:s', strtotime($item['waktu'])) ?></td>
                                                 <td><?= $item['nama'] ?></td>
                                                 <td><?= $item['nama_satuan'] ?></td>
                                                 <td><?= $item['harga_beli'] ?></td>
@@ -137,10 +137,10 @@
     <script>
         $(function() {
             $("#start_date").datepicker({
-                dateFormat: 'yy-mm-dd'
+                dateFormat: 'dd-mm-yy'
             });
             $("#end_date").datepicker({
-                dateFormat: 'yy-mm-dd'
+                dateFormat: 'dd-mm-yy'
             });
         });
     </script>

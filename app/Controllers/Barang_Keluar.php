@@ -55,14 +55,30 @@ class Barang_Keluar extends BaseController
         return view('v_barang_masuk', $data);
     }
 
+
+
     public function beranda()
-    {
-        $data = [
-            'keluar' => $this->masterBarangKeluarModel->getAll(),
-        ];
-        echo view('v_header');
-        return view('v_beranda_barang_keluar', $data);
+{
+    $startDate = $this->request->getVar('start_date');
+    $endDate = $this->request->getVar('end_date');
+
+    $query = $this->masterBarangKeluarModel;
+
+    if ($startDate && $endDate) {
+        $query = $query->where('waktu >=', $startDate . ' 00:00:00')
+                       ->where('waktu <=', $endDate . ' 23:59:59');
     }
+
+    $data = [
+        'keluar' => $query->getAll(),
+        'start_date' => $startDate,
+        'end_date' => $endDate
+    ];
+
+    echo view('v_header');
+    return view('v_beranda_barang_keluar', $data);
+}
+
 
     public function loadExistingData()
     {

@@ -57,7 +57,7 @@ class Barang_Masuk extends BaseController
         ];
         echo view('v_header');
         // ganti url ke detail
-        return view('admin\detailbarangmasuk', $data);
+        return view('v_barang_masuk', $data);
     }
     public function beranda()
     {
@@ -301,7 +301,7 @@ class Barang_Masuk extends BaseController
         return $this->response->setJSON(['status' => 'success']);
     }
 
-    public function indexTambahAlat()
+    public function doubleForm()
     {
 
         $data = [
@@ -309,18 +309,7 @@ class Barang_Masuk extends BaseController
             'kategori' => $this->kategoriModel->findAll()
         ];
         echo view('v_header');
-        return view('v_tambah_alat_scan', $data);
-    }
-
-    public function indexTambahBarang()
-    {
-
-        $data = [
-            'satuan' => $this->satuanModel->findAll(),
-            'kategori' => $this->kategoriModel->findAll()
-        ];
-        echo view('v_header');
-        return view('v_tambah_barang_scan', $data);
+        return view('v_tambah_alat_barang', $data);
     }
 
     public function cariMaster()

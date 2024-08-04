@@ -114,6 +114,10 @@
                         </div>
                     </div>
                 </div>
+                <div id="dialog-confirm" title="Barang / Alat Belum ditambahkan" style="display:none;">
+                    <p>Tambahkan Barang atau Alat Baru</p>
+                </div>
+
                 <!-- Bootstrap core JavaScript-->
                 <script src="/vendor/jquery/jquery.js"></script>
                 <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
@@ -127,6 +131,11 @@
                 <!-- Page level plugins -->
                 <script src="/vendor/datatables/jquery.dataTables.js"></script>
                 <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
+
+                <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 
                 <!-- Page level custom scripts -->
                 <script src="/js/demo/datatables-demo.js"></script>
@@ -253,9 +262,22 @@
                                     console.log('Barcode scanned successfully');
                                     location.reload(); // Reload the page to see updated data
                                 } else if (response.status === 'not_found') {
-                                    if (confirm(response.message + "\n\nDo you want to add this item? Click 'OK' to add or 'Cancel' to close.")) {
-                                        window.location.href = '<?= base_url('/barang_masuk/doubleform') ?>'; // Redirect to the input form
-                                    }
+                                    $("#dialog-confirm").dialog({
+                                        resizable: false,
+                                        height: "auto",
+                                        width: 400,
+                                        modal: true,
+                                        buttons: {
+                                            "Tambah Barang": function() {
+                                                window.location.href = '<?= base_url('/barang_masuk/indextambahbarang') ?>';                                                 
+                                                $(this).dialog("close");
+                                            },
+                                            "Tambah Alat": function() {
+                                                window.location.href = '<?= base_url('/barang_masuk/indextambahalat') ?>';                                                 
+                                                $(this).dialog("close");
+                                            }
+                                        }
+                                    });
                                 }
                             },
                             error: function(jqXHR, text, eror) {

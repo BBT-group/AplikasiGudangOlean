@@ -45,8 +45,8 @@
                                                 </td>
 
                                                 <td style="display: flexbox; text-align: center;">
-                                                    <a href="<?= base_url('inventaris/indexdetail/' . $item['id_inventaris']) ?>" class="btn btn-sm btn-primary"><i class="fas fa-clone"></i></a>
-                                                    <a href="<?= base_url('inventaris/indexupdate/' . $item['id_inventaris']) ?>" class="btn btn-sm btn-info"><i class="fas fa-pencil-alt"></i></a>
+                                                    <a href="<?= base_url('inventaris/indexdetail/' . $item['id_inventaris']) ?>" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Detail"><i class="fas fa-clone"></i></a>
+                                                    <a href="<?= base_url('inventaris/indexupdate/' . $item['id_inventaris']) ?>" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Update"><i class="fas fa-pencil-alt"></i></a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -99,7 +99,24 @@
 
                 <!-- Page level custom scripts -->
                 <script src="/js/demo/datatables-demo.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+                <script>
+                    <?php if(session()->getFlashdata('success')) {?>
+                        Swal.fire({
+                            icon: "success",
+                            title: "<?= session()->getFlashdata('success')?>",
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        <?php } ?>
+                </script>
+                <script>
+                    $(function () {
+                        $('[data-toggle="tooltip"]').tooltip()
+                    })
+                </script>
+                
                 </body>
 
                 </html>

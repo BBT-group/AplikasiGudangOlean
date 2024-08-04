@@ -42,9 +42,11 @@ class Satuan extends BaseController
         if (!$this->validate([
             'nama_satuan' => 'required|is_unique[satuan.nama_satuan]'
         ])) {
+            session()->setFlashdata('warning', 'Satuan sudah ada');
             return redirect()->to(base_url('/satuan/indextambah'))->withInput();
         }
         $this->satuanModel->insert(['nama_satuan' => $this->request->getVar('nama_satuan')]);
+        session()->setFlashdata('success', 'Satuan berhasil ditambahkan');
         return redirect()->to(base_url('satuan'));
     }
 

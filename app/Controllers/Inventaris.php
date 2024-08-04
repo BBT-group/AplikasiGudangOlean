@@ -24,6 +24,7 @@ class Inventaris extends BaseController
 
     public function indexTambah()
     {
+        session()->set('id_temp', '');
         $dataAlat = [
             'inventaris' => $this->inventarisModel->findAll()
         ];

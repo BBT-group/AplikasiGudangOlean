@@ -126,7 +126,7 @@ class Stok extends BaseController
                 'nama' => $this->request->getVar('nama'),
                 'foto' => $foto_path,
                 'stok' => $this->request->getVar('stok'),
-                'harga_beli' => $this->request->getVar('harga'),
+                'harga_beli' => $this->request->getVar('harga_beli'),
                 'id_kategori' => $newID['id_kategori'],
                 'id_satuan' => $idSat['id_satuan'],
             ];
@@ -141,7 +141,7 @@ class Stok extends BaseController
                 'nama' => $this->request->getVar('nama'),
                 'foto' => $this->request->getVar('foto'),
                 'stok' => $this->request->getVar('stok'),
-                'harga_beli' => $this->request->getVar('harga'),
+                'harga_beli' => $this->request->getVar('harga_beli'),
                 'id_satuan' => $idSat['id_satuan'],
                 'id_kategori' => $newID['id_kategori'],
             ];

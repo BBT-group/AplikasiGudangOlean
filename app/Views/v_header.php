@@ -24,6 +24,12 @@
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
+    <style>
+        .collapse-item.active {
+            color: #206c1f !important;
+            background-color: #fff !important; /* Hijau */
+        }
+    </style>
 
 </head>
 
@@ -33,118 +39,96 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion <?= uri_string() == 'beranda' ? 'active' : '' ?>" id="accordionSidebar">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url('beranda') ?>">
                 <div class="sidebar-brand-icon">
-                    <i class="fas fa-laugh-wink"></i>
+                    <img src="/img/logo.png" style="height: 50px;">
                 </div>
-                <div class="sidebar-brand-text mx-3">PT. OLEAN<sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">PT. OLEAN</div>
             </a>
-
             <hr class="sidebar-divider my-0">
-
             <?php if (session()->role == 'admin') : ?>
-                <li class="nav-item">
+                <li class="nav-item <?= uri_string() == 'beranda' ? 'active' : '' ?>">
                     <a class="nav-link" href="<?php echo base_url('beranda') ?>">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span></a>
+                        <span>Dashboard</span>
+                    </a>
                 </li>
                 <hr class="sidebar-divider">
-                <div class="sidebar-heading">
-                    Master
-                </div>
-                <li class="nav-item">
+                <div class="sidebar-heading">Master</div>
+                <li class="nav-item <?= in_array(uri_string(), ['stok', 'kategori', 'satuan']) ? 'active' : '' ?>">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                         <i class="fas fa-fw fa-layer-group"></i>
                         <span>Stok Barang</span>
                     </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div id="collapseTwo" class="collapse <?= in_array(uri_string(), ['stok', 'kategori', 'satuan']) ? 'show' : '' ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="<?php echo base_url('stok') ?>">Data Barang</a>
-                            <a class="collapse-item" href="<?php echo base_url('kategori') ?>">Kategori</a>
-                            <a class="collapse-item" href="<?php echo base_url('satuan') ?>">Satuan</a>
+                            <a class="collapse-item <?= uri_string() == 'stok' ? 'active' : '' ?>" href="<?php echo base_url('stok') ?>">Data Barang</a>
+                            <a class="collapse-item <?= uri_string() == 'kategori' ? 'active' : '' ?>" href="<?php echo base_url('kategori') ?>">Kategori</a>
+                            <a class="collapse-item <?= uri_string() == 'satuan' ? 'active' : '' ?>" href="<?php echo base_url('satuan') ?>">Satuan</a>
                         </div>
                     </div>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item <?= uri_string() == 'inventaris' ? 'active' : '' ?>">
                     <a class="nav-link" href="<?php echo base_url('inventaris') ?>">
                         <i class="fas fa-fw fa-wrench"></i>
                         <span>Inventaris Alat</span>
                     </a>
                 </li>
                 <hr class="sidebar-divider">
-
-                <div class="sidebar-heading">
-                    Transaksi
-                </div>
-                <li class="nav-item">
+                <div class="sidebar-heading">Transaksi</div>
+                <li class="nav-item <?= uri_string() == 'barang_masuk' ? 'active' : '' ?>">
                     <a class="nav-link" href="<?php echo base_url('barang_masuk') ?>">
                         <i class="fas fa-fw fa-sign-in-alt"></i>
                         <span>Barang Masuk</span>
                     </a>
                 </li>
-
                 <hr class="sidebar-divider">
-
-                <div class="sidebar-heading">
-                    Laporan
-                </div>
-                <li class="nav-item">
+                <div class="sidebar-heading">Laporan</div>
+                <li class="nav-item <?= uri_string() == 'laporan_stok' ? 'active' : '' ?>">
                     <a class="nav-link" href="laporan_stok">
                         <i class="fas fa-fw fa-file-signature"></i>
-                        <span>Laporan Stok</span></a>
+                        <span>Laporan Stok</span>
+                    </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item <?= uri_string() == 'laporan_masuk' ? 'active' : '' ?>">
                     <a class="nav-link" href="<?php echo base_url('laporan_masuk') ?>">
                         <i class="fas fa-fw fa-file-import"></i>
-                        <span>Laporan Barang Masuk</span></a>
+                        <span>Laporan Barang Masuk</span>
+                    </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item <?= uri_string() == 'laporan_keluar' ? 'active' : '' ?>">
                     <a class="nav-link" href="<?php echo base_url('laporan_keluar') ?>">
                         <i class="fas fa-fw fa-file-export"></i>
-                        <span>Laporan Barang Keluar</span></a>
+                        <span>Laporan Barang Keluar</span>
+                    </a>
                 </li>
-
                 <hr class="sidebar-divider d-none d-md-block">
-
-                <!-- <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div> -->
             <?php endif; ?>
-
             <?php if (session()->role == 'operator') : ?>
-                <li class="nav-item">
+                <li class="nav-item <?= uri_string() == 'beranda' ? 'active' : '' ?>">
                     <a class="nav-link" href="<?php echo base_url('beranda') ?>">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span></a>
+                        <span>Dashboard</span>
+                    </a>
                 </li>
                 <hr class="sidebar-divider">
-                <div class="sidebar-heading">
-                    Master
-                </div>
-
+                <div class="sidebar-heading">Master</div>
                 <hr class="sidebar-divider">
-
-                <div class="sidebar-heading">
-                    Transaksi
-                </div>
-                <li class="nav-item">
+                <div class="sidebar-heading">Transaksi</div>
+                <li class="nav-item <?= uri_string() == 'barang_keluar' ? 'active' : '' ?>">
                     <a class="nav-link" href="<?php echo base_url('barang_keluar') ?>">
                         <i class="fas fa-fw fa-sign-out-alt"></i>
-                        <span>Barang Keluar</span></a>
+                        <span>Barang Keluar</span>
+                    </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item <?= uri_string() == 'barang_pinjam' ? 'active' : '' ?>">
                     <a class="nav-link" href="<?php echo base_url('barang_pinjam') ?>">
                         <i class="fas fa-fw fa-sign-out-alt"></i>
-                        <span>Barang pinjam</span></a>
+                        <span>Barang Pinjam</span>
+                    </a>
                 </li>
                 <hr class="sidebar-divider d-none d-md-block">
-
-                <!-- <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div> -->
             <?php endif; ?>
         </ul>
         <div id="content-wrapper" class="d-flex flex-column">

@@ -10,7 +10,7 @@ use App\Models\InventarisModel;
 use App\Models\MasterBarangMasukModel;
 use App\Models\SatuanModel;
 use App\Models\SupplierModel;
-
+use CodeIgniter\Database\Exceptions\DatabaseException;
 use function PHPUnit\Framework\isEmpty;
 
 class Barang_Masuk extends BaseController
@@ -152,58 +152,80 @@ class Barang_Masuk extends BaseController
         ])) {
             return redirect()->to(base_url('/barang_masuk/index'))->withInput();
         }
-        $barang = session()->get('datalist');
-        if (!empty($barang)) {
-            $namasupplier = $this->request->getVar('nama_supplier');
-            if ($this->supplierModel->where('nama', $namasupplier)->first() == null) {
-                $suppId = $this->supplierModel->insert(['nama' =>
-                $namasupplier], true);
-            } else {
-                $supp = $this->supplierModel->where('nama', $namasupplier)->first();
-                $suppId = $supp['id_supplier'];
-            }
-            date_default_timezone_set('Asia/Jakarta');
-            $currentDateTime =  date("Y-m-d H:i:s");
-            $this->masterBarangMasukModel->insert(['waktu' => $currentDateTime, 'id_supplier' => $suppId]);
+        $db = \Config\Database::connect();
+        try {
+            // Set the isolation level if needed
+            $db->query("SET TRANSACTION ISOLATION LEVEL READ COMMITTED"); // Change as required
 
-            $idms = $this->masterBarangMasukModel->getInsertID();
+            // Start the transaction
+            $db->transBegin();
 
-            foreach ($barang as $b) {
-
-                if ($b['jenis'] == 'barang') {
-                    $barang1 = $this->barangModel->where('id_barang', $b['id_barang'])->first();
-                    $data = [
-                        'nama' => $barang1['nama'],
-                        'id_satuan' => $barang1['id_satuan'],
-                        'foto' => $barang1['foto'],
-
-                        'stok' => $barang1['stok'] + $b['stok'],
-                        'harga_beli' => $b['harga_beli'],
-                        'id_kategori' => $barang1['id_kategori'],
-                    ];
-
-                    $this->barangModel->update($b['id_barang'], $data);
-
-                    $this->barangMasukModel->insert(['id_barang' => $barang1['id_barang'], 'id_ms_barang_masuk' => $idms, 'jumlah' => $b['stok']]);
-                } elseif ($b['jenis'] == 'alat') {
-                    $barang1 = $this->inventarisModel->where('id_inventaris', $b['id_barang'])->first();
-                    $data = [
-                        'nama_inventaris' => $barang1['nama_inventaris'],
-                        'foto' => $barang1['foto'],
-                        'stok' => $barang1['stok'] + $b['stok'],
-                        'harga_beli' => $b['harga_beli'],
-                    ];
-
-                    $this->inventarisModel->update($b['id_barang'], $data);
-
-                    $this->barangMasukModel->insert(['id_inventaris' => $barang1['id_inventaris'], 'id_ms_barang_masuk' => $idms, 'jumlah' => $b['stok']]);
+            $barang = session()->get('datalist');
+            if (!empty($barang)) {
+                $namasupplier = $this->request->getVar('nama_supplier');
+                if ($this->supplierModel->where('nama', $namasupplier)->first() == null) {
+                    $suppId = $this->supplierModel->insert(['nama' =>
+                    $namasupplier], true);
+                } else {
+                    $supp = $this->supplierModel->where('nama', $namasupplier)->first();
+                    $suppId = $supp['id_supplier'];
                 }
+                date_default_timezone_set('Asia/Jakarta');
+                $currentDateTime =  date("Y-m-d H:i:s");
+                $this->masterBarangMasukModel->insert(['waktu' => $currentDateTime, 'id_supplier' => $suppId]);
 
-                session()->remove('datalist');
-                return redirect()->to(base_url('/barang_masuk'));
+                $idms = $this->masterBarangMasukModel->getInsertID();
+
+                foreach ($barang as $b) {
+
+                    if ($b['jenis'] == 'barang') {
+                        $barang1 = $this->barangModel->where('id_barang', $b['id_barang'])->first();
+                        $data = [
+                            'nama' => $barang1['nama'],
+                            'id_satuan' => $barang1['id_satuan'],
+                            'foto' => $barang1['foto'],
+
+                            'stok' => $barang1['stok'] + $b['stok'],
+                            'harga_beli' => $b['harga_beli'],
+                            'id_kategori' => $barang1['id_kategori'],
+                        ];
+
+                        $this->barangModel->update($b['id_barang'], $data);
+
+                        $this->barangMasukModel->insert(['id_barang' => $barang1['id_barang'], 'id_ms_barang_masuk' => $idms, 'jumlah' => $b['stok']]);
+                    } elseif ($b['jenis'] == 'alat') {
+                        $barang1 = $this->inventarisModel->where('id_inventaris', $b['id_barang'])->first();
+                        $data = [
+                            'nama_inventaris' => $barang1['nama_inventaris'],
+                            'foto' => $barang1['foto'],
+                            'stok' => $barang1['stok'] + $b['stok'],
+                            'harga_beli' => $b['harga_beli'],
+                        ];
+
+                        $this->inventarisModel->update($b['id_barang'], $data);
+
+                        $this->barangMasukModel->insert(['id_inventaris' => $barang1['id_inventaris'], 'id_ms_barang_masuk' => $idms, 'jumlah' => $b['stok']]);
+                    }
+
+                    session()->remove('datalist');
+                    return redirect()->to(base_url('/barang_masuk'));
+                }
+            } else {
+                return redirect()->to(base_url('/barang_masuk/index'))->withInput();
             }
-        } else {
-            return redirect()->to(base_url('/barang_masuk/index'))->withInput();
+
+            // Commit the transaction
+            if ($db->transStatus() === FALSE) {
+                // If something went wrong, rollback transaction
+                $db->transRollback();
+                throw new DatabaseException('Transaction failed.');
+            } else {
+                // Otherwise, commit the transaction
+                $db->transCommit();
+            }
+        } catch (DatabaseException $e) {
+            // Rollback transaction on any exception
+            $db->transRollback();
         }
     }
     public function update()

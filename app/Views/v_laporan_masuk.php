@@ -25,6 +25,7 @@
                                     </div>
                                     <div class="col-md-6" style="text-align: end;">
                                         <a href="<?= base_url('/laporan_masuk/exportm?start_date=' . (isset($start_date) ? $start_date : '') . '&end_date=' . (isset($end_date) ? $end_date : '')) ?>" class="btn btn-success">Export to Excel</a>
+                                        <a href="<?= base_url('/laporan_masuk/printm?start_date=' . (isset($start_date) ? $start_date : '') . '&end_date=' . (isset($end_date) ? $end_date : '')) ?>" class="btn btn-info" target="_blank">Print</a>
                                     </div>
                                 </div>
                             </form>
@@ -40,7 +41,7 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>ID Barang</th>
+                                            <th>ID Barang Masuk</th>
                                             <th>Tanggal</th>
                                             <th>Nama Barang</th>
                                             <th>Satuan</th>
@@ -55,7 +56,7 @@
                                             <?php $stok_awal = $item['stok'] - $item['jumlah']; ?>
                                             <tr>
                                                 <td><?= $no++ ?></td>
-                                                <td><?= $item['id_barang'] ?></td>
+                                                <td><?= $item['id_ms_barang_masuk'] ?></td>
                                                 <td><?= $item['waktu'] ?></td>
                                                 <td><?= $item['nama'] ?></td>
                                                 <td><?= $item['nama_satuan'] ?></td>

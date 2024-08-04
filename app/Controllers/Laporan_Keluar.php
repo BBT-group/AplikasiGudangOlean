@@ -33,6 +33,23 @@ class Laporan_Keluar extends BaseController
         return view('v_laporan_keluar', $data);
     }
 
+    public function printk()
+    {
+    $start_date = $this->request->getGet('start_date');
+    $end_date = $this->request->getGet('end_date');
+
+    if ($start_date && $end_date) {
+        $data['barangkeluar'] = $this->barangkeluarModel->getBarangKeluarGabungFilter($start_date, $end_date);
+    } else {
+        $data['barangkeluar'] = $this->barangkeluarModel->getBarangKeluarGabung();
+    }
+
+    $data['start_date'] = $start_date;
+    $data['end_date'] = $end_date;
+
+    echo view('v_print_keluar', $data);
+    }
+
     public function exportk()
     {
         $start_date = $this->request->getGet('start_date');

@@ -27,6 +27,16 @@ class Laporan_Stok extends BaseController
         return view('v_laporan_stok', $data);
     }
 
+    public function prints()
+    {
+    $search = $this->request->getGet('search') ?? '';
+    $data = [
+        'barang' => $this->stokModel->getBarangGabung($search),
+        'search' => $search
+    ];
+    echo view('v_print_stok', $data);
+    }
+
     public function exports()
     {
         $search = $this->request->getGet('search') ?? '';

@@ -33,6 +33,24 @@ class Laporan_Masuk extends BaseController
         return view('v_laporan_masuk', $data);
     }
 
+    public function printm()
+    {
+    $start_date = $this->request->getGet('start_date');
+    $end_date = $this->request->getGet('end_date');
+
+    if ($start_date && $end_date) {
+        $data['barangmasuk'] = $this->barangmasukModel->getBarangMasukGabungFilter($start_date, $end_date);
+    } else {
+        $data['barangmasuk'] = $this->barangmasukModel->getBarangMasukGabung();
+    }
+
+    $data['start_date'] = $start_date;
+    $data['end_date'] = $end_date;
+
+    echo view('v_print_masuk', $data);
+    }
+
+
     public function exportm()
     {
         $start_date = $this->request->getGet('start_date');
@@ -55,7 +73,7 @@ class Laporan_Masuk extends BaseController
 
         // Header kolom
         $sheet->setCellValue('A3', 'No');
-        $sheet->setCellValue('B3', 'Id');
+        $sheet->setCellValue('B3', 'Id Ba');
         $sheet->setCellValue('C3', 'Tanggal');
         $sheet->setCellValue('D3', 'Nama barang');
         $sheet->setCellValue('E3', 'Satuan');
@@ -71,7 +89,7 @@ class Laporan_Masuk extends BaseController
             $stok_awal = $item['stok'] - $item['jumlah']; // Menghitung stok awal
 
             $sheet->setCellValue('A' . $row, $no++);
-            $sheet->setCellValue('B' . $row, $item['id_barang']);
+            $sheet->setCellValue('B' . $row, $item['id_ms_barang_masuk']);
             $sheet->setCellValue('C' . $row, $item['waktu']);
             $sheet->setCellValue('D' . $row, $item['nama']);
             $sheet->setCellValue('E' . $row, $item['nama_satuan']);

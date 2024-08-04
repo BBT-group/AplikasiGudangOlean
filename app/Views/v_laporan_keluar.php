@@ -25,6 +25,7 @@
                                     </div>
                                     <div class="col-md-6" style="text-align: end;">
                                         <a href="<?= base_url('/laporan_keluar/exportk?start_date=' . (isset($start_date) ? $start_date : '') . '&end_date=' . (isset($end_date) ? $end_date : '')) ?>" class="btn btn-success">Export to Excel</a>
+                                        <a href="<?= base_url('/laporan_keluar/printk?start_date=' . (isset($start_date) ? $start_date : '') . '&end_date=' . (isset($end_date) ? $end_date : '')) ?>" class="btn btn-info" target="_blank">Print</a>
                                     </div>
                                 </div>
                             </form>

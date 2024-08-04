@@ -14,6 +14,7 @@
                                 <div class="col-md-6"></div>
                                 <div class="col-md-6" style="text-align: end;">
                                     <a href="<?= base_url('/laporan_stok/exports' . ($search ? '?search=' . urlencode($search) : '')) ?>" class="btn btn-success">Export to Excel</a>
+                                    <a href="<?= base_url('/laporan_stok/prints' . ($search ? '?search=' . urlencode($search) : '')) ?>" target="_blank" class="btn btn-primary">Print</a>
                                 </div>
                             </div>
                             <div class="table-responsive">

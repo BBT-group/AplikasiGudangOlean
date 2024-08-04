@@ -23,26 +23,23 @@
                                                     <input type="text" class="form-control" id="nama" name="nama" required maxlength="45" value="<?= $data['nama'] ?>">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="satuan">Satuan</label>
-                                                    <input type="text" class="form-control" id="id_satuan" name="id_satuan" required maxlength="15" list="satuan-list" value="<?= $data['nama_satuan'] ?>">
-                                                    <datalist id="satuan-list">
+                                                    <label for="id_satuan">Satuan</label>
+                                                    <select class="form-control" id="id_satuan" name="id_satuan" style="display: block;" required list="item-list" maxlength="15" value="<?= $data['nama_satuan'] ?>">
+                                                        <option value="">Pilih Satuan</option>
                                                         <?php foreach ($satuan as $sat) : ?>
-                                                            <option value="<?= $sat['nama_satuan']; ?>">
-                                                            <?php endforeach; ?>
-                                                    </datalist>
+                                                            <option value="<?= $sat['nama_satuan']; ?>"><?= $sat['nama_satuan']; ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="id_kategori">ID Kategori</label>
-                                                    <input type="text" class="form-control" id="id_kategori" name="id_kategori" required list="item-list" maxlength="15" value="<?= $data['nama_kategori'] ?>">
-                                                    <datalist id="item-list">
-                                                        <?php foreach ($kategori as $kat) : ?>
-                                                            <option value="<?= $kat['nama_kategori']; ?>">
-                                                            <?php endforeach; ?>
-                                                    </datalist>
+                                                    <label for="id_kategori">Kategori</label>
+                                                    <select class="form-control" id="id_kategori" name="id_kategori" required list="item-list" maxlength="15" value="<?= $data['nama_kategori'] ?>">
+                                                    <option value="">Pilih Kategori</option>
+                                                    <?php foreach ($kategori as $kat) : ?>
+                                                            <option value="<?= $kat['nama_kategori']; ?>"><?= $kat['nama_kategori']; ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
                                                 </div>
-
-
-
                                                 <div class="form-group">
                                                     <label for="foto">Foto</label>
                                                     <input type="file" class="form-control" id="foto" name="foto" required maxlength="255">
@@ -104,6 +101,24 @@
                 <!-- Page level custom scripts -->
                 <script src="/js/demo/chart-area-demo.js"></script>
                 <script src="/js/demo/chart-pie-demo.js"></script>
+
+                <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+                <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+                <script>
+                    $(document).ready(function() {
+                        $('#id_satuan').select2({
+                            placeholder: "<?=$data['nama_satuan']?>",
+                            allowClear: true
+                        });
+                    });
+                    $(document).ready(function() {
+                        $('#id_kategori').select2({
+                            placeholder: "<?=$data['nama_kategori']?>",
+                            allowClear: true
+                        });
+                    });
+                </script>
 
                 </body>
 

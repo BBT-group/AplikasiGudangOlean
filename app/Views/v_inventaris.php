@@ -99,7 +99,18 @@
 
                 <!-- Page level custom scripts -->
                 <script src="/js/demo/datatables-demo.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+                <script>
+                    <?php if(session()->getFlashdata('success')) {?>
+                        Swal.fire({
+                            icon: "success",
+                            title: "<?= session()->getFlashdata('success')?>",
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        <?php } ?>
+                </script>
                 <script>
                     $(function () {
                         $('[data-toggle="tooltip"]').tooltip()

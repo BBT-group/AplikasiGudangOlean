@@ -56,7 +56,7 @@
                                                 <td><?= $item['id_ms_barang_masuk'] ?></td>
                                                 <td><?= $item['waktu'] ?></td>
                                                 <td><?= $item['nama'] ?></td>
-                                                <td><button>detail</button></td>
+                                                <td> <button class="detail-item btn btn-primary" data-key="<?= $item['id_ms_barang_masuk'] ?>">Detail</button></td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php endif; ?>

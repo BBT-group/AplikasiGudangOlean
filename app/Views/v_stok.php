@@ -126,6 +126,27 @@
             timer: 1500
         })
         <?php } ?>
+        <?php if(session()->getFlashdata('update')) {?>
+        Swal.fire({
+            icon: "success",
+            title: "<?= session()->getFlashdata('update')?>",
+            showConfirmButton: false,
+            timer: 1500
+        })
+        <?php } ?>
+        <?php if(session()->getFlashdata('error')) {?>
+        Swal.fire({
+            icon: "error",
+            title: "<?= session()->getFlashdata('error')?>",
+            showConfirmButton: false,
+            timer: 1500
+        })
+        <?php } ?>
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
     </script>
 
 

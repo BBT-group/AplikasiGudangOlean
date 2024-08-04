@@ -131,6 +131,7 @@ class Stok extends BaseController
                 'id_satuan' => $idSat['id_satuan'],
             ];
             $this->barangModel->update($this->request->getVar('id_barang'), $data);
+            session()->setFlashdata('update', 'Barang berhasil diupdate');
             return redirect()->to(base_url('/stok'));
         } else {
             $newID = $this->kategoriModel->where('nama_kategori', $this->request->getVar('id_kategori'))->first();
@@ -145,7 +146,8 @@ class Stok extends BaseController
                 'id_kategori' => $newID['id_kategori'],
             ];
             $this->barangModel->update($this->request->getVar('id_barang'), $data);
-            return redirect()->to(base_url('/stok'));
+            session()->setFlashdata('update', 'Barang berhasil diupdate');
+            return redirect()->to('/stok');
         }
     }
 }

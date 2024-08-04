@@ -68,7 +68,7 @@ class Inventaris extends BaseController
     public function indexDetail($id_inventaris = null)
     {
         $data = [
-            'alat' => $this->inventarisModel->getAlatById($id_inventaris)
+            'alat' => $this->inventarisModel->getById($id_inventaris)->first()
         ];
         echo view('v_header');
         return view('admin\detailalat', $data);
@@ -77,7 +77,7 @@ class Inventaris extends BaseController
     public function indexUpdate($id_inventaris = null)
     {
         $data = [
-            'alat' => $this->inventarisModel->getAlatById($id_inventaris)
+            'alat' => $this->inventarisModel->getById($id_inventaris)->first()
         ];
         echo view('v_header');
         return view('v_update_inventaris', $data);

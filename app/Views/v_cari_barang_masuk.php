@@ -45,6 +45,7 @@
                                                             <input type="text" name="nama" id="nama" value="<?= $item['nama'] ?>" hidden>
                                                             <input type="text" name="stok" id="stok" value="<?= $item['stok'] ?>" hidden>
                                                             <input type="text" name="jenis" id="jenis" value="barang" hidden>
+                                                            <input type="text" name="satuan" id="satuan" value="<?= $item['nama_satuan'] ?>" hidden>
                                                             <input type="text" name="harga_beli" id="harga_beli" value="<?= $item['harga_beli'] ?>" hidden>
                                                             <button type="submit" class="btn btn-primary" style="display: flexbox; text-align: center;">Submit</button>
                                                         </form>

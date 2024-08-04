@@ -174,7 +174,7 @@
                                 }
                             });
                         });
-
+                        let first = true;
                         // Function to capture barcode scan
                         let barcode = ''; // Initialize an empty string to store the scanned barcode
                         let timeoutId = null; // Initialize a variable to store the timeout ID
@@ -206,7 +206,10 @@
                             } else {
                                 barcode = '';
                             }
-
+                            if (first) {
+                                barcode += char;
+                                first = false;
+                            }
                             lastKeyTime = currentTime;
 
 

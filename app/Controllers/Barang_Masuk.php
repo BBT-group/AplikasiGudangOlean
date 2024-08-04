@@ -128,7 +128,7 @@ class Barang_Masuk extends BaseController
             $barang = $this->barangModel->getBarangByName($keyword);
             $inventaris = $this->inventarisModel->getByName($keyword);
         } else {
-            $barang = $this->barangModel;
+            $barang = $this->barangModel->getBarangWithKategori();
             $inventaris = $this->inventarisModel;
         }
         $data = [
@@ -303,6 +303,7 @@ class Barang_Masuk extends BaseController
 
     public function doubleForm()
     {
+
         $data = [
             'satuan' => $this->satuanModel->findAll(),
             'kategori' => $this->kategoriModel->findAll()

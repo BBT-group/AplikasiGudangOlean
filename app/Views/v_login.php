@@ -4,7 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    .password-container {
+      position: relative;
+      width: fit-content;
+    }
+    .password-container input {
+      padding-right: 30px; /* Add space for the eye icon */
+    }
+    .password-container .fa-eye-slash {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+  </style>
     <link rel="stylesheet" href="/css/style.css">
     <title>Login | PT. Olean</title>
     <link rel="icon" href="/img/logo.png">
@@ -31,8 +47,8 @@
                     <input type="username" placeholder="Username" name="username" required>
                 </div>
                 <div class="password-container">
-                    <input type="password" placeholder="Password" name="password" required>
-                    <!-- <i class="fa fa-eye-slash" id="togglePassword" style="cursor: pointer;"></i> -->
+                    <input type="password" name="password" id="password" placeholder="Password" required>
+                    <i class="fa fa-eye-slash" id="togglePassword" style="cursor: pointer;"></i>
                 </div>
                 <br>
                 <button>Login</button>
@@ -51,6 +67,21 @@
     </div>
 
     <script src="/js/script.js"></script>
-</body>
+    <script>
+    // Select the password input field and the toggle icon
+    const password = document.querySelector('#password');
+    const togglePassword = document.querySelector('#togglePassword');
+
+    // Function to toggle the visibility of the password
+    togglePassword.addEventListener('click', function () {
+      // Toggle the type attribute of the password field
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+
+      // Toggle the icon class
+      this.classList.toggle('fa-eye');
+      this.classList.toggle('fa-eye-slash');
+    });
+  </script></body>
 
 </html>

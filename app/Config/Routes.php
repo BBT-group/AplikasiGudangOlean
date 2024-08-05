@@ -86,3 +86,8 @@ $routes->add('/barang_pinjam/hapusitem', 'Barang_pinjam::hapusBarangDatalistPinj
 $routes->add('/barang_masuk/indextambahbarang', 'Barang_Masuk::indexTambahBarang');
 $routes->add('/barang_masuk/indextambahalat', 'Barang_Masuk::indexTambahAlat');
 $routes->add('/barang_masuk/indexdetailmaster/(:num)', 'Barang_masuk::indexDetailMaster/$1');
+$routes->add('/stok/index2', 'Stok::index2');
+$routes->add('/inventaris/index2', 'Inventaris::index2');
+$routes->add('/barang_keluar/indexdetailmaster/(:num)', 'Barang_keluar::indexDetailMaster/$1');
+$routes->add('/barang_pinjam/indexdetailmaster/(:num)', 'Barang_pinjam::indexDetailMaster/$1');
+

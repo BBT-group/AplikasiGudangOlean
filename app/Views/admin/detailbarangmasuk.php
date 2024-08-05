@@ -1,28 +1,35 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <!-- Content Row -->
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-header">
-                                    <!-- judul form -->
-                                    <div class="card-title">Detail Data Barang</div>
-                                </div>
-                                <!-- detail data -->
-                                <div class="card-body" >
-                                    <table class="table table-striped">
-                                        <tbody>
-                                            
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Detail Barang Masuk</h6>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <!-- tampilkan foto default -->
-                                </div>
+                        <div class="card-body">
+                            <div class="table-responsive">                                
+                                <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>ID Barang</th>
+                                            <th>Tanggal</th>
+                                            <th>Nama Barang</th>
+                                            <th>Harga Masuk</th>
+                                            <th>Stok Masuk</th>
+                                            <th>Satuan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -60,21 +67,21 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="/vendor/jquery/jquery.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/jquery/jquery.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="/vendor/jquery-easing/jquery.easing.js"></script>
+    <script src="/jquery-easing/jquery.easing.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="/js/sb-admin-2.js"></script>
 
     <!-- Page level plugins -->
-    <script src="/vendor/chart.js/Chart.js"></script>
+    <script src="/datatables/jquery.dataTables.js"></script>
+    <script src="/datatables/dataTables.bootstrap4.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="/js/demo/chart-area-demo.js"></script>
-    <script src="/js/demo/chart-pie-demo.js"></script>
+    <script src="/js/demo/datatables-demo.js"></script>
 
 </body>
 

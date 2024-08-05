@@ -3,7 +3,24 @@
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Barang Keluar</h1>
                     <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
-
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <form method="get" action="<?= base_url('barang_keluar/beranda') ?>">
+                                <div class="form-group row">
+                                    <label for="start_date" class="col-sm-2 col-form-label">Start Date</label>
+                                    <div class="col-sm-4">
+                                        <input type="date" class="form-control" id="start_date" name="start_date" value="<?= isset($start_date) ? $start_date : '' ?>">
+                                    </div>
+                                    <label for="end_date" class="col-sm-2 col-form-label">End Date</label>
+                                    <div class="col-sm-4">
+                                        <input type="date" class="form-control" id="end_date" name="end_date" value="<?= isset($end_date) ? $end_date : '' ?>">
+                                    </div>
+                                </div>
+                                <a href="<?= base_url('barang_keluar/beranda') ?>" class="btn btn-secondary">Reset</a>
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                            </form>
+                        </div>
+                    </div>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -37,7 +54,7 @@
                                                     <td><?= $item['id_ms_barang_keluar'] ?></td>
                                                     <td><?= $item['waktu'] ?></td>
                                                     <td><?= $item['nama'] ?></td>
-                                                    <td><button>detail</button></td>
+                                                    <td> <a href="<?= base_url('barang_keluar/indexdetailmaster/' . $item['id_ms_barang_keluar']) ?>" class="btn btn-sm btn-primary">Detail</a></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
@@ -56,7 +73,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                    <span>Copyright &copy; Team IT PT. Olean</span>
                     </div>
                 </div>
             </footer>
@@ -94,18 +111,18 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="/vendor/jquery/jquery.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/jquery/jquery.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="/vendor/jquery-easing/jquery.easing.js"></script>
+    <script src="/jquery-easing/jquery.easing.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="/js/sb-admin-2.js"></script>
 
     <!-- Page level plugins -->
-    <script src="/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script src="/datatables/jquery.dataTables.js"></script>
+    <script src="/datatables/dataTables.bootstrap4.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="/js/demo/datatables-demo.js"></script>

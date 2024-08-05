@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">pinjam alat</h1>
+    <h1 class="h3 mb-2 text-gray-800">Pinjam Alat</h1>
     <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
     <!-- DataTales Example -->
@@ -39,7 +39,7 @@
                                     <td><?= $item['id_ms_peminjaman'] ?></td>
                                     <td><?= $item['tanggal_pinjam'] ?></td>
                                     <td><?= $item['nama'] ?></td>
-                                    <td><button>detail</button></td>
+                                    <td> <a href="<?= base_url('barang_pinjam/indexdetailmaster/' . $item['id_ms_peminjaman']) ?>" class="btn btn-sm btn-primary">Detail</a></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php endif; ?>
@@ -58,7 +58,7 @@
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
+        <span>Copyright &copy; Team IT PT. Olean</span>
         </div>
     </div>
 </footer>
@@ -213,18 +213,18 @@
 </script>
 
 <!-- Bootstrap core JavaScript-->
-<script src="/vendor/jquery/jquery.js"></script>
-<script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+<script src="/jquery/jquery.js"></script>
+<script src="/bootstrap/js/bootstrap.bundle.js"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="/vendor/jquery-easing/jquery.easing.js"></script>
+<script src="/jquery-easing/jquery.easing.js"></script>
 
 <!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.js"></script>
 
 <!-- Page level plugins -->
-<script src="/vendor/datatables/jquery.dataTables.js"></script>
-<script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
+<script src="/datatables/jquery.dataTables.js"></script>
+<script src="/datatables/dataTables.bootstrap4.js"></script>
 
 <!-- Page level custom scripts -->
 <script src="/js/demo/datatables-demo.js"></script>

@@ -70,7 +70,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2020</span>
+                    <span>Copyright &copy; Team IT PT. Olean</span>
                 </div>
             </div>
         </footer>
@@ -106,18 +106,18 @@
             </div>
         </div>
         <!-- Bootstrap core JavaScript-->
-        <script src="/vendor/jquery/jquery.js"></script>
-        <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+        <script src="/jquery/jquery.js"></script>
+        <script src="/bootstrap/js/bootstrap.bundle.js"></script>
 
         <!-- Core plugin JavaScript-->
-        <script src="/vendor/jquery-easing/jquery.easing.js"></script>
+        <script src="/jquery-easing/jquery.easing.js"></script>
 
         <!-- Custom scripts for all pages-->
         <script src="/js/sb-admin-2.js"></script>
 
         <!-- Page level plugins -->
-        <script src="/vendor/datatables/jquery.dataTables.js"></script>
-        <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
+        <script src="/datatables/jquery.dataTables.js"></script>
+        <script src="/datatables/dataTables.bootstrap4.js"></script>
 
         <!--     
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

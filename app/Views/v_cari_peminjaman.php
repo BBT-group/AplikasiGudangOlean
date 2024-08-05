@@ -37,7 +37,7 @@
                                             <input type="text" name="id_inventaris" id="id_inventaris" value="<?= $item['id_inventaris'] ?>" hidden>
                                             <input type="text" name="nama_inventaris" id="nama_inventaris" value="<?= $item['nama_inventaris'] ?>" hidden>
                                             <input type="text" name="stok" id="stok" value="<?= $item['stok'] ?>" hidden>
-                                            <button type="submit">submit</button>
+                                            <button type="submit" class="btn btn-primary" style="display: flexbox;">Submit</button>
                                         </form>
                                     </td>
                                 </tr>

@@ -114,6 +114,18 @@
                 </li>
                 <hr class="sidebar-divider">
                 <div class="sidebar-heading">Master</div>
+                <li class="nav-item <?= uri_string() == 'stok/index2' ? 'active' : '' ?>">
+                    <a class="nav-link" href="<?php echo base_url('stok/index2') ?>">
+                        <i class="fas fa-fw fa-layer-group"></i>
+                        <span>Data Barang</span>
+                    </a>
+                </li>
+                <li class="nav-item <?= uri_string() == 'inventaris/index2' ? 'active' : '' ?>">
+                    <a class="nav-link" href="<?php echo base_url('inventaris/index2') ?>">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Inventaris Alat</span>
+                    </a>
+                </li>
                 <hr class="sidebar-divider">
                 <div class="sidebar-heading">Transaksi</div>
                 <li class="nav-item <?= uri_string() == 'barang_keluar' ? 'active' : '' ?>">

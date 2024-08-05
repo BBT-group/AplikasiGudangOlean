@@ -35,6 +35,18 @@ class Barang_Pinjam extends BaseController
         echo view('v_header');
         return view('v_peminjaman', $data);
     }
+    public function indexDetailMaster()
+    {
+        // $idBarang = $this->request->getVar('id_ms_barang_keluar');
+        // $data = [
+        //     // mengambil header ms barang masuk yaitu nama supp, tanggal, id master barang
+        //     'header' => $this->masterBarangKeluarModel->getById($idBarang),
+        //     // mengambil data yang memiliki id ms barang masuk
+        //     'barang' => $this->barangKeluarModel->getByMasterId($idBarang)
+        // ];
+        echo view('v_header');
+        return view('admin\detailpeminjaman');
+    }
 
     public function index2()
     {

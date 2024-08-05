@@ -52,7 +52,7 @@ class Barang_Keluar extends BaseController
         ];
         echo view('v_header');
         // ganti url ke detail
-        return view('v_barang_masuk', $data);
+        return view('admin\detailbarangkeluar', $data);
     }
 
     public function beranda()
@@ -265,4 +265,5 @@ class Barang_Keluar extends BaseController
             return $this->response->setJSON(['status' => 'eror']);
         }
     }
+    
 }

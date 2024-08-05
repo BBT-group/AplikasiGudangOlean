@@ -56,7 +56,7 @@
                                                 <td><?= $item['id_ms_barang_masuk'] ?></td>
                                                 <td><?= $item['waktu'] ?></td>
                                                 <td><?= $item['nama'] ?></td>
-                                                <td> <a href="<?= base_url('barang_masuk/indexdetailmaster/' . $item['id_ms_barang_masuk']) ?>" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Detail">Detail</a></td>
+                                                <td> <a href="<?= base_url('barang_masuk/indexdetailmaster/' . $item['id_ms_barang_masuk']) ?>" class="btn btn-sm btn-primary">Detail</a></td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php endif; ?>

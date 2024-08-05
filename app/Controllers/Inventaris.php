@@ -21,6 +21,14 @@ class Inventaris extends BaseController
         echo view('v_header');
         return view('v_inventaris', $data);
     }
+    public function index2()
+    {
+        $data = [
+            'alat' => $this->inventarisModel->findAll(),
+        ];
+        echo view('v_header');
+        return view('v_inventaris_operator', $data);
+    }
 
     public function indexTambah()
     {

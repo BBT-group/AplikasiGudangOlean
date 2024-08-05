@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">pinjam alat</h1>
+    <h1 class="h3 mb-2 text-gray-800">Pinjam Alat</h1>
     <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
     <!-- DataTales Example -->
@@ -39,7 +39,7 @@
                                     <td><?= $item['id_ms_peminjaman'] ?></td>
                                     <td><?= $item['tanggal_pinjam'] ?></td>
                                     <td><?= $item['nama'] ?></td>
-                                    <td><button>detail</button></td>
+                                    <td> <a href="<?= base_url('barang_pinjam/indexdetailmaster/' . $item['id_ms_peminjaman']) ?>" class="btn btn-sm btn-primary">Detail</a></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php endif; ?>

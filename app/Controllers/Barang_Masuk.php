@@ -163,17 +163,19 @@ class Barang_Masuk extends BaseController
             $barang = session()->get('datalist');
             if (!empty($barang)) {
                 $namasupplier = $this->request->getVar('nama_supplier');
-                if ($this->supplierModel->where('nama', $namasupplier)->first() == null) {
+                $newSupp = $this->supplierModel->where('nama', $namasupplier)->first();
+                if ($newSupp == null) {
                     $suppId = $this->supplierModel->insert(['nama' =>
                     $namasupplier], true);
                 } else {
-                    $supp = $this->supplierModel->where('nama', $namasupplier)->first();
-                    $suppId = $supp['id_supplier'];
+
+                    $suppId = $newSupp['id_supplier'];
                 }
                 date_default_timezone_set('Asia/Jakarta');
                 $currentDateTime =  date("Y-m-d H:i:s");
-                $this->masterBarangMasukModel->insert(['waktu' => $currentDateTime, 'id_supplier' => $suppId]);
-
+                if (!$this->masterBarangMasukModel->insert(['waktu' => $currentDateTime, 'id_supplier' => $suppId])) {
+                    throw new DatabaseException('Failed to insert post: ' . implode(', ', $this->masterBarangMasukModel->errors()));
+                }
                 $idms = $this->masterBarangMasukModel->getInsertID();
 
                 foreach ($barang as $b) {
@@ -190,9 +192,13 @@ class Barang_Masuk extends BaseController
                             'id_kategori' => $barang1['id_kategori'],
                         ];
 
-                        $this->barangModel->update($b['id_barang'], $data);
+                        if ($this->barangModel->update($b['id_barang'], $data)) {
+                            throw new DatabaseException('Failed to insert post: ' . implode(', ', $this->barangModel->errors()));
+                        }
 
-                        $this->barangMasukModel->insert(['id_barang' => $barang1['id_barang'], 'id_ms_barang_masuk' => $idms, 'jumlah' => $b['stok']]);
+                        if ($this->barangMasukModel->insert(['id_barang' => $barang1['id_barang'], 'id_ms_barang_masuk' => $idms, 'jumlah' => $b['stok']])) {
+                            throw new DatabaseException('Failed to insert post: ' . implode(', ', $this->barangMasukModel->errors()));
+                        }
                     } elseif ($b['jenis'] == 'alat') {
                         $barang1 = $this->inventarisModel->where('id_inventaris', $b['id_barang'])->first();
                         $data = [
@@ -202,11 +208,14 @@ class Barang_Masuk extends BaseController
                             'harga_beli' => $b['harga_beli'],
                         ];
 
-                        $this->inventarisModel->update($b['id_barang'], $data);
+                        if ($this->inventarisModel->update($b['id_barang'], $data)) {
+                            throw new DatabaseException('Failed to insert post: ' . implode(', ', $this->inventarisModel->errors()));
+                        }
 
-                        $this->barangMasukModel->insert(['id_inventaris' => $barang1['id_inventaris'], 'id_ms_barang_masuk' => $idms, 'jumlah' => $b['stok']]);
+                        if ($this->barangMasukModel->insert(['id_inventaris' => $barang1['id_inventaris'], 'id_ms_barang_masuk' => $idms, 'jumlah' => $b['stok']])) {
+                            throw new DatabaseException('Failed to insert post: ' . implode(', ', $this->barangMasukModel->errors()));
+                        }
                     }
-
                     session()->remove('datalist');
                     return redirect()->to(base_url('/barang_masuk'));
                 }

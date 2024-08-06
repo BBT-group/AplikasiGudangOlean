@@ -1,5 +1,6 @@
                 <div class="container-fluid">
-
+                    <?= session()->getFlashdata('error') ?>
+                    <?= session()->getFlashdata('message') ?>
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Inventory Management</h1>
                     <!-- DataTales Example -->
@@ -140,6 +141,15 @@
                 <!-- Page level custom scripts -->
                 <script src="/js/demo/datatables-demo.js"></script>
                 <script>
+                    window.onload = function() {
+                        <?php if (session()->has('error')) : ?>
+                            alert("<?= addslashes(session('error')) ?>");
+                        <?php elseif (session()->has('message')) : ?>
+                            alert("<?= addslashes(session('message')) ?>");
+                        <?php endif; ?>
+                    };
+                </script>
+                <script>
                     $(document).ready(function() {
                         $('#clear-session-btn').click(function() {
                             $.ajax({
@@ -211,6 +221,7 @@
 
                                     barcode = ''; // Reset the barcode string after handling the scan
                                     timeoutId = null; // Reset the timeout ID
+                                    first = true;
                                 }, 200); // Reset the barcode string if more than 100ms passed since the last keypress
                             } else {
                                 barcode = '';
@@ -269,11 +280,11 @@
                                         modal: true,
                                         buttons: {
                                             "Tambah Barang": function() {
-                                                window.location.href = '<?= base_url('/barang_masuk/indextambahbarang') ?>';                                                 
+                                                window.location.href = '<?= base_url('/barang_masuk/indextambahbarang') ?>';
                                                 $(this).dialog("close");
                                             },
                                             "Tambah Alat": function() {
-                                                window.location.href = '<?= base_url('/barang_masuk/indextambahalat') ?>';                                                 
+                                                window.location.href = '<?= base_url('/barang_masuk/indextambahalat') ?>';
                                                 $(this).dialog("close");
                                             }
                                         }

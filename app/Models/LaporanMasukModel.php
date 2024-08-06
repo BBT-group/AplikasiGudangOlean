@@ -3,15 +3,17 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use PhpOffice\PhpSpreadsheet\Writer\Ods\Thumbnails;
 
 class LaporanMasukModel extends Model
 {
     protected $table = 'barang_masuk';
     protected $tableBarang = 'barang';
+    protected $tableInventaris = 'inventaris';
     protected $tableMsBarangMasuk = 'ms_barang_masuk';
     protected $tableSatuan = 'satuan';
     protected $primaryKey = 'id_barang_masuk';
-    protected $allowedFields = ['id_barang', 'id_ms_barang_masuk', 'jumlah'];
+    protected $allowedFields = ['id_barang', 'id_ms_barang_masuk', 'jumlah', 'id_inventaris'];
 
     public function getBarangMasuk()
     {
@@ -21,8 +23,9 @@ class LaporanMasukModel extends Model
     public function getBarangMasukGabung()
     {
         return $this->db->table($this->table)
-            ->select('barang_masuk.*, barang.stok, barang.harga_beli, barang.nama, ms_barang_masuk.waktu, satuan.nama_satuan')
+            ->select('barang_masuk.*, barang.stok, barang.harga_beli, barang.nama, ms_barang_masuk.waktu,inventaris.*')
             ->join($this->tableBarang, 'barang.id_barang = barang_masuk.id_barang')
+            ->join($this->tableInventaris, 'inventaris.id_inventaris = barang_masuk.id_inventaris')
             ->join($this->tableMsBarangMasuk, 'ms_barang_masuk.id_ms_barang_masuk = barang_masuk.id_ms_barang_masuk')
             ->join($this->tableSatuan, 'satuan.id_satuan = barang.id_satuan')
             ->get()

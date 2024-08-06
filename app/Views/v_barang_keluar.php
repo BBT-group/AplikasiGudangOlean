@@ -207,6 +207,7 @@
 
                             barcode = ''; // Reset the barcode string after handling the scan
                             timeoutId = null; // Reset the timeout ID
+                            first = true;
                         }, 200); // Reset the barcode string if more than 100ms passed since the last keypress
                     } else {
                         barcode = '';
@@ -225,6 +226,25 @@
 
                 });
 
+
+                $('.remove-item').on('click', function() {
+                    var key = $(this).data('key');
+                    var index = $(this).data('index');
+                    console.log(key);
+                    $.ajax({
+                        url: '<?= base_url('/barang_keluar/hapusitem') ?>',
+                        type: 'POST',
+                        data: {
+                            key: key,
+                            index: index
+                        },
+                        success: function(response) {
+                            if (response.status) {
+                                $('button[data-index="' + index + '"]').closest('tr').remove();
+                            }
+                        }
+                    });
+                });
             });
 
             function handleBarcodeScan(id) {

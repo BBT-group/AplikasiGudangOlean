@@ -218,6 +218,7 @@
 
                     barcode = ''; // Reset the barcode string after handling the scan
                     timeoutId = null; // Reset the timeout ID
+                    first = true;
                 }, 200); // Reset the barcode string if more than 100ms passed since the last keypress
             } else {
                 barcode = '';

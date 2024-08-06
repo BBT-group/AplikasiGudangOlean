@@ -11,45 +11,36 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-
-                                <div class="col-12 mb-1 p-0">
-                                    <div class="flex-box pb-1">
-                                        <?php if (session()->role == 'admin') : ?>
-                                            <div class="col-12 mb-1 p-0">
-                                                <a href="<?= base_url('inventaris/indextambah') ?>" method="post" class="btn btn-primary">Tambah Alat</a>
-                                            </div>
-                                        <?php endif; ?>
-
+                                <div class="flex-box pb-1">
+                                    <div class="col-12 mb-1 p-0">
+                                        <a href="<?= base_url('user/create') ?>" method="post" class="btn btn-primary">Tambah Akun</a>
                                     </div>
                                 </div>
                                 <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>ID Inventaris</th>
+                                            <th>ID</th>
+                                            <th>Username</th>
                                             <th>Nama</th>
-                                            <th>Stok</th>
+                                            <th>Role</th>
+                                            <th>Status</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
-
-                                        <?php foreach ($alat as $k => $item) : ?>
+                                        <?php foreach ($users as $user) : ?>
                                             <tr>
-                                                <td><?= $k + 1 ?></td>
-                                                <td><?= $item['id_inventaris'] ?></td>
-                                                <td><?= $item['nama_inventaris'] ?></td>
-                                                <td><?= $item['stok'] ?></td>
-                                                <td style="display: flexbox; text-align: center;">
-                                                    <a href="<?= base_url('inventaris/indexdetail/' . $item['id_inventaris']) ?>" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Detail"><i class="fas fa-clone"></i></a>
-                                                    <?php if (session()->role == 'admin') : ?>
-                                                        <a href="<?= base_url('inventaris/indexupdate/' . $item['id_inventaris']) ?>" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Update"><i class="fas fa-pencil-alt"></i></a>
-                                                    <?php endif; ?>
+                                                <td><?= $user['id_ms_user'] ?></td>
+                                                <td><?= $user['username'] ?></td>
+                                                <td><?= $user['nama'] ?></td>
+                                                <td><?= $user['role'] ?></td>
+                                                <td><?= $user['status'] ?></td>
+                                                <td>
+                                                    <a href="/user/edit/<?= $user['id_ms_user'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                                                    <a href="/user/delete/<?= $user['id_ms_user'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus akun ini?')">Delete</a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
-
                                     </tbody>
                                 </table>
                             </div>
@@ -98,23 +89,6 @@
 
                 <!-- Page level custom scripts -->
                 <script src="/js/demo/datatables-demo.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-                <script>
-                    <?php if (session()->getFlashdata('success')) { ?>
-                        Swal.fire({
-                            icon: "success",
-                            title: "<?= session()->getFlashdata('success') ?>",
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                    <?php } ?>
-                </script>
-                <script>
-                    $(function() {
-                        $('[data-toggle="tooltip"]').tooltip()
-                    })
-                </script>
 
                 </body>
 

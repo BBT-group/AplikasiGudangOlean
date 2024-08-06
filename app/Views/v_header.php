@@ -8,9 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="/img/logo.png">
 
-    <title><?php echo session()->get('role') ?> | Gudang PT.Olean</title>
+    <title>SB Admin 2 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -18,18 +17,11 @@
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 
     <!-- Custom styles for this page -->
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-    <style>
-        .collapse-item.active {
-            color: #206c1f !important;
-            background-color: #fff !important; /* Hijau */
-        }
-    </style>
 
 </head>
 
@@ -39,96 +31,140 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion <?= uri_string() == 'beranda' ? 'active' : '' ?>" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url('beranda') ?>">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon">
-                    <img src="/img/logo.png" style="height: 50px;">
+                    <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">PT. OLEAN</div>
+                <div class="sidebar-brand-text mx-3">PT. OLEAN<sup>2</sup></div>
             </a>
+
             <hr class="sidebar-divider my-0">
+
             <?php if (session()->role == 'admin') : ?>
-                <li class="nav-item <?= uri_string() == 'beranda' ? 'active' : '' ?>">
+                <li class="nav-item">
                     <a class="nav-link" href="<?php echo base_url('beranda') ?>">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span>
-                    </a>
+                        <span>Dashboard</span></a>
                 </li>
                 <hr class="sidebar-divider">
-                <div class="sidebar-heading">Master</div>
-                <li class="nav-item <?= in_array(uri_string(), ['stok', 'kategori', 'satuan']) ? 'active' : '' ?>">
+                <div class="sidebar-heading">
+                    Master
+                </div>
+                <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                         <i class="fas fa-fw fa-layer-group"></i>
                         <span>Stok Barang</span>
                     </a>
-                    <div id="collapseTwo" class="collapse <?= in_array(uri_string(), ['stok', 'kategori', 'satuan']) ? 'show' : '' ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item <?= uri_string() == 'stok' ? 'active' : '' ?>" href="<?php echo base_url('stok') ?>">Data Barang</a>
-                            <a class="collapse-item <?= uri_string() == 'kategori' ? 'active' : '' ?>" href="<?php echo base_url('kategori') ?>">Kategori</a>
-                            <a class="collapse-item <?= uri_string() == 'satuan' ? 'active' : '' ?>" href="<?php echo base_url('satuan') ?>">Satuan</a>
+                            <a class="collapse-item" href="<?php echo base_url('stok') ?>">Data Barang</a>
+                            <a class="collapse-item" href="<?php echo base_url('kategori') ?>">Kategori</a>
+                            <a class="collapse-item" href="<?php echo base_url('satuan') ?>">Satuan</a>
                         </div>
                     </div>
                 </li>
-                <li class="nav-item <?= uri_string() == 'inventaris' ? 'active' : '' ?>">
+                <li class="nav-item">
                     <a class="nav-link" href="<?php echo base_url('inventaris') ?>">
                         <i class="fas fa-fw fa-wrench"></i>
                         <span>Inventaris Alat</span>
                     </a>
                 </li>
                 <hr class="sidebar-divider">
-                <div class="sidebar-heading">Transaksi</div>
-                <li class="nav-item <?= uri_string() == 'barang_masuk' ? 'active' : '' ?>">
+
+                <div class="sidebar-heading">
+                    Transaksi
+                </div>
+                <li class="nav-item">
                     <a class="nav-link" href="<?php echo base_url('barang_masuk') ?>">
                         <i class="fas fa-fw fa-sign-in-alt"></i>
                         <span>Barang Masuk</span>
                     </a>
                 </li>
+
                 <hr class="sidebar-divider">
-                <div class="sidebar-heading">Laporan</div>
-                <li class="nav-item <?= uri_string() == 'laporan_stok' ? 'active' : '' ?>">
+
+                <div class="sidebar-heading">
+                    Laporan
+                </div>
+                <li class="nav-item">
                     <a class="nav-link" href="laporan_stok">
                         <i class="fas fa-fw fa-file-signature"></i>
-                        <span>Laporan Stok</span>
-                    </a>
+                        <span>Laporan Stok</span></a>
                 </li>
-                <li class="nav-item <?= uri_string() == 'laporan_masuk' ? 'active' : '' ?>">
+                <li class="nav-item">
                     <a class="nav-link" href="<?php echo base_url('laporan_masuk') ?>">
                         <i class="fas fa-fw fa-file-import"></i>
-                        <span>Laporan Barang Masuk</span>
-                    </a>
+                        <span>Laporan Barang Masuk</span></a>
                 </li>
-                <li class="nav-item <?= uri_string() == 'laporan_keluar' ? 'active' : '' ?>">
+                <li class="nav-item">
                     <a class="nav-link" href="<?php echo base_url('laporan_keluar') ?>">
                         <i class="fas fa-fw fa-file-export"></i>
-                        <span>Laporan Barang Keluar</span>
-                    </a>
+                        <span>Laporan Barang Keluar</span></a>
                 </li>
+
                 <hr class="sidebar-divider d-none d-md-block">
+
+                <div class="sidebar-heading">
+                    Akun
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url('user') ?>">
+                        <i class="fas fa-fw fa-users"></i>
+                        <span>Manajemen Akun</span></a>
+                </li>
+
+                <hr class="sidebar-divider">
+
+                <!-- <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div> -->
             <?php endif; ?>
+
             <?php if (session()->role == 'operator') : ?>
-                <li class="nav-item <?= uri_string() == 'beranda' ? 'active' : '' ?>">
+                <li class="nav-item">
                     <a class="nav-link" href="<?php echo base_url('beranda') ?>">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span>
+                        <span>Dashboard</span></a>
+                </li>
+                <hr class="sidebar-divider">
+                <div class="sidebar-heading">
+                    Master
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url('stok') ?>">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Stok Barang</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url('inventaris') ?>">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Inventaris Alat</span>
                     </a>
                 </li>
                 <hr class="sidebar-divider">
-                <div class="sidebar-heading">Master</div>
-                <hr class="sidebar-divider">
-                <div class="sidebar-heading">Transaksi</div>
-                <li class="nav-item <?= uri_string() == 'barang_keluar' ? 'active' : '' ?>">
+
+                <div class="sidebar-heading">
+                    Transaksi
+                </div>
+                <li class="nav-item">
                     <a class="nav-link" href="<?php echo base_url('barang_keluar') ?>">
                         <i class="fas fa-fw fa-sign-out-alt"></i>
-                        <span>Barang Keluar</span>
-                    </a>
+                        <span>Barang Keluar</span></a>
                 </li>
-                <li class="nav-item <?= uri_string() == 'barang_pinjam' ? 'active' : '' ?>">
+                <li class="nav-item">
                     <a class="nav-link" href="<?php echo base_url('barang_pinjam') ?>">
                         <i class="fas fa-fw fa-sign-out-alt"></i>
-                        <span>Barang Pinjam</span>
-                    </a>
+                        <span>Barang pinjam</span></a>
                 </li>
                 <hr class="sidebar-divider d-none d-md-block">
+
+                <!-- <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div> -->
             <?php endif; ?>
         </ul>
         <div id="content-wrapper" class="d-flex flex-column">
@@ -200,9 +236,9 @@
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="<?php echo base_url('user/changePassword'); ?>">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
+                                    Ubah Password
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -219,12 +255,12 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Apakah Anda Yakin Ingin Keluar?</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">Pilih "Logout" di bawah ini jika Anda siap untuk keluar dari website gudang olean.</div>
+                                <div class="modal-body">Pilih "Logout" di bawah ini jika Anda siap untuk mengakhiri sesi Anda saat ini.</div>
                                 <div class="modal-footer">
                                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                                     <a class="btn btn-primary" href="<?php echo base_url('logout') ?>">Logout</a>

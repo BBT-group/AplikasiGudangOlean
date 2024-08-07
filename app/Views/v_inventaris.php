@@ -11,9 +11,15 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <div class="flex-box pb-1">
-                                    <div class="col-12 mb-1 p-0">
-                                        <a href="<?= base_url('inventaris/indextambah') ?>" method="post" class="btn btn-primary">Tambah Alat</a>
+
+                                <div class="col-12 mb-1 p-0">
+                                    <div class="flex-box pb-1">
+                                        <?php if (session()->role == 'admin') : ?>
+                                            <div class="col-12 mb-1 p-0">
+                                                <a href="<?= base_url('inventaris/indextambah') ?>" method="post" class="btn btn-primary">Tambah Alat</a>
+                                            </div>
+                                        <?php endif; ?>
+
                                     </div>
                                 </div>
                                 <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -23,8 +29,6 @@
                                             <th>ID Inventaris</th>
                                             <th>Nama</th>
                                             <th>Stok</th>
-                                            <th>Harga Beli</th>
-                                            <th>Foto</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -37,16 +41,11 @@
                                                 <td><?= $item['id_inventaris'] ?></td>
                                                 <td><?= $item['nama_inventaris'] ?></td>
                                                 <td><?= $item['stok'] ?></td>
-
-                                                <td><?= $item['harga_beli'] ?></td>
-                                                <td><?php if ($item['foto'] != null) : ?>
-                                                        <img src="<?= base_url($item['foto']) ?>" alt="<?= $item['nama_inventaris'] ?>" width="50">
-                                                    <?php endif; ?>
-                                                </td>
-
                                                 <td style="display: flexbox; text-align: center;">
                                                     <a href="<?= base_url('inventaris/indexdetail/' . $item['id_inventaris']) ?>" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Detail"><i class="fas fa-clone"></i></a>
-                                                    <a href="<?= base_url('inventaris/indexupdate/' . $item['id_inventaris']) ?>" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Update"><i class="fas fa-pencil-alt"></i></a>
+                                                    <?php if (session()->role == 'admin') : ?>
+                                                        <a href="<?= base_url('inventaris/indexupdate/' . $item['id_inventaris']) ?>" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Update"><i class="fas fa-pencil-alt"></i></a>
+                                                    <?php endif; ?>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -102,21 +101,21 @@
                 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
                 <script>
-                    <?php if(session()->getFlashdata('success')) {?>
+                    <?php if (session()->getFlashdata('success')) { ?>
                         Swal.fire({
                             icon: "success",
-                            title: "<?= session()->getFlashdata('success')?>",
+                            title: "<?= session()->getFlashdata('success') ?>",
                             showConfirmButton: false,
                             timer: 1500
                         })
-                        <?php } ?>
+                    <?php } ?>
                 </script>
                 <script>
-                    $(function () {
+                    $(function() {
                         $('[data-toggle="tooltip"]').tooltip()
                     })
                 </script>
-                
+
                 </body>
 
                 </html>

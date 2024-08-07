@@ -7,6 +7,8 @@ use App\Models\MasterPeminjamanModel;
 use App\Models\PeminjamanModel;
 use App\Models\PenerimaModel;
 
+use CodeIgniter\Database\Exceptions\DatabaseException;
+
 use function PHPUnit\Framework\isEmpty;
 
 class Barang_Pinjam extends BaseController
@@ -77,13 +79,29 @@ class Barang_Pinjam extends BaseController
         // } else {
         //     $masuk = $this->masterBarangMasukModel;
         // }
+        $startDate = $this->request->getVar('start_date');
+        $endDate = $this->request->getVar('end_date');
+
+        $query = $this->masterPeminjamanModel->getAllWithNama();
+
+        if ($startDate) {
+            $query = $query->where('tanggal_pinjam >=', $startDate);
+        }
+
+        if ($endDate) {
+            $query = $query->where('tanggal_pinjam <=', $endDate);
+        }
+
         $data = [
-            'pinjam' => $this->masterPeminjamanModel->getAllWithNama()->findAll(),
+            'pinjam' => $query->findAll(),
+            'start_date' => $startDate,
+            'end_date' => $endDate
         ];
 
         echo view('v_header');
         return view('v_beranda_peminjaman', $data);
     }
+
 
     function containsObjectWithName($objects, $name)
     {
@@ -145,48 +163,80 @@ class Barang_Pinjam extends BaseController
             return redirect()->to(base_url('/barang_pinjam/index'))->withInput();
         }
 
+
         $barang = session()->get('datalist_pinjam');
         if (!empty($barang)) {
+            $db = \Config\Database::connect();
 
-            $namaPenerima = $this->request->getVar('nama_penerima');
-            if ($this->penerimaModel->where('nama', $namaPenerima)->first() == null) {
-                $penerimaId = $this->penerimaModel->insert(['nama' =>
-                $namaPenerima], true);
-            } else {
-                $penerima = $this->penerimaModel->where('nama', $namaPenerima)->first();
-                $penerimaId = $penerima['id_penerima'];
-            }
 
-            date_default_timezone_set('Asia/Jakarta');
-            $currentDateTime =  date("Y-m-d H:i:s");
-            $this->masterPeminjamanModel->insert(['tanggal_pinjam' => $currentDateTime, 'id_penerima' => $penerimaId]);
+            try {
+                // Set the isolation level if needed
+                $db->query("SET TRANSACTION ISOLATION LEVEL READ COMMITTED"); // Change as required
 
-            $idms = $this->masterPeminjamanModel->getInsertID();
+                // Start the transaction
+                $db->transBegin();
 
-            foreach ($barang as $b) {
 
-                $barang1 = $this->inventarisModel->where('id_inventaris', $b['id_inventaris'])->first();
-                if (isset($kembali)) {
-                    $stok = $barang1['stok'] + $b['stok'];
+                $namaPenerima = $this->request->getVar('nama_penerima');
+                if ($this->penerimaModel->where('nama', $namaPenerima)->first() == null) {
+                    if (!$this->penerimaModel->insert(['nama' => $namaPenerima], true)) {
+                        throw new DatabaseException('Failed to insert post: kurang dari 0');
+                    }
+                    $penerimaId = $this->peminjamanModel->getInsertID();
                 } else {
-                    $stok =  $barang1['stok'] - $b['stok'];
+                    $penerima = $this->penerimaModel->where('nama', $namaPenerima)->first();
+                    $penerimaId = $penerima['id_penerima'];
                 }
-                $data = [
-                    'nama_inventaris' => $barang1['nama_inventaris'],
-                    'foto' => $barang1['foto'],
-                    'stok' => $stok,
-                ];
 
-                $this->inventarisModel->update($barang1['id_inventaris'], $data);
-                $this->peminjamanModel->insert(['id_inventaris' => $barang1['id_inventaris'], 'id_ms_peminjaman' => $idms, 'jumlah' => $b['stok']]);
+                date_default_timezone_set('Asia/Jakarta');
+                $currentDateTime =  date("Y-m-d H:i:s");
+                if (!$this->masterPeminjamanModel->insert(['tanggal_pinjam' => $currentDateTime, 'id_penerima' => $penerimaId])) {
+                    throw new DatabaseException('Failed to insert post: kurang dari 0');
+                }
+
+                $idms = $this->masterPeminjamanModel->getInsertID();
+
+                foreach ($barang as $b) {
+
+                    $barang1 = $this->inventarisModel->where('id_inventaris', $b['id_inventaris'])->first();
+
+                    $stok = $barang1['stok'] + $b['stok'];
+
+                    $data = [
+                        'nama_inventaris' => $barang1['nama_inventaris'],
+                        'foto' => $barang1['foto'],
+                        'stok' => $stok,
+                    ];
+
+                    if (!$this->inventarisModel->update($barang1['id_inventaris'], $data)) {
+                        throw new DatabaseException('Failed to insert post: kurang dari 0');
+                    }
+                    if (!$this->peminjamanModel->insert(['id_inventaris' => $barang1['id_inventaris'], 'id_ms_peminjaman' => $idms, 'jumlah' => $b['stok']])) {
+                        throw new DatabaseException('Failed to insert post: kurang dari 0');
+                    }
+                } // Commit the transaction
+                if ($db->transStatus() === FALSE) {
+                    // If something went wrong, rollback transaction
+                    $db->transRollback();
+                    throw new DatabaseException('Transaction failed.');
+                } else {
+                    // Otherwise, commit the transaction
+                    $db->transCommit();
+
+                    session()->remove('datalist_pinjam');
+                    session()->setFlashdata('message', 'Transaction successful.');
+                    // ganti url
+                    return redirect()->to(base_url('/barang_pinjam'));
+                }
+            } catch (DatabaseException $e) {
+                // Rollback transaction on any exception
+                $db->transRollback();
+                session()->setFlashdata('error', 'Transaction failed: ' . $e->getMessage());
+                return redirect()->to(base_url('/barang_pinjam/index'));
             }
-
-
-            session()->remove('datalist_pinjam');
-            // ganti url
-            return redirect()->to(base_url('/barang_pinjam'));
         } else {
             // ganti url
+            session()->setFlashdata('error', 'data kosong');
             return redirect()->to(base_url('/barang_pinjam/index'))->withInput();
         }
     }

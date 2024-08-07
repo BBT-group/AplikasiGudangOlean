@@ -25,13 +25,31 @@ class Laporan_Masuk extends BaseController
         } else {
             $data['barangmasuk'] = $this->barangmasukModel->getBarangMasukGabung();
         }
-
+        $data['semua'] = $this->barangmasukModel->findAll();
         $data['start_date'] = $start_date;
         $data['end_date'] = $end_date;
 
         echo view('v_header');
         return view('v_laporan_masuk', $data);
     }
+
+    public function printm()
+    {
+        $start_date = $this->request->getGet('start_date');
+        $end_date = $this->request->getGet('end_date');
+
+        if ($start_date && $end_date) {
+            $data['barangmasuk'] = $this->barangmasukModel->getBarangMasukGabungFilter($start_date, $end_date);
+        } else {
+            $data['barangmasuk'] = $this->barangmasukModel->getBarangMasukGabung();
+        }
+
+        $data['start_date'] = $start_date;
+        $data['end_date'] = $end_date;
+
+        echo view('v_print_masuk', $data);
+    }
+
 
     public function exportm()
     {
@@ -55,7 +73,7 @@ class Laporan_Masuk extends BaseController
 
         // Header kolom
         $sheet->setCellValue('A3', 'No');
-        $sheet->setCellValue('B3', 'Id');
+        $sheet->setCellValue('B3', 'Id Ba');
         $sheet->setCellValue('C3', 'Tanggal');
         $sheet->setCellValue('D3', 'Nama barang');
         $sheet->setCellValue('E3', 'Satuan');
@@ -71,8 +89,12 @@ class Laporan_Masuk extends BaseController
             $stok_awal = $item['stok'] - $item['jumlah']; // Menghitung stok awal
 
             $sheet->setCellValue('A' . $row, $no++);
-            $sheet->setCellValue('B' . $row, $item['id_barang']);
-            $sheet->setCellValue('C' . $row, $item['waktu']);
+            $sheet->setCellValue('B' . $row, $item['id_ms_barang_masuk']);
+
+            $datetime = \PhpOffice\PhpSpreadsheet\Shared\Date::PHPToExcel(new \DateTime($item['waktu']));
+            $sheet->setCellValue('C' . $row, $datetime);
+            $sheet->getStyle('C' . $row)->getNumberFormat()->setFormatCode('dd/mm/yyyy hh:mm:ss');
+
             $sheet->setCellValue('D' . $row, $item['nama']);
             $sheet->setCellValue('E' . $row, $item['nama_satuan']);
             $sheet->setCellValue('F' . $row, $item['harga_beli']);
@@ -90,7 +112,7 @@ class Laporan_Masuk extends BaseController
         $sheet->getStyle('A1:I2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
         $sheet->getStyle('A1:I2')->getFill()->getStartColor()->setARGB('34a853'); // Warna hijau, gunakan kode warna hex RGB 
         $sheet->getStyle('A3:I3')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
-        $sheet->getStyle('A3:I3')->getFill()->getStartColor()->setARGB('b6d7a8'); 
+        $sheet->getStyle('A3:I3')->getFill()->getStartColor()->setARGB('b6d7a8');
 
         // Apply border to the header and data
         $styleArray = [
@@ -103,6 +125,10 @@ class Laporan_Masuk extends BaseController
         ];
 
         $sheet->getStyle('A1:I' . ($row - 1))->applyFromArray($styleArray);
+
+        foreach (range('A', 'I') as $columnID) {
+            $sheet->getColumnDimension($columnID)->setAutoSize(true);
+        }
 
         $writer = new Xlsx($spreadsheet);
         $filename = 'laporan_masuk_stok_barang.xlsx';

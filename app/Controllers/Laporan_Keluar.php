@@ -33,6 +33,23 @@ class Laporan_Keluar extends BaseController
         return view('v_laporan_keluar', $data);
     }
 
+    public function printk()
+    {
+    $start_date = $this->request->getGet('start_date');
+    $end_date = $this->request->getGet('end_date');
+
+    if ($start_date && $end_date) {
+        $data['barangkeluar'] = $this->barangkeluarModel->getBarangKeluarGabungFilter($start_date, $end_date);
+    } else {
+        $data['barangkeluar'] = $this->barangkeluarModel->getBarangKeluarGabung();
+    }
+
+    $data['start_date'] = $start_date;
+    $data['end_date'] = $end_date;
+
+    echo view('v_print_keluar', $data);
+    }
+
     public function exportk()
     {
         $start_date = $this->request->getGet('start_date');
@@ -72,7 +89,11 @@ class Laporan_Keluar extends BaseController
 
             $sheet->setCellValue('A' . $row, $no++);
             $sheet->setCellValue('B' . $row, $item['id_barang_keluar']);
-            $sheet->setCellValue('C' . $row, $item['waktu']);
+            
+            $datetime = \PhpOffice\PhpSpreadsheet\Shared\Date::PHPToExcel(new \DateTime($item['waktu']));
+            $sheet->setCellValue('C' . $row, $datetime);
+            $sheet->getStyle('C' . $row)->getNumberFormat()->setFormatCode('dd/mm/yyyy hh:mm:ss');
+
             $sheet->setCellValue('D' . $row, $item['nama_barang']);
             $sheet->setCellValue('E' . $row, $item['nama_satuan']);
             $sheet->setCellValue('F' . $row, $item['nama_penerima']);
@@ -103,6 +124,10 @@ class Laporan_Keluar extends BaseController
         ];
 
         $sheet->getStyle('A1:I' . ($row - 1))->applyFromArray($styleArray);
+
+        foreach (range('A', 'I') as $columnID) {
+            $sheet->getColumnDimension($columnID)->setAutoSize(true);
+        }
 
         $writer = new Xlsx($spreadsheet);
         $filename = 'laporan_keluar_stok_barang.xlsx';

@@ -55,14 +55,30 @@ class Barang_Keluar extends BaseController
         return view('admin\detailbarangkeluar', $data);
     }
 
+
+
     public function beranda()
     {
+        $startDate = $this->request->getVar('start_date');
+        $endDate = $this->request->getVar('end_date');
+
+        $query = $this->masterBarangKeluarModel;
+
+        if ($startDate && $endDate) {
+            $query = $query->where('waktu >=', $startDate . ' 00:00:00')
+                ->where('waktu <=', $endDate . ' 23:59:59');
+        }
+
         $data = [
-            'keluar' => $this->masterBarangKeluarModel->getAll(),
+            'keluar' => $query->getAll(),
+            'start_date' => $startDate,
+            'end_date' => $endDate
         ];
+
         echo view('v_header');
         return view('v_beranda_barang_keluar', $data);
     }
+
 
     public function loadExistingData()
     {
@@ -88,7 +104,6 @@ class Barang_Keluar extends BaseController
                 'nama' => $this->request->getVar('nama'),
                 'satuan' => $this->request->getVar('satuan'),
                 'stok' => 1,
-
             ];
 
             $this->dataList[] = $data2;
@@ -106,7 +121,7 @@ class Barang_Keluar extends BaseController
         if ($keyword) {
             $barang = $this->barangModel->getBarangByName($keyword);
         } else {
-            $barang = $this->barangModel;
+            $barang = $this->barangModel->getBarangWithKategori();
         }
         $data = [
             'barang' => $barang->findAll(),
@@ -233,6 +248,20 @@ class Barang_Keluar extends BaseController
                 return $index;
             }
         }
+    }
+
+    public function hapusBarangDatalistKeluar()
+    {
+        $session = session();
+        $items = $session->get('datalist_keluar') ?? [];
+
+        $index = $this->request->getPost('index');
+
+        if (isset($items[$index])) {
+            unset($items[$index]);
+            $session->set('datalist_keluar', $items);
+        }
+        return $this->response->setJSON(['status' => 'success']);
     }
 
     public function cariStok()

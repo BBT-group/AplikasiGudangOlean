@@ -91,3 +91,7 @@ $routes->add('/inventaris/index2', 'Inventaris::index2');
 $routes->add('/barang_keluar/indexdetailmaster/(:num)', 'Barang_keluar::indexDetailMaster/$1');
 $routes->add('/barang_pinjam/indexdetailmaster/(:num)', 'Barang_pinjam::indexDetailMaster/$1');
 
+$routes->add('/laporan_keluar/printk', 'Laporan_Keluar::printk');
+$routes->add('/laporan_masuk/printm', 'Laporan_Masuk::printm');
+$routes->add('/laporan_stok/prints', 'Laporan_Stok::prints');
+

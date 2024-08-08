@@ -95,3 +95,13 @@ $routes->add('/laporan_keluar/printk', 'Laporan_Keluar::printk');
 $routes->add('/laporan_masuk/printm', 'Laporan_Masuk::printm');
 $routes->add('/laporan_stok/prints', 'Laporan_Stok::prints');
 
+$routes->get('/user', 'User::index');
+$routes->get('/user/create', 'User::create');
+$routes->post('/user/store', 'User::store');
+$routes->get('/user/edit/(:num)', 'User::edit/$1');
+$routes->post('/user/update/(:num)', 'User::update/$1');
+$routes->get('/user/delete/(:num)', 'User::delete/$1');
+$routes->match(['get', 'post'], '/user/updatePassword/(:num)', 'User::updatePassword/$1');
+
+$routes->get('/user/changePassword', 'UserController::changePasswordForm');
+$routes->post('/user/updatePassword', 'UserController::updatePassword');

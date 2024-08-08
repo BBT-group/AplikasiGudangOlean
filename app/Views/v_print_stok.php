@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Barang Masuk - Print</title>
+    <link rel="icon" href="/img/logo.png">
+    <title>Laporan Stok Barang - Print</title>
     <link rel="stylesheet" href="<?= base_url('/css/print.css') ?>"> <!-- Add your custom print CSS here -->
 </head>
 <body>
     <div class="print-container">
-        <h1 class="text-center">LAPORAN MASUK STOK BARANG GUDANG PT.OLEAN PERMATA</h1>
+        <h1 class="text-center">LAPORAN STOK BARANG GUDANG PT.OLEAN PERMATA</h1>
         
         <table border="1" cellspacing="0" cellpadding="5" width="100%">
             <thead>

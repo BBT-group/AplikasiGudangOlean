@@ -9,7 +9,6 @@ class UserController extends Controller
 {
     public function changePasswordForm()
     {
-        echo view('v_header');  
         return view('v_ubah_password');
     }
 

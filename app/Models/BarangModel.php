@@ -62,4 +62,9 @@ class BarangModel extends Model
     public function getBarangWithInventaris()
     {
     }
+
+    public function getBarangCount()
+    {
+        return $this->countAll();
+    }
 }

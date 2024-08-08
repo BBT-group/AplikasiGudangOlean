@@ -27,47 +27,46 @@
 </head>
 
 <body>
+  <div class="container" id="container">
+      <div class="form-container sign-in">
+          <form method="post" action="<?php echo base_url('/loginproses') ?>">
+              <?= csrf_field()?>
+              <h1>Login</h1>
+              <span>Masukan username dan password</span>
+              <br>
+              <?php if(session()->getFlashdata('error')) : ?>
+                  <div class="alert alert-denger alert-dismissible show fade">
+                      <div class="alert-body">
+                          <b>Error !</b>
+                          <?= session()->getFlashdata('error')?>
+                      </div>
+                  </div>
+                  <?php endif ?>
+              <div class="username-container">
+                  <input type="username" placeholder="Username" name="username" required>
+              </div>
+              <div class="password-container">
+                  <input type="password" name="password" id="password" placeholder="Password" required>
+                  <i class="fa fa-eye-slash" id="togglePassword" style="cursor: pointer;"></i>
+              </div>
+              <br>
+              <button>Login</button>
+          </form>
+      </div>
+      <div class="toggle-container">
+          <div class="toggle">
+              <div class="toggle-panel toggle-right">
+                  <img src="/img/logo.png" alt="">
+                  <br>
+                  <h1>STOK BARANG</h1>
+                  <span>PT. OLEAN PERMATA TELEMATIKA</span>
+              </div>
+          </div>
+      </div>
+  </div>
 
-    <div class="container" id="container">
-        <div class="form-container sign-in">
-            <form method="post" action="<?php echo base_url('/loginproses') ?>">
-                <?= csrf_field()?>
-                <h1>Login</h1>
-                <span>Masukan username dan password</span>
-                <br>
-                <?php if(session()->getFlashdata('error')) : ?>
-                    <div class="alert alert-denger alert-dismissible show fade">
-                        <div class="alert-body">
-                            <b>Error !</b>
-                            <?= session()->getFlashdata('error')?>
-                        </div>
-                    </div>
-                    <?php endif ?>
-                <div class="username-container">
-                    <input type="username" placeholder="Username" name="username" required>
-                </div>
-                <div class="password-container">
-                    <input type="password" name="password" id="password" placeholder="Password" required>
-                    <i class="fa fa-eye-slash" id="togglePassword" style="cursor: pointer;"></i>
-                </div>
-                <br>
-                <button>Login</button>
-            </form>
-        </div>
-        <div class="toggle-container">
-            <div class="toggle">
-                <div class="toggle-panel toggle-right">
-                    <img src="/img/logo.png" alt="">
-                    <br>
-                    <h1>STOK BARANG</h1>
-                    <span>PT. OLEAN PERMATA TELEMATIKA</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="/js/script.js"></script>
-    <script>
+  <script src="/js/script.js"></script>
+  <script>
     // Select the password input field and the toggle icon
     const password = document.querySelector('#password');
     const togglePassword = document.querySelector('#togglePassword');
@@ -82,6 +81,7 @@
       this.classList.toggle('fa-eye');
       this.classList.toggle('fa-eye-slash');
     });
-  </script></body>
+  </script>
+</body>
 
 </html>

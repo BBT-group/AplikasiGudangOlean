@@ -1,13 +1,13 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Stok Alat</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Management User</h1>
                     <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Stok Alat</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data User</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -35,9 +35,9 @@
                                                 <td><?= $user['nama'] ?></td>
                                                 <td><?= $user['role'] ?></td>
                                                 <td><?= $user['status'] ?></td>
-                                                <td>
-                                                    <a href="/user/edit/<?= $user['id_ms_user'] ?>" class="btn btn-warning btn-sm">Edit</a>
-                                                    <a href="/user/delete/<?= $user['id_ms_user'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus akun ini?')">Delete</a>
+                                                <td style="text-align: center;">
+                                                    <a href="/user/edit/<?= $user['id_ms_user'] ?>" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-pencil-alt"></i></a>
+                                                    <a href="/user/delete/<?= $user['id_ms_user'] ?>" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus akun ini?')"><i class="fas fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -49,47 +49,53 @@
 
                 </div>
 
-                </div>
-                <!-- End of Main Content -->
+            </div>
+            <!-- End of Main Content -->
 
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2020</span>
-                        </div>
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Team IT PT. Olean</span>
                     </div>
-                </footer>
-                <!-- End of Footer -->
-
                 </div>
-                <!-- End of Content Wrapper -->
+            </footer>
+            <!-- End of Footer -->
 
-                </div>
-                <!-- End of Page Wrapper -->
+        </div>
+        <!-- End of Content Wrapper -->
 
-                <!-- Scroll to Top Button-->
-                <a class="scroll-to-top rounded" href="#page-top">
-                    <i class="fas fa-angle-up"></i>
-                </a>
+    </div>
+    <!-- End of Page Wrapper -->
 
-                <!-- Bootstrap core JavaScript-->
-                <script src="/vendor/jquery/jquery.js"></script>
-                <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-                <!-- Core plugin JavaScript-->
-                <script src="/vendor/jquery-easing/jquery.easing.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="/jquery/jquery.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
 
-                <!-- Custom scripts for all pages-->
-                <script src="/js/sb-admin-2.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="/jquery-easing/jquery.easing.js"></script>
 
-                <!-- Page level plugins -->
-                <script src="/vendor/datatables/jquery.dataTables.js"></script>
-                <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.js"></script>
 
-                <!-- Page level custom scripts -->
-                <script src="/js/demo/datatables-demo.js"></script>
+    <!-- Page level plugins -->
+    <script src="/datatables/jquery.dataTables.js"></script>
+    <script src="/datatables/dataTables.bootstrap4.js"></script>
 
-                </body>
+    <!-- Page level custom scripts -->
+    <script src="/js/demo/datatables-demo.js"></script>
 
-                </html>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+
+</body>
+
+</html>

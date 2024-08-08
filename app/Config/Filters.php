@@ -86,10 +86,10 @@ class Filters extends BaseFilters
             // 'honeypot',
             // 'secureheaders',
             'AdminFilter' => [
-                'except' => ['beranda', 'stok', 'stok/*', 'barang_masuk', 'barang_masuk/*', 'laporan_stok', 'laporan_stok/*', 'laporan_masuk', 'laporan_masuk/*', 'satuan', 'satuan/*', 'laporan_keluar', 'laporan_keluar/*', 'kategori', 'kategori/*', 'inventaris', 'inventaris/*']
+                'except' => ['user', 'user/*', 'beranda', 'stok', 'stok/*', 'barang_masuk', 'barang_masuk/*', 'laporan_stok', 'laporan_stok/*', 'laporan_masuk', 'laporan_masuk/*', 'satuan', 'satuan/*', 'laporan_keluar', 'laporan_keluar/*', 'kategori', 'kategori/*', 'inventaris', 'inventaris/*']
             ],
             'OperatorFilter' => [
-                'except' => ['beranda','barang_keluar', 'barang_keluar/*', 'barang_pinjam', 'barang_pinjam/*', 'inventaris', 'inventaris/*', 'stok', 'stok/*']
+                'except' => ['beranda', 'stok', 'inventaris', 'barang_keluar', 'barang_keluar/*', 'barang_pinjam', 'barang_pinjam/*',]
             ]
         ],
     ];
@@ -120,10 +120,10 @@ class Filters extends BaseFilters
      */
     public array $filters = [
         'AdminFilter' => [
-            'before' => ['beranda', 'stok', 'stok/*', 'barang_masuk', 'barang_masuk/*', 'laporan_stok', 'laporan_stok/*', 'laporan_masuk', 'laporan_masuk/*', 'satuan', 'satuan/*', 'laporan_keluar', 'laporan_keluar/*', 'peminjaman', 'peminjaman/*', 'kategori', 'kategori/*', 'inventaris', 'inventaris/*']
+            'before' => ['user', 'user/*', 'beranda', 'stok', 'stok/*', 'barang_masuk', 'barang_masuk/*', 'laporan_stok', 'laporan_stok/*', 'laporan_masuk', 'laporan_masuk/*', 'satuan', 'satuan/*', 'laporan_keluar', 'laporan_keluar/*', 'peminjaman', 'peminjaman/*', 'kategori', 'kategori/*', 'inventaris', 'inventaris/*']
         ],
         'OperatorFilter' => [
-            'before' => ['beranda', 'barang_keluar', 'barang_keluar/*', 'laporan_keluar', 'laporan_keluar/*']
+            'before' => ['beranda', 'stok', 'inventaris', 'barang_keluar', 'barang_keluar/*', 'laporan_keluar', 'laporan_keluar/*']
         ]
     ];
 }

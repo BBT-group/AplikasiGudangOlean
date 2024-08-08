@@ -37,21 +37,22 @@
                                     <label for="input2">Keterangan</label>
                                     <input type="text" class="form-control <?php if (isset($validate)) {
                                                                                 echo $validate->hasError('nama_penerima') ? 'is-invalid' : '';
-                                                                            }  ?>" id="nama_penerima" name="nama_penerima" value="<?= old('nama_penerima'); ?>">
+                                                                            }  ?>" id="keterangan" name="keterangan" value="<?= old('keterangan'); ?>">
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <a href="<?= base_url('barang_pinjam/cari') ?>" class="btn btn-primary">Tambah Barang</a>
+                        </div>
+                        <div class="col-6 mb-1" style="text-align: right;">
+                            <button id="clear-session-btn" class="btn btn-secondary">Clear Session</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
                 </form>
-                <div class="row">
-                    <div class="col-6 mb-3">
-                        <a href="<?= base_url('barang_pinjam/cari') ?>" class="btn btn-primary">Tambah Barang</a>
-                    </div>
-                    <div class="col-6 mb-1" style="text-align: right;">
-                        <button id="clear-session-btn" class="btn btn-secondary">Clear Session</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </div>
+
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
@@ -142,6 +143,15 @@
 
 <!-- Page level custom scripts -->
 <script src="/js/demo/datatables-demo.js"></script>
+<script>
+    window.onload = function() {
+        <?php if (session()->has('error')) : ?>
+            alert("<?= addslashes(session('error')) ?>");
+        <?php elseif (session()->has('message')) : ?>
+            alert("<?= addslashes(session('message')) ?>");
+        <?php endif; ?>
+    };
+</script>
 <script>
     $(document).ready(function() {
         $('#clear-session-btn').click(function() {

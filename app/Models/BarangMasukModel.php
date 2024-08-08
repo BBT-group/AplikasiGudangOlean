@@ -42,6 +42,9 @@ class BarangMasukModel extends Model
 
     public function getByMasterId($id)
     {
-        return $this->where('id_barang_masuk', $id)->findAll();
+        return $this->select('barang_masuk.*,barang.*,satuan.nama_satuan')
+            ->join('barang', 'barang.id_barang=barang_masuk.id_barang')
+            ->join('satuan', 'satuan.id_satuan=barang.id_satuan')
+            ->where('id_ms_barang_masuk', $id)->findAll();
     }
 }

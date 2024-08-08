@@ -37,7 +37,9 @@
                                                 <td><?= $user['status'] ?></td>
                                                 <td>
                                                     <a href="/user/edit/<?= $user['id_ms_user'] ?>" class="btn btn-warning btn-sm">Edit</a>
-                                                    <a href="/user/delete/<?= $user['id_ms_user'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus akun ini?')">Delete</a>
+                                                    <?php if ($user['role'] != 'admin') : ?>
+                                                        <a href="/user/delete/<?= $user['id_ms_user'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus akun ini?')">Delete</a>
+                                                    <?php endif; ?>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>

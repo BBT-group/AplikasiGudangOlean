@@ -167,19 +167,16 @@ class Barang_Pinjam extends BaseController
 
                 $namaPenerima = $this->request->getVar('nama_penerima');
                 if ($this->penerimaModel->where('nama', $namaPenerima)->first() == null) {
-                    if (!$this->penerimaModel->insert(['nama' => $namaPenerima], true)) {
-                        throw new DatabaseException('Failed to insert post: kurang dari 0');
-                    }
-                    $penerimaId = $this->peminjamanModel->getInsertID();
+                    $penerimaId = $this->penerimaModel->insert(['nama' => $namaPenerima]) ? $this->penerimaModel->getInsertID() : throw new DatabaseException('Failed to insert post:gagal menambah master' . implode(', ', $this->masterPeminjamanModel->errors()));
                 } else {
                     $penerima = $this->penerimaModel->where('nama', $namaPenerima)->first();
                     $penerimaId = $penerima['id_penerima'];
                 }
-
+                $keterangan = $this->request->getVar('keterangan');
                 date_default_timezone_set('Asia/Jakarta');
                 $currentDateTime =  date("Y-m-d H:i:s");
-                if (!$this->masterPeminjamanModel->insert(['tanggal_pinjam' => $currentDateTime, 'id_penerima' => $penerimaId])) {
-                    throw new DatabaseException('Failed to insert post: kurang dari 0');
+                if (!$this->masterPeminjamanModel->insert(['tanggal_pinjam' => $currentDateTime, 'id_penerima' => $penerimaId, 'keterangan' => $keterangan])) {
+                    throw new DatabaseException('Failed to insert post:gagal menambah master' . implode(', ', $this->masterPeminjamanModel->errors()));
                 }
 
                 $idms = $this->masterPeminjamanModel->getInsertID();
@@ -188,7 +185,7 @@ class Barang_Pinjam extends BaseController
 
                     $barang1 = $this->inventarisModel->where('id_inventaris', $b['id_inventaris'])->first();
 
-                    $stok = $barang1['stok'] + $b['stok'];
+                    $stok = $barang1['stok'] - $b['stok'];
 
                     $data = [
                         'nama_inventaris' => $barang1['nama_inventaris'],
@@ -197,10 +194,10 @@ class Barang_Pinjam extends BaseController
                     ];
 
                     if (!$this->inventarisModel->update($barang1['id_inventaris'], $data)) {
-                        throw new DatabaseException('Failed to insert post: kurang dari 0');
+                        throw new DatabaseException('Failed to insert post: gagal update data alat');
                     }
                     if (!$this->peminjamanModel->insert(['id_inventaris' => $barang1['id_inventaris'], 'id_ms_peminjaman' => $idms, 'jumlah' => $b['stok']])) {
-                        throw new DatabaseException('Failed to insert post: kurang dari 0');
+                        throw new DatabaseException('Failed to insert post: gagla update peminjaman');
                     }
                 } // Commit the transaction
                 if ($db->transStatus() === FALSE) {
@@ -214,13 +211,13 @@ class Barang_Pinjam extends BaseController
                     session()->remove('datalist_pinjam');
                     session()->setFlashdata('message', 'Transaction successful.');
                     // ganti url
-                    return redirect()->to(base_url('/barang_pinjam'));
+                    return redirect()->to(base_url('/barang_pinjam'))->withInput();
                 }
             } catch (DatabaseException $e) {
                 // Rollback transaction on any exception
                 $db->transRollback();
                 session()->setFlashdata('error', 'Transaction failed: ' . $e->getMessage());
-                return redirect()->to(base_url('/barang_pinjam/index'));
+                return redirect()->to(base_url('/barang_pinjam/index'))->withInput();
             }
         } else {
             // ganti url

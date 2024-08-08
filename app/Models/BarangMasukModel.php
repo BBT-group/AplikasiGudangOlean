@@ -11,7 +11,7 @@ class BarangMasukModel extends Model
     protected $tableMsBarangMasuk = 'ms_barang_masuk';
     protected $tableSatuan = 'satuan';
     protected $primaryKey = 'id_barang_masuk';
-    protected $allowedFields = ['id_barang', 'id_ms_barang_masuk', 'jumlah'];
+    protected $allowedFields = ['id_barang', 'id_ms_barang_masuk', 'jumlah', 'id_inventaris'];
 
     public function getBarangMasuk()
     {
@@ -38,11 +38,10 @@ class BarangMasukModel extends Model
             ->get()
             ->getResultArray();
     }
-    
+
 
     public function getByMasterId($id)
     {
         return $this->where('id_barang_masuk', $id)->findAll();
-
     }
 }

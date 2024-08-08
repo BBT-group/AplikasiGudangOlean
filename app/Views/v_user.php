@@ -1,34 +1,43 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Satuan</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Management User</h1>
+                    <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
+
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Satuan</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data User</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <div class="flex-box pb-1">
                                     <div class="col-12 mb-1 p-0">
-                                        <a href="<?= base_url('satuan/indextambah/') ?>" method="post" class="btn btn-primary">Tambah Satuan</a>
+                                        <a href="<?= base_url('user/create') ?>" method="post" class="btn btn-primary">Tambah Akun</a>
                                     </div>
                                 </div>
                                 <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th class="col-0">No</th>
-                                            <th class="col-10">Satuan</th>
-                                            <th class="col-2">Aksi</th>
+                                            <th>ID</th>
+                                            <th>Username</th>
+                                            <th>Nama</th>
+                                            <th>Role</th>
+                                            <th>Status</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($satuan as $k => $sat) : ?>
+                                        <?php foreach ($users as $user) : ?>
                                             <tr>
-                                                <td><?= 1 + $k ?></td>
-                                                <td><?= $sat['nama_satuan'] ?></td>
+                                                <td><?= $user['id_ms_user'] ?></td>
+                                                <td><?= $user['username'] ?></td>
+                                                <td><?= $user['nama'] ?></td>
+                                                <td><?= $user['role'] ?></td>
+                                                <td><?= $user['status'] ?></td>
                                                 <td style="text-align: center;">
-                                                    <a href="<?= base_url('satuan/deletesatuan/' . $sat['id_satuan']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin menghapus?')"><i class="fas fa-trash"></i></a>
+                                                    <a href="/user/edit/<?= $user['id_ms_user'] ?>" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-pencil-alt"></i></a>
+                                                    <a href="/user/delete/<?= $user['id_ms_user'] ?>" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus akun ini?')"><i class="fas fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -37,7 +46,9 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
+
             </div>
             <!-- End of Main Content -->
 
@@ -45,13 +56,17 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Team IT PT. Olean</span>
+                        <span>Copyright &copy; Team IT PT. Olean</span>
                     </div>
                 </div>
             </footer>
             <!-- End of Footer -->
+
         </div>
-        <!-- End of Page Wrapper -->
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -75,25 +90,12 @@
     <!-- Page level custom scripts -->
     <script src="/js/demo/datatables-demo.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        <?php if(session()->getFlashdata('success')) {?>
-        Swal.fire({
-            icon: "success",
-            title: "<?= session()->getFlashdata('success')?>",
-            showConfirmButton: false,
-            timer: 1500
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
         })
-        <?php } ?>
-        <?php if(session()->getFlashdata('warning')) {?>
-        Swal.fire({
-            icon: "warning",
-            title: "<?= session()->getFlashdata('warning')?>",
-            showConfirmButton: false,
-            timer: 1500
-        })
-        <?php } ?>
     </script>
 
 </body>
+
 </html>

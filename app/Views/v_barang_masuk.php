@@ -1,5 +1,6 @@
                 <div class="container-fluid">
-
+                    <?= session()->getFlashdata('error') ?>
+                    <?= session()->getFlashdata('message') ?>
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Inventory Management</h1>
                     <!-- DataTales Example -->
@@ -36,7 +37,7 @@
                                     </div>
                                 </form>
                                 <div class="col-12 mb-3 p-0">
-                                    <a href="<?= base_url('barang_masuk/cari') ?>" class="btn btn-primary">Tambah Barang</a>
+                                    <a href="<?= base_url('barang_masuk/cari') ?>" class="btn btn-primary">Cari Barang</a>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -96,24 +97,7 @@
                     <i class="fas fa-angle-up"></i>
                 </a>
 
-                <!-- Logout Modal-->
-                <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                            <div class="modal-footer">
-                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                <a class="btn btn-primary" href="<?= base_url('logout') ?>">Logout</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
                 <div id="dialog-confirm" title="Barang / Alat Belum ditambahkan" style="display:none;">
                     <p>Tambahkan Barang atau Alat Baru</p>
                 </div>
@@ -140,6 +124,15 @@
 
                 <!-- Page level custom scripts -->
                 <script src="/js/demo/datatables-demo.js"></script>
+                <script>
+                    window.onload = function() {
+                        <?php if (session()->has('error')) : ?>
+                            alert("<?= addslashes(session('error')) ?>");
+                        <?php elseif (session()->has('message')) : ?>
+                            alert("<?= addslashes(session('message')) ?>");
+                        <?php endif; ?>
+                    };
+                </script>
                 <script>
                     $(document).ready(function() {
                         $('#clear-session-btn').click(function() {
@@ -212,6 +205,7 @@
 
                                     barcode = ''; // Reset the barcode string after handling the scan
                                     timeoutId = null; // Reset the timeout ID
+                                    first = true;
                                 }, 200); // Reset the barcode string if more than 100ms passed since the last keypress
                             } else {
                                 barcode = '';
@@ -270,11 +264,11 @@
                                         modal: true,
                                         buttons: {
                                             "Tambah Barang": function() {
-                                                window.location.href = '<?= base_url('/barang_masuk/indextambahbarang') ?>';                                                 
+                                                window.location.href = '<?= base_url('/barang_masuk/indextambahbarang') ?>';
                                                 $(this).dialog("close");
                                             },
                                             "Tambah Alat": function() {
-                                                window.location.href = '<?= base_url('/barang_masuk/indextambahalat') ?>';                                                 
+                                                window.location.href = '<?= base_url('/barang_masuk/indextambahalat') ?>';
                                                 $(this).dialog("close");
                                             }
                                         }

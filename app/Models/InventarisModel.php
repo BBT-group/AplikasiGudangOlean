@@ -19,4 +19,9 @@ class InventarisModel extends Model
     {
         return $this->where('id_inventaris', $nama);
     }
+
+    public function getAlatCount()
+    {
+        return $this->countAll();
+    }
 }

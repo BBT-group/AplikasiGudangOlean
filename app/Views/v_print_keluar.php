@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Barang Masuk - Print</title>
+    <link rel="icon" href="/img/logo.png">
+    <title>Laporan Barang Keluar - Print</title>
     <link rel="stylesheet" href="<?= base_url('/css/print.css') ?>"> <!-- Add your custom print CSS here -->
 </head>
 <body>
     <div class="print-container">
-        <h1 class="text-center">LAPORAN MASUK STOK BARANG GUDANG PT.OLEAN PERMATA</h1>
+        <h1 class="text-center">LAPORAN KELUAR STOK BARANG GUDANG PT.OLEAN PERMATA</h1>
         <p class="text-center">Periode: <?= ($start_date ? $start_date : 'Semua') ?> - <?= ($end_date ? $end_date : 'Semua') ?></p>
         <table border="1" cellspacing="0" cellpadding="5" width="100%">
             <thead>

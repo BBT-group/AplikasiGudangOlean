@@ -37,7 +37,7 @@
                                     </div>
                                 </form>
                                 <div class="col-12 mb-3 p-0">
-                                    <a href="<?= base_url('barang_masuk/cari') ?>" class="btn btn-primary">Tambah Barang</a>
+                                    <a href="<?= base_url('barang_masuk/cari') ?>" class="btn btn-primary">Cari Barang</a>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -72,7 +72,7 @@
                         </div>
 
                     </div>
-
+                </div>
                 </div>
                 <!-- End of Main Content -->
 
@@ -80,7 +80,7 @@
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2020</span>
+                            <span>Copyright &copy; Team IT PT. Olean</span>
                         </div>
                     </div>
                 </footer>
@@ -97,41 +97,25 @@
                     <i class="fas fa-angle-up"></i>
                 </a>
 
-                <!-- Logout Modal-->
-                <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                            <div class="modal-footer">
-                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                <a class="btn btn-primary" href="<?= base_url('logout') ?>">Logout</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
                 <div id="dialog-confirm" title="Barang / Alat Belum ditambahkan" style="display:none;">
                     <p>Tambahkan Barang atau Alat Baru</p>
                 </div>
 
                 <!-- Bootstrap core JavaScript-->
-                <script src="/vendor/jquery/jquery.js"></script>
-                <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+                <script src="/jquery/jquery.js"></script>
+                <script src="/bootstrap/js/bootstrap.bundle.js"></script>
 
                 <!-- Core plugin JavaScript-->
-                <script src="/vendor/jquery-easing/jquery.easing.js"></script>
+                <script src="/jquery-easing/jquery.easing.js"></script>
 
                 <!-- Custom scripts for all pages-->
                 <script src="/js/sb-admin-2.js"></script>
 
                 <!-- Page level plugins -->
-                <script src="/vendor/datatables/jquery.dataTables.js"></script>
-                <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
+                <script src="/datatables/jquery.dataTables.js"></script>
+                <script src="/datatables/dataTables.bootstrap4.js"></script>
+                <script src="/js/demo/datatables-demo.js"></script>
 
                 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

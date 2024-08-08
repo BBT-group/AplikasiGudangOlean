@@ -34,7 +34,6 @@ $routes->add('/barang_masuk/update', 'Barang_Masuk::updateStok');
 $routes->add('/barang_masuk/update2', 'Barang_Masuk::update');
 $routes->add('/barang_masuk/carii', 'Barang_Masuk::cariStok');
 $routes->add('/barang_masuk/hapusitem', 'Barang_Masuk::hapusBarangDatalistMasuk');
-$routes->add('/barang_masuk/indexdetailmaster/(:num)', 'Barang_Masuk::indexDetailMaster/$1');
 
 $routes->add('/barang_keluar/index', 'Barang_keluar::index');
 $routes->post('/barang_keluar/savedata', 'Barang_Keluar::saveData');
@@ -43,27 +42,19 @@ $routes->add('/barang_keluar/clearsession', 'Barang_Keluar::clearSession');
 $routes->add('/barang_keluar/update', 'Barang_Keluar::updateStok');
 $routes->add('/barang_keluar/update2', 'Barang_Keluar::update');
 $routes->add('/barang_keluar/carii', 'Barang_Keluar::cariStok');
-$routes->add('/barang_keluar/hapusitem', 'Barang_Keluar::hapusBarangDatalistKeluar');
+$routes->add('/barang_keluar/hapusitem', 'Barang_Keluar::hapusBarangDatalistMasuk');
 
 $routes->get('/beranda', 'Beranda::index');
 $routes->get('/barang_masuk', 'Barang_Masuk::beranda');
 $routes->get('/barang_masuk/beranda', 'Barang_Masuk::beranda');
 $routes->get('/barang_keluar', 'Barang_Keluar::beranda');
-$routes->get('/barang_keluar/beranda', 'Barang_Keluar::beranda');
 $routes->get('/barang_pinjam', 'Barang_Pinjam::beranda');
-$routes->get('/barang_pinjam/beranda', 'Barang_Pinjam::beranda');
-
 $routes->get('/laporan_stok', 'Laporan_Stok::index');
 $routes->get('/laporan_stok/exports', 'Laporan_Stok::exports');
-$routes->get('/laporan_stok/prints', 'Laporan_Stok::prints');
-
 $routes->get('/laporan_masuk', 'Laporan_Masuk::index');
 $routes->get('/laporan_masuk/exportm', 'Laporan_Masuk::exportm');
-$routes->get('/laporan_masuk/printm', 'Laporan_Masuk::printm');
-
 $routes->get('/laporan_keluar', 'Laporan_Keluar::index');
 $routes->get('/laporan_keluar/exportk', 'Laporan_Keluar::exportk');
-$routes->get('/laporan_keluar/printk', 'Laporan_Keluar::printk');
 
 $routes->get('/stok', 'Stok::index');
 $routes->get('/stok/tambahbarang', 'Stok::tambahBarang');
@@ -92,9 +83,17 @@ $routes->add('/barang_pinjam/update2', 'Barang_pinjam::update');
 $routes->add('/barang_pinjam/carii', 'Barang_pinjam::cariStok');
 $routes->add('/barang_pinjam/hapusitem', 'Barang_pinjam::hapusBarangDatalistPinjam');
 
-$routes->add('/barang_masuk/doubleform', 'Barang_Masuk::doubleForm');
+$routes->add('/barang_masuk/indextambahbarang', 'Barang_Masuk::indexTambahBarang');
+$routes->add('/barang_masuk/indextambahalat', 'Barang_Masuk::indexTambahAlat');
+$routes->add('/barang_masuk/indexdetailmaster/(:num)', 'Barang_masuk::indexDetailMaster/$1');
+$routes->add('/stok/index2', 'Stok::index2');
+$routes->add('/inventaris/index2', 'Inventaris::index2');
+$routes->add('/barang_keluar/indexdetailmaster/(:num)', 'Barang_keluar::indexDetailMaster/$1');
+$routes->add('/barang_pinjam/indexdetailmaster/(:num)', 'Barang_pinjam::indexDetailMaster/$1');
 
-
+$routes->add('/laporan_keluar/printk', 'Laporan_Keluar::printk');
+$routes->add('/laporan_masuk/printm', 'Laporan_Masuk::printm');
+$routes->add('/laporan_stok/prints', 'Laporan_Stok::prints');
 
 $routes->get('/user', 'User::index');
 $routes->get('/user/create', 'User::create');

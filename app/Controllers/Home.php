@@ -39,8 +39,8 @@ class Home extends BaseController
             } elseif(password_verify($post['password'], $user->password)) {
                 $params = ['role' => $user->role, 'nama' =>$user->nama];
                 session()->set($params);
-                return redirect()->to('/beranda');
-            }else {
+                return redirect()->to('/beranda')->with('login_suceess', 'Tambahkan Kategori dan Satuan terlebih dahulu sebelum menambahkan Barang baru');
+             }else {
                 return redirect()->back()->with('error', 'Password tidak sesuai');
             }
         } else {

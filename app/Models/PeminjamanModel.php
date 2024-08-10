@@ -9,4 +9,11 @@ class PeminjamanModel extends Model
     protected $table = 'peminjaman';
     protected $primaryKey = 'id_peminjaman';
     protected $allowedFields = ['id_ms_peminjaman', 'id_inventaris', 'jumlah'];
+
+    public function getByMasterId($id)
+    {
+        return $this->select('peminjaman.*,inventaris.*')
+            ->join('inventaris', 'inventaris.id_inventaris = peminjaman.id_inventaris')
+            ->where('id_ms_peminjaman', $id)->findAll();
+    }
 }

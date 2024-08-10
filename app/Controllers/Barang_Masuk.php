@@ -173,8 +173,8 @@ class Barang_Masuk extends BaseController
                 } else {
                     $suppId = $newSupp['id_supplier'];
                 }
-                date_default_timezone_set('Asia/Jakarta');
-                $currentDateTime =  date("Y-m-d H:i:s");
+
+                $currentDateTime =  date("d-m-Y H:i:s");
                 if (!$this->masterBarangMasukModel->insert(['waktu' => $currentDateTime, 'id_supplier' => $suppId])) {
                     throw new DatabaseException('Failed to insert master barang masuk post: ' . implode(', ', $this->masterBarangMasukModel->errors()));
                 }

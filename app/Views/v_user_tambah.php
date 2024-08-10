@@ -14,7 +14,7 @@
 
     <!-- Custom fonts for this template-->
     <link href="/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
@@ -33,7 +33,7 @@
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <div class="row">
-                        <!-- Nested Row within Card Body -->
+                            <!-- Nested Row within Card Body -->
                             <div class="col-lg-12">
                                 <div class="p-5">
                                     <div class="text-center">
@@ -53,7 +53,6 @@
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <select class="form-control" id="status" name="status" required>
                                                     <option value="aktif">Aktif</option>
-                                                    <option value="tidak aktif">Tidak Aktif</option>
                                                 </select>
                                             </div>
                                             <div class="col-sm-6">
@@ -65,7 +64,8 @@
                                         </div>
                                         <button class="btn btn-primary btn-user btn-block">
                                             Submit
-                                        </button>                                     
+                                        </button>
+                                        <a class="btn btn-danger btn-user btn-block" href="<?php echo base_url('beranda') ?>">Batal</a>
                                     </form>
                                     <hr>
                                 </div>

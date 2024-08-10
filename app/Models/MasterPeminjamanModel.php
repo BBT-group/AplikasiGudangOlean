@@ -15,4 +15,11 @@ class MasterPeminjamanModel extends Model
         return $this->select('ms_peminjaman.*,penerima.nama')
             ->join('penerima', 'penerima.id_penerima = ms_peminjaman.id_penerima');
     }
+    public function getById($id)
+    {
+        return $this->select('ms_peminjaman.*,penerima.nama')
+            ->join('penerima', 'penerima.id_penerima = ms_peminjaman.id_penerima')
+            ->where('id_ms_peminjaman', $id)
+            ->first();
+    }
 }

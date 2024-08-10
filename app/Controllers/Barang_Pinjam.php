@@ -37,17 +37,17 @@ class Barang_Pinjam extends BaseController
         echo view('v_header');
         return view('v_peminjaman', $data);
     }
-    public function indexDetailMaster()
+    public function indexDetailMaster($id)
     {
-        // $idBarang = $this->request->getVar('id_ms_barang_keluar');
-        // $data = [
-        //     // mengambil header ms barang masuk yaitu nama supp, tanggal, id master barang
-        //     'header' => $this->masterBarangKeluarModel->getById($idBarang),
-        //     // mengambil data yang memiliki id ms barang masuk
-        //     'barang' => $this->barangKeluarModel->getByMasterId($idBarang)
-        // ];
+        $idBarang = $this->request->getVar('id_ms_barang_keluar');
+        $data = [
+            // mengambil header ms barang masuk yaitu nama supp, tanggal, id master barang
+            'header' => $this->masterPeminjamanModel->getById($id),
+            // mengambil data yang memiliki id ms barang masuk
+            'barang' => $this->peminjamanModel->getByMasterId($id)
+        ];
         echo view('v_header');
-        return view('admin\detailpeminjaman');
+        return view('admin\detailpeminjaman', $data);
     }
 
     public function index2()
@@ -186,7 +186,7 @@ class Barang_Pinjam extends BaseController
                 }
                 $keterangan = $this->request->getVar('keterangan');
                 date_default_timezone_set('Asia/Jakarta');
-                $currentDateTime =  date("Y-m-d H:i:s");
+                $currentDateTime =  date("d-m-Y H:i:s");
                 if (!$this->masterPeminjamanModel->insert(['tanggal_pinjam' => $currentDateTime, 'id_penerima' => $penerimaId, 'keterangan' => $keterangan])) {
                     throw new DatabaseException('Failed to insert post:gagal menambah master' . implode(', ', $this->masterPeminjamanModel->errors()));
                 }
@@ -308,11 +308,12 @@ class Barang_Pinjam extends BaseController
 
     public function updateStatus()
     {
-        if ($this->request->getVar('status') == 'kembali') {
+        if ($this->request->getMethod() == 'POST') {
+
             $id = $this->request->getVar('id_ms_peminjaman');
-            $data = $this->masterPeminjamanModel->where('id_ms_peminjaman')->first();
-            date_default_timezone_set('Asia/Jakarta');
-            $currentDateTime =  date("Y-m-d H:i:s");
+            $data = $this->masterPeminjamanModel->where('id_ms_peminjaman', $id)->first();
+
+            $currentDateTime =  date("d-m-Y H:i:s");
             $newData = [
                 'tanggal_pinjam' => $data['tanggal_pinjam'],
                 'tanggal_kembali' => $currentDateTime,
@@ -320,7 +321,10 @@ class Barang_Pinjam extends BaseController
                 'status' => '0',
                 'bukti_peminjaman' => $data['bukti_peminjaman']
             ];
-            $this->masterPeminjamanModel->update($data['id_ms_peminjaman'], $newData);
+            if (!$this->masterPeminjamanModel->update($data['id_ms_peminjaman'], $newData)) {
+                return redirect()->to(base_url('/barang_pinjam/index'))->withInput();
+            }
+            return redirect()->to(base_url('/barang_pinjam'))->withInput();
         }
     }
 }

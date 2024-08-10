@@ -136,11 +136,9 @@
 
 <!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.js"></script>
-
+<script src="/datatables/jquery.dataTables.js"></script>
+<script src="/datatables/dataTables.bootstrap4.js"></script>
 <!-- Page level plugins -->
-<script src="/vendor/datatables/jquery.dataTables.js"></script>
-<script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
-
 <!-- Page level custom scripts -->
 <script src="/js/demo/datatables-demo.js"></script>
 <script>

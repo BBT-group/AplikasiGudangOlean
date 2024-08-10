@@ -162,7 +162,7 @@ class Barang_Keluar extends BaseController
                     $penerimaId = $penerima['id_penerima'];
                 }
                 date_default_timezone_set('Asia/Jakarta');
-                $currentDateTime =  date("Y-m-d H:i:s");
+                $currentDateTime =  date("d-m-Y H:i:s");
 
                 if (!$this->masterBarangKeluarModel->insert(['waktu' => $currentDateTime, 'id_penerima' => $penerimaId])) {
                     throw new DatabaseException('gagal insert master barang keluar');
@@ -296,5 +296,4 @@ class Barang_Keluar extends BaseController
             return $this->response->setJSON(['status' => 'eror']);
         }
     }
-    
 }

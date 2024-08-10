@@ -76,6 +76,7 @@ $routes->get('/laporan_stok/exports', 'Laporan_Stok::exports');
 
 $routes->post('/barang_pinjam/savedata', 'Barang_pinjam::saveData');
 $routes->add('/barang_pinjam/cari', 'Barang_pinjam::index2');
+$routes->add('/barang_pinjam/updatestatus', 'Barang_pinjam::updateStatus');
 $routes->add('/barang_pinjam/index', 'Barang_pinjam::index');
 $routes->add('/barang_pinjam/clearsession', 'Barang_pinjam::clearSession');
 $routes->add('/barang_pinjam/update', 'Barang_pinjam::updateStok');

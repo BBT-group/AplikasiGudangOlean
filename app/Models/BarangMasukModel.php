@@ -11,7 +11,7 @@ class BarangMasukModel extends Model
     protected $tableMsBarangMasuk = 'ms_barang_masuk';
     protected $tableSatuan = 'satuan';
     protected $primaryKey = 'id_barang_masuk';
-    protected $allowedFields = ['id_barang', 'id_ms_barang_masuk', 'jumlah', 'id_inventaris'];
+    protected $allowedFields = ['id_barang', 'id_ms_barang_masuk', 'jumlah', 'id_inventaris', 'stok_awal'];
 
     public function getBarangMasuk()
     {

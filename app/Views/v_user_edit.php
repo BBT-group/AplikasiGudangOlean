@@ -65,7 +65,7 @@
                                         <button class="btn btn-primary btn-user btn-block">
                                             Update
                                         </button>
-                                        <a class="btn btn-danger btn-user btn-block" href="<?php echo base_url('beranda') ?>">Batal</a>s
+                                        <a class="btn btn-danger btn-user btn-block" href="<?php echo base_url('beranda') ?>">Batal</a>
                                     </form>
                                     <hr>
                                 </div>

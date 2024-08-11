@@ -8,7 +8,7 @@ class PeminjamanModel extends Model
 {
     protected $table = 'peminjaman';
     protected $primaryKey = 'id_peminjaman';
-    protected $allowedFields = ['id_ms_peminjaman', 'id_inventaris', 'jumlah'];
+    protected $allowedFields = ['id_ms_peminjaman', 'id_inventaris', 'jumlah', 'stok_awal'];
 
     public function getByMasterId($id)
     {

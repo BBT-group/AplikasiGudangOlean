@@ -208,7 +208,7 @@ class Barang_Pinjam extends BaseController
                     if (!$this->inventarisModel->update($barang1['id_inventaris'], $data)) {
                         throw new DatabaseException('Failed to insert post: gagal update data alat');
                     }
-                    if (!$this->peminjamanModel->insert(['id_inventaris' => $barang1['id_inventaris'], 'id_ms_peminjaman' => $idms, 'jumlah' => $b['stok']])) {
+                    if (!$this->peminjamanModel->insert(['id_inventaris' => $barang1['id_inventaris'], 'id_ms_peminjaman' => $idms, 'jumlah' => $b['stok'], 'stok_awal' => $barang1['stok']])) {
                         throw new DatabaseException('Failed to insert post: gagla update peminjaman');
                     }
                 } // Commit the transaction
@@ -313,7 +313,7 @@ class Barang_Pinjam extends BaseController
             $id = $this->request->getVar('id_ms_peminjaman');
             $data = $this->masterPeminjamanModel->where('id_ms_peminjaman', $id)->first();
 
-            $currentDateTime =  date("d-m-Y H:i:s");
+            $currentDateTime =  date("Y-m-d H:i:s");
             $newData = [
                 'tanggal_pinjam' => $data['tanggal_pinjam'],
                 'tanggal_kembali' => $currentDateTime,

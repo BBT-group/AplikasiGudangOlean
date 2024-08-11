@@ -97,7 +97,7 @@
                     <i class="fas fa-angle-up"></i>
                 </a>
 
-                
+
                 <div id="dialog-confirm" title="Barang / Alat Belum ditambahkan" style="display:none;">
                     <p>Tambahkan Barang atau Alat Baru</p>
                 </div>
@@ -264,11 +264,11 @@
                                         modal: true,
                                         buttons: {
                                             "Tambah Barang": function() {
-                                                window.location.href = '<?= base_url('/barang_masuk/indextambahbarang') ?>';
+                                                window.location.href = '<?= base_url('/stok/indextambah') ?>';
                                                 $(this).dialog("close");
                                             },
                                             "Tambah Alat": function() {
-                                                window.location.href = '<?= base_url('/barang_masuk/indextambahalat') ?>';
+                                                window.location.href = '<?= base_url('/inventaris/indextambah') ?>';
                                                 $(this).dialog("close");
                                             }
                                         }

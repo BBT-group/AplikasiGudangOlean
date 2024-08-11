@@ -162,7 +162,7 @@ class Barang_Keluar extends BaseController
                     $penerimaId = $penerima['id_penerima'];
                 }
                 date_default_timezone_set('Asia/Jakarta');
-                $currentDateTime =  date("d-m-Y H:i:s");
+                $currentDateTime =  date("Y-m-d H:i:s");
 
                 if (!$this->masterBarangKeluarModel->insert(['waktu' => $currentDateTime, 'id_penerima' => $penerimaId])) {
                     throw new DatabaseException('gagal insert master barang keluar');
@@ -192,7 +192,7 @@ class Barang_Keluar extends BaseController
                         throw new DatabaseException('Failed to insert post: ' . implode(', ', $this->barangModel->errors()));
                     }
 
-                    if (!$this->barangKeluarModel->insert(['id_barang' => $barang1['id_barang'], 'id_ms_barang_keluar' => $idms, 'jumlah' => $b['stok']])) {
+                    if (!$this->barangKeluarModel->insert(['id_barang' => $barang1['id_barang'], 'id_ms_barang_keluar' => $idms, 'jumlah' => $b['stok'], 'stok_awal' => $barang1['stok']])) {
                         // If the post insert fails, rollback transaction
                         throw new DatabaseException('Failed to insert post: ' . implode(', ', $this->barangKeluarModel->errors()));
                     }

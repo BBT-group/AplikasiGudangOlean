@@ -95,6 +95,11 @@
                         <span>Laporan Stok</span></a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="laporan_inventaris">
+                        <i class="fas fa-fw fa-file-signature"></i>
+                        <span>Laporan Inventaris</span></a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="<?php echo base_url('laporan_masuk') ?>">
                         <i class="fas fa-fw fa-file-import"></i>
                         <span>Laporan Barang Masuk</span></a>

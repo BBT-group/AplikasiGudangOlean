@@ -29,28 +29,25 @@ class Laporan_Stok extends BaseController
 
     public function prints()
     {
-    $search = $this->request->getGet('search') ?? '';
-    $data = [
-        'barang' => $this->stokModel->getBarangGabung($search),
-        'search' => $search
-    ];
-    echo view('v_print_stok', $data);
+        $data = [
+            'barang' => $this->stokModel->getBarangGabung(),
+        ];
+        echo view('v_print_stok', $data);
     }
-
+    
     public function exports()
     {
-        $search = $this->request->getGet('search') ?? '';
-        $data = $this->stokModel->getBarangGabung($search);
-
+        $data = $this->stokModel->getBarangGabung();
+    
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-
+    
         // Set header file
         $sheet->mergeCells('A1:G1');
         $sheet->setCellValue('A1', 'LAPORAN STOK BARANG GUDANG ');
         $sheet->mergeCells('A2:G2');
         $sheet->setCellValue('A2', 'PT.OLEAN PERMATA');
-
+    
         // Header kolom
         $sheet->setCellValue('A3', 'No');
         $sheet->setCellValue('B3', 'ID Barang');
@@ -59,7 +56,7 @@ class Laporan_Stok extends BaseController
         $sheet->setCellValue('E3', 'Stok');
         $sheet->setCellValue('F3', 'Satuan');
         $sheet->setCellValue('G3', 'Harga Beli');
-
+    
         // Data
         $row = 4;
         $no = 1;
@@ -74,17 +71,17 @@ class Laporan_Stok extends BaseController
             
             $row++;
         }
-
+    
         // Styling header
         $sheet->getStyle('A1:G2')->getFont()->setBold(true);
         $sheet->getStyle('A1:G2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-
+    
         // Mengubah warna background header
         $sheet->getStyle('A1:G2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
         $sheet->getStyle('A1:G2')->getFill()->getStartColor()->setARGB('34a853'); // Warna hijau, gunakan kode warna hex RGB 
         $sheet->getStyle('A3:G3')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
         $sheet->getStyle('A3:G3')->getFill()->getStartColor()->setARGB('b6d7a8'); 
-
+    
         // Apply border to the header and data
         $styleArray = [
             'borders' => [
@@ -94,17 +91,18 @@ class Laporan_Stok extends BaseController
                 ],
             ],
         ];
-
+    
         $sheet->getStyle('A1:G' . ($row - 1))->applyFromArray($styleArray);
-
+    
         $writer = new Xlsx($spreadsheet);
         $filename = 'laporan_stok_barang.xlsx';
-
+    
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment; filename="' . $filename . '"');
         header('Cache-Control: max-age=0');
-
+    
         $writer->save('php://output');
         exit;
     }
+    
 }

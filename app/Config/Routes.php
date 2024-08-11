@@ -56,6 +56,10 @@ $routes->get('/laporan_stok', 'Laporan_Stok::index');
 $routes->get('/laporan_stok/exports', 'Laporan_Stok::exports');
 $routes->get('/laporan_stok/prints', 'Laporan_Stok::prints');
 
+$routes->get('/laporan_inventaris', 'Laporan_Inventaris::index');
+$routes->get('/laporan_inventaris/exporti', 'Laporan_Inventaris::exporti');
+$routes->get('/laporan_inventaris/printi', 'Laporan_Inventaris::printi');
+
 $routes->get('/laporan_masuk', 'Laporan_Masuk::index');
 $routes->get('/laporan_masuk/exportm', 'Laporan_Masuk::exportm');
 $routes->get('/laporan_masuk/printm', 'Laporan_Masuk::printm');

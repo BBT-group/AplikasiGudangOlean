@@ -86,7 +86,7 @@ class Filters extends BaseFilters
             // 'honeypot',
             // 'secureheaders',
             'AdminFilter' => [
-                'except' => ['beranda', 'stok', 'stok/*', 'barang_masuk', 'barang_masuk/*', 'laporan_stok', 'laporan_stok/*', 'laporan_masuk', 'laporan_masuk/*', 'satuan', 'satuan/*', 'laporan_keluar', 'laporan_keluar/*', 'peminjaman', 'peminjaman/*', 'kategori', 'kategori/*', 'inventaris', 'inventaris/*','user', 'user*','user/changepassword','user/changepassword*']
+                'except' => ['beranda', 'stok', 'stok/*', 'barang_masuk', 'barang_masuk/*', 'laporan_stok', 'laporan_stok/*', 'laporan_inventaris', 'laporan_inventaris/*','laporan_masuk', 'laporan_masuk/*', 'satuan', 'satuan/*', 'laporan_keluar', 'laporan_keluar/*','laporan_peminjaman', 'laporan_peminjaman/*', 'peminjaman', 'peminjaman/*', 'kategori', 'kategori/*', 'inventaris', 'inventaris/*','user', 'user*','user/changepassword','user/changepassword*']
             ],
             'OperatorFilter' => [
                 'except' => ['beranda', 'barang_keluar', 'barang_keluar/*', 'stok', 'stok/*', 'satuan', 'satuan/*', 'kategori', 'kategori/*', 'inventaris', 'inventaris/*', 'barang_pinjam/*', 'barang_pinjam','user/changepassword','user/changepassword*']

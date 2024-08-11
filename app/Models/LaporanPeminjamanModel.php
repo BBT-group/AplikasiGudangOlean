@@ -6,48 +6,43 @@ use CodeIgniter\Model;
 
 class LaporanPeminjamanModel extends Model
 {
-    protected $table = 'barang_keluar';
-    protected $tableBarang = 'barang';
+    protected $table = 'peminjaman';
+    protected $tableInventaris = 'inventaris';
     protected $tablePenerima = 'penerima';
-    protected $tableMsBarangKeluar = 'ms_barang_keluar';
-    protected $tableSatuan = 'satuan';
-    protected $primaryKey = 'id_barang_keluar';
-    protected $allowedFields = ['id_barang', 'id_ms_barang_keluar', 'jumlah'];
+    protected $tableMsPeminjaman = 'ms_peminjaman';
+    protected $primaryKey = 'id_peminjaman';
 
-    public function getBarangKeluar()
+    public function getPeminjaman()
     {
         return $this->findAll();
     }
 
-    public function getBarangKeluarGabung()
+    public function getPeminjamanGabung()
     {
         return $this->db->table($this->table)
-            ->select('barang_keluar.*, barang.nama as nama_barang,barang.stok, barang.harga_beli, penerima.nama as nama_penerima, ms_barang_keluar.waktu,satuan.nama_satuan')
-            ->join($this->tableBarang, 'barang.id_barang = barang_keluar.id_barang')
-            ->join($this->tableMsBarangKeluar, 'ms_barang_keluar.id_ms_barang_keluar = barang_keluar.id_ms_barang_keluar')
-            ->join($this->tablePenerima, 'penerima.id_penerima = ms_barang_keluar.id_penerima')
-            ->join($this->tableSatuan, 'satuan.id_satuan = barang.id_satuan')
+            ->select('peminjaman.*, inventaris.nama_inventaris, penerima.nama as nama_penerima, ms_peminjaman.tanggal_pinjam, ms_peminjaman.tanggal_kembali')
+            ->join($this->tableInventaris, 'inventaris.id_inventaris = peminjaman.id_inventaris')
+            ->join($this->tableMsPeminjaman, 'ms_peminjaman.id_ms_peminjaman = peminjaman.id_ms_peminjaman')
+            ->join($this->tablePenerima, 'penerima.id_penerima = ms_peminjaman.id_penerima')
             ->get()
             ->getResultArray();
     }
 
-    public function getBarangKeluarGabungFilter($start_date, $end_date)
+    public function getPeminjamanGabungFilter($start_date, $end_date)
     {
         return $this->db->table($this->table)
-            ->select('barang_keluar.*, barang.nama as nama_barang, barang.stok, barang.harga_beli, penerima.nama as nama_penerima, ms_barang_keluar.waktu,satuan.nama_satuan')
-            ->join($this->tableBarang, 'barang.id_barang = barang_keluar.id_barang')
-            ->join($this->tableMsBarangKeluar, 'ms_barang_keluar.id_ms_barang_keluar = barang_keluar.id_ms_barang_keluar')
-            ->join($this->tablePenerima, 'penerima.id_penerima = ms_barang_keluar.id_penerima')
-            ->join($this->tableSatuan, 'satuan.id_satuan = barang.id_satuan')
-            ->where('DATE(ms_barang_keluar.waktu) >=', $start_date)
-            ->where('DATE(ms_barang_keluar.waktu) <=', $end_date)
+            ->select('peminjaman.*, inventaris.nama_inventaris, penerima.nama as nama_penerima, ms_peminjaman.tanggal_pinjam, ms_peminjaman.tanggal_kembali')
+            ->join($this->tableInventaris, 'inventaris.id_inventaris = peminjaman.id_inventaris')
+            ->join($this->tableMsPeminjaman, 'ms_peminjaman.id_ms_peminjaman = peminjaman.id_ms_peminjaman')
+            ->join($this->tablePenerima, 'penerima.id_penerima = ms_peminjaman.id_penerima')
+            ->where('DATE(ms_peminjaman.tanggal_pinjam) >=', $start_date)
+            ->where('DATE(ms_peminjaman.tanggal_pinjam) <=', $end_date)
             ->get()
             ->getResultArray();
     }
 
     public function getByMasterId($id)
     {
-        return $this->where('id_barang_keluar', $id)->findAll();
+        return $this->where('id_peminjaman', $id)->findAll();
     }
 }
-?>

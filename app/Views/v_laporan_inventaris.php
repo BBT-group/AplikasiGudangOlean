@@ -13,9 +13,10 @@
                             <div class="row mb-3">
                                 <div class="col-md-6"></div>
                                 <div class="col-md-6" style="text-align: end;">
-                                    <a href="<?= base_url('/laporan_stok/exports') ?>" class="btn btn-success">Export to Excel</a>
-                                    <a href="<?= base_url('/laporan_stok/prints') ?>" target="_blank" class="btn btn-primary">Print</a>
+                                    <a href="<?= base_url('/laporan_inventaris/exporti') ?>" class="btn btn-success">Export to Excel</a>
+                                    <a href="<?= base_url('/laporan_inventaris/printi') ?>" target="_blank" class="btn btn-primary">Print</a>
                                 </div>
+
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered" id="dataTables" width="100%" cellspacing="0">
@@ -24,21 +25,17 @@
                                         <th>No</th>
                                         <th>Id Barang</th>
                                         <th>Nama Barang</th>
-                                        <th>Kategori</th>
                                         <th>Stok</th>
-                                        <th>Satuan</th>
                                         <th>Harga Beli</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $no = 1; foreach ($barang as $item) : ?>
+                                    <?php $no = 1; foreach ($inventaris as $item) : ?>
                                         <tr>
                                             <td><?= $no++ ?></td>
-                                            <td><?= $item['id_barang'] ?></td>
-                                            <td><?= $item['nama'] ?></td>
-                                            <td><?= $item['nama_kategori'] ?></td>
+                                            <td><?= $item['id_inventaris'] ?></td>
+                                            <td><?= $item['nama_inventaris'] ?></td>
                                             <td><?= $item['stok'] ?></td>
-                                            <td><?= $item['nama_satuan'] ?></td>
                                             <td><?= $item['harga_beli'] ?></td>
                                         </tr>
                                     <?php endforeach; ?>

@@ -6,6 +6,7 @@ use App\Models\BarangModel;
 use App\Models\KategoriModel;
 use App\Models\SatuanModel;
 use Config\Pager;
+use PhpParser\Node\Stmt\TryCatch;
 
 class Stok extends BaseController
 {
@@ -167,5 +168,14 @@ class Stok extends BaseController
         ];
         echo view('v_header');
         return view('v_stok_operator', $data);
+    }
+
+    public function deleteBarang($id_barang)
+    {
+        $data = $this->barangModel->getBarangById($id_barang);
+        unlink($data['foto']);
+        $this->barangModel->delete($id_barang);
+        session()->setFlashdata('delete', 'Barang berhasil dihapus');
+        return redirect()->to('/stok');
     }
 }

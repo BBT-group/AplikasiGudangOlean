@@ -63,7 +63,7 @@ $routes->get('/laporan_peminjaman/printp', 'Laporan_Peminjaman::printp');
 $routes->get('/stok', 'Stok::index');
 $routes->get('/stok/tambahbarang', 'Stok::tambahBarang');
 $routes->add('/stok/updatebarang', 'Stok::updateBarang');
-$routes->get('/stok/deletebarang/(:num)', 'Stok::deletebarang/$1');
+$routes->get('/stok/deletebarang/(:num)', 'Stok::deleteBarang/$1');
 
 $routes->get('/satuan/deletesatuan/(:num)', 'Satuan::deletesatuan/$1');
 $routes->get('/satuan', 'Satuan::index');

@@ -64,6 +64,10 @@ $routes->get('/laporan_keluar', 'Laporan_Keluar::index');
 $routes->get('/laporan_keluar/exportk', 'Laporan_Keluar::exportk');
 $routes->get('/laporan_keluar/printk', 'Laporan_Keluar::printk');
 
+$routes->get('/laporan_peminjaman', 'Laporan_Peminjaman::index');
+$routes->get('/laporan_peminjaman/exportp', 'Laporan_Peminjaman::exportp');
+$routes->get('/laporan_peminjaman/printp', 'Laporan_Peminjaman::printp');
+
 $routes->get('/stok', 'Stok::index');
 $routes->get('/stok/tambahbarang', 'Stok::tambahBarang');
 $routes->add('/stok/updatebarang', 'Stok::updateBarang');

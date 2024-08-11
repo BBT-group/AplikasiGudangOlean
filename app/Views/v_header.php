@@ -105,6 +105,12 @@
                         <span>Laporan Barang Keluar</span></a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url('laporan_peminjaman') ?>">
+                        <i class="fas fa-fw fa-file-export"></i>
+                        <span>Laporan peminjaman</span></a>
+                </li>
+
                 <hr class="sidebar-divider d-none d-md-block">
 
                 <div class="sidebar-heading">

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class LaporanKeluarModel extends Model
+class LaporanPeminjamanModel extends Model
 {
     protected $table = 'barang_keluar';
     protected $tableBarang = 'barang';

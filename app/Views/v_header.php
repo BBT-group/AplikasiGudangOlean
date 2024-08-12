@@ -85,11 +85,17 @@
                 </li>
                 <hr class="sidebar-divider">
                 <div class="sidebar-heading">Laporan</div>
-                <li class="nav-item <?= uri_string() == 'laporan_stok' ? 'active' : '' ?>">
-                    <a class="nav-link" href="<?php echo base_url('laporan_stok') ?>">
-                        <i class="fas fa-fw fa-file-signature"></i>
+                <li class="nav-item <?= in_array(uri_string(), ['laporan_stok', 'laporan_inventaris']) ? 'active' : '' ?>">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <i class="fas fa-fw fa-layer-group"></i>
                         <span>Laporan Stok</span>
                     </a>
+                    <div id="collapseOne" class="collapse <?= in_array(uri_string(), ['laporan_stok', 'laporan_inventaris']) ? 'show' : '' ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item <?= uri_string() == 'laporan_stok' ? 'active' : '' ?>" href="<?php echo base_url('laporan_stok') ?>">Stok Barang</a>
+                            <a class="collapse-item <?= uri_string() == 'laporan_inventaris' ? 'active' : '' ?>" href="<?php echo base_url('laporan_inventaris') ?>">Stok Alat</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item <?= uri_string() == 'laporan_masuk' ? 'active' : '' ?>">
                     <a class="nav-link" href="<?php echo base_url('laporan_masuk') ?>">
@@ -101,6 +107,12 @@
                     <a class="nav-link" href="<?php echo base_url('laporan_keluar') ?>">
                         <i class="fas fa-fw fa-file-export"></i>
                         <span>Laporan Barang Keluar</span>
+                    </a>
+                </li>
+                <li class="nav-item <?= uri_string() == 'laporan_peminjaman' ? 'active' : '' ?>">
+                    <a class="nav-link" href="<?php echo base_url('laporan_peminjaman') ?>">
+                        <i class="fas fa-fw fa-file-export"></i>
+                        <span>Laporan peminjaman</span>
                     </a>
                 </li>
                 <hr class="sidebar-divider d-none d-md-block">

@@ -37,17 +37,17 @@ class Barang_Pinjam extends BaseController
         echo view('v_header');
         return view('v_peminjaman', $data);
     }
-    public function indexDetailMaster()
+    public function indexDetailMaster($id)
     {
-        // $idBarang = $this->request->getVar('id_ms_barang_keluar');
-        // $data = [
-        //     // mengambil header ms barang masuk yaitu nama supp, tanggal, id master barang
-        //     'header' => $this->masterBarangKeluarModel->getById($idBarang),
-        //     // mengambil data yang memiliki id ms barang masuk
-        //     'barang' => $this->barangKeluarModel->getByMasterId($idBarang)
-        // ];
+        $idBarang = $this->request->getVar('id_ms_barang_keluar');
+        $data = [
+            // mengambil header ms barang masuk yaitu nama supp, tanggal, id master barang
+            'header' => $this->masterPeminjamanModel->getById($id),
+            // mengambil data yang memiliki id ms barang masuk
+            'barang' => $this->peminjamanModel->getByMasterId($id)
+        ];
         echo view('v_header');
-        return view('admin\detailpeminjaman');
+        return view('admin\detailpeminjaman', $data);
     }
 
     public function index2()
@@ -179,19 +179,16 @@ class Barang_Pinjam extends BaseController
 
                 $namaPenerima = $this->request->getVar('nama_penerima');
                 if ($this->penerimaModel->where('nama', $namaPenerima)->first() == null) {
-                    if (!$this->penerimaModel->insert(['nama' => $namaPenerima], true)) {
-                        throw new DatabaseException('Failed to insert post: kurang dari 0');
-                    }
-                    $penerimaId = $this->peminjamanModel->getInsertID();
+                    $penerimaId = $this->penerimaModel->insert(['nama' => $namaPenerima]) ? $this->penerimaModel->getInsertID() : throw new DatabaseException('Failed to insert post:gagal menambah master' . implode(', ', $this->masterPeminjamanModel->errors()));
                 } else {
                     $penerima = $this->penerimaModel->where('nama', $namaPenerima)->first();
                     $penerimaId = $penerima['id_penerima'];
                 }
-
+                $keterangan = $this->request->getVar('keterangan');
                 date_default_timezone_set('Asia/Jakarta');
-                $currentDateTime =  date("Y-m-d H:i:s");
-                if (!$this->masterPeminjamanModel->insert(['tanggal_pinjam' => $currentDateTime, 'id_penerima' => $penerimaId])) {
-                    throw new DatabaseException('Failed to insert post: kurang dari 0');
+                $currentDateTime =  date("d-m-Y H:i:s");
+                if (!$this->masterPeminjamanModel->insert(['tanggal_pinjam' => $currentDateTime, 'id_penerima' => $penerimaId, 'keterangan' => $keterangan])) {
+                    throw new DatabaseException('Failed to insert post:gagal menambah master' . implode(', ', $this->masterPeminjamanModel->errors()));
                 }
 
                 $idms = $this->masterPeminjamanModel->getInsertID();
@@ -200,19 +197,22 @@ class Barang_Pinjam extends BaseController
 
                     $barang1 = $this->inventarisModel->where('id_inventaris', $b['id_inventaris'])->first();
 
-                    $stok = $barang1['stok'] + $b['stok'];
-
+                    $sisa = $barang1['stok'] - $b['stok'];
+                    if ($sisa < 0) {
+                        // If the post insert fails, rollback transaction
+                        throw new DatabaseException('Failed to insert post: kurang dari 0');
+                    }
                     $data = [
                         'nama_inventaris' => $barang1['nama_inventaris'],
                         'foto' => $barang1['foto'],
-                        'stok' => $stok,
+                        'stok' => $sisa,
                     ];
 
                     if (!$this->inventarisModel->update($barang1['id_inventaris'], $data)) {
-                        throw new DatabaseException('Failed to insert post: kurang dari 0');
+                        throw new DatabaseException('Failed to insert post: gagal update data alat');
                     }
-                    if (!$this->peminjamanModel->insert(['id_inventaris' => $barang1['id_inventaris'], 'id_ms_peminjaman' => $idms, 'jumlah' => $b['stok']])) {
-                        throw new DatabaseException('Failed to insert post: kurang dari 0');
+                    if (!$this->peminjamanModel->insert(['id_inventaris' => $barang1['id_inventaris'], 'id_ms_peminjaman' => $idms, 'jumlah' => $b['stok'], 'stok_awal' => $barang1['stok']])) {
+                        throw new DatabaseException('Failed to insert post: gagla update peminjaman');
                     }
                 } // Commit the transaction
                 if ($db->transStatus() === FALSE) {
@@ -226,13 +226,13 @@ class Barang_Pinjam extends BaseController
                     session()->remove('datalist_pinjam');
                     session()->setFlashdata('message', 'Transaction successful.');
                     // ganti url
-                    return redirect()->to(base_url('/barang_pinjam'));
+                    return redirect()->to(base_url('/barang_pinjam'))->withInput();
                 }
             } catch (DatabaseException $e) {
                 // Rollback transaction on any exception
                 $db->transRollback();
                 session()->setFlashdata('error', 'Transaction failed: ' . $e->getMessage());
-                return redirect()->to(base_url('/barang_pinjam/index'));
+                return redirect()->to(base_url('/barang_pinjam/index'))->withInput();
             }
         } else {
             // ganti url
@@ -263,14 +263,15 @@ class Barang_Pinjam extends BaseController
 
     public function cariStok()
     {
-        $idInventaris = $this->request->getPost('id_inventaris');
+        $idInventaris = $this->request->getVar('idBarang');
 
-        if (!empty($idInventaris)) {
+        if ($idInventaris != null) {
+
             $a = $this->inventarisModel->where(
                 'id_inventaris',
                 $idInventaris
             )->first();
-            if (empty($a)) {
+            if ($a == null) {
                 session()->set('id_temp', $idInventaris);
                 return $this->response->setJSON([
                     'status' => 'not_found',
@@ -311,10 +312,11 @@ class Barang_Pinjam extends BaseController
 
     public function updateStatus()
     {
-        if ($this->request->getVar('status') == 'kembali') {
+        if ($this->request->getMethod() == 'POST') {
+
             $id = $this->request->getVar('id_ms_peminjaman');
-            $data = $this->masterPeminjamanModel->where('id_ms_peminjaman')->first();
-            date_default_timezone_set('Asia/Jakarta');
+            $data = $this->masterPeminjamanModel->where('id_ms_peminjaman', $id)->first();
+
             $currentDateTime =  date("Y-m-d H:i:s");
             $newData = [
                 'tanggal_pinjam' => $data['tanggal_pinjam'],
@@ -323,7 +325,10 @@ class Barang_Pinjam extends BaseController
                 'status' => '0',
                 'bukti_peminjaman' => $data['bukti_peminjaman']
             ];
-            $this->masterPeminjamanModel->update($data['id_ms_peminjaman'], $newData);
+            if (!$this->masterPeminjamanModel->update($data['id_ms_peminjaman'], $newData)) {
+                return redirect()->to(base_url('/barang_pinjam/index'))->withInput();
+            }
+            return redirect()->to(base_url('/barang_pinjam'))->withInput();
         }
     }
 }

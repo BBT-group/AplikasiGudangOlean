@@ -69,4 +69,11 @@ class Satuan extends BaseController
         $this->satuanModel->update($this->request->getVar('id_satuan'), ['nama_satuan' => $this->request->getVar('nama_satuan')]);
         return redirect()->to('');
     }
+
+    public function deleteSatuan($id_satuan)
+    {
+        $this->satuanModel->delete($id_satuan);
+        session()->setFlashdata('success', 'Satuan berhasil dihapus');
+        return redirect()->to(base_url('satuan'));
+    }
 }

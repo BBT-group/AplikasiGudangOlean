@@ -66,4 +66,10 @@ class Kategori extends BaseController
         $this->kategoriModel->update($this->request->getVar('id_kategori'), ['nama_kategori' => $this->request->getVar('nama_kategori')]);
         return redirect()->to('v_kategori');
     }
+    public function deleteKategori($id_kategori)
+    {
+        $this->kategoriModel->delete($id_kategori);
+        session()->setFlashdata('success', 'Kategori berhasil dihapus');
+        return redirect()->to(base_url('kategori'));
+    }
 }

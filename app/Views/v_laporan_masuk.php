@@ -3,7 +3,6 @@
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Laporan Barang Masuk</h1>
                     <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
-
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
@@ -33,7 +32,7 @@
                     </div>
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Barang Masuk dari <?= $start_date?> s/d <?= $end_date?></h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Barang Masuk dari <?= $start_date ?> s/d <?= $end_date ?></h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -52,8 +51,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $no = 1; foreach ($barangmasuk as $item) : ?>
-                                            <?php $stok_awal = $item['stok'] - $item['jumlah']; ?>
+                                        <?php $no = 1;
+                                        foreach ($barangmasuk as $item) : ?>
                                             <tr>
                                                 <td><?= $no++ ?></td>
                                                 <td><?= $item['id_barang'] ?></td>
@@ -61,9 +60,24 @@
                                                 <td><?= $item['nama'] ?></td>
                                                 <td><?= $item['nama_satuan'] ?></td>
                                                 <td><?= $item['harga_beli'] ?></td>
-                                                <td><?= $stok_awal ?></td> <!-- Mengisi stok awal -->
+                                                <td><?= $item['stok_awal'] ?></td> <!-- Mengisi stok awal -->
                                                 <td><?= $item['jumlah'] ?></td>
-                                                <td><?= $item['stok'] ?></td>
+                                                <td><?= $item['stok_awal'] + $item['jumlah'] ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+
+                                        <?php
+                                        foreach ($alatmasuk as $item) : ?>
+                                            <tr>
+                                                <td><?= $no++ ?></td>
+                                                <td><?= $item['id_inventaris'] ?></td>
+                                                <td><?= $item['waktu'] ?></td>
+                                                <td><?= $item['nama_inventaris'] ?></td>
+                                                <td>alat</td>
+                                                <td><?= $item['harga_beli'] ?></td>
+                                                <td><?= $item['stok_awal'] ?></td> <!-- Mengisi stok awal -->
+                                                <td><?= $item['jumlah'] ?></td>
+                                                <td><?= $item['stok_awal'] + $item['jumlah'] ?></td>
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>
@@ -74,58 +88,58 @@
 
                 </div>
 
-            </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Team IT PT. Olean</span>
-                    </div>
                 </div>
-            </footer>
-            <!-- End of Footer -->
+                <!-- End of Main Content -->
 
-        </div>
-        <!-- End of Content Wrapper -->
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Team IT PT. Olean</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+                </div>
+                <!-- End of Content Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+                </div>
+                <!-- End of Page Wrapper -->
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/jquery/jquery.js"></script>
-    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+                <!-- Scroll to Top Button-->
+                <a class="scroll-to-top rounded" href="#page-top">
+                    <i class="fas fa-angle-up"></i>
+                </a>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/jquery-easing/jquery.easing.js"></script>
+                <!-- Bootstrap core JavaScript-->
+                <script src="/jquery/jquery.js"></script>
+                <script src="/bootstrap/js/bootstrap.bundle.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.js"></script>
+                <!-- Core plugin JavaScript-->
+                <script src="/jquery-easing/jquery.easing.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="/datatables/jquery.dataTables.js"></script>
-    <script src="/datatables/dataTables.bootstrap4.js"></script>
+                <!-- Custom scripts for all pages-->
+                <script src="/js/sb-admin-2.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="/js/demo/datatables-demo.js"></script>
+                <!-- Page level plugins -->
+                <script src="/datatables/jquery.dataTables.js"></script>
+                <script src="/datatables/dataTables.bootstrap4.js"></script>
 
-    <script>
-        $(function() {
-            $("#start_date").datepicker({
-                dateFormat: 'yy-mm-dd'
-            });
-            $("#end_date").datepicker({
-                dateFormat: 'yy-mm-dd'
-            });
-        });
-    </script>
+                <!-- Page level custom scripts -->
+                <script src="/js/demo/datatables-demo.js"></script>
 
-</body>
+                <script>
+                    $(function() {
+                        $("#start_date").datepicker({
+                            dateFormat: 'yy-mm-dd'
+                        });
+                        $("#end_date").datepicker({
+                            dateFormat: 'yy-mm-dd'
+                        });
+                    });
+                </script>
 
-</html>
+                </body>
+
+                </html>

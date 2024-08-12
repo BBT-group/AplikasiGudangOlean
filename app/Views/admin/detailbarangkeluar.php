@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col mb-1 p-0" style="text-align: left;">
-                                        <a href="<?= base_url('barang_pinjam') ?>" class="btn btn-primary">kembali</a>
+                                        <a href="<?= base_url('barang_keluar') ?>" class="btn btn-primary">kembali</a>
                                     </div>
 
                                 </div>

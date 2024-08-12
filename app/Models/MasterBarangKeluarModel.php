@@ -8,7 +8,7 @@ class MasterBarangKeluarModel extends Model
 {
     protected $table = 'ms_barang_Keluar';
     protected $primaryKey = 'id_barang_keluar';
-    protected $allowedFields = ['waktu', 'id_penerima'];
+    protected $allowedFields = ['waktu', 'id_penerima', 'keterangan'];
 
     public function getAll()
     {

@@ -11,7 +11,7 @@ class BarangMasukModel extends Model
     protected $tableMsBarangMasuk = 'ms_barang_masuk';
     protected $tableSatuan = 'satuan';
     protected $primaryKey = 'id_barang_masuk';
-    protected $allowedFields = ['id_barang', 'id_ms_barang_masuk', 'jumlah', 'id_inventaris'];
+    protected $allowedFields = ['id_barang', 'id_ms_barang_masuk', 'jumlah', 'id_inventaris', 'stok_awal'];
 
     public function getBarangMasuk()
     {
@@ -42,6 +42,9 @@ class BarangMasukModel extends Model
 
     public function getByMasterId($id)
     {
-        return $this->where('id_barang_masuk', $id)->findAll();
+        return $this->select('barang_masuk.*,barang.*,satuan.nama_satuan')
+            ->join('barang', 'barang.id_barang=barang_masuk.id_barang')
+            ->join('satuan', 'satuan.id_satuan=barang.id_satuan')
+            ->where('id_ms_barang_masuk', $id)->findAll();
     }
 }

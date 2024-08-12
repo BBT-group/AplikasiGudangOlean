@@ -173,9 +173,10 @@ class Barang_Masuk extends BaseController
                 } else {
                     $suppId = $newSupp['id_supplier'];
                 }
-                date_default_timezone_set('Asia/Jakarta');
+
                 $currentDateTime =  date("Y-m-d H:i:s");
-                if (!$this->masterBarangMasukModel->insert(['waktu' => $currentDateTime, 'id_supplier' => $suppId])) {
+
+                if (!$this->masterBarangMasukModel->insert(['waktu' => $currentDateTime, 'id_supplier' => $suppId, 'keterangan' => $this->request->getVar('keterangan')])) {
                     throw new DatabaseException('Failed to insert master barang masuk post: ' . implode(', ', $this->masterBarangMasukModel->errors()));
                 }
                 $idms = $this->masterBarangMasukModel->getInsertID();
@@ -183,6 +184,9 @@ class Barang_Masuk extends BaseController
                 foreach ($barang as $b) {
 
                     if ($b['jenis'] == 'barang') {
+                        if ($b['harga_beli'] < 1000) {
+                            throw new DatabaseException('harga beli minimal 1000');
+                        }
                         $barang1 = $this->barangModel->where('id_barang', $b['id_barang'])->first();
                         $data = [
                             'nama' => $barang1['nama'],
@@ -198,10 +202,13 @@ class Barang_Masuk extends BaseController
                             throw new DatabaseException('Failed to barang model insert post: ' . implode(', ', $this->barangModel->errors()));
                         }
 
-                        if (!$this->barangMasukModel->insert(['id_barang' => $barang1['id_barang'], 'id_ms_barang_masuk' => $idms, 'jumlah' => $b['stok']])) {
+                        if (!$this->barangMasukModel->insert(['id_barang' => $barang1['id_barang'], 'id_ms_barang_masuk' => $idms, 'jumlah' => $b['stok'], 'stok_awal' => $barang1['stok']])) {
                             throw new DatabaseException('Failed to  barang masuk 1 insert post: ' . implode(', ', $this->barangMasukModel->errors()));
                         }
                     } elseif ($b['jenis'] == 'alat') {
+                        if ($b['harga_beli'] < 1000) {
+                            throw new DatabaseException('harga beli minimal 1000');
+                        }
                         $barang1 = $this->inventarisModel->where('id_inventaris', $b['id_barang'])->first();
                         $data = [
                             'nama_inventaris' => $barang1['nama_inventaris'],
@@ -214,7 +221,7 @@ class Barang_Masuk extends BaseController
                             throw new DatabaseException('Failed to insert inventaris post: ' . implode(', ', $this->inventarisModel->errors()));
                         }
 
-                        if (!$this->barangMasukModel->insert(['id_inventaris' => $barang1['id_inventaris'], 'id_ms_barang_masuk' => $idms, 'jumlah' => $b['stok']])) {
+                        if (!$this->barangMasukModel->insert(['id_inventaris' => $barang1['id_inventaris'], 'id_ms_barang_masuk' => $idms, 'jumlah' => $b['stok'], 'stok_awal' => $barang1['stok']])) {
                             throw new DatabaseException('Failed to insert barang masuk 2 post: ' . implode(', ', $this->barangMasukModel->errors()));
                         }
                     }
@@ -272,21 +279,29 @@ class Barang_Masuk extends BaseController
     public function cariStok()
     {
 
-        $idBarang = $this->request->getPost('idBarang');
+        $idBarang = $this->request->getVar('idBarang');
 
-        if (!empty($idBarang)) {
-            $a = $this->barangModel->getBarangWithSatuan($idBarang)->first();
+        if (($idBarang != null)) {
+            $a = $this->barangModel->getBarangById($idBarang);
             $jenis = 'barang';
             if ($a == null) {
-                $a = $this->inventarisModel->getById($idBarang)->first();
+                $a = $this->inventarisModel->where('id_inventaris', $idBarang)->first();
                 $jenis = 'alat';
             }
 
-            if (empty($a)) {
+            if ($a == null) {
                 session()->set('id_temp', $idBarang);
                 return $this->response->setJSON([
                     'status' => 'not_found',
-                    'message' => 'Item not found. Please go to the input form to add this item.'
+                    'message' => 'Item not found. Please go to the input form to add this item.',
+                    'a' => $a,
+                    'b' => $this->barangModel->getBarangById(
+                        60523110565
+                    ),
+                    'c' => $this->inventarisModel->getById($idBarang)->first(),
+                    'd' => strlen(60523110565),
+
+
                 ]);
             }
             if ($this->containsObjectWithName($this->dataList, $idBarang)) {
@@ -348,7 +363,5 @@ class Barang_Masuk extends BaseController
         return view('v_tambah_alat_barang', $data);
     }
 
-    public function cariMaster()
-    {
-    }
+    public function cariMaster() {}
 }

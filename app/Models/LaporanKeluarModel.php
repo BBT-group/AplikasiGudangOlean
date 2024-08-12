@@ -26,7 +26,7 @@ class LaporanKeluarModel extends Model
             ->join($this->tableBarang, 'barang.id_barang = barang_keluar.id_barang')
             ->join($this->tableMsBarangKeluar, 'ms_barang_keluar.id_ms_barang_keluar = barang_keluar.id_ms_barang_keluar')
             ->join($this->tablePenerima, 'penerima.id_penerima = ms_barang_keluar.id_penerima')
-            ->join($this->tableSatuan, 'satuan.id_satuan = barang.id_satuan') // Corrected the join condition
+            ->join($this->tableSatuan, 'satuan.id_satuan = barang.id_satuan')
             ->get()
             ->getResultArray();
     }
@@ -38,7 +38,7 @@ class LaporanKeluarModel extends Model
             ->join($this->tableBarang, 'barang.id_barang = barang_keluar.id_barang')
             ->join($this->tableMsBarangKeluar, 'ms_barang_keluar.id_ms_barang_keluar = barang_keluar.id_ms_barang_keluar')
             ->join($this->tablePenerima, 'penerima.id_penerima = ms_barang_keluar.id_penerima')
-            ->join($this->tableSatuan, 'satuan.id_satuan = barang.id_satuan') // Corrected the join condition
+            ->join($this->tableSatuan, 'satuan.id_satuan = barang.id_satuan')
             ->where('DATE(ms_barang_keluar.waktu) >=', $start_date)
             ->where('DATE(ms_barang_keluar.waktu) <=', $end_date)
             ->get()

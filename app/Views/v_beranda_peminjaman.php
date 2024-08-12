@@ -37,9 +37,10 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Id pinjam</th>
-                                                <th>Tanggal pinjam</th>
-                                                <th>teknisi</th>
+                                                <th>Id Peminjaman</th>
+                                                <th>Tanggal Pinjam</th>
+                                                <th>Teknisi</th>
+                                                <th>Status</th>
                                                 <th>aksi</th>
                                             </tr>
                                         </thead>
@@ -56,8 +57,9 @@
                                                     <tr>
                                                         <td><?= $no += 1 ?></td>
                                                         <td><?= $item['id_ms_peminjaman'] ?></td>
-                                                        <td><?= $item['tanggal_pinjam'] ?></td>
+                                                        <td><?= date('d-m-Y H:i:s', strtotime($item['tanggal_pinjam'])) ?></td>
                                                         <td><?= $item['nama'] ?></td>
+                                                        <td><?= ($item['status'] == 1) ? 'Dipinjam' : 'Dikembalikan' ?></td>
                                                         <td> <a href="<?= base_url('barang_pinjam/indexdetailmaster/' . $item['id_ms_peminjaman']) ?>" class="btn btn-sm btn-primary">Detail</a></td>
                                                     </tr>
                                                 <?php endforeach; ?>
@@ -70,55 +72,55 @@
 
                     </div>
 
-                </div>
-                <!-- End of Main Content -->
-
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Team IT PT. Olean</span>
-                        </div>
                     </div>
-                </footer>
-                <!-- End of Footer -->
+                    <!-- End of Main Content -->
 
-            </div>
-            <!-- End of Content Wrapper -->
+                    <!-- Footer -->
+                    <footer class="sticky-footer bg-white">
+                        <div class="container my-auto">
+                            <div class="copyright text-center my-auto">
+                                <span>Copyright &copy; Team IT PT. Olean</span>
+                            </div>
+                        </div>
+                    </footer>
+                    <!-- End of Footer -->
 
-        </div>
-        <!-- End of Page Wrapper -->
+                    </div>
+                    <!-- End of Content Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+                    </div>
+                    <!-- End of Page Wrapper -->
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/jquery/jquery.js"></script>
-    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+                    <!-- Scroll to Top Button-->
+                    <a class="scroll-to-top rounded" href="#page-top">
+                        <i class="fas fa-angle-up"></i>
+                    </a>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/jquery-easing/jquery.easing.js"></script>
+                    <!-- Bootstrap core JavaScript-->
+                    <script src="/jquery/jquery.js"></script>
+                    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.js"></script>
+                    <!-- Core plugin JavaScript-->
+                    <script src="/jquery-easing/jquery.easing.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="/datatables/jquery.dataTables.js"></script>
-    <script src="/datatables/dataTables.bootstrap4.js"></script>
+                    <!-- Custom scripts for all pages-->
+                    <script src="/js/sb-admin-2.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="/js/demo/datatables-demo.js"></script>
-    <script>
-        window.onload = function() {
-            <?php if (session()->has('error')) : ?>
-                alert("<?= addslashes(session('error')) ?>");
-            <?php elseif (session()->has('message')) : ?>
-                alert("<?= addslashes(session('message')) ?>");
-            <?php endif; ?>
-        };
-    </script>
-</body>
+                    <!-- Page level plugins -->
+                    <script src="/datatables/jquery.dataTables.js"></script>
+                    <script src="/datatables/dataTables.bootstrap4.js"></script>
 
-</html>
+                    <!-- Page level custom scripts -->
+                    <script src="/js/demo/datatables-demo.js"></script>
+                    <script>
+                        window.onload = function() {
+                            <?php if (session()->has('error')) : ?>
+                                alert("<?= addslashes(session('error')) ?>");
+                            <?php elseif (session()->has('message')) : ?>
+                                alert("<?= addslashes(session('message')) ?>");
+                            <?php endif; ?>
+                        };
+                    </script>
+                    </body>
+
+                    </html>

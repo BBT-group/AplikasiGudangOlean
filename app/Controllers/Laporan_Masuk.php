@@ -22,8 +22,10 @@ class Laporan_Masuk extends BaseController
 
         if ($start_date && $end_date) {
             $data['barangmasuk'] = $this->barangmasukModel->getBarangMasukGabungFilter($start_date, $end_date);
+            $data['alatmasuk'] = $this->barangmasukModel->getAlatMasukGabungFilter($start_date, $end_date);
         } else {
             $data['barangmasuk'] = $this->barangmasukModel->getBarangMasukGabung();
+            $data['alatmasuk'] = $this->barangmasukModel->getAlatMasukGabung();
         }
         $data['semua'] = $this->barangmasukModel->findAll();
         $data['start_date'] = $start_date;

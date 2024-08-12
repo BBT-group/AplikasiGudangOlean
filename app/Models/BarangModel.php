@@ -59,9 +59,7 @@ class BarangModel extends Model
             ->where('id_barang', $id);
     }
 
-    public function getBarangWithInventaris()
-    {
-    }
+    public function getBarangWithInventaris() {}
 
     public function getBarangCount()
     {

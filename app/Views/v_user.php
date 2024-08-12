@@ -37,7 +37,9 @@
                                                 <td><?= $user['status'] ?></td>
                                                 <td style="text-align: center;">
                                                     <a href="/user/edit/<?= $user['id_ms_user'] ?>" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                                                    <a href="/user/delete/<?= $user['id_ms_user'] ?>" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus akun ini?')"><i class="fas fa-trash"></i></a>
+                                                    <?php if ($user['role'] != 'admin') : ?>
+                                                        <a href="/user/delete/<?= $user['id_ms_user'] ?>" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus akun ini?')"><i class="fas fa-trash"></i></a>
+                                                    <?php endif; ?>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -49,53 +51,53 @@
 
                 </div>
 
-            </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Team IT PT. Olean</span>
-                    </div>
                 </div>
-            </footer>
-            <!-- End of Footer -->
+                <!-- End of Main Content -->
 
-        </div>
-        <!-- End of Content Wrapper -->
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Team IT PT. Olean</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+                </div>
+                <!-- End of Content Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+                </div>
+                <!-- End of Page Wrapper -->
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/jquery/jquery.js"></script>
-    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+                <!-- Scroll to Top Button-->
+                <a class="scroll-to-top rounded" href="#page-top">
+                    <i class="fas fa-angle-up"></i>
+                </a>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/jquery-easing/jquery.easing.js"></script>
+                <!-- Bootstrap core JavaScript-->
+                <script src="/jquery/jquery.js"></script>
+                <script src="/bootstrap/js/bootstrap.bundle.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.js"></script>
+                <!-- Core plugin JavaScript-->
+                <script src="/jquery-easing/jquery.easing.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="/datatables/jquery.dataTables.js"></script>
-    <script src="/datatables/dataTables.bootstrap4.js"></script>
+                <!-- Custom scripts for all pages-->
+                <script src="/js/sb-admin-2.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="/js/demo/datatables-demo.js"></script>
+                <!-- Page level plugins -->
+                <script src="/datatables/jquery.dataTables.js"></script>
+                <script src="/datatables/dataTables.bootstrap4.js"></script>
 
-    <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-    </script>
+                <!-- Page level custom scripts -->
+                <script src="/js/demo/datatables-demo.js"></script>
 
-</body>
+                <script>
+                    $(function() {
+                        $('[data-toggle="tooltip"]').tooltip()
+                    })
+                </script>
 
-</html>
+                </body>
+
+                </html>

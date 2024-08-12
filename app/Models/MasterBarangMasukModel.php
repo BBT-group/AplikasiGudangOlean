@@ -8,7 +8,7 @@ class MasterBarangMasukModel extends Model
 {
     protected $table = 'ms_barang_masuk';
     protected $primaryKey = 'id_ms_barang_masuk';
-    protected $allowedFields = ['waktu', 'id_supplier'];
+    protected $allowedFields = ['waktu', 'id_supplier', 'keterangan'];
     protected bool $allowEmptyInserts = true;
 
     public function getAll()

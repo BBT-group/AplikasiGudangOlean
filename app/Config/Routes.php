@@ -17,6 +17,7 @@ $routes->add('/inventaris/simpanalat', 'Inventaris::simpanAlat');
 $routes->add('/inventaris/indexdetail/(:num)', 'Inventaris::indexDetail/$1');
 $routes->add('/inventaris/indexupdate/(:num)', 'Inventaris::indexUpdate/$1');
 $routes->add('/inventaris/updatealat', 'Inventaris::updateAlat');
+$routes->get('/inventaris/deletealat/(:num)', 'Inventaris::deleteAlat/$1');
 $routes->post('/barang/simpan', 'Barang::simpan');
 $routes->add('/barang/index', 'Barang::index');
 $routes->add('/barang/barangsesi', 'Barang::barangSesi');
@@ -60,12 +61,16 @@ $routes->get('/laporan_peminjaman', 'Laporan_Peminjaman::index');
 $routes->get('/laporan_peminjaman/exportp', 'Laporan_Peminjaman::exportp');
 $routes->get('/laporan_peminjaman/printp', 'Laporan_Peminjaman::printp');
 
+$routes->get('/laporan_inventaris', 'laporan_Inventaris::index');
+$routes->get('/laporan_inventaris/exporti', 'laporan_Inventaris::exporti');
+$routes->get('/laporan_inventaris/printi', 'laporan_Inventaris::printi');
+
 $routes->get('/stok', 'Stok::index');
 $routes->get('/stok/tambahbarang', 'Stok::tambahBarang');
 $routes->add('/stok/updatebarang', 'Stok::updateBarang');
 $routes->get('/stok/deletebarang/(:num)', 'Stok::deleteBarang/$1');
 
-$routes->get('/satuan/deletesatuan/(:num)', 'Satuan::deletesatuan/$1');
+$routes->get('/satuan/deletesatuan/(:num)', 'Satuan::deleteSatuan/$1');
 $routes->get('/satuan', 'Satuan::index');
 $routes->add('/satuan/indextambah', 'Satuan::indexTambah');
 $routes->add('/satuan/tambahsatuan', 'Satuan::tambahSatuan');

@@ -57,7 +57,7 @@
                                                     <tr>
                                                         <td><?= $no += 1 ?></td>
                                                         <td><?= $item['id_ms_peminjaman'] ?></td>
-                                                        <td><?= date('d-m-Y H:i:s', strtotime($item['tanggal_peminjaman'])) ?></td>
+                                                        <td><?= date('d-m-Y H:i:s', strtotime($item['tanggal_pinjam'])) ?></td>
                                                         <td><?= $item['nama'] ?></td>
                                                         <td><?= ($item['status'] == 1) ? 'Dipinjam' : 'Dikembalikan' ?></td>
                                                         <td> <a href="<?= base_url('barang_pinjam/indexdetailmaster/' . $item['id_ms_peminjaman']) ?>" class="btn btn-sm btn-primary">Detail</a></td>

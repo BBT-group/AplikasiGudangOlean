@@ -197,12 +197,15 @@ class Barang_Pinjam extends BaseController
 
                     $barang1 = $this->inventarisModel->where('id_inventaris', $b['id_inventaris'])->first();
 
-                    $stok = $barang1['stok'] - $b['stok'];
-
+                    $sisa = $barang1['stok'] - $b['stok'];
+                    if ($sisa < 0) {
+                        // If the post insert fails, rollback transaction
+                        throw new DatabaseException('Failed to insert post: kurang dari 0');
+                    }
                     $data = [
                         'nama_inventaris' => $barang1['nama_inventaris'],
                         'foto' => $barang1['foto'],
-                        'stok' => $stok,
+                        'stok' => $sisa,
                     ];
 
                     if (!$this->inventarisModel->update($barang1['id_inventaris'], $data)) {
@@ -260,14 +263,15 @@ class Barang_Pinjam extends BaseController
 
     public function cariStok()
     {
-        $idInventaris = $this->request->getPost('id_inventaris');
+        $idInventaris = $this->request->getVar('idBarang');
 
-        if (!empty($idInventaris)) {
+        if ($idInventaris != null) {
+
             $a = $this->inventarisModel->where(
                 'id_inventaris',
                 $idInventaris
             )->first();
-            if (empty($a)) {
+            if ($a == null) {
                 session()->set('id_temp', $idInventaris);
                 return $this->response->setJSON([
                     'status' => 'not_found',

@@ -41,9 +41,10 @@ class Barang_Keluar extends BaseController
     }
 
     // fungsi tampil detail barang masuk
-    public function indexDetailMaster()
+    public function indexDetailMaster($idBarang)
+
     {
-        $idBarang = $this->request->getVar('id_ms_barang_keluar');
+
         $data = [
             // mengambil header ms barang masuk yaitu nama supp, tanggal, id master barang
             'header' => $this->masterBarangKeluarModel->getById($idBarang),
@@ -164,7 +165,7 @@ class Barang_Keluar extends BaseController
                 date_default_timezone_set('Asia/Jakarta');
                 $currentDateTime =  date("Y-m-d H:i:s");
 
-                if (!$this->masterBarangKeluarModel->insert(['waktu' => $currentDateTime, 'id_penerima' => $penerimaId])) {
+                if (!$this->masterBarangKeluarModel->insert(['waktu' => $currentDateTime, 'id_penerima' => $penerimaId, 'keterangan' => $this->request->getVar('keterangan')])) {
                     throw new DatabaseException('gagal insert master barang keluar');
                 }
 
@@ -267,9 +268,9 @@ class Barang_Keluar extends BaseController
     public function cariStok()
     {
         $idBarang = $this->request->getPost('idBarang');
-        if (!empty($idBarang)) {
+        if ($idBarang != null) {
             $a = $this->barangModel->getBarangWithSatuan($idBarang)->first();
-            if (empty($a)) {
+            if ($a == null) {
                 session()->set('id_barang_temp', $idBarang);
                 return $this->response->setJSON([
                     'status' => 'not_found',

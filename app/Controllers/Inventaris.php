@@ -123,4 +123,10 @@ class Inventaris extends BaseController
         }
         return redirect()->back()->withInput();
     }
+    public function deleteAlat($id_inventaris)
+    {
+        $this->inventarisModel->delete($id_inventaris);
+        session()->setFlashdata('success', 'Alat berhasil dihapus');
+        return redirect()->to(base_url('inventaris'));
+    }
 }

@@ -8,19 +8,28 @@
                         <div class="card-body">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="input1">Tanggal dan Waktu</label>
+                                            <label for="input1">Tanggal dan Waktu Peminjaman</label>
                                             <input type="text" class="form-control" value="<?= $header['tanggal_pinjam'] ?>" readonly>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="input2">Penerima</label>
                                             <input type="text" class="form-control" value="<?= $header['nama'] ?>" readonly>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="input1">Tanggal dan Waktu Pengembalian</label>
+                                            <input type="text" class="form-control" value="<?= $header['tanggal_kembali'] ?>" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="input2">status</label>
                                             <input type="text" class="form-control" value="<?php if ($header['status'] == 1) {

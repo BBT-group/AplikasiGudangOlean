@@ -29,6 +29,14 @@
                                                     <input type="text" class="form-control" id="nama_supplier" name="nama_supplier" value="<?= old('nama_supplier'); ?>">
                                                 </div>
                                             </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="input2">Keterangan</label>
+                                                    <input type="text" class="form-control <?php if (isset($validate)) {
+                                                                                                echo $validate->hasError('nama_penerima') ? 'is-invalid' : '';
+                                                                                            }  ?>" id="keterangan" name="keterangan" value="<?= old('keterangan'); ?>">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-12 mb-1 p-0" style="text-align: right;">
@@ -198,7 +206,7 @@
 
                                     let id = barcode; // Assign the barcode string to the ID variable
                                     console.log(barcode);
-
+                                    id = id.slice(0, -1);
                                     handleBarcodeScan(id);
                                     // Call a function to handle the barcode scan}
 
@@ -257,6 +265,10 @@
                                     console.log('Barcode scanned successfully');
                                     location.reload(); // Reload the page to see updated data
                                 } else if (response.status === 'not_found') {
+                                    console.log(response.a);
+                                    console.log(response.b);
+                                    console.log(response.c);
+                                    console.log(response.d);
                                     $("#dialog-confirm").dialog({
                                         resizable: false,
                                         height: "auto",

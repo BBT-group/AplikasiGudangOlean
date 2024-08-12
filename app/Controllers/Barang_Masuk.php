@@ -176,7 +176,7 @@ class Barang_Masuk extends BaseController
 
                 $currentDateTime =  date("Y-m-d H:i:s");
 
-                if (!$this->masterBarangMasukModel->insert(['waktu' => $currentDateTime, 'id_supplier' => $suppId])) {
+                if (!$this->masterBarangMasukModel->insert(['waktu' => $currentDateTime, 'id_supplier' => $suppId, 'keterangan' => $this->request->getVar('keterangan')])) {
                     throw new DatabaseException('Failed to insert master barang masuk post: ' . implode(', ', $this->masterBarangMasukModel->errors()));
                 }
                 $idms = $this->masterBarangMasukModel->getInsertID();
@@ -279,21 +279,29 @@ class Barang_Masuk extends BaseController
     public function cariStok()
     {
 
-        $idBarang = $this->request->getPost('idBarang');
+        $idBarang = $this->request->getVar('idBarang');
 
-        if (!empty($idBarang)) {
-            $a = $this->barangModel->getBarangWithSatuan($idBarang)->first();
+        if (($idBarang != null)) {
+            $a = $this->barangModel->getBarangById($idBarang);
             $jenis = 'barang';
             if ($a == null) {
-                $a = $this->inventarisModel->getById($idBarang)->first();
+                $a = $this->inventarisModel->where('id_inventaris', $idBarang)->first();
                 $jenis = 'alat';
             }
 
-            if (empty($a)) {
+            if ($a == null) {
                 session()->set('id_temp', $idBarang);
                 return $this->response->setJSON([
                     'status' => 'not_found',
-                    'message' => 'Item not found. Please go to the input form to add this item.'
+                    'message' => 'Item not found. Please go to the input form to add this item.',
+                    'a' => $a,
+                    'b' => $this->barangModel->getBarangById(
+                        60523110565
+                    ),
+                    'c' => $this->inventarisModel->getById($idBarang)->first(),
+                    'd' => strlen(60523110565),
+
+
                 ]);
             }
             if ($this->containsObjectWithName($this->dataList, $idBarang)) {
@@ -355,7 +363,5 @@ class Barang_Masuk extends BaseController
         return view('v_tambah_alat_barang', $data);
     }
 
-    public function cariMaster()
-    {
-    }
+    public function cariMaster() {}
 }

@@ -14,7 +14,7 @@
                 <form id="addItemForm" action=<?= base_url('/barang_pinjam/update') ?> method="post" enctype="multipart/form-data">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="input1">tanggal dan waktu</label>
                                     <input type="text" class="form-control" id="datetime" name="datetime" value="<?php
@@ -24,7 +24,7 @@
                                                                                                                     ?>" disabled>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="input2">Penerima</label>
                                     <input type="text" class="form-control <?php if (isset($validate)) {
@@ -32,7 +32,7 @@
                                                                             }  ?>" id="nama_penerima" name="nama_penerima" value="<?= old('nama_penerima'); ?>">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col">
                                 <div class="form-group">
                                     <label for="input2">Keterangan</label>
                                     <input type="text" class="form-control <?php if (isset($validate)) {
@@ -128,17 +128,25 @@
     </div>
 </div>
 <!-- Bootstrap core JavaScript-->
-<script src="/vendor/jquery/jquery.js"></script>
-<script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+<script src="/jquery/jquery.js"></script>
+<script src="/bootstrap/js/bootstrap.bundle.js"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="/vendor/jquery-easing/jquery.easing.js"></script>
+<script src="/jquery-easing/jquery.easing.js"></script>
 
 <!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.js"></script>
+
+<!-- Page level plugins -->
 <script src="/datatables/jquery.dataTables.js"></script>
 <script src="/datatables/dataTables.bootstrap4.js"></script>
-<!-- Page level plugins -->
+<script src="/js/demo/datatables-demo.js"></script>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
 <!-- Page level custom scripts -->
 <script src="/js/demo/datatables-demo.js"></script>
 <script>
@@ -219,7 +227,7 @@
 
                     let id = barcode; // Assign the barcode string to the ID variable
                     console.log(barcode);
-
+                    id = id.slice(0, -1);
                     handleBarcodeScan(id);
                     // Call a function to handle the barcode scan}
 
@@ -278,9 +286,11 @@
                     console.log('Barcode scanned successfully');
                     location.reload(); // Reload the page to see updated data
                 } else if (response.status === 'not_found') {
-                    if (confirm(response.message + "\n\nDo you want to add this item? Click 'OK' to add or 'Cancel' to close.")) {
-                        window.location.href = '<?= base_url('/barangtambah/index') ?>'; // Redirect to the input form
+                    if (alert(response.message + "\n\nhubungi admin barang belum terdaftar")) {
+
                     }
+                } else if (response.status === 'eror') {
+                    console.log('Error: ' + response.message);
                 }
             },
             error: function(jqXHR, text, eror) {

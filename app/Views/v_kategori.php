@@ -30,7 +30,7 @@
                                                 <td><?= 1 + $k ?></td>
                                                 <td><?= $sat['nama_kategori'] ?></td>
                                                 <td style="text-align: center;">
-                                                    <a href="<?= base_url('satuan/deletesatuan/' . $sat['id_kategori']) ?>" class="btn btn-sm btn-danger" onclick="return  confirm(' Menghapus data akan menghapus barang yang bersangkutan Apakah anda yakin menghapus? ')"><i class="fas fa-trash"></i></a>
+                                                    <a href="<?= base_url('kategori/deletekategori/' . $sat['id_kategori']) ?>" class="btn btn-sm btn-danger" onclick="return  confirm(' Menghapus data akan menghapus barang yang bersangkutan Apakah anda yakin menghapus? ')"><i class="fas fa-trash"></i></a>
                                                 </td
                                                     </tr>
                                             <?php endforeach; ?>

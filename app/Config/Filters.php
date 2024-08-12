@@ -120,10 +120,10 @@ class Filters extends BaseFilters
      */
     public array $filters = [
         'AdminFilter' => [
-            'before' => ['user', 'user/*', 'beranda', 'stok', 'stok/*', 'barang_masuk', 'barang_masuk/*', 'laporan_stok', 'laporan_stok/*', 'laporan_masuk', 'laporan_masuk/*', 'satuan', 'satuan/*', 'laporan_keluar', 'laporan_keluar/*', 'peminjaman', 'peminjaman/*', 'kategori', 'kategori/*', 'inventaris', 'inventaris/*']
+            'before' => ['user', 'user/*', 'beranda', 'stok', 'stok/*', 'barang_masuk', 'barang_masuk/*', 'laporan_stok', 'laporan_stok/*', 'laporan_masuk', 'laporan_masuk/*', 'satuan', 'satuan/*', 'laporan_keluar', 'laporan_keluar/*', 'peminjaman', 'peminjaman/*', 'kategori', 'kategori/*', 'inventaris', 'inventaris/*', 'barang_pinjam', 'barang_pinjam/*', 'barang_keluar', 'barang_keluar/*']
         ],
         'OperatorFilter' => [
-            'before' => ['beranda', 'stok', 'inventaris', 'barang_keluar', 'barang_keluar/*', 'laporan_keluar', 'laporan_keluar/*']
-        ]
+            'except' => ['beranda', 'stok', 'inventaris','stok/*', 'inventaris/*', 'barang_keluar', 'barang_keluar/*', 'barang_pinjam', 'barang_pinjam/*',]
+            ]
     ];
 }

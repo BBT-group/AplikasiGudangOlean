@@ -144,7 +144,18 @@
                 <div class="sidebar-heading">
                     Master
                 </div>
-
+                <li class="nav-item <?= uri_string() == 'stok/index2' ? 'active' : '' ?>">
+                    <a class="nav-link" href="<?php echo base_url('stok/index2') ?>">
+                        <i class="fas fa-fw fa-layer-group"></i>
+                        <span>Data Barang</span>
+                    </a>
+                </li>
+                <li class="nav-item <?= uri_string() == 'inventaris/index2' ? 'active' : '' ?>">
+                    <a class="nav-link" href="<?php echo base_url('inventaris/index2') ?>">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Inventaris Alat</span>
+                    </a>
+                </li>
                 <hr class="sidebar-divider">
 
                 <div class="sidebar-heading">
@@ -161,7 +172,19 @@
                         <span>Barang pinjam</span></a>
                 </li>
                 <hr class="sidebar-divider d-none d-md-block">
-
+                <div class="sidebar-heading">
+                    Laporan
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url('laporan_keluar') ?>">
+                        <i class="fas fa-fw fa-file-export"></i>
+                        <span>Laporan Barang Keluar</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url('laporan_peminjaman') ?>">
+                        <i class="fas fa-fw fa-file-export"></i>
+                        <span>Laporan peminjaman</span></a>
+                </li>
                 <!-- <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div> -->

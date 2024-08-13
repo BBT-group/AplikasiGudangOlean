@@ -89,7 +89,7 @@ class Filters extends BaseFilters
                 'except' => ['laporan_peminjaman', 'laporan_peminjaman/*', 'laporan_inventaris', 'laporan_inventaris/*', 'beranda', 'stok', 'stok/*', 'barang_masuk', 'barang_masuk/*', 'laporan_stok', 'laporan_stok/*', 'laporan_masuk', 'laporan_masuk/*', 'satuan', 'satuan/*', 'laporan_keluar', 'laporan_keluar/*', 'peminjaman', 'peminjaman/*', 'kategori', 'kategori/*', 'inventaris', 'inventaris/*', 'user', 'user*', 'user/changepassword', 'user/changepassword*']
             ],
             'OperatorFilter' => [
-                'except' => ['beranda', 'stok', 'inventaris', 'stok/*', 'inventaris/*', 'barang_keluar', 'barang_keluar/*', 'barang_pinjam', 'barang_pinjam/*',]
+                'except' => ['laporan_keluar', 'laporan_peminjaman', 'beranda', 'stok', 'inventaris', 'stok/*', 'inventaris/*', 'barang_keluar', 'barang_keluar/*', 'barang_pinjam', 'barang_pinjam/*',]
             ]
         ],
     ];
@@ -123,7 +123,7 @@ class Filters extends BaseFilters
             'before' => ['laporan_peminjaman', 'laporan_peminjaman/*', 'laporan_inventaris', 'laporan_inventaris/*', 'user', 'user/*', 'beranda', 'stok', 'stok/*', 'barang_masuk', 'barang_masuk/*', 'laporan_stok', 'laporan_stok/*', 'laporan_masuk', 'laporan_masuk/*', 'satuan', 'satuan/*', 'laporan_keluar', 'laporan_keluar/*', 'peminjaman', 'peminjaman/*', 'kategori', 'kategori/*', 'inventaris', 'inventaris/*']
         ],
         'OperatorFilter' => [
-            'before' => ['beranda', 'stok', 'inventaris', 'barang_keluar', 'barang_keluar/*', 'laporan_keluar', 'laporan_keluar/*']
+            'before' => ['laporan_peminjaman', 'beranda', 'stok', 'inventaris', 'barang_keluar', 'barang_keluar/*', 'laporan_keluar', 'laporan_keluar/*']
         ]
     ];
 }

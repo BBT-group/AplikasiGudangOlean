@@ -24,8 +24,10 @@
                                         <button type="submit" class="btn btn-primary mr-2">Tampilkan</button>
                                     </div>
                                     <div class="col-md-6" style="text-align: end;">
-                                        <a href="<?= base_url('/laporan_keluar/exportk?start_date=' . (isset($start_date) ? $start_date : '') . '&end_date=' . (isset($end_date) ? $end_date : '')) ?>" class="btn btn-success"><i class="fas fa-file-excel"></i> Export to Excel</a>
-                                        <a href="<?= base_url('/laporan_keluar/printk?start_date=' . (isset($start_date) ? $start_date : '') . '&end_date=' . (isset($end_date) ? $end_date : '')) ?>" class="btn btn-info" target="_blank"><i class="fas fa-print"></i> Print</a>
+                                        <?php if (session()->role == 'admin'): ?>
+                                            <a href="<?= base_url('/laporan_keluar/exportk?start_date=' . (isset($start_date) ? $start_date : '') . '&end_date=' . (isset($end_date) ? $end_date : '')) ?>" class="btn btn-success"><i class="fas fa-file-excel"></i> Export to Excel</a>
+                                            <a href="<?= base_url('/laporan_keluar/printk?start_date=' . (isset($start_date) ? $start_date : '') . '&end_date=' . (isset($end_date) ? $end_date : '')) ?>" class="btn btn-info" target="_blank"><i class="fas fa-print"></i> Print</a>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </form>
@@ -33,42 +35,43 @@
                     </div>
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Barang Keluar dari <?= $start_date?> s/d <?= $end_date?></h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Barang Keluar dari <?= $start_date ?> s/d <?= $end_date ?></h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered" id="dataTables" width="100%" cellspacing="0">
                                     <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>ID Barang Keluar</th>
-                                        <th>Tanggal</th>
-                                        <th>Nama Barang</th>
-                                        <th>Satuan</th>
-                                        <th>Nama Penerima</th>
-                                        <th>Stok Awal</th>
-                                        <th>Jumlah Keluar</th>
-                                        <th>Stok Akhir</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php if (!empty($barangkeluar)) : ?>
-                                        <?php $no = 1; foreach ($barangkeluar as $item) : ?>
-                                            <?php $stok_awal = $item['stok'] + $item['jumlah']; ?>
-                                            <tr>
-                                                <td><?= $no++ ?></td>
-                                                <td><?= $item['id_barang'] ?></td>
-                                                <td><?= date('d/m/Y H:i:s', strtotime($item['waktu'])) ?></td>
-                                                <td><?= $item['nama_barang'] ?></td>
-                                                <td><?= $item['nama_satuan'] ?></td>
-                                                <td><?= $item['nama_penerima'] ?></td>
-                                                <td><?= $stok_awal ?></td> <!-- Mengisi stok awal -->
-                                                <td><?= $item['jumlah'] ?></td>
-                                                <td><?= $item['stok'] ?></td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
-                                </tbody>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>ID Barang Keluar</th>
+                                            <th>Tanggal</th>
+                                            <th>Nama Barang</th>
+                                            <th>Satuan</th>
+                                            <th>Nama Penerima</th>
+                                            <th>Stok Awal</th>
+                                            <th>Jumlah Keluar</th>
+                                            <th>Stok Akhir</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php if (!empty($barangkeluar)) : ?>
+                                            <?php $no = 1;
+                                            foreach ($barangkeluar as $item) : ?>
+                                                <?php $stok_awal = $item['stok'] + $item['jumlah']; ?>
+                                                <tr>
+                                                    <td><?= $no++ ?></td>
+                                                    <td><?= $item['id_barang'] ?></td>
+                                                    <td><?= date('d/m/Y H:i:s', strtotime($item['waktu'])) ?></td>
+                                                    <td><?= $item['nama_barang'] ?></td>
+                                                    <td><?= $item['nama_satuan'] ?></td>
+                                                    <td><?= $item['nama_penerima'] ?></td>
+                                                    <td><?= $stok_awal ?></td> <!-- Mengisi stok awal -->
+                                                    <td><?= $item['jumlah'] ?></td>
+                                                    <td><?= $item['stok'] ?></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -76,58 +79,58 @@
 
                 </div>
 
-            </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Team IT PT. Olean</span>
-                    </div>
                 </div>
-            </footer>
-            <!-- End of Footer -->
+                <!-- End of Main Content -->
 
-        </div>
-        <!-- End of Content Wrapper -->
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Team IT PT. Olean</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+                </div>
+                <!-- End of Content Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+                </div>
+                <!-- End of Page Wrapper -->
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/jquery/jquery.js"></script>
-    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+                <!-- Scroll to Top Button-->
+                <a class="scroll-to-top rounded" href="#page-top">
+                    <i class="fas fa-angle-up"></i>
+                </a>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/jquery-easing/jquery.easing.js"></script>
+                <!-- Bootstrap core JavaScript-->
+                <script src="/jquery/jquery.js"></script>
+                <script src="/bootstrap/js/bootstrap.bundle.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.js"></script>
+                <!-- Core plugin JavaScript-->
+                <script src="/jquery-easing/jquery.easing.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="/datatables/jquery.dataTables.js"></script>
-    <script src="/datatables/dataTables.bootstrap4.js"></script>
+                <!-- Custom scripts for all pages-->
+                <script src="/js/sb-admin-2.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="/js/demo/datatables-demo.js"></script>
+                <!-- Page level plugins -->
+                <script src="/datatables/jquery.dataTables.js"></script>
+                <script src="/datatables/dataTables.bootstrap4.js"></script>
 
-    <script>
-        $(function() {
-            $("#start_date").datepicker({
-                dateFormat: 'yy-mm-dd'
-            });
-            $("#end_date").datepicker({
-                dateFormat: 'yy-mm-dd'
-            });
-        });
-    </script>
+                <!-- Page level custom scripts -->
+                <script src="/js/demo/datatables-demo.js"></script>
 
-</body>
+                <script>
+                    $(function() {
+                        $("#start_date").datepicker({
+                            dateFormat: 'yy-mm-dd'
+                        });
+                        $("#end_date").datepicker({
+                            dateFormat: 'yy-mm-dd'
+                        });
+                    });
+                </script>
 
-</html>
+                </body>
+
+                </html>

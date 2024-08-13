@@ -97,20 +97,19 @@ class Inventaris extends BaseController
         if (!$this->validate([
             'id_inventaris' => 'required|is_not_unique[inventaris.id_inventaris]',
             'nama_inventaris' => 'required',
-            'foto' => 'uploaded[foto]',
         ])) {
             return redirect()->back();
         }
         $file = $this->request->getFile('foto');
+        $dataLama = $this->inventarisModel->getById($this->request->getVar('id_inventaris'))->first();
         if ($file->isValid() && !$file->hasMoved()) {
-            $dataLama = $this->inventarisModel->getAlatById($this->request->getVar('id_inventaris'));
             $fotoLama = $dataLama['foto'];
             unlink($fotoLama);
             $newName = $file->getRandomName();
             $file->move(ROOTPATH . 'public/uploads/', $newName);
             $foto_path = 'uploads/' . $newName;
         } else {
-            $foto_path = $this->request->getFile('foto');
+            $foto_path =  $dataLama['foto'];
         }
         $data = [
             'nama_inventaris' => $this->request->getVar('nama_inventaris'),

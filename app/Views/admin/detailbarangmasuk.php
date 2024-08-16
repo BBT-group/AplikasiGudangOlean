@@ -61,7 +61,14 @@
                                                 <td><?= $item['jumlah'] ?></td>
                                                 <td><?= $item['nama_satuan'] ?></td>
                                             <?php endforeach; ?>
-
+                                        </tr>
+                                        <tr><?php foreach ($inventaris as $item) : ?>
+                                                <td><?= $no += 1 ?></td>
+                                                <td><?= $item['id_inventaris'] ?></td>
+                                                <td><?= $item['nama_inventaris'] ?></td>
+                                                <td><?= $item['jumlah'] ?></td>
+                                                <td>alat</td>
+                                            <?php endforeach; ?>
                                         </tr>
                                     </tbody>
                                 </table>

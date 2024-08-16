@@ -47,4 +47,10 @@ class BarangMasukModel extends Model
             ->join('satuan', 'satuan.id_satuan=barang.id_satuan')
             ->where('id_ms_barang_masuk', $id)->findAll();
     }
+    public function getAlatByMasterId($id)
+    {
+        return $this->select('barang_masuk.*,inventaris.*')
+            ->join('inventaris', 'inventaris.id_inventaris=barang_masuk.id_inventaris')
+            ->where('id_ms_barang_masuk', $id)->findAll();
+    }
 }

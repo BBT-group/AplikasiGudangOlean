@@ -53,8 +53,10 @@ class Barang_Masuk extends BaseController
             // mengambil header ms barang masuk yaitu nama supp, tanggal, id master barang
             'header' => $this->masterBarangMasukModel->getById($id),
             // mengambil data yang memiliki id ms barang imasuk
-            'barang' => $this->barangMasukModel->getByMasterId($id)
+            'barang' => $this->barangMasukModel->getByMasterId($id),
+            'inventaris' => $this->barangMasukModel->getAlatByMasterId($id)
         ];
+
         echo view('v_header');
         // ganti url ke detail
         return view('admin/detailbarangmasuk', $data);

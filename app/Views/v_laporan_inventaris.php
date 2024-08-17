@@ -14,7 +14,7 @@
                                 <div class="col-md-6"></div>
                                 <div class="col-md-6" style="text-align: end;">
                                     <a href="<?= base_url('/laporan_inventaris/exporti') ?>" class="btn btn-success btn-sm"><i class="fa fa-file-excel"></i> Export to Excel</a>
-                                    <a href="<?= base_url('/laporan_inventaris/printi') ?>" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-print"></i> Print</a>
+                                    <a href="<?= base_url('/laporan_inventaris/printi') ?>" target="_blank" class="btn btn-info btn-sm"><i class="fas fa-print"></i> Print</a>
                                 </div>
 
                             </div>

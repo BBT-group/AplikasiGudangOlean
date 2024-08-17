@@ -37,7 +37,7 @@
                                                 <td class="p-1 pl-3" style="display: flexbox; text-align: center;">
                                                     <a href="<?= base_url('stok/indexdetail/' . $item['id_barang']) ?>" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Detail"><i class="fas fa-clone"></i></a>
                                                     <a href="<?= base_url('stok/indexupdate/' . $item['id_barang']) ?>" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Update"><i class="fas fa-pencil-alt"></i></a>
-                                                    <a href="<?= base_url('/stok/deletebarang/' . $item['id_barang']) ?>" class="btn btn-sm btn-danger" onclick="return  confirm(' Menghapus data barang akan menghapus riwayat transaksi yang bersangkutan Apakah anda yakin menghapus? ')"><i class="fas fa-trash"></i></a>
+                                                    <a href="<?= base_url('/stok/deletebarang/' . $item['id_barang']) ?>" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="return  confirm(' Menghapus data barang akan menghapus riwayat transaksi yang bersangkutan Apakah anda yakin menghapus? ')"><i class="fas fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>

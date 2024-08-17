@@ -37,7 +37,7 @@
                                                             <input type="text" name="stok" id="stok" value="<?= $item['stok'] ?>" hidden>
                                                             <input type="text" name="satuan" id="satuan" value="<?= $item['nama_satuan'] ?>" hidden>
                                                             <input type="text" name="harga_beli" id="harga_beli" value="<?= $item['harga_beli'] ?>" hidden>
-                                                            <button type="submit" class="btn btn-primary">submit</button>
+                                                            <button type="submit" class="btn btn-primary btn-sm">submit</button>
                                                         </form>
                                                     </td>
                                                 </tr>

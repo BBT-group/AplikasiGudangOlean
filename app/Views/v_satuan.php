@@ -27,8 +27,8 @@
                                                 <td class="p-1 pl-3"><?= 1 + $k ?></td>
                                                 <td class="p-1 pl-3"><?= $sat['nama_satuan'] ?></td>
                                                 <td class="p-1 pl-3" style="text-align: center;">
-                                                    <a href="<?= base_url('satuan/deletesatuan/' . $sat['id_satuan']) ?>" class="btn btn-sm btn-danger" onclick="return confirm(' Menghapus data akan menghapus barang yang bersangkutan Apakah anda yakin menghapus? ')" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash"></i></a>
                                                     <a href="<?= base_url('satuan/indexupdate/' . $sat['id_satuan']) ?>" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Update"><i class="fas fa-pencil-alt"></i></a>
+                                                    <a href="<?= base_url('satuan/deletesatuan/' . $sat['id_satuan']) ?>" class="btn btn-sm btn-danger" onclick="return confirm(' Menghapus data akan menghapus barang yang bersangkutan Apakah anda yakin menghapus? ')" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -93,6 +93,11 @@
                             timer: 1500
                         })
                     <?php } ?>
+
+                <script>
+                    $(function() {
+                        $('[data-toggle="tooltip"]').tooltip()
+                    })
                 </script>
 
                 </body>

@@ -1,21 +1,21 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Detail Barang Keluar</h6>
+                        <div class="card-header py-2">
+                            <h6 class="m-0 font-weight-bold text-primary">Detail Barang Masuk</h6>
                         </div>
 
-                        <div class="card-body">
+                        <div class="card-body pt-2">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="input1">Tanggal dan Waktu Peminjaman</label>
+                                        <div class="form-group mb-1">
+                                            <label for="input1">Tanggal dan Waktu Barang Masuk</label>
                                             <input type="text" class="form-control" value="<?= $header['waktu'] ?>" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group">
+                                        <div class="form-group mb-1">
                                             <label for="input2">Penerima</label>
                                             <input type="text" class="form-control" value="<?= $header['nama'] ?>" readonly>
                                         </div>
@@ -28,7 +28,7 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col">
-                                        <div class="form-group">
+                                        <div class="form-group mb-1">
                                             <label for="input2">Keterangan</label>
                                             <input type="text" class="form-control" value="<?= $header['keterangan'] ?>" readonly>
                                         </div>
@@ -36,13 +36,13 @@
                                 </div>
                                 <div class="row">
                                     <div class="col mb-1 p-0" style="text-align: left;">
-                                        <a href="<?= base_url('barang_masuk') ?>" class="btn btn-primary">kembali</a>
+                                        <a href="<?= base_url('barang_masuk') ?>" class="btn btn-sm btn-primary">kembali</a>
                                     </div>
 
                                 </div>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-striped table-bordered" id="dataTabless" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -56,21 +56,21 @@
                                         <?php $no = 0;
                                         foreach ($barang as $item) : ?>
                                             <tr>
-                                                <td><?= $no += 1 ?></td>
-                                                <td><?= $item['id_barang'] ?></td>
-                                                <td><?= $item['nama'] ?></td>
-                                                <td><?= $item['jumlah'] ?></td>
-                                                <td><?= $item['nama_satuan'] ?></td>
+                                                <td class="p-1 pl-3"><?= $no += 1 ?></td>
+                                                <td class="p-1 pl-3"><?= $item['id_barang'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['nama'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['jumlah'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['nama_satuan'] ?></td>
 
                                             </tr>
                                         <?php endforeach; ?>
                                         <?php foreach ($inventaris as $item) : ?>
                                             <tr>
-                                                <td><?= $no += 1 ?></td>
-                                                <td><?= $item['id_inventaris'] ?></td>
-                                                <td><?= $item['nama_inventaris'] ?></td>
-                                                <td><?= $item['jumlah'] ?></td>
-                                                <td>alat</td>
+                                                <td class="p-1 pl-3"><?= $no += 1 ?></td>
+                                                <td class="p-1 pl-3"><?= $item['id_inventaris'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['nama_inventaris'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['jumlah'] ?></td>
+                                                <td class="p-1 pl-3">alat</td>
 
                                             </tr>
                                         <?php endforeach; ?>

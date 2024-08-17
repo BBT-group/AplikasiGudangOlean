@@ -32,12 +32,8 @@
 
                                                     <td class="p-1 pl-3"><?= $item['id_barang'] ?></td>
                                                     <td class="p-1 pl-3"><?= $item['nama'] ?></td>
-
                                                     <td class="p-1 pl-3"><?= $item['stok'] ?></td>
-
                                                     <td class="p-1 pl-3"><?= $item['nama_kategori'] ?></td>
-
-
                                                     <td class="p-1 pl-3">
                                                         <form action=<?= base_url('/barang_masuk/savedata') ?> method="post">
                                                             <input type="text" name="id_barang" id="id_barang" value="<?= $item['id_barang'] ?>" hidden>
@@ -46,7 +42,7 @@
                                                             <input type="text" name="jenis" id="jenis" value="barang" hidden>
                                                             <input type="text" name="satuan" id="satuan" value="<?= $item['nama_satuan'] ?>" hidden>
                                                             <input type="text" name="harga_beli" id="harga_beli" value="<?= $item['harga_beli'] ?>" hidden>
-                                                            <button type="submit" class="btn btn-primary" style="display: flexbox; text-align: center;">Submit</button>
+                                                            <button type="submit" class="btn btn-primary btn-sm" style="display: flexbox; text-align: center;">Submit</button>
                                                         </form>
                                                     </td>
                                                 </tr>
@@ -65,7 +61,7 @@
 
                                                     <td class="p-1 pl-3">alat</td>
 
-                                                    <td>
+                                                    <td class="p-1 pl-3">
                                                         <form action=<?= base_url('/barang_masuk/savedata') ?> method="post">
                                                             <input type="text" name="id_barang" id="id_barang" value="<?= $item['id_inventaris'] ?>" hidden>
                                                             <input type="text" name="nama" id="nama" value="<?= $item['nama_inventaris'] ?>" hidden>
@@ -73,7 +69,7 @@
                                                             <input type="text" name="jenis" id="jenis" value="alat" hidden>
                                                             <input type="text" name="satuan" id="satuan" value="alat" hidden>
                                                             <input type="text" name="harga_beli" id="harga_beli" value="<?= $item['harga_beli'] ?>" hidden>
-                                                            <button type="submit" class="btn btn-primary" style="display: flexbox; text-align: center;">Submit</button>
+                                                            <button type="submit" class="btn btn-primary btn-sm" style="display: flexbox; text-align: center;">Submit</button>
                                                         </form>
                                                     </td>
                                                 </tr>

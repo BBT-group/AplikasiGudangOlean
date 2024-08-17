@@ -112,7 +112,7 @@ class Inventaris extends BaseController
         if (!$this->inventarisModel->update($this->request->getVar('id_inventaris'), $data)) {
             return redirect()->back()->withInput();
         }
-        return redirect()->to(base_url('/inventaris'));
+        return redirect()->to(base_url('/inventaris'))->with('success', 'Alat berhasil diperbarui');
     }
 
     public function deleteAlat($id_inventaris)

@@ -70,6 +70,7 @@ class Satuan extends BaseController
         if (!$this->satuanModel->update($this->request->getVar('id_satuan'), ['nama_satuan' => $this->request->getVar('nama_satuan')])) {
             return redirect()->back()->withInput();
         }
+        session()->setFlashdata('success', 'Satuan berhasil diupdate');
         return redirect()->to(base_url('/satuan'));
     }
 

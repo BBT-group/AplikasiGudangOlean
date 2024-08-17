@@ -38,9 +38,7 @@
                                                     <a href="<?= base_url('inventaris/indexdetail/' . $item['id_inventaris']) ?>" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Detail"><i class="fas fa-clone"></i></a>
                                                     <?php if (session()->role == 'admin') : ?>
                                                         <a href="<?= base_url('inventaris/indexupdate/' . $item['id_inventaris']) ?>" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Update"><i class="fas fa-pencil-alt"></i></a>
-
-                                                        <a href="<?= base_url('inventaris/deletealat/' . $item['id_inventaris']) ?>" class="btn btn-sm btn-danger" onclick="return confirm(' Menghapus data akan menghapus barang yang bersangkutan Apakah anda yakin menghapus? ')"><i class="fas fa-trash"></i></a>
-
+                                                        <a href="<?= base_url('inventaris/deletealat/' . $item['id_inventaris']) ?>" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="return confirm(' Menghapus data akan menghapus barang yang bersangkutan Apakah anda yakin menghapus? ')"><i class="fas fa-trash"></i></a>
                                                     <?php endif; ?>
                                                 </td>
                                             </tr>

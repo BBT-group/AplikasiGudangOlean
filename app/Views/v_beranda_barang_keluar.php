@@ -60,7 +60,7 @@
                                                     <td class="p-1 pl-3"><?= $item['id_ms_barang_keluar'] ?></td>
                                                     <td class="p-1 pl-3"><?= date('d-m-Y H:i:s', strtotime($item['waktu'])) ?></td>
                                                     <td class="p-1 pl-3"><?= $item['nama'] ?></td>
-                                                    <td class="p-1 pl-3"> <a href="<?= base_url('barang_keluar/indexdetailmaster/' . $item['id_ms_barang_keluar']) ?>" class="btn btn-sm btn-primary">Detail</a></td>
+                                                    <td class="p-1 pl-3" style="text-align: center;"> <a href="<?= base_url('barang_keluar/indexdetailmaster/' . $item['id_ms_barang_keluar']) ?>" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Detail"><i class="fas fa-clone"></i></a></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
@@ -112,6 +112,11 @@
 
                 <!-- Page level custom scripts -->
                 <script src="/js/demo/datatables-demo.js"></script>
+                <script>
+                    $(function() {
+                        $('[data-toggle="tooltip"]').tooltip()
+                    })
+                </script>
 
                 </body>
 

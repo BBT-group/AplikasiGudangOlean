@@ -68,7 +68,7 @@
                                                         <td class="p-1 pl-3"><?= date('d-m-Y H:i:s', strtotime($item['tanggal_pinjam'])) ?></td>
                                                         <td class="p-1 pl-3"><?= $item['nama'] ?></td>
                                                         <td class="p-1 pl-3"><?= ($item['status'] == 1) ? 'Dipinjam' : 'Dikembalikan' ?></td>
-                                                        <td class="p-1 pl-3"> <a href="<?= base_url('barang_pinjam/indexdetailmaster/' . $item['id_ms_peminjaman']) ?>" class="btn btn-sm btn-primary">Detail</a></td>
+                                                        <td class="p-1 pl-3" style="text-align: center;"> <a href="<?= base_url('barang_pinjam/indexdetailmaster/' . $item['id_ms_peminjaman']) ?>" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Detail"><i class="fas fa-clone"></i></a></td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
@@ -128,6 +128,12 @@
                                 alert("<?= addslashes(session('message')) ?>");
                             <?php endif; ?>
                         };
+                    </script>
+
+                    <script>
+                        $(function() {
+                            $('[data-toggle="tooltip"]').tooltip()
+                        })
                     </script>
                     </body>
 

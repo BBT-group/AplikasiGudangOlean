@@ -14,7 +14,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group mb-1">
-                                                    <label for="input1">tanggal dan waktu</label>
+                                                    <label for="input1">Tanggal dan waktu</label>
                                                     <input type="text" class="form-control" id="datetime" name="datetime" value="<?php
                                                                                                                                     date_default_timezone_set('Asia/Jakarta');
                                                                                                                                     $currentDateTime = date("l, F j, Y H:i:s");
@@ -24,7 +24,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group mb-1">
-                                                    <label for="input2">supplier</label>
+                                                    <label for="input2">Supplier</label>
                                                     <input type="text" class="form-control" id="nama_supplier" name="nama_supplier" value="<?= old('nama_supplier'); ?>">
                                                 </div>
                                             </div>
@@ -71,7 +71,7 @@
                                                 <td class="p-1 pl-3"><?= $s['satuan'] ?></td>
                                                 <td class="p-1 pl-3"><input type="number" class="update-field" data-index="<?= $index ?>" data-column="stok" value="<?= esc($s['stok']) ?>"></td>
                                                 <td class="p-1 pl-3"><input type="number" class="update-field" data-index="<?= $index ?>" data-column="harga_beli" value="<?= esc($s['harga_beli']) ?>"></td>
-                                                <td class="p-1 pl-3"> <button class="remove-item btn btn-danger" data-index="<?= $index ?>" data-key="<?= $s['id_barang'] ?>">Remove Item</button></td>
+                                                <td class="p-1 pl-3"> <button class="remove-item btn btn-sm btn-danger" data-index="<?= $index ?>" data-key="<?= $s['id_barang'] ?>">Remove Item</button></td>
                                             </tr>
 
                                         <?php endforeach; ?>

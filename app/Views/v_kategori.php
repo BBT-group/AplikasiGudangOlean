@@ -26,8 +26,8 @@
                                                 <td class="p-1 pl-3"><?= 1 + $k ?></td>
                                                 <td class="p-1 pl-3"><?= $sat['nama_kategori'] ?></td>
                                                 <td class="p-1 pl-3" style="text-align: center;">
-                                                    <a href="<?= base_url('kategori/deletekategori/' . $sat['id_kategori']) ?>" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="return  confirm(' Menghapus data akan menghapus barang yang bersangkutan Apakah anda yakin menghapus? ')"><i class="fas fa-trash"></i></a>
                                                     <a href="<?= base_url('kategori/indexupdate/' . $sat['id_kategori']) ?>" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Update"><i class="fas fa-pencil-alt"></i></a>
+                                                    <a href="<?= base_url('kategori/deletekategori/' . $sat['id_kategori']) ?>" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="return  confirm(' Menghapus data akan menghapus barang yang bersangkutan Apakah anda yakin menghapus? ')"><i class="fas fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -82,6 +82,26 @@
                     $(function() {
                         $('[data-toggle="tooltip"]').tooltip()
                     })
+                </script>
+
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script>
+                    <?php if (session()->getFlashdata('success')) { ?>
+                        Swal.fire({
+                            icon: "success",
+                            title: "<?= session()->getFlashdata('success') ?>",
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    <?php } ?>
+                    <?php if (session()->getFlashdata('warning')) { ?>
+                        Swal.fire({
+                            icon: "warning",
+                            title: "<?= session()->getFlashdata('warning') ?>",
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    <?php } ?>
                 </script>
 
                 </body>

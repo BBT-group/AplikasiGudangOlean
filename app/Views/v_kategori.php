@@ -27,9 +27,10 @@
                                                 <td class="p-1 pl-3"><?= $sat['nama_kategori'] ?></td>
                                                 <td class="p-1 pl-3" style="text-align: center;">
                                                     <a href="<?= base_url('kategori/deletekategori/' . $sat['id_kategori']) ?>" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="return  confirm(' Menghapus data akan menghapus barang yang bersangkutan Apakah anda yakin menghapus? ')"><i class="fas fa-trash"></i></a>
+                                                    <a href="<?= base_url('kategori/indexupdate/' . $sat['id_kategori']) ?>" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Update"><i class="fas fa-pencil-alt"></i></a>
                                                 </td>
                                             </tr>
-                                            <?php endforeach; ?>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>

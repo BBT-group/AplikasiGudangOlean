@@ -53,23 +53,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr><?php $no = 0;
-                                            foreach ($barang as $item) : ?>
+                                        <?php $no = 0;
+                                        foreach ($barang as $item) : ?>
+                                            <tr>
                                                 <td><?= $no += 1 ?></td>
                                                 <td><?= $item['id_barang'] ?></td>
                                                 <td><?= $item['nama'] ?></td>
                                                 <td><?= $item['jumlah'] ?></td>
                                                 <td><?= $item['nama_satuan'] ?></td>
-                                            <?php endforeach; ?>
-                                        </tr>
-                                        <tr><?php foreach ($inventaris as $item) : ?>
+
+                                            </tr>
+                                        <?php endforeach; ?>
+                                        <?php foreach ($inventaris as $item) : ?>
+                                            <tr>
                                                 <td><?= $no += 1 ?></td>
                                                 <td><?= $item['id_inventaris'] ?></td>
                                                 <td><?= $item['nama_inventaris'] ?></td>
                                                 <td><?= $item['jumlah'] ?></td>
                                                 <td>alat</td>
-                                            <?php endforeach; ?>
-                                        </tr>
+
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>

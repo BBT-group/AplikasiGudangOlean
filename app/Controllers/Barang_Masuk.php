@@ -184,7 +184,10 @@ class Barang_Masuk extends BaseController
                 $idms = $this->masterBarangMasukModel->getInsertID();
 
                 foreach ($barang as $b) {
-
+                    if ($b <= 0) {
+                        // If the post insert fails, rollback transaction
+                        throw new DatabaseException('Failed to insert post: kurang dari 0');
+                    }
                     if ($b['jenis'] == 'barang') {
                         if ($b['harga_beli'] < 1000) {
                             throw new DatabaseException('harga beli minimal 1000');

@@ -109,11 +109,12 @@ class Inventaris extends BaseController
             'stok' => $this->request->getVar('stok'),
             'harga_beli' => $this->request->getVar('harga_beli'),
         ];
-        if ($this->inventarisModel->update($this->request->getVar('id_inventaris'), $data)) {
-            return redirect()->to(base_url('/inventaris'));
+        if (!$this->inventarisModel->update($this->request->getVar('id_inventaris'), $data)) {
+            return redirect()->back()->withInput();
         }
-        return redirect()->back()->withInput();
+        return redirect()->to(base_url('/inventaris'));
     }
+
     public function deleteAlat($id_inventaris)
     {
         $this->inventarisModel->delete($id_inventaris);

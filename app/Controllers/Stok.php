@@ -112,9 +112,9 @@ class Stok extends BaseController
     }
     public function updateBarang()
     {
+        $dataLama = $this->barangModel->getBarangById($this->request->getVar('id_barang'));
         $file = $this->request->getFile('foto');
         if ($file->isValid() && !$file->hasMoved()) {
-            $dataLama = $this->barangModel->getBarangById($this->request->getVar('id_barang'));
             $fotoLama = $dataLama['foto'];
             unlink($fotoLama);
             $newName = $file->getRandomName();
@@ -140,7 +140,8 @@ class Stok extends BaseController
             $data = [
                 'id_barang' => $this->request->getVar('id_barang'),
                 'nama' => $this->request->getVar('nama'),
-                'foto' => $this->request->getVar('foto'),
+                'foto' => $dataLama['foto'],
+
                 'stok' => $this->request->getVar('stok'),
                 'harga_beli' => $this->request->getVar('harga_beli'),
                 'id_satuan' => $idSat['id_satuan'],

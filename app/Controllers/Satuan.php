@@ -50,24 +50,27 @@ class Satuan extends BaseController
         return redirect()->to(base_url('satuan'));
     }
 
-    public function indexUpdate()
+    public function indexUpdate($id)
     {
-
         $data = [
-            'satuan' => $this->satuanModel->where('id_satuan', $this->request->getVar('id_satuan'))->first()
+            'satuan' => $this->satuanModel->where('id_satuan', $id)->first()
         ];
-        return view('', $data);
+        echo view('v_header');
+        return view('v_update_satuan', $data);
     }
 
     public function updateSatuan()
     {
         if (!$this->validate([
-            'satuan' => 'required|is_not_unique[satuan.id_satuan]'
+            'id_satuan' => 'required|is_not_unique[satuan.id_satuan]',
+            'nama_satuan' => 'required'
         ])) {
-            return redirect()->to(base_url('/barang_masuk/index'))->withInput();
+            return redirect()->back()->withInput();
         }
-        $this->satuanModel->update($this->request->getVar('id_satuan'), ['nama_satuan' => $this->request->getVar('nama_satuan')]);
-        return redirect()->to('');
+        if (!$this->satuanModel->update($this->request->getVar('id_satuan'), ['nama_satuan' => $this->request->getVar('nama_satuan')])) {
+            return redirect()->back()->withInput();
+        }
+        return redirect()->to(base_url('/satuan'));
     }
 
     public function deleteSatuan($id_satuan)

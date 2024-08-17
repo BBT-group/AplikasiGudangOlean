@@ -175,7 +175,7 @@ class Barang_Keluar extends BaseController
                 foreach ($barang as $b) {
                     $barang1 = $this->barangModel->where('id_barang', $b['id_barang'])->first();
                     $sisa = $barang1['stok'] - $b['stok'];
-                    if ($sisa < 0) {
+                    if ($sisa < 0 || $b <= 0) {
                         // If the post insert fails, rollback transaction
                         throw new DatabaseException('Failed to insert post: kurang dari 0');
                     }

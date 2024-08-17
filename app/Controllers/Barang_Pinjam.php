@@ -198,7 +198,7 @@ class Barang_Pinjam extends BaseController
                     $barang1 = $this->inventarisModel->where('id_inventaris', $b['id_inventaris'])->first();
 
                     $sisa = $barang1['stok'] - $b['stok'];
-                    if ($sisa < 0) {
+                    if ($sisa < 0 || $b['stok'] <= 0) {
                         // If the post insert fails, rollback transaction
                         throw new DatabaseException('Failed to insert post: kurang dari 0');
                     }

@@ -16,8 +16,16 @@
                                         <input type="date" class="form-control" id="end_date" name="end_date" value="<?= isset($end_date) ? $end_date : '' ?>">
                                     </div>
                                 </div>
-                                <a href="<?= base_url('barang_keluar/beranda') ?>" class="btn btn-secondary btn-sm">Reset</a>
-                                <button type="submit" class="btn btn-primary btn-sm">Filter</button>
+                                <div class="row">
+                                    <div class="col-6 mb-1 ">
+                                        <a href="<?= base_url('barang_keluar/index') ?>" class="btn btn-primary btn-sm">Keluarkan Barang</a>
+                                    </div>
+                                    <div class="col-6 mb-1 " style="text-align: right;">
+                                        <a href="<?= base_url('barang_keluar/beranda') ?>" class="btn btn-secondary btn-sm">Reset</a>
+                                        <button type="submit" class="btn btn-primary btn-sm">Filter</button>
+                                    </div>
+                                </div>
+
                             </form>
                         </div>
                     </div>
@@ -27,9 +35,7 @@
                             <h6 class="m-0 font-weight-bold text-primary">Data Barang Keluar</h6>
                         </div>
                         <div class="card-body pt-2">
-                            <div class="col-12 mb-1 p-0">
-                                <a href="<?= base_url('barang_keluar/index') ?>" class="btn btn-primary btn-sm">Keluarkan Barang</a>
-                            </div>
+
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>

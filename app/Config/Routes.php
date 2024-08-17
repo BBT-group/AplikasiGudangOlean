@@ -43,7 +43,7 @@ $routes->add('/barang_keluar/clearsession', 'Barang_Keluar::clearSession');
 $routes->add('/barang_keluar/update', 'Barang_Keluar::updateStok');
 $routes->add('/barang_keluar/update2', 'Barang_Keluar::update');
 $routes->add('/barang_keluar/carii', 'Barang_Keluar::cariStok');
-$routes->add('/barang_keluar/hapusitem', 'Barang_Keluar::hapusBarangDatalistMasuk');
+$routes->add('/barang_keluar/hapusitem', 'Barang_Keluar::hapusBarangDatalistKeluar');
 
 $routes->get('/beranda', 'Beranda::index');
 $routes->get('/barang_masuk', 'Barang_Masuk::beranda');

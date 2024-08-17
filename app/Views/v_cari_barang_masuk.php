@@ -15,9 +15,9 @@
                                         <tr>
                                             <th>ID Barang</th>
                                             <th>Nama</th>
-                                            <th>Foto</th>
+
                                             <th>Stok</th>
-                                            <th>Harga Beli</th>
+
                                             <th>Kategori</th>
                                             <th>Detail</th>
                                         </tr>
@@ -32,9 +32,9 @@
 
                                                     <td class="p-1 pl-3"><?= $item['id_barang'] ?></td>
                                                     <td class="p-1 pl-3"><?= $item['nama'] ?></td>
-                                                    <td class="p-1 pl-3"><img src="<?= base_url($item['foto']) ?>" alt="<?= $item['nama'] ?>" width="50"></td>
+
                                                     <td class="p-1 pl-3"><?= $item['stok'] ?></td>
-                                                    <td class="p-1 pl-3"><?= $item['harga_beli'] ?></td>
+
                                                     <td class="p-1 pl-3"><?= $item['nama_kategori'] ?></td>
 
 
@@ -57,17 +57,13 @@
                                             <?php foreach ($inventaris as $item) : ?>
                                                 <tr>
 
-                                                    <td><?= $item['id_inventaris'] ?></td>
-                                                    <td><?= $item['nama_inventaris'] ?></td>
-                                                    <?php if ($item['foto'] != null) : ?>
-                                                        <td><img src="<?= base_url($item['foto']) ?>" alt="<?= $item['nama_inventaris'] ?>" width="50"></td>
-                                                    <?php else :  ?>
-                                                        <td></td>
-                                                    <?php endif; ?>
+                                                    <td class="p-1 pl-3"><?= $item['id_inventaris'] ?></td>
+                                                    <td class="p-1 pl-3"><?= $item['nama_inventaris'] ?></td>
 
-                                                    <td><?= $item['stok'] ?></td>
-                                                    <td><?= $item['harga_beli'] ?></td>
-                                                    <td>alat</td>
+
+                                                    <td class="p-1 pl-3"><?= $item['stok'] ?></td>
+
+                                                    <td class="p-1 pl-3">alat</td>
 
                                                     <td>
                                                         <form action=<?= base_url('/barang_masuk/savedata') ?> method="post">

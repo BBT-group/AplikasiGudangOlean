@@ -1,6 +1,5 @@
                 <div class="container-fluid">
-                    <?= session()->getFlashdata('error') ?>
-                    <?= session()->getFlashdata('message') ?>
+
                     <!-- Page Heading -->
                     <!-- <h1 class="h3 mb-2 text-gray-800">Inventory Management</h1> -->
                     <!-- DataTales Example -->
@@ -49,7 +48,7 @@
                                                 <button type="submit" class="btn btn-primary btn-sm">Submit</button>
                                             </div>
                                         </div>
-                                    </div>                                                                        
+                                    </div>
                                 </form>
                                 <table class="table table-striped table-bordered" id="dataTabless" width="100%" cellspacing="0">
                                     <thead>
@@ -82,7 +81,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
                 <!-- End of Main Content -->
 
                 <!-- Footer -->

@@ -16,10 +16,8 @@
                                         <tr>
                                             <th>ID Barang</th>
                                             <th>Nama</th>
-                                            <th>Foto</th>
+
                                             <th>Stok</th>
-                                            <th>Harga Beli</th>
-                                            <th>ID Kategori</th>
                                             <th>Detail</th>
                                         </tr>
                                     </thead>
@@ -29,15 +27,9 @@
                                                 <tr>
                                                     <td class="p-1 pl-3"><?= $item['id_barang'] ?></td>
                                                     <td class="p-1 pl-3"><?= $item['nama'] ?></td>
-                                                    <td class="p-1 pl-3"><img src="<?= base_url($item['foto']) ?>" alt="<?= $item['nama'] ?>" width="50"></td>
+
                                                     <td class="p-1 pl-3"><?= $item['stok'] ?></td>
-                                                    <td class="p-1 pl-3"><?= $item['harga_beli'] ?></td>
-                                                    <td class="p-1 pl-3"><?php foreach ($kategori as $k) {
-                                                            if ($k['id_kategori'] === $item['id_kategori']) {
-                                                                echo $k['nama_kategori'];
-                                                            };
-                                                        }; ?>
-                                                    </td>
+
                                                     <td>
                                                         <form action=<?= base_url('/barang_keluar/savedata') ?> method="post">
                                                             <input type="text" name="id_barang" id="id_barang" value="<?= $item['id_barang'] ?>" hidden>
@@ -58,47 +50,47 @@
 
                 </div>
 
-            </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Team IT PT. Olean</span>
-                    </div>
                 </div>
-            </footer>
-            <!-- End of Footer -->
+                <!-- End of Main Content -->
 
-        </div>
-        <!-- End of Content Wrapper -->
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Team IT PT. Olean</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+                </div>
+                <!-- End of Content Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-    
-    <!-- Bootstrap core JavaScript-->
-    <script src="/jquery/jquery.js"></script>
-    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+                </div>
+                <!-- End of Page Wrapper -->
 
-    <!-- Core plugin JavaScript-->
-    <script src="/jquery-easing/jquery.easing.js"></script>
+                <!-- Scroll to Top Button-->
+                <a class="scroll-to-top rounded" href="#page-top">
+                    <i class="fas fa-angle-up"></i>
+                </a>
 
-    <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.js"></script>
+                <!-- Bootstrap core JavaScript-->
+                <script src="/jquery/jquery.js"></script>
+                <script src="/bootstrap/js/bootstrap.bundle.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="/datatables/jquery.dataTables.js"></script>
-    <script src="/datatables/dataTables.bootstrap4.js"></script>
+                <!-- Core plugin JavaScript-->
+                <script src="/jquery-easing/jquery.easing.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="/js/demo/datatables-demo.js"></script>
+                <!-- Custom scripts for all pages-->
+                <script src="/js/sb-admin-2.js"></script>
 
-</body>
+                <!-- Page level plugins -->
+                <script src="/datatables/jquery.dataTables.js"></script>
+                <script src="/datatables/dataTables.bootstrap4.js"></script>
 
-</html>
+                <!-- Page level custom scripts -->
+                <script src="/js/demo/datatables-demo.js"></script>
+
+                </body>
+
+                </html>

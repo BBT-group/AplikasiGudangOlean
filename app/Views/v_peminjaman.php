@@ -75,7 +75,7 @@
                                     <td class="p-1 pl-3"><?= $s['nama_inventaris'] ?></td>
                                     <td class="p-1 pl-3"><?= $s['stok'] ?></td>
                                     <td class="p-1 pl-3"><input type="number" class="update-field" data-index="<?= $index ?>" data-column="stok" value="<?= esc($s['stok']) ?>"></td>
-                                    <td class="p-1 pl-3"> <button class="remove-item" data-index="<?= $index ?>" data-key="<?= $s['id_inventaris'] ?>">Remove Item</button></td>
+                                    <td class="p-1 pl-3"> <button class="remove-item btn btn-danger" data-index="<?= $index ?>" data-key="<?= $s['id_inventaris'] ?>">Remove Item</button></td>
                                 </tr>
 
                             <?php endforeach; ?>
@@ -94,7 +94,7 @@
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-        <span>Copyright &copy; Team IT PT. Olean</span>
+            <span>Copyright &copy; Team IT PT. Olean</span>
         </div>
     </div>
 </footer>

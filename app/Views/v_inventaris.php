@@ -1,22 +1,17 @@
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Stok Alat</h1>
-                    <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
-
+                <div class="container-fluid">                
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
+                        <div class="card-header py-2">
                             <h6 class="m-0 font-weight-bold text-primary">Data Stok Alat</h6>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body pt-2">
                             <div class="table-responsive">
 
                                 <div class="col-12 mb-1 p-0">
                                     <div class="flex-box pb-1">
                                         <?php if (session()->role == 'admin') : ?>
                                             <div class="col-12 mb-1 p-0">
-                                                <a href="<?= base_url('inventaris/indextambah') ?>" method="post" class="btn btn-primary">Tambah Alat</a>
+                                                <a href="<?= base_url('inventaris/indextambah') ?>" method="post" class="btn btn-primary btn-sm">Tambah Alat</a>
                                             </div>
                                         <?php endif; ?>
 
@@ -29,19 +24,17 @@
                                             <th>ID Inventaris</th>
                                             <th>Nama</th>
                                             <th>Stok</th>
-                                            <th>Aksi</th>
+                                            <th>Detail</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
-
                                         <?php foreach ($alat as $k => $item) : ?>
                                             <tr>
-                                                <td><?= $k + 1 ?></td>
-                                                <td><?= $item['id_inventaris'] ?></td>
-                                                <td><?= $item['nama_inventaris'] ?></td>
-                                                <td><?= $item['stok'] ?></td>
-                                                <td style="display: flexbox; text-align: center;">
+                                                <td class="p-1 pl-3"><?= $k + 1 ?></td>
+                                                <td class="p-1 pl-3"><?= $item['id_inventaris'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['nama_inventaris'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['stok'] ?></td>
+                                                <td class="p-1 pl-3" style="display: flexbox; text-align: center;">
                                                     <a href="<?= base_url('inventaris/indexdetail/' . $item['id_inventaris']) ?>" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Detail"><i class="fas fa-clone"></i></a>
                                                     <?php if (session()->role == 'admin') : ?>
                                                         <a href="<?= base_url('inventaris/indexupdate/' . $item['id_inventaris']) ?>" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Update"><i class="fas fa-pencil-alt"></i></a>

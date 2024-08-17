@@ -6,4 +6,9 @@ $(document).ready(function() {
     "paginate": true,
     "sort": true
   });
+  $('#dataTabless').DataTable({
+    "searching": false,
+    "paginate": false,
+    "sort": false
+  });
 });

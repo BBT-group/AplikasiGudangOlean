@@ -5,7 +5,7 @@
                         <div class="col-lg-12">
                             <div class="card mb-4">
                                 <div class="card-header">
-                                    Default Card Example
+                                    Tambah Barang
                                 </div>
 
                                 <div class="card-body">

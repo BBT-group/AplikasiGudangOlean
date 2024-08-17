@@ -1,15 +1,15 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">nama_inventaris</h1>
+                <!-- <h1 class="h3 mb-2 text-gray-800">nama_inventaris</h1> -->
                 <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
-                    <div class="card-header py-3">
+                    <div class="card-header py-2">
                         <h6 class="m-0 font-weight-bold text-primary">Data Inventaris</h6>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body pt-2">
                         <div class="table-responsive">
 
                             <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -18,7 +18,7 @@
                                         <th>ID Barang</th>
                                         <th>Nama</th>
                                         <th>Stok</th>
-                                        <th>Aksi</th>
+                                        <th>Detail</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -29,10 +29,10 @@
                                         <?php foreach ($barang as $item) : ?>
                                             <tr>
 
-                                                <td><?= $item['id_inventaris'] ?></td>
-                                                <td><?= $item['nama_inventaris'] ?></td>
-                                                <td><?= $item['stok'] ?></td>
-                                                <td>
+                                                <td class="p-1 pl-3"><?= $item['id_inventaris'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['nama_inventaris'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['stok'] ?></td>
+                                                <td class="p-1 pl-3">
                                                     <form action=<?= base_url('barang_pinjam/savedata') ?> method="post">
                                                         <input type="text" name="id_inventaris" id="id_inventaris" value="<?= $item['id_inventaris'] ?>" hidden>
                                                         <input type="text" name="nama_inventaris" id="nama_inventaris" value="<?= $item['nama_inventaris'] ?>" hidden>

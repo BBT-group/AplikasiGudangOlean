@@ -1,12 +1,12 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Barang Keluar</h1>
+                    <!-- <h1 class="h3 mb-2 text-gray-800">Barang Keluar</h1> -->
                     <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
                     <div class="card mb-4">
-                        <div class="card-body">
+                        <div class="card-body p-2">
                             <form method="get" action="<?= base_url('barang_keluar/beranda') ?>">
-                                <div class="form-group row">
+                                <div class="form-group row mb-1">
                                     <label for="start_date" class="col-sm-2 col-form-label">Start Date</label>
                                     <div class="col-sm-4">
                                         <input type="date" class="form-control" id="start_date" name="start_date" value="<?= isset($start_date) ? $start_date : '' ?>">
@@ -16,19 +16,19 @@
                                         <input type="date" class="form-control" id="end_date" name="end_date" value="<?= isset($end_date) ? $end_date : '' ?>">
                                     </div>
                                 </div>
-                                <a href="<?= base_url('barang_keluar/beranda') ?>" class="btn btn-secondary">Reset</a>
-                                <button type="submit" class="btn btn-primary">Filter</button>
+                                <a href="<?= base_url('barang_keluar/beranda') ?>" class="btn btn-secondary btn-sm">Reset</a>
+                                <button type="submit" class="btn btn-primary btn-sm">Filter</button>
                             </form>
                         </div>
                     </div>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
+                        <div class="card-header py-2">
                             <h6 class="m-0 font-weight-bold text-primary">Data Barang Keluar</h6>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body pt-2">
                             <div class="col-12 mb-1 p-0">
-                                <a href="<?= base_url('barang_keluar/index') ?>" class="btn btn-primary">Keluarkan Barang</a>
+                                <a href="<?= base_url('barang_keluar/index') ?>" class="btn btn-primary btn-sm">Keluarkan Barang</a>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -38,7 +38,7 @@
                                             <th>Id Masuk</th>
                                             <th>Tanggal waktu</th>
                                             <th>penerima</th>
-                                            <th>aksi</th>
+                                            <th>Detail</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -50,11 +50,11 @@
                                             $no = 0;
                                             foreach ($keluar as $item) : ?>
                                                 <tr>
-                                                    <td><?= $no += 1 ?></td>
-                                                    <td><?= $item['id_ms_barang_keluar'] ?></td>
-                                                    <td><?= date('d-m-Y H:i:s', strtotime($item['waktu'])) ?></td>
-                                                    <td><?= $item['nama'] ?></td>
-                                                    <td> <a href="<?= base_url('barang_keluar/indexdetailmaster/' . $item['id_ms_barang_keluar']) ?>" class="btn btn-sm btn-primary">Detail</a></td>
+                                                    <td class="p-1 pl-3"><?= $no += 1 ?></td>
+                                                    <td class="p-1 pl-3"><?= $item['id_ms_barang_keluar'] ?></td>
+                                                    <td class="p-1 pl-3"><?= date('d-m-Y H:i:s', strtotime($item['waktu'])) ?></td>
+                                                    <td class="p-1 pl-3"><?= $item['nama'] ?></td>
+                                                    <td class="p-1 pl-3"> <a href="<?= base_url('barang_keluar/indexdetailmaster/' . $item['id_ms_barang_keluar']) ?>" class="btn btn-sm btn-primary">Detail</a></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         <?php endif; ?>

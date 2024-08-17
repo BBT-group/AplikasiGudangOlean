@@ -23,6 +23,10 @@
     <!-- Custom styles for this page -->
     <link href="/datatables/dataTables.bootstrap4.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css">
+    
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <style>
         .collapse-item.active {
@@ -113,7 +117,7 @@
                 <li class="nav-item <?= uri_string() == 'laporan_peminjaman' ? 'active' : '' ?>">
                     <a class="nav-link" href="<?php echo base_url('laporan_peminjaman') ?>">
                         <i class="fas fa-fw fa-file-export"></i>
-                        <span>Laporan peminjaman</span>
+                        <span>Laporan Peminjaman</span>
                     </a>
                 </li>
                 <hr class="sidebar-divider d-none d-md-block">
@@ -139,14 +143,14 @@
                 </li>
                 <hr class="sidebar-divider">
                 <div class="sidebar-heading">Master</div>
-                <li class="nav-item <?= uri_string() == 'stok/index2' ? 'active' : '' ?>">
-                    <a class="nav-link" href="<?php echo base_url('stok/index2') ?>">
+                <li class="nav-item <?= uri_string() == 'stok' ? 'active' : '' ?>">
+                    <a class="nav-link" href="<?php echo base_url('stok') ?>">
                         <i class="fas fa-fw fa-layer-group"></i>
                         <span>Data Barang</span>
                     </a>
                 </li>
-                <li class="nav-item <?= uri_string() == 'inventaris/index2' ? 'active' : '' ?>">
-                    <a class="nav-link" href="<?php echo base_url('inventaris/index2') ?>">
+                <li class="nav-item <?= uri_string() == 'inventaris' ? 'active' : '' ?>">
+                    <a class="nav-link" href="<?php echo base_url('inventaris') ?>">
                         <i class="fas fa-fw fa-wrench"></i>
                         <span>Inventaris Alat</span>
                     </a>
@@ -177,7 +181,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo base_url('laporan_peminjaman') ?>">
                         <i class="fas fa-fw fa-file-export"></i>
-                        <span>Laporan peminjaman</span></a>
+                        <span>Laporan Peminjaman</span></a>
                 </li>
             <?php endif; ?>
         </ul>
@@ -185,7 +189,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-2 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3" style="color: #206c1f;">
@@ -196,6 +200,55 @@
                             <i class="fa fa-bars" style="color: #206c1f;"></i>
                         </button>
                     </div>
+                    <h1 class="h3 mb-2 text-gray-800 pl-3"><?php
+                            $uri = uri_string();
+                            if ($uri == 'beranda') {
+                                echo 'Dashboard';
+                            } elseif ($uri == 'stok') {
+                                echo 'Stok Barang';
+                            } elseif ($uri == 'kategori') {
+                                echo 'Kategori Barang';
+                            } elseif ($uri == 'satuan') {
+                                echo 'Satuan Barang';
+                            } elseif ($uri == 'inventaris') {
+                                echo 'Stok Alat';
+                            } elseif ($uri == 'barang_masuk') {
+                                echo 'Barang Masuk';
+                            } elseif ($uri == 'laporan_stok') {
+                                echo 'Laporan Stok Barang';
+                            } elseif ($uri == 'laporan_inventaris') {
+                                echo 'Laporan Stok Alat';
+                            } elseif ($uri == 'laporan_masuk') {
+                                echo 'Laporan Barang Masuk';
+                            } elseif ($uri == 'laporan_keluar') {
+                                echo 'Laporan Barang Keluar';
+                            } elseif ($uri == 'laporan_peminjaman') {
+                                echo 'Laporan Peminjaman';
+                            } elseif ($uri == 'user') {
+                                echo 'Manajemen Akun';
+                            } elseif ($uri == 'password') {
+                                echo 'Ganti Password';
+                            } elseif ($uri == 'barang_keluar') {
+                                echo 'Barang Keluar';
+                            } elseif ($uri == 'peminjaman') {
+                                echo 'Peminjaman Alat';
+                            } elseif ($uri == 'pengembalian') {
+                                echo 'Pengembalian Alat';
+                            } elseif ($uri == 'barang_pinjam') {
+                                echo 'Barang Pinjam';
+                            } elseif ($uri == 'barang_pinjam/index' || $uri == 'barang_keluar/index'|| $uri == 'barang_masuk/index') {
+                                echo 'Inventory Management';
+                            } elseif ($uri == 'barang_pinjam/cari' || $uri == 'barang_keluar/cari'|| $uri == 'barang_masuk/cari') {
+                                echo 'Cari Barang';
+                            } elseif ($uri == 'stok/indextambah' || $uri == 'inventaris/indextambah') {
+                                echo 'Tambah Data';
+                            } elseif ($uri == 'stok/indexupdate/(:num)' || $uri == 'inventaris/indexupdate/(:num)') {
+                                echo 'Update Data';
+                            } else {
+                                echo 'Gudang PT.Olean';
+                            }
+                            ?></h1>
+
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">

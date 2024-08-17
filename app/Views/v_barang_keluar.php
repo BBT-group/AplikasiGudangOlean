@@ -1,20 +1,20 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Inventory Management</h1>
+                <!-- <h1 class="h3 mb-2 text-gray-800">Inventory Management</h1> -->
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
-                    <div class="card-header py-3">
+                    <div class="card-header py-2">
                         <h6 class="m-0 font-weight-bold text-primary">Data Barang Keluar</h6>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body pt-2">
                         <div class="table-responsive">
                             <form id="addItemForm" action=<?= base_url('/barang_keluar/update') ?> method="post" enctype="multipart/form-data">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="input1">tanggal dan waktu</label>
+                                            <div class="form-group mb-1">
+                                                <label for="input1">Tanggal dan waktu</label>
                                                 <input type="text" class="form-control" id="datetime" name="datetime" value="<?php
                                                                                                                                 date_default_timezone_set('Asia/Jakarta');
                                                                                                                                 $currentDateTime = date("l, F j, Y H:i:s");
@@ -23,8 +23,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="input2">penerima</label>
+                                            <div class="form-group mb-1">
+                                                <label for="input2">Penerima</label>
                                                 <input type="text" class="form-control" id="penerima" name="penerima" value="<?= old('penerima') ?>">
                                             </div>
                                         </div>
@@ -38,22 +38,26 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 mb-1 p-0" style="text-align: right;">
-                                    <button id="clear-session-btn" class="btn btn-secondary">Clear Session</button>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
-                            </form>
-                            <div class="col-12 mb-3 p-0">
-                                <a href="<?= base_url('barang_keluar/cari') ?>" class="btn btn-primary">Cari Barang</a>
-                            </div>
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-6 mb-1">
+                                            <a href="<?= base_url('barang_keluar/cari') ?>" class="btn btn-primary btn-sm">Cari Barang</a>
+                                        </div>
+                                        <div class="col-6 mb-1" style="text-align: right;">
+                                            <button id="clear-session-btn" class="btn btn-secondary btn-sm">Clear Session</button>
+                                            <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>                                
+                            </form>                            
+                            <table class="table table-bordered" id="dataTabless" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>ID Barang</th>
                                         <th>Nama</th>
                                         <th>Satuan</th>
                                         <th>jumlah</th>
-                                        <th>Aksi</th>
+                                        <th>Detail</th>
                                     </tr>
                                 </thead>
                                 <tbody id="inventoryTable">

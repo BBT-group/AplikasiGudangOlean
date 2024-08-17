@@ -1,20 +1,18 @@
                 <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Stok Barang</h1>
-                    <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
-
-
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
+                        <div class="card-header py-2">
                             <h6 class="m-0 font-weight-bold text-primary">Data Stok Barang</h6>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body pt-2">
                             <div class="table-responsive">
                                 <div class="flex-box pb-1">
                                     <div class="col-12 mb-1 p-0">
-                                        <a href="<?= base_url('stok/indextambah') ?>" method="post" class="btn btn-primary">Tambah Barang</a>
+                                    <?php if (session()->role == 'admin') : ?>
+                                            <div class="col-12 mb-1 p-0">
+                                                <a href="<?= base_url('stok/indextambah') ?>" method="post" class="btn btn-primary btn-sm">Tambah Barang</a>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -25,18 +23,18 @@
                                             <th>Nama</th>
                                             <th>Stok</th>
                                             <th>Satuan</th>
-                                            <th>Aksi</th>
+                                            <th>Detail</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php foreach ($barang  as $k => $item) : ?>
                                             <tr>
-                                                <td><?= $k + 1 ?></td>
-                                                <td><?= $item['id_barang'] ?></td>
-                                                <td><?= $item['nama'] ?></td>
-                                                <td><?= $item['stok'] ?></td>
-                                                <td><?= $item['nama_satuan'] ?></td>
-                                                <td style="display: flexbox; text-align: center;">
+                                                <td class="p-1 pl-3"><?= $k + 1 ?></td>
+                                                <td class="p-1 pl-3"><?= $item['id_barang'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['nama'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['stok'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['nama_satuan'] ?></td>
+                                                <td class="p-1 pl-3" style="display: flexbox; text-align: center;">
                                                     <a href="<?= base_url('stok/indexdetail/' . $item['id_barang']) ?>" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Detail"><i class="fas fa-clone"></i></a>
                                                     <a href="<?= base_url('stok/indexupdate/' . $item['id_barang']) ?>" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Update"><i class="fas fa-pencil-alt"></i></a>
                                                     <a href="<?= base_url('/stok/deletebarang/' . $item['id_barang']) ?>" class="btn btn-sm btn-danger" onclick="return  confirm(' Menghapus data barang akan menghapus riwayat transaksi yang bersangkutan Apakah anda yakin menghapus? ')"><i class="fas fa-trash"></i></a>

@@ -1,17 +1,16 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Satuan</h1>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
+                        <div class="card-header py-2">
                             <h6 class="m-0 font-weight-bold text-primary">Data Satuan</h6>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body pt-2">
                             <div class="table-responsive">
                                 <div class="flex-box pb-1">
                                     <div class="col-12 mb-1 p-0">
-                                        <a href="<?= base_url('satuan/indextambah/') ?>" method="post" class="btn btn-primary">Tambah Satuan</a>
+                                        <a href="<?= base_url('satuan/indextambah/') ?>" method="post" class="btn btn-primary btn-sm">Tambah Satuan</a>
                                     </div>
                                 </div>
                                 <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -19,15 +18,15 @@
                                         <tr>
                                             <th class="col-0">No</th>
                                             <th class="col-10">Satuan</th>
-                                            <th class="col-2">Aksi</th>
+                                            <th class="col-2">Detail</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php foreach ($satuan as $k => $sat) : ?>
                                             <tr>
-                                                <td><?= 1 + $k ?></td>
-                                                <td><?= $sat['nama_satuan'] ?></td>
-                                                <td style="text-align: center;">
+                                                <td class="p-1 pl-3"><?= 1 + $k ?></td>
+                                                <td class="p-1 pl-3"><?= $sat['nama_satuan'] ?></td>
+                                                <td class="p-1 pl-3" style="text-align: center;">
                                                     <a href="<?= base_url('satuan/deletesatuan/' . $sat['id_satuan']) ?>" class="btn btn-sm btn-danger" onclick="return confirm(' Menghapus data akan menghapus barang yang bersangkutan Apakah anda yakin menghapus? ')"><i class="fas fa-trash"></i></a>
                                                 </td>
                                             </tr>

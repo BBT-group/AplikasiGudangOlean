@@ -1,15 +1,15 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Stok Barang</h1>
+                    <!-- <h1 class="h3 mb-2 text-gray-800">Stok Barang</h1> -->
                     <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
+                        <div class="card-header py-2">
                             <h6 class="m-0 font-weight-bold text-primary">Data Stok Barang</h6>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body pt-2">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -20,19 +20,19 @@
                                             <th>Stok</th>
                                             <th>Harga Beli</th>
                                             <th>ID Kategori</th>
-                                            <th>Aksi</th>
+                                            <th>Detail</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php if (!empty($barang)) : ?>
                                             <?php foreach ($barang as $item) : ?>
                                                 <tr>
-                                                    <td><?= $item['id_barang'] ?></td>
-                                                    <td><?= $item['nama'] ?></td>
-                                                    <td><img src="<?= base_url($item['foto']) ?>" alt="<?= $item['nama'] ?>" width="50"></td>
-                                                    <td><?= $item['stok'] ?></td>
-                                                    <td><?= $item['harga_beli'] ?></td>
-                                                    <td><?php foreach ($kategori as $k) {
+                                                    <td class="p-1 pl-3"><?= $item['id_barang'] ?></td>
+                                                    <td class="p-1 pl-3"><?= $item['nama'] ?></td>
+                                                    <td class="p-1 pl-3"><img src="<?= base_url($item['foto']) ?>" alt="<?= $item['nama'] ?>" width="50"></td>
+                                                    <td class="p-1 pl-3"><?= $item['stok'] ?></td>
+                                                    <td class="p-1 pl-3"><?= $item['harga_beli'] ?></td>
+                                                    <td class="p-1 pl-3"><?php foreach ($kategori as $k) {
                                                             if ($k['id_kategori'] === $item['id_kategori']) {
                                                                 echo $k['nama_kategori'];
                                                             };

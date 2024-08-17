@@ -1,20 +1,20 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Laporan Stok Barang</h1>
+                    <!-- <h1 class="h3 mb-2 text-gray-800">Laporan Stok Barang</h1> -->
                     <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Stok Barang</h6>
+                        <div class="card-header py-2">
+                            <h6 class="m-0 font-weight-bold text-primary">Data Stok Alat</h6>
                         </div>
-                        <div class="card-body">
-                            <div class="row mb-3">
+                        <div class="card-body pt-2">
+                            <div class="row mb-1">
                                 <div class="col-md-6"></div>
                                 <div class="col-md-6" style="text-align: end;">
-                                    <a href="<?= base_url('/laporan_inventaris/exporti') ?>" class="btn btn-success">Export to Excel</a>
-                                    <a href="<?= base_url('/laporan_inventaris/printi') ?>" target="_blank" class="btn btn-primary">Print</a>
+                                    <a href="<?= base_url('/laporan_inventaris/exporti') ?>" class="btn btn-success btn-sm"><i class="fa fa-file-excel"></i> Export to Excel</a>
+                                    <a href="<?= base_url('/laporan_inventaris/printi') ?>" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-print"></i> Print</a>
                                 </div>
 
                             </div>
@@ -24,7 +24,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Id Barang</th>
-                                        <th>Nama Barang</th>
+                                        <th>Nama Alat</th>
                                         <th>Stok</th>
                                         <th>Harga Beli</th>
                                     </tr>
@@ -32,11 +32,11 @@
                                 <tbody>
                                     <?php $no = 1; foreach ($inventaris as $item) : ?>
                                         <tr>
-                                            <td><?= $no++ ?></td>
-                                            <td><?= $item['id_inventaris'] ?></td>
-                                            <td><?= $item['nama_inventaris'] ?></td>
-                                            <td><?= $item['stok'] ?></td>
-                                            <td><?= $item['harga_beli'] ?></td>
+                                            <td class="p-1 pl-3"><?= $no++ ?></td>
+                                            <td class="p-1 pl-3"><?= $item['id_inventaris'] ?></td>
+                                            <td class="p-1 pl-3"><?= $item['nama_inventaris'] ?></td>
+                                            <td class="p-1 pl-3"><?= $item['stok'] ?></td>
+                                            <td class="p-1 pl-3"><?= $item['harga_beli'] ?></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
@@ -54,7 +54,7 @@
             <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2020</span>
+                    <span>Copyright &copy; Team IT PT. Olean</span>
                 </div>
             </div>
             </footer>
@@ -71,38 +71,19 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="<?php echo base_url('logout') ?>">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Bootstrap core JavaScript-->
-    <script src="/vendor/jquery/jquery.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/jquery/jquery.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="/vendor/jquery-easing/jquery.easing.js"></script>
+    <script src="/jquery-easing/jquery.easing.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="/js/sb-admin-2.js"></script>
 
     <!-- Page level plugins -->
-    <script src="/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script src="/datatables/jquery.dataTables.js"></script>
+    <script src="/datatables/dataTables.bootstrap4.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="/js/demo/datatables-demo.js"></script>

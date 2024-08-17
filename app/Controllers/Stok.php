@@ -151,25 +151,6 @@ class Stok extends BaseController
             return redirect()->to('/stok');
         }
     }
-
-    public function index2(): string
-    {
-
-        $keyword = $this->request->getVar('search');
-        if ($keyword) {
-            $barang = $this->barangModel->getBarangByName($keyword);
-        } else {
-            $barang = $this->barangModel->getBarangWithKategori();
-        }
-        $data = [
-
-            'barang' => $barang->findAll(),
-            'pager' => $this->barangModel->pager
-        ];
-        echo view('v_header');
-        return view('v_stok_operator', $data);
-    }
-
     public function deleteBarang($id_barang)
     {
         $data = $this->barangModel->getBarangById($id_barang);

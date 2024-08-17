@@ -5,7 +5,7 @@
                         <div class="col-lg-12">
                             <div class="card mb-4">
                                 <div class="card-header">
-                                    Default Card Example
+                                    Update Data Alat
                                 </div>
                                 <div class="card-body">
                                     <form id="addItemForm" action="<?= base_url('inventaris/updatealat') ?>" method="post" enctype="multipart/form-data">

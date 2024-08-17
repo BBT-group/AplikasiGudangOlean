@@ -3,19 +3,19 @@
 
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Inventory Management</h1>
+    <!-- <h1 class="h3 mb-2 text-gray-800">Inventory Management</h1> -->
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-2">
             <h6 class="m-0 font-weight-bold text-primary">Data Pinjam Barang</h6>
         </div>
-        <div class="card-body">
+        <div class="card-body pt-2">
             <div class="table-responsive">
                 <form id="addItemForm" action=<?= base_url('/barang_pinjam/update') ?> method="post" enctype="multipart/form-data">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group mb-1">
                                     <label for="input1">tanggal dan waktu</label>
                                     <input type="text" class="form-control" id="datetime" name="datetime" value="<?php
                                                                                                                     date_default_timezone_set('Asia/Jakarta');
@@ -25,14 +25,14 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group mb-1">
                                     <label for="input2">Penerima</label>
                                     <input type="text" class="form-control <?php if (isset($validate)) {
                                                                                 echo $validate->hasError('nama_penerima') ? 'is-invalid' : '';
                                                                             }  ?>" id="nama_penerima" name="nama_penerima" value="<?= old('nama_penerima'); ?>">
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="input2">Keterangan</label>
                                     <input type="text" class="form-control <?php if (isset($validate)) {
@@ -42,26 +42,28 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-6 mb-3">
-                            <a href="<?= base_url('barang_pinjam/cari') ?>" class="btn btn-primary">Tambah Barang</a>
-                        </div>
-                        <div class="col-6 mb-1" style="text-align: right;">
-                            <button id="clear-session-btn" class="btn btn-secondary">Clear Session</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6 mb-1">
+                                <a href="<?= base_url('barang_pinjam/cari') ?>" class="btn btn-primary btn-sm">Tambah Barang</a>
+                            </div>
+                            <div class="col-6 mb-1" style="text-align: right;">
+                                <button id="clear-session-btn" class="btn btn-secondary btn-sm">Clear Session</button>
+                                <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                            </div>
                         </div>
                     </div>
                 </form>
 
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="dataTabless" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>Id inventaris</th>
                                 <th>Nama</th>
                                 <th>stok</th>
                                 <th>jumlah</th>
-                                <th>Aksi</th>
+                                <th>Detail</th>
                             </tr>
                         </thead>
                         <tbody id="inventoryTable">
@@ -69,11 +71,11 @@
                             <?php
                             foreach ($pinjam ?? [] as $index => $s) : ?>
                                 <tr>
-                                    <td><?= $s['id_inventaris'] ?></td>
-                                    <td><?= $s['nama_inventaris'] ?></td>
-                                    <td><?= $s['stok'] ?></td>
-                                    <td><input type="number" class="update-field" data-index="<?= $index ?>" data-column="stok" value="<?= esc($s['stok']) ?>"></td>
-                                    <td> <button class="remove-item" data-index="<?= $index ?>" data-key="<?= $s['id_inventaris'] ?>">Remove Item</button></td>
+                                    <td class="p-1 pl-3"><?= $s['id_inventaris'] ?></td>
+                                    <td class="p-1 pl-3"><?= $s['nama_inventaris'] ?></td>
+                                    <td class="p-1 pl-3"><?= $s['stok'] ?></td>
+                                    <td class="p-1 pl-3"><input type="number" class="update-field" data-index="<?= $index ?>" data-column="stok" value="<?= esc($s['stok']) ?>"></td>
+                                    <td class="p-1 pl-3"> <button class="remove-item" data-index="<?= $index ?>" data-key="<?= $s['id_inventaris'] ?>">Remove Item</button></td>
                                 </tr>
 
                             <?php endforeach; ?>
@@ -92,7 +94,7 @@
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
+        <span>Copyright &copy; Team IT PT. Olean</span>
         </div>
     </div>
 </footer>
@@ -108,25 +110,6 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- Bootstrap core JavaScript-->
 <script src="/jquery/jquery.js"></script>
 <script src="/bootstrap/js/bootstrap.bundle.js"></script>
@@ -140,15 +123,10 @@
 <!-- Page level plugins -->
 <script src="/datatables/jquery.dataTables.js"></script>
 <script src="/datatables/dataTables.bootstrap4.js"></script>
-<script src="/js/demo/datatables-demo.js"></script>
-
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
 
 <!-- Page level custom scripts -->
 <script src="/js/demo/datatables-demo.js"></script>
+
 <script>
     window.onload = function() {
         <?php if (session()->has('error')) : ?>

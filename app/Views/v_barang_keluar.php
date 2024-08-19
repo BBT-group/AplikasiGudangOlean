@@ -48,8 +48,8 @@
                                             <button type="submit" class="btn btn-primary btn-sm">Submit</button>
                                         </div>
                                     </div>
-                                </div>                                
-                            </form>                            
+                                </div>
+                            </form>
                             <table class="table table-bordered" id="dataTabless" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
@@ -65,6 +65,7 @@
                                         <tr>
                                             <td class="p-1 pl-3"><?= $s['id_barang'] ?></td>
                                             <td class="p-1 pl-3"><?= $s['nama'] ?></td>
+                                            <td class="p-1 pl-3"><?= $s['stok_awal'] ?></td>
                                             <td class="p-1 pl-3"><?= $s['satuan'] ?></td>
                                             <td class="p-1 pl-3"><input type="number" class="update-field" data-index="<?= $index ?>" data-column="stok" value="<?= esc($s['stok']) ?>"></td>
                                             <td class="p-1 pl-3"> <button class="remove-item btn btn-danger btn-sm" data-index="<?= $index ?>" data-key="<?= $s['id_barang'] ?>">Remove Item</button></td>

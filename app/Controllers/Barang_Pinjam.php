@@ -143,6 +143,7 @@ class Barang_Pinjam extends BaseController
                 'nama_inventaris' => $this->request->getVar('nama_inventaris'),
                 // 'jenis' => $this->request->getVar('jenis'),
                 'stok' => 1,
+                'stok_awal' =>  $this->request->getVar('stok'),
             ];
             $this->dataList[] = $data2;
             session()->set('datalist_pinjam', $this->dataList);
@@ -287,6 +288,7 @@ class Barang_Pinjam extends BaseController
                 'id_inventaris' => $idInventaris,
                 'nama_inventaris' => $a['nama_inventaris'],
                 'stok' => 1,
+                'stok_awal' => $a['stok'],
             ];
             $this->dataList[] = $data2;
             session()->set('datalist_pinjam', $this->dataList);

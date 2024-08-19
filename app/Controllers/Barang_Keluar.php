@@ -105,6 +105,7 @@ class Barang_Keluar extends BaseController
                 'nama' => $this->request->getVar('nama'),
                 'satuan' => $this->request->getVar('satuan'),
                 'stok' => 1,
+                'stok_awal' =>  $this->request->getVar('stok')
             ];
 
             $this->dataList[] = $data2;
@@ -288,7 +289,7 @@ class Barang_Keluar extends BaseController
                 'satuan' => $a['nama_satuan'],
                 // 'merk' => $a('merk'),
                 'stok' => 1,
-                // 'id_kategori' => $a('id_kategori'),
+                'stok_awal' =>  $a['stok'],
             ];
             $this->dataList[] = $data2;
             session()->set('datalist_keluar', $this->dataList);

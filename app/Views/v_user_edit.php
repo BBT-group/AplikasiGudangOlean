@@ -49,19 +49,24 @@
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password (Kosongkan jika tidak ingin mengubah)">
                                         </div>
-                                        <div class="form-group row">
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <select class="form-control" id="status" name="status" required>
-                                                    <option value="aktif" <?= $user['status'] == 'aktif' ? 'selected' : '' ?>>Aktif</option>
-                                                    <option value="tidak aktif" <?= $user['status'] == 'tidak aktif' ? 'selected' : '' ?>>Tidak Aktif</option>
-                                                </select>
+                                        <?php if ($user['role'] != 'admin'): ?>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <select class="form-control" id="status" name="status" required>
+                                                        <option value="aktif" <?= $user['status'] == 'aktif' ? 'selected' : '' ?>>Aktif</option>
+                                                        <option value="tidak aktif" <?= $user['status'] == 'tidak aktif' ? 'selected' : '' ?>>Tidak Aktif</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <select class="form-control" id="role" name="role" required>
+                                                        <option value="operator" <?= $user['role'] == 'operator' ? 'selected' : '' ?>>Operator</option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-6">
-                                                <select class="form-control" id="role" name="role" required>
-                                                    <option value="operator" <?= $user['role'] == 'operator' ? 'selected' : '' ?>>Operator</option>
-                                                </select>
-                                            </div>
-                                        </div>
+                                        <?php else: ?>
+                                            <input type="text" class="form-control form-control-user" id="role" name="role" value="<?= $user['role'] ?>" hidden>
+                                            <input type="text" class="form-control form-control-user" id="status" name="status" value="<?= $user['status'] ?>" hidden>
+                                        <?php endif; ?>
                                         <button class="btn btn-primary btn-user btn-block">
                                             Update
                                         </button>

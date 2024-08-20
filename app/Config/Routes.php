@@ -43,7 +43,7 @@ $routes->add('/barang_keluar/clearsession', 'Barang_Keluar::clearSession');
 $routes->add('/barang_keluar/update', 'Barang_Keluar::updateStok');
 $routes->add('/barang_keluar/update2', 'Barang_Keluar::update');
 $routes->add('/barang_keluar/carii', 'Barang_Keluar::cariStok');
-$routes->add('/barang_keluar/hapusitem', 'Barang_Keluar::hapusBarangDatalistMasuk');
+$routes->add('/barang_keluar/hapusitem', 'Barang_Keluar::hapusBarangDatalistKeluar');
 
 $routes->get('/beranda', 'Beranda::index');
 $routes->get('/barang_masuk', 'Barang_Masuk::beranda');
@@ -73,12 +73,16 @@ $routes->get('/stok/deletebarang/(:num)', 'Stok::deleteBarang/$1');
 $routes->get('/satuan/deletesatuan/(:num)', 'Satuan::deleteSatuan/$1');
 $routes->get('/satuan', 'Satuan::index');
 $routes->add('/satuan/indextambah', 'Satuan::indexTambah');
+$routes->add('/satuan/indexupdate/(:num)', 'Satuan::indexUpdate/$1');
 $routes->add('/satuan/tambahsatuan', 'Satuan::tambahSatuan');
+$routes->add('/satuan/updatesatuan', 'Satuan::updateSatuan');
 
 $routes->get('/kategori/deletekategori/(:num)', 'Kategori::deleteKategori/$1');
 $routes->get('/kategori', 'Kategori::index');
 $routes->add('/kategori/indextambah', 'Kategori::indexTambah');
+$routes->add('/kategori/indexupdate/(:num)', 'Kategori::indexUpdate/$1');
 $routes->add('/kategori/tambahkategori', 'Kategori::tambahKategori');
+$routes->add('/kategori/updatekategori', 'Kategori::updateKategori');
 
 
 $routes->get('/laporan_stok/exports', 'Laporan_Stok::exports');

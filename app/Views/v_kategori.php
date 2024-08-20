@@ -1,19 +1,15 @@
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Kategori</h1>
-                    <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
-
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
+                        <div class="card-header py-2">
                             <h6 class="m-0 font-weight-bold text-primary">Data Kategori</h6>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body pt-2">
                             <div class="table-responsive">
                                 <div class="flex-box pb-1">
                                     <div class="col-12 mb-1 p-0">
-                                        <a href="<?= base_url('kategori/indextambah/') ?>" method="post" class="btn btn-primary">Tambah Kategori</a>
+                                        <a href="<?= base_url('kategori/indextambah/') ?>" method="post" class="btn btn-primary btn-sm">Tambah Kategori</a>
                                     </div>
                                 </div>
                                 <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -21,19 +17,20 @@
                                         <tr>
                                             <th class="col-0">No</th>
                                             <th class="col-10">Kategori</th>
-                                            <th class="col-2">Aksi</th>
+                                            <th class="col-2">Detail</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php foreach ($kategori as $k => $sat) : ?>
                                             <tr>
-                                                <td><?= 1 + $k ?></td>
-                                                <td><?= $sat['nama_kategori'] ?></td>
-                                                <td style="text-align: center;">
-                                                    <a href="<?= base_url('satuan/deletesatuan/' . $sat['id_kategori']) ?>" class="btn btn-sm btn-danger" onclick="return  confirm(' Menghapus data akan menghapus barang yang bersangkutan Apakah anda yakin menghapus? ')"><i class="fas fa-trash"></i></a>
+                                                <td class="p-1 pl-3"><?= 1 + $k ?></td>
+                                                <td class="p-1 pl-3"><?= $sat['nama_kategori'] ?></td>
+                                                <td class="p-1 pl-3" style="text-align: center;">
+                                                    <a href="<?= base_url('kategori/indexupdate/' . $sat['id_kategori']) ?>" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Update"><i class="fas fa-pencil-alt"></i></a>
+                                                    <a href="<?= base_url('kategori/deletekategori/' . $sat['id_kategori']) ?>" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="return  confirm(' Menghapus data akan menghapus barang yang bersangkutan Apakah anda yakin menghapus? ')"><i class="fas fa-trash"></i></a>
                                                 </td>
-                                                    </tr>
-                                            <?php endforeach; ?>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -80,6 +77,32 @@
 
                 <!-- Page level custom scripts -->
                 <script src="/js/demo/datatables-demo.js"></script>
+
+                <script>
+                    $(function() {
+                        $('[data-toggle="tooltip"]').tooltip()
+                    })
+                </script>
+
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script>
+                    <?php if (session()->getFlashdata('success')) { ?>
+                        Swal.fire({
+                            icon: "success",
+                            title: "<?= session()->getFlashdata('success') ?>",
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    <?php } ?>
+                    <?php if (session()->getFlashdata('warning')) { ?>
+                        Swal.fire({
+                            icon: "warning",
+                            title: "<?= session()->getFlashdata('warning') ?>",
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    <?php } ?>
+                </script>
 
                 </body>
 

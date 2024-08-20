@@ -33,11 +33,11 @@ class Home extends BaseController
         $user = $query->getRow();
         if($user) {
             if($post['password'] == $user->password) {
-                $params = ['role' => $user->role, 'nama' =>$user->nama];
+                $params = ['role' => $user->role, 'nama' =>$user->nama, 'id_ms_user' => $user->id_ms_user];
                 session()->set($params);
                 return redirect()->to('/beranda')->with('login_suceess', 'Tambahkan Kategori dan Satuan terlebih dahulu sebelum menambahkan Barang baru');
             } elseif(password_verify($post['password'], $user->password)) {
-                $params = ['role' => $user->role, 'nama' =>$user->nama];
+                $params = ['role' => $user->role, 'nama' =>$user->nama, 'id_ms_user' => $user->id_ms_user];
                 session()->set($params);
                 return redirect()->to('/beranda')->with('login_suceess', 'Tambahkan Kategori dan Satuan terlebih dahulu sebelum menambahkan Barang baru');
              }else {

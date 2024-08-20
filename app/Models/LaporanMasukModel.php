@@ -55,7 +55,6 @@ class LaporanMasukModel extends Model
             ->select('barang_masuk.*, inventaris.stok, inventaris.harga_beli, inventaris.nama_inventaris, ms_barang_masuk.waktu')
             ->join('inventaris', 'inventaris.id_inventaris = barang_masuk.id_inventaris')
             ->join($this->tableMsBarangMasuk, 'ms_barang_masuk.id_ms_barang_masuk = barang_masuk.id_ms_barang_masuk')
-
             ->get()
             ->getResultArray();
     }

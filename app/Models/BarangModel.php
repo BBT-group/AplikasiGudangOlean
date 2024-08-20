@@ -36,9 +36,11 @@ class BarangModel extends Model
     {
         return $this->select('barang.*, kategori.nama_kategori')
             ->join('kategori', 'kategori.id_kategori = barang.id_kategori')
+            ->join('satuan', 'satuan.id_satuan = barang.id_satuan')
             ->groupStart()
             ->like('barang.nama', $name)
             ->orLike('kategori.nama_kategori', $name)
+            ->orLike('satuan.nama_satuan', $name)
             ->orLike('barang.id_barang', $name)
             ->groupEnd();
     }

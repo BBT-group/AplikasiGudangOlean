@@ -53,8 +53,10 @@ class Barang_Masuk extends BaseController
             // mengambil header ms barang masuk yaitu nama supp, tanggal, id master barang
             'header' => $this->masterBarangMasukModel->getById($id),
             // mengambil data yang memiliki id ms barang imasuk
-            'barang' => $this->barangMasukModel->getByMasterId($id)
+            'barang' => $this->barangMasukModel->getByMasterId($id),
+            'inventaris' => $this->barangMasukModel->getAlatByMasterId($id)
         ];
+
         echo view('v_header');
         // ganti url ke detail
         return view('admin/detailbarangmasuk', $data);
@@ -182,7 +184,10 @@ class Barang_Masuk extends BaseController
                 $idms = $this->masterBarangMasukModel->getInsertID();
 
                 foreach ($barang as $b) {
-
+                    if ($b <= 0) {
+                        // If the post insert fails, rollback transaction
+                        throw new DatabaseException('Failed to insert post: kurang dari 0');
+                    }
                     if ($b['jenis'] == 'barang') {
                         if ($b['harga_beli'] < 1000) {
                             throw new DatabaseException('harga beli minimal 1000');

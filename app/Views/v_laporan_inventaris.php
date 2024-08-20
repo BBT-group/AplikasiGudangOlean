@@ -1,20 +1,20 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Laporan Stok Alat</h1>
+                    <!-- <h1 class="h3 mb-2 text-gray-800">Laporan Stok Barang</h1> -->
                     <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
+                        <div class="card-header py-2">
                             <h6 class="m-0 font-weight-bold text-primary">Data Stok Alat</h6>
                         </div>
-                        <div class="card-body">
-                            <div class="row mb-3">
+                        <div class="card-body pt-2">
+                            <div class="row mb-1">
                                 <div class="col-md-6"></div>
                                 <div class="col-md-6" style="text-align: end;">
-                                    <a href="<?= base_url('/laporan_inventaris/exporti') ?>" class="btn btn-success"><i class="fas fa-file-excel"></i> Export to Excel</a>
-                                    <a href="<?= base_url('/laporan_inventaris/printi') ?>" target="_blank" class="btn btn-info"><i class="fas fa-print"></i> Print</a>
+                                    <a href="<?= base_url('/laporan_inventaris/exporti') ?>" class="btn btn-success btn-sm"><i class="fa fa-file-excel"></i> Export to Excel</a>
+                                    <a href="<?= base_url('/laporan_inventaris/printi') ?>" target="_blank" class="btn btn-info btn-sm"><i class="fas fa-print"></i> Print</a>
                                 </div>
 
                             </div>
@@ -23,7 +23,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Id Alat</th>
+                                        <th>Id Barang</th>
                                         <th>Nama Alat</th>
                                         <th>Stok</th>
                                         <th>Harga Beli</th>
@@ -32,11 +32,11 @@
                                 <tbody>
                                     <?php $no = 1; foreach ($inventaris as $item) : ?>
                                         <tr>
-                                            <td><?= $no++ ?></td>
-                                            <td><?= $item['id_inventaris'] ?></td>
-                                            <td><?= $item['nama_inventaris'] ?></td>
-                                            <td><?= $item['stok'] ?></td>
-                                            <td><?= $item['harga_beli'] ?></td>
+                                            <td class="p-1 pl-3"><?= $no++ ?></td>
+                                            <td class="p-1 pl-3"><?= $item['id_inventaris'] ?></td>
+                                            <td class="p-1 pl-3"><?= $item['nama_inventaris'] ?></td>
+                                            <td class="p-1 pl-3"><?= $item['stok'] ?></td>
+                                            <td class="p-1 pl-3"><?= $item['harga_beli'] ?></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
@@ -54,7 +54,7 @@
             <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                <span>Copyright &copy; Team IT PT. Olean</span>
+                    <span>Copyright &copy; Team IT PT. Olean</span>
                 </div>
             </div>
             </footer>

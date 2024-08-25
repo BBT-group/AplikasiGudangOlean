@@ -30,7 +30,7 @@
 
     <style>
         .collapse-item.active {
-            color: #206c1f !important;
+            color: #27468B !important;
             background-color: #fff !important;
             /* Hijau */
         }
@@ -44,7 +44,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion <?= uri_string() == 'beranda' ? 'active' : '' ?>" id="accordionSidebar">
+        <ul class="navbar-nav sidebar sidebar-dark accordion <?= uri_string() == 'beranda' ? 'active' : '' ?>" id="accordionSidebar" style="background-color: #27468B;">
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url('beranda') ?>">
                 <div class="sidebar-brand-icon">
                     <img src="/img/logo.png" style="height: 50px;">
@@ -92,7 +92,7 @@
                 <div class="sidebar-heading">Laporan</div>
                 <li class="nav-item <?= in_array(uri_string(), ['laporan_stok', 'laporan_inventaris']) ? 'active' : '' ?>">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <i class="fas fa-fw fa-layer-group"></i>
+                        <i class="fas fa-fw fa-file-signature"></i>
                         <span>Laporan Stok</span>
                     </a>
                     <div id="collapseOne" class="collapse <?= in_array(uri_string(), ['laporan_stok', 'laporan_inventaris']) ? 'show' : '' ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -192,12 +192,12 @@
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-2 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3" style="color: #206c1f;">
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3" style="color: #27468B;">
                         <i class="fa fa-bars"></i>
                     </button>
                     <div class="text-center d-none d-md-inline" style="color: #fff;">
                         <button class="rounded-circle border-0" id="sidebarToggle" style="background-color: #fff;">
-                            <i class="fa fa-bars" style="color: #206c1f;"></i>
+                            <i class="fa fa-bars" style="color: #27468B;"></i>
                         </button>
                     </div>
                     <h1 class="h3 mb-2 text-gray-800 pl-3"><?php
@@ -259,8 +259,6 @@
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout

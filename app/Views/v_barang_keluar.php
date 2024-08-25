@@ -55,6 +55,7 @@
                                     <tr>
                                         <th>ID Barang</th>
                                         <th>Nama</th>
+                                        <th>Stok Awal</th>
                                         <th>Satuan</th>
                                         <th>jumlah</th>
                                         <th>Detail</th>

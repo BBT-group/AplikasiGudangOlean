@@ -53,4 +53,9 @@ class BarangMasukModel extends Model
             ->join('inventaris', 'inventaris.id_inventaris=barang_masuk.id_inventaris')
             ->where('id_ms_barang_masuk', $id)->findAll();
     }
+
+    public function getBarangMasukCount()
+    {
+        return $this->countAll();
+    }
 }

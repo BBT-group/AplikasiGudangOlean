@@ -45,7 +45,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-6 mb-1">
-                                <a href="<?= base_url('barang_pinjam/cari') ?>" class="btn btn-primary btn-sm">Tambah Barang</a>
+                                <a href="<?= base_url('barang_pinjam/cari') ?>" class="btn btn-primary btn-sm">Cari Barang</a>
                             </div>
                             <div class="col-6 mb-1" style="text-align: right;">
                                 <button id="clear-session-btn" class="btn btn-secondary btn-sm">Clear Session</button>

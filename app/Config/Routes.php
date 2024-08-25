@@ -119,3 +119,7 @@ $routes->match(['get', 'post'], '/user/updatePassword/(:num)', 'User::updatePass
 
 $routes->get('/user/changePassword', 'UserController::changePasswordForm');
 $routes->post('/user/updatePassword', 'UserController::updatePassword');
+
+$routes->set404Override(function(){
+    echo view('v_404');
+});

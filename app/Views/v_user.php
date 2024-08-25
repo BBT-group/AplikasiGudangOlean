@@ -38,7 +38,7 @@
                                                 <td style="text-align: center;">
                                                     <a href="/user/edit/<?= $user['id_ms_user'] ?>" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-pencil-alt"></i></a>
                                                     <?php if ($user['role'] != 'admin') : ?>
-                                                        <a href="/user/delete/<?= $user['id_ms_user'] ?>" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus akun ini?')"><i class="fas fa-trash"></i></a>
+                                                        <a href="/user/delete/<?= $user['id_ms_user'] ?>" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus"><i class="fas fa-trash"></i></a>
                                                     <?php endif; ?>
                                                 </td>
                                             </tr>
@@ -88,6 +88,7 @@
                 <!-- Page level plugins -->
                 <script src="/datatables/jquery.dataTables.js"></script>
                 <script src="/datatables/dataTables.bootstrap4.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
                 <!-- Page level custom scripts -->
                 <script src="/js/demo/datatables-demo.js"></script>
@@ -96,6 +97,25 @@
                     $(function() {
                         $('[data-toggle="tooltip"]').tooltip()
                     })
+                </script>
+                <script>
+                    document.querySelectorAll('.btn-danger').forEach(function(button) {
+                        button.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            const url = this.getAttribute('href');
+
+                            Swal.fire({
+                                title: "Apakah Anda yakin ingin menghapus akun ini?",
+                                showCancelButton: true,
+                                confirmButtonText: "Hapus",
+                                cancelButtonText: "Batal"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                        window.location.href = url;
+                                }
+                            });
+                        });
+                    });
                 </script>
 
                 </body>

@@ -37,7 +37,7 @@
                                                 <td class="p-1 pl-3" style="display: flexbox; text-align: center;">
                                                     <a href="<?= base_url('stok/indexdetail/' . $item['id_barang']) ?>" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Detail"><i class="fas fa-clone"></i></a>
                                                     <a href="<?= base_url('stok/indexupdate/' . $item['id_barang']) ?>" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Update"><i class="fas fa-pencil-alt"></i></a>
-                                                    <a href="<?= base_url('/stok/deletebarang/' . $item['id_barang']) ?>" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="return  confirm(' Menghapus data barang akan menghapus riwayat transaksi yang bersangkutan Apakah anda yakin menghapus? ')"><i class="fas fa-trash"></i></a>
+                                                    <a href="<?= base_url('/stok/deletebarang/' . $item['id_barang']) ?>" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus" id="hapus"><i class="fas fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -115,6 +115,25 @@
                             timer: 1500
                         })
                     <?php } ?>
+                </script>
+                <script>
+                    document.querySelectorAll('.btn-danger').forEach(function(button) {
+                        button.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            const url = this.getAttribute('href');
+
+                            Swal.fire({
+                                title: "Menghapus data barang akan menghapus riwayat transaksi yang bersangkutan. Apakah anda yakin ingin menghapus?",
+                                showCancelButton: true,
+                                confirmButtonText: "Hapus",
+                                cancelButtonText: "Batal"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                        window.location.href = url;
+                                }
+                            });
+                        });
+                    });
                 </script>
                 <script>
                     $(function() {

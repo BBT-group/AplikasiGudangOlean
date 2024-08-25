@@ -22,4 +22,9 @@ class MasterPeminjamanModel extends Model
             ->where('id_ms_peminjaman', $id)
             ->first();
     }
+    public function getChartData() {
+        return $this->select('status, COUNT(*) as count')
+                    ->groupBy('status')
+                    ->findAll();
+    }
 }

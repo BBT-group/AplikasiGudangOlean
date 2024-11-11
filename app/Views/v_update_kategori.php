@@ -3,33 +3,24 @@
                     <!-- Content Row -->
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="card mb-4">
+                            <div class="card">
                                 <div class="card-header">
-                                    Update Data Alat
+                                    <!-- judul form -->
+                                    <div class="card-title">Update Data Kategori</div>
                                 </div>
                                 <div class="card-body">
-                                    <form id="addItemForm" action="<?= base_url('inventaris/updatealat') ?>" method="post" enctype="multipart/form-data">
+                                    <form id="addItemForm" action="<?= base_url('kategori/updatekategori') ?>" method="post" enctype="multipart/form-data">
                                         <div class="row">
-                                            <div class="col">
+                                            <div class="col-md-6">
+                                                <input type="hidden" id="id_kategori" value="<?= $kategori['id_kategori'] ?>">
                                                 <div class="form-group">
-                                                    <label for="id_inventaris">ID Alat</label>
-                                                    <input type="text" class="form-control" id="id_inventaris" name="id_inventaris" value="<?= $alat['id_inventaris'] ?>" readonly>
-                                                    <input type="text" class="form-control" id="stok" name="stok" value="<?= $alat['stok'] ?>" hidden>
-                                                    <input type="text" class="form-control" id="harga_beli" name="harga_beli" value="<?= $alat['harga_beli'] ?>" hidden>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="nama_inventaris">Nama</label>
-                                                    <input type="text" class="form-control" id="nama_inventaris" name="nama_inventaris" required maxlength="45" value="<?= $alat['nama_inventaris'] ?>">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="foto">Foto</label>
-                                                    <input type="file" class="form-control" id="foto" name="foto" value="<?= $alat['foto'] ?>">
-
+                                                    <label for="nama_satuan">Nama Kategori</label>
+                                                    <input type="text" class="form-control" id="nama_kategori" name="nama_kategori" value="<?= (old('nama_kategori')) ? old('nama_kategori') : $kategori['nama_kategori'];  ?>">
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-secondary" onclick="window.history.back();">Batal</button>
-                                        <button type="submit" class="btn btn-primary">Perbarui</button>
+                                        <button type="reset" class="btn btn-secondary">Batal</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>
                                 </div>
                             </div>

@@ -105,6 +105,7 @@ class Barang_Keluar extends BaseController
                 'nama' => $this->request->getVar('nama'),
                 'satuan' => $this->request->getVar('satuan'),
                 'stok' => 1,
+                'stok_awal' =>  $this->request->getVar('stok')
             ];
 
             $this->dataList[] = $data2;
@@ -175,7 +176,7 @@ class Barang_Keluar extends BaseController
                 foreach ($barang as $b) {
                     $barang1 = $this->barangModel->where('id_barang', $b['id_barang'])->first();
                     $sisa = $barang1['stok'] - $b['stok'];
-                    if ($sisa < 0) {
+                    if ($sisa < 0 || $b <= 0) {
                         // If the post insert fails, rollback transaction
                         throw new DatabaseException('Failed to insert post: kurang dari 0');
                     }
@@ -288,7 +289,7 @@ class Barang_Keluar extends BaseController
                 'satuan' => $a['nama_satuan'],
                 // 'merk' => $a('merk'),
                 'stok' => 1,
-                // 'id_kategori' => $a('id_kategori'),
+                'stok_awal' =>  $a['stok'],
             ];
             $this->dataList[] = $data2;
             session()->set('datalist_keluar', $this->dataList);

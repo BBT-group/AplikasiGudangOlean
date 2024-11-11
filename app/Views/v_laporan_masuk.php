@@ -1,13 +1,13 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Laporan Barang Masuk</h1>
+                    <!-- <h1 class="h3 mb-2 text-gray-800">Laporan Barang Masuk</h1> -->
                     <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-body">
+                        <div class="card-body p-2">
                             <form method="get" action="<?= base_url('/laporan_masuk') ?>">
-                                <div class="form-group row">
+                                <div class="form-group row mb-1">
                                     <label for="start_date" class="col-sm-2 col-form-label">Start Date</label>
                                     <div class="col-sm-4">
                                         <input type="date" class="form-control" id="start_date" name="start_date" value="<?= isset($start_date) ? $start_date : '' ?>">
@@ -17,24 +17,24 @@
                                         <input type="date" class="form-control" id="end_date" name="end_date" value="<?= isset($end_date) ? $end_date : '' ?>">
                                     </div>
                                 </div>
-                                <div class="row mb-3">
+                                <div class="row mb-1">
                                     <div class="col-md-6">
-                                        <a href="<?= base_url('/laporan_masuk') ?>" class="btn btn-secondary mr-2">Reset</a>
-                                        <button type="submit" class="btn btn-primary mr-2">Tampilkan</button>
+                                        <a href="<?= base_url('/laporan_masuk') ?>" class="btn btn-secondary btn-sm mr-2">Reset</a>
+                                        <button type="submit" class="btn btn-primary btn-sm mr-2">Tampilkan</button>
                                     </div>
                                     <div class="col-md-6" style="text-align: end;">
-                                        <a href="<?= base_url('/laporan_masuk/exportm?start_date=' . (isset($start_date) ? $start_date : '') . '&end_date=' . (isset($end_date) ? $end_date : '')) ?>" class="btn btn-success"><i class="fa fa-file-excel"></i> Export to Excel</a>
-                                        <a href="<?= base_url('/laporan_masuk/printm?start_date=' . (isset($start_date) ? $start_date : '') . '&end_date=' . (isset($end_date) ? $end_date : '')) ?>" class="btn btn-info" target="_blank"><i class="fas fa-print"></i> Print</a>
+                                        <a href="<?= base_url('/laporan_masuk/exportm?start_date=' . (isset($start_date) ? $start_date : '') . '&end_date=' . (isset($end_date) ? $end_date : '')) ?>" class="btn btn-success btn-sm"><i class="fa fa-file-excel"></i> Export to Excel</a>
+                                        <a href="<?= base_url('/laporan_masuk/printm?start_date=' . (isset($start_date) ? $start_date : '') . '&end_date=' . (isset($end_date) ? $end_date : '')) ?>" class="btn btn-info btn-sm" target="_blank"><i class="fas fa-print"></i> Print</a>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
+                        <div class="card-header py-2">
                             <h6 class="m-0 font-weight-bold text-primary">Data Barang Masuk dari <?= $start_date ?> s/d <?= $end_date ?></h6>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body pt-2">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered" id="dataTables" width="100%" cellspacing="0">
                                     <thead>
@@ -54,30 +54,30 @@
                                         <?php $no = 1;
                                         foreach ($barangmasuk as $item) : ?>
                                             <tr>
-                                                <td><?= $no++ ?></td>
-                                                <td><?= $item['id_barang'] ?></td>
-                                                <td><?= $item['waktu'] ?></td>
-                                                <td><?= $item['nama'] ?></td>
-                                                <td><?= $item['nama_satuan'] ?></td>
-                                                <td><?= $item['harga_beli'] ?></td>
-                                                <td><?= $item['stok_awal'] ?></td> <!-- Mengisi stok awal -->
-                                                <td><?= $item['jumlah'] ?></td>
-                                                <td><?= $item['stok_awal'] + $item['jumlah'] ?></td>
+                                                <td class="p-1 pl-3"><?= $no++ ?></td>
+                                                <td class="p-1 pl-3"><?= $item['id_barang'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['waktu'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['nama'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['nama_satuan'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['harga_beli'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['stok_awal'] ?></td> <!-- Mengisi stok awal -->
+                                                <td class="p-1 pl-3"><?= $item['jumlah'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['stok_awal'] + $item['jumlah'] ?></td>
                                             </tr>
                                         <?php endforeach; ?>
 
                                         <?php
                                         foreach ($alatmasuk as $item) : ?>
                                             <tr>
-                                                <td><?= $no++ ?></td>
-                                                <td><?= $item['id_inventaris'] ?></td>
-                                                <td><?= $item['waktu'] ?></td>
-                                                <td><?= $item['nama_inventaris'] ?></td>
-                                                <td>alat</td>
-                                                <td><?= $item['harga_beli'] ?></td>
-                                                <td><?= $item['stok_awal'] ?></td> <!-- Mengisi stok awal -->
-                                                <td><?= $item['jumlah'] ?></td>
-                                                <td><?= $item['stok_awal'] + $item['jumlah'] ?></td>
+                                                <td class="p-1 pl-3"><?= $no++ ?></td>
+                                                <td class="p-1 pl-3"><?= $item['id_inventaris'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['waktu'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['nama_inventaris'] ?></td>
+                                                <td class="p-1 pl-3">alat</td>
+                                                <td class="p-1 pl-3"><?= $item['harga_beli'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['stok_awal'] ?></td> <!-- Mengisi stok awal -->
+                                                <td class="p-1 pl-3"><?= $item['jumlah'] ?></td>
+                                                <td class="p-1 pl-3"><?= $item['stok_awal'] + $item['jumlah'] ?></td>
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>

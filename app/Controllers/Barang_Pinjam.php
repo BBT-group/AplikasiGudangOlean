@@ -143,6 +143,7 @@ class Barang_Pinjam extends BaseController
                 'nama_inventaris' => $this->request->getVar('nama_inventaris'),
                 // 'jenis' => $this->request->getVar('jenis'),
                 'stok' => 1,
+                'stok_awal' =>  $this->request->getVar('stok'),
             ];
             $this->dataList[] = $data2;
             session()->set('datalist_pinjam', $this->dataList);
@@ -198,7 +199,7 @@ class Barang_Pinjam extends BaseController
                     $barang1 = $this->inventarisModel->where('id_inventaris', $b['id_inventaris'])->first();
 
                     $sisa = $barang1['stok'] - $b['stok'];
-                    if ($sisa < 0) {
+                    if ($sisa < 0 || $b['stok'] <= 0) {
                         // If the post insert fails, rollback transaction
                         throw new DatabaseException('Failed to insert post: kurang dari 0');
                     }
@@ -287,6 +288,7 @@ class Barang_Pinjam extends BaseController
                 'id_inventaris' => $idInventaris,
                 'nama_inventaris' => $a['nama_inventaris'],
                 'stok' => 1,
+                'stok_awal' => $a['stok'],
             ];
             $this->dataList[] = $data2;
             session()->set('datalist_pinjam', $this->dataList);

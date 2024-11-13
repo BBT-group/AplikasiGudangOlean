@@ -11,13 +11,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group mb-1">
                                             <label for="input1">Tanggal dan Waktu Barang Masuk</label>
-                                            <input type="text" class="form-control" value="<?= $header['waktu'] ?>" readonly>
+                                            <input type="text" class="form-control form-control-sm" value="<?= $header['waktu'] ?>" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group mb-1">
                                             <label for="input2">Penerima</label>
-                                            <input type="text" class="form-control" value="<?= $header['nama'] ?>" readonly>
+                                            <input type="text" class="form-control form-control-sm" value="<?= $header['nama'] ?>" readonly>
                                         </div>
                                     </div>
 
@@ -30,7 +30,7 @@
                                     <div class="col">
                                         <div class="form-group mb-1">
                                             <label for="input2">Keterangan</label>
-                                            <input type="text" class="form-control" value="<?= $header['keterangan'] ?>" readonly>
+                                            <input type="text" class="form-control form-control-sm" value="<?= $header['keterangan'] ?>" readonly>
                                         </div>
                                     </div>
                                 </div>

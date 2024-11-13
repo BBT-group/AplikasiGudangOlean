@@ -41,20 +41,21 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-6 mb-1">
-                                            <a href="<?= base_url('barang_keluar/cari') ?>" class="btn btn-primary btn-sm">Cari Barang</a>
+                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">Cari Barang</button>
                                         </div>
                                         <div class="col-6 mb-1" style="text-align: right;">
                                             <button id="clear-session-btn" class="btn btn-secondary btn-sm">Clear Session</button>
                                             <button type="submit" class="btn btn-primary btn-sm">Submit</button>
                                         </div>
                                     </div>
-                                </div>                                
-                            </form>                            
-                            <table class="table table-bordered" id="dataTabless" width="100%" cellspacing="0">
+                                </div>
+                            </form>
+                            <table class="table table-striped table-bordered" id="dataTabless" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>ID Barang</th>
                                         <th>Nama</th>
+                                        <th>Stok Awal</th>
                                         <th>Satuan</th>
                                         <th>jumlah</th>
                                         <th>Detail</th>
@@ -65,6 +66,7 @@
                                         <tr>
                                             <td class="p-1 pl-3"><?= $s['id_barang'] ?></td>
                                             <td class="p-1 pl-3"><?= $s['nama'] ?></td>
+                                            <td class="p-1 pl-3"><?= $s['stok_awal'] ?></td>
                                             <td class="p-1 pl-3"><?= $s['satuan'] ?></td>
                                             <td class="p-1 pl-3"><input type="number" class="update-field" data-index="<?= $index ?>" data-column="stok" value="<?= esc($s['stok']) ?>"></td>
                                             <td class="p-1 pl-3"> <button class="remove-item btn btn-danger btn-sm" data-index="<?= $index ?>" data-key="<?= $s['id_barang'] ?>">Remove Item</button></td>
@@ -75,6 +77,55 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Cari Barang</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Barang</th>
+                                            <th>Nama</th>
+
+                                            <th>Stok</th>
+                                            <th>Detail</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php if (!empty($barangs)) : ?>
+                                            <?php foreach ($barangs as $item) : ?>
+                                                <tr>
+                                                    <td class="p-1 pl-3"><?= $item['id_barang'] ?></td>
+                                                    <td class="p-1 pl-3"><?= $item['nama'] ?></td>
+
+                                                    <td class="p-1 pl-3"><?= $item['stok'] ?></td>
+
+                                                    <td>
+                                                        <form action=<?= base_url('/barang_keluar/savedata') ?> method="post">
+                                                            <input type="text" name="id_barang" id="id_barang" value="<?= $item['id_barang'] ?>" hidden>
+                                                            <input type="text" name="nama" id="nama" value="<?= $item['nama'] ?>" hidden>
+                                                            <input type="text" name="stok" id="stok" value="<?= $item['stok'] ?>" hidden>
+                                                            <input type="text" name="satuan" id="satuan" value="<?= $item['nama_satuan'] ?>" hidden>
+                                                            <input type="text" name="harga_beli" id="harga_beli" value="<?= $item['harga_beli'] ?>" hidden>
+                                                            <button type="submit" class="btn btn-primary btn-sm">submit</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </div>
             <!-- End of Main Content -->
 

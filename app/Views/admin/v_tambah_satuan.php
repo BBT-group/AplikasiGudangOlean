@@ -20,7 +20,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="reset" class="btn btn-secondary">Batal</button>
+                                        <button class="btn btn-secondary" onclick="history.back()">Batal</button>
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>
                                 </div>

@@ -1,286 +1,325 @@
-<div class="container-fluid">
+    <div class="container-fluid">
 
 
 
-    <!-- Page Heading -->
-    <!-- <h1 class="h3 mb-2 text-gray-800">Inventory Management</h1> -->
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4">
-        <div class="card-header py-2">
-            <h6 class="m-0 font-weight-bold text-primary">Data Pinjam Barang</h6>
-        </div>
-        <div class="card-body pt-2">
-            <div class="table-responsive">
-                <form id="addItemForm" action=<?= base_url('/barang_pinjam/update') ?> method="post" enctype="multipart/form-data">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group mb-1">
-                                    <label for="input1">tanggal dan waktu</label>
-                                    <input type="text" class="form-control" id="datetime" name="datetime" value="<?php
-                                                                                                                    date_default_timezone_set('Asia/Jakarta');
-                                                                                                                    $currentDateTime = date("l, F j, Y H:i:s");
-                                                                                                                    echo $currentDateTime;
-                                                                                                                    ?>" disabled>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group mb-1">
-                                    <label for="input2">Penerima</label>
-                                    <input type="text" class="form-control <?php if (isset($validate)) {
-                                                                                echo $validate->hasError('nama_penerima') ? 'is-invalid' : '';
-                                                                            }  ?>" id="nama_penerima" name="nama_penerima" value="<?= old('nama_penerima'); ?>">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="input2">Keterangan</label>
-                                    <input type="text" class="form-control <?php if (isset($validate)) {
-                                                                                echo $validate->hasError('nama_penerima') ? 'is-invalid' : '';
-                                                                            }  ?>" id="keterangan" name="keterangan" value="<?= old('keterangan'); ?>">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-6 mb-1">
-                                <a href="<?= base_url('barang_pinjam/cari') ?>" class="btn btn-primary btn-sm">Tambah Barang</a>
-                            </div>
-                            <div class="col-6 mb-1" style="text-align: right;">
-                                <button id="clear-session-btn" class="btn btn-secondary btn-sm">Clear Session</button>
-                                <button type="submit" class="btn btn-primary btn-sm">Submit</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
+        <!-- Page Heading -->
+        <!-- <h1 class="h3 mb-2 text-gray-800">Inventory Management</h1> -->
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-2">
+                <h6 class="m-0 font-weight-bold text-primary">Data Pinjam Barang</h6>
+            </div>
+            <div class="card-body pt-2">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTabless" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Id inventaris</th>
-                                <th>Nama</th>
-                                <th>stok</th>
-                                <th>jumlah</th>
-                                <th>Detail</th>
-                            </tr>
-                        </thead>
-                        <tbody id="inventoryTable">
+                    <form id="addItemForm" action=<?= base_url('/barang_pinjam/update') ?> method="post" enctype="multipart/form-data">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-1">
+                                        <label for="input1">Tanggal dan waktu</label>
+                                        <input type="text" class="form-control" id="datetime" name="datetime" value="<?php
+                                                                                                                        date_default_timezone_set('Asia/Jakarta');
+                                                                                                                        $currentDateTime = date("l, F j, Y H:i:s");
+                                                                                                                        echo $currentDateTime;
+                                                                                                                        ?>" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-1">
+                                        <label for="input2">Penerima</label>
+                                        <input type="text" class="form-control <?php if (isset($validate)) {
+                                                                                    echo $validate->hasError('nama_penerima') ? 'is-invalid' : '';
+                                                                                }  ?>" id="nama_penerima" name="nama_penerima" value="<?= old('nama_penerima'); ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="input2">Keterangan</label>
+                                        <input type="text" class="form-control <?php if (isset($validate)) {
+                                                                                    echo $validate->hasError('nama_penerima') ? 'is-invalid' : '';
+                                                                                }  ?>" id="keterangan" name="keterangan" value="<?= old('keterangan'); ?>">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6 mb-1">
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">Cari Barang</button>
+                                </div>
+                                <div class="col-6 mb-1" style="text-align: right;">
+                                    <button id="clear-session-btn" class="btn btn-secondary btn-sm">Clear Session</button>
+                                    <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
 
-                            <?php
-                            foreach ($pinjam ?? [] as $index => $s) : ?>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTabless" width="100%" cellspacing="0">
+                            <thead>
                                 <tr>
-                                    <td class="p-1 pl-3"><?= $s['id_inventaris'] ?></td>
-                                    <td class="p-1 pl-3"><?= $s['nama_inventaris'] ?></td>
-                                    <td class="p-1 pl-3"><?= $s['stok'] ?></td>
-                                    <td class="p-1 pl-3"><input type="number" class="update-field" data-index="<?= $index ?>" data-column="stok" value="<?= esc($s['stok']) ?>"></td>
-                                    <td class="p-1 pl-3"> <button class="remove-item btn btn-danger btn-sm" data-index="<?= $index ?>" data-key="<?= $s['id_inventaris'] ?>">Remove Item</button></td>
+                                    <th>Id inventaris</th>
+                                    <th>Nama</th>
+                                    <th>stok</th>
+                                    <th>jumlah</th>
+                                    <th>Detail</th>
                                 </tr>
+                            </thead>
+                            <tbody id="inventoryTable">
 
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                                <?php
+                                foreach ($pinjam ?? [] as $index => $s) : ?>
+                                    <tr>
+                                        <td class="p-1 pl-3"><?= $s['id_inventaris'] ?></td>
+                                        <td class="p-1 pl-3"><?= $s['nama_inventaris'] ?></td>
+                                        <td class="p-1 pl-3"><?= $s['stok_awal'] ?></td>
+                                        <td class="p-1 pl-3"><input type="number" class="update-field" data-index="<?= $index ?>" data-column="stok" value="<?= esc($s['stok']) ?>"></td>
+                                        <td class="p-1 pl-3"> <button class="remove-item btn btn-danger btn-sm" data-index="<?= $index ?>" data-key="<?= $s['id_inventaris'] ?>">Remove Item</button></td>
+                                    </tr>
+
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-
-    </div>
-
-</div>
-<!-- End of Main Content -->
-
-<!-- Footer -->
-<footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Team IT PT. Olean</span>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cari Alat</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>ID Barang</th>
+                                    <th>Nama</th>
+                                    <th>Stok</th>
+                                    <th>Detail</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if (!empty($barang)) : ?>
+                                    <?php foreach ($barang as $item) : ?>
+                                        <tr>
+                                            <td class="p-1 pl-3"><?= $item['id_inventaris'] ?></td>
+                                            <td class="p-1 pl-3"><?= $item['nama_inventaris'] ?></td>
+                                            <td class="p-1 pl-3"><?= $item['stok'] ?></td>
+                                            <td class="p-1 pl-3">
+                                                <form action=<?= base_url('barang_pinjam/savedata') ?> method="post">
+                                                    <input type="text" name="id_inventaris" id="id_inventaris" value="<?= $item['id_inventaris'] ?>" hidden>
+                                                    <input type="text" name="nama_inventaris" id="nama_inventaris" value="<?= $item['nama_inventaris'] ?>" hidden>
+                                                    <input type="text" name="stok" id="stok" value="<?= $item['stok'] ?>" hidden>
+                                                    <button type="submit" class="btn btn-primary btn-sm" style="display: flexbox;">Submit</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</footer>
-<!-- End of Footer -->
+    </div>
+    <!-- End of Main Content -->
 
-</div>
-<!-- End of Content Wrapper -->
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Team IT PT. Olean</span>
+            </div>
+        </div>
+    </footer>
+    <!-- End of Footer -->
 
-</div>
-<!-- End of Page Wrapper -->
+    </div>
+    <!-- End of Content Wrapper -->
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-<!-- Bootstrap core JavaScript-->
-<script src="/jquery/jquery.js"></script>
-<script src="/bootstrap/js/bootstrap.bundle.js"></script>
+    </div>
+    <!-- End of Page Wrapper -->
 
-<!-- Core plugin JavaScript-->
-<script src="/jquery-easing/jquery.easing.js"></script>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- Bootstrap core JavaScript-->
+    <script src="/jquery/jquery.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
 
-<!-- Custom scripts for all pages-->
-<script src="/js/sb-admin-2.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="/jquery-easing/jquery.easing.js"></script>
 
-<!-- Page level plugins -->
-<script src="/datatables/jquery.dataTables.js"></script>
-<script src="/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.js"></script>
 
-<!-- Page level custom scripts -->
-<script src="/js/demo/datatables-demo.js"></script>
+    <!-- Page level plugins -->
+    <script src="/datatables/jquery.dataTables.js"></script>
+    <script src="/datatables/dataTables.bootstrap4.js"></script>
 
-<script>
-    window.onload = function() {
-        <?php if (session()->has('error')) : ?>
-            alert("<?= addslashes(session('error')) ?>");
-        <?php elseif (session()->has('message')) : ?>
-            alert("<?= addslashes(session('message')) ?>");
-        <?php endif; ?>
-    };
-</script>
-<script>
-    $(document).ready(function() {
-        $('#clear-session-btn').click(function() {
-            $.ajax({
-                url: '<?= base_url('barang_pinjam/clearsession') ?>', // Adjust the URL as needed
-                method: 'POST',
-                success: function(response) {
-                    // $('.print').text('Response from server: ' + response);
-                    // console.log(response);
+    <!-- Page level custom scripts -->
+    <script src="/js/demo/datatables-demo.js"></script>
 
-                    alert('Session cleared successfully');
-                },
-                error: function(xhr, status, error) {
-                    alert('Error clearing session: ' + error);
-                }
-            });
-        });
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        $('.update-field').on('input', function() {
-            var index = $(this).data('index');
-            var column = $(this).data('column');
-            var value = $(this).val();
+    <script>
+        window.onload = function() {
+            <?php if (session()->has('error')) : ?>
+                alert("<?= addslashes(session('error')) ?>");
+            <?php elseif (session()->has('message')) : ?>
+                alert("<?= addslashes(session('message')) ?>");
+            <?php endif; ?>
+        };
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#clear-session-btn').click(function() {
+                $.ajax({
+                    url: '<?= base_url('barang_pinjam/clearsession') ?>', // Adjust the URL as needed
+                    method: 'POST',
+                    success: function(response) {
+                        // $('.print').text('Response from server: ' + response);
+                        // console.log(response);
 
-            $.ajax({
-                url: '<?= base_url('barang_pinjam/update2') ?>',
-                method: 'POST',
-                data: {
-                    index: index,
-                    column: column,
-                    value: value
-                },
-                success: function(response) {
-
-                    if (response.status === 'success') {
-                        console.log('Data updated successfully');
-                    } else {
-                        console.log('Data updated not');
+                        alert('Session cleared successfully');
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Error clearing session: ' + error);
                     }
-                }
+                });
             });
         });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.update-field').on('input', function() {
+                var index = $(this).data('index');
+                var column = $(this).data('column');
+                var value = $(this).val();
 
-        // Function to capture barcode scan
-        let first = true;
-        let barcode = ''; // Initialize an empty string to store the scanned barcode
-        let timeoutId = null; // Initialize a variable to store the timeout ID
-        let lastKeyTime = Date.now();
-        $(document).keypress(function(e) {
-            let char = String.fromCharCode(e.which); // Convert the keypress event to the corresponding character
-            let currentTime = Date.now();
-            // Clear any existing timeout
-            if (first) {
+                $.ajax({
+                    url: '<?= base_url('barang_pinjam/update2') ?>',
+                    method: 'POST',
+                    data: {
+                        index: index,
+                        column: column,
+                        value: value
+                    },
+                    success: function(response) {
 
-            }
-            if (timeoutId) {
-                clearTimeout(timeoutId);
-            }
+                        if (response.status === 'success') {
+                            console.log('Data updated successfully');
+                        } else {
+                            console.log('Data updated not');
+                        }
+                    }
+                });
+            });
+
+            // Function to capture barcode scan
+            let first = true;
+            let barcode = ''; // Initialize an empty string to store the scanned barcode
+            let timeoutId = null; // Initialize a variable to store the timeout ID
+            let lastKeyTime = Date.now();
+            $(document).keypress(function(e) {
+                let char = String.fromCharCode(e.which); // Convert the keypress event to the corresponding character
+                let currentTime = Date.now();
+                // Clear any existing timeout
+                if (first) {
+
+                }
+                if (timeoutId) {
+                    clearTimeout(timeoutId);
+                }
 
 
-            barcode += char;
-            if (currentTime - lastKeyTime < 10) {
-
-                timeoutId = setTimeout(function() {
-
-                    let id = barcode; // Assign the barcode string to the ID variable
-                    console.log(barcode);
-                    id = id.slice(0, -1);
-                    handleBarcodeScan(id);
-                    // Call a function to handle the barcode scan}
-
-
-                    barcode = ''; // Reset the barcode string after handling the scan
-                    timeoutId = null; // Reset the timeout ID
-                    first = true;
-                }, 200); // Reset the barcode string if more than 100ms passed since the last keypress
-            } else {
-                barcode = '';
-            }
-            if (first) {
                 barcode += char;
-                first = false;
-            }
-            lastKeyTime = currentTime;
+                if (currentTime - lastKeyTime < 10) {
+
+                    timeoutId = setTimeout(function() {
+
+                        let id = barcode; // Assign the barcode string to the ID variable
+                        console.log(barcode);
+                        id = id.slice(0, -1);
+                        handleBarcodeScan(id);
+                        // Call a function to handle the barcode scan}
 
 
-            // Append character to barcode string
-            // Append the current character to the barcode string
+                        barcode = ''; // Reset the barcode string after handling the scan
+                        timeoutId = null; // Reset the timeout ID
+                        first = true;
+                    }, 200); // Reset the barcode string if more than 100ms passed since the last keypress
+                } else {
+                    barcode = '';
+                }
+                if (first) {
+                    barcode += char;
+                    first = false;
+                }
+                lastKeyTime = currentTime;
 
-            // Set a timeout to handle the complete barcode after 200ms of no input
+
+                // Append character to barcode string
+                // Append the current character to the barcode string
+
+                // Set a timeout to handle the complete barcode after 200ms of no input
+
+            });
+
+            $('.remove-item').on('click', function() {
+                var key = $(this).data('key');
+                var index = $(this).data('index');
+                console.log(key);
+                $.ajax({
+                    url: '<?= base_url('/barang_pinjam/hapusitem') ?>',
+                    type: 'POST',
+                    data: {
+                        key: key,
+                        index: index
+                    },
+                    success: function(response) {
+                        if (response.status) {
+                            $('button[data-index="' + index + '"]').closest('tr').remove();
+                        }
+                    }
+                });
+            });
 
         });
 
-        $('.remove-item').on('click', function() {
-            var key = $(this).data('key');
-            var index = $(this).data('index');
-            console.log(key);
+        function handleBarcodeScan(id) {
             $.ajax({
-                url: '<?= base_url('/barang_pinjam/hapusitem') ?>',
-                type: 'POST',
+                url: '<?= base_url('barang_pinjam/carii') ?>',
+                method: 'POST',
                 data: {
-                    key: key,
-                    index: index
+                    idBarang: id,
                 },
                 success: function(response) {
-                    if (response.status) {
-                        $('button[data-index="' + index + '"]').closest('tr').remove();
+                    if (response.status === 'success') {
+                        console.log('Barcode scanned successfully');
+                        location.reload(); // Reload the page to see updated data
+                    } else if (response.status === 'not_found') {
+                        if (alert(response.message + "\n\nhubungi admin barang belum terdaftar")) {
+
+                        }
+                    } else if (response.status === 'eror') {
+                        console.log('Error: ' + response.message);
                     }
+                },
+                error: function(jqXHR, text, eror) {
+                    console.log(eror.text);
                 }
             });
-        });
 
-    });
-
-    function handleBarcodeScan(id) {
-        $.ajax({
-            url: '<?= base_url('barang_pinjam/carii') ?>',
-            method: 'POST',
-            data: {
-                idBarang: id,
-            },
-            success: function(response) {
-                if (response.status === 'success') {
-                    console.log('Barcode scanned successfully');
-                    location.reload(); // Reload the page to see updated data
-                } else if (response.status === 'not_found') {
-                    if (alert(response.message + "\n\nhubungi admin barang belum terdaftar")) {
-
-                    }
-                } else if (response.status === 'eror') {
-                    console.log('Error: ' + response.message);
-                }
-            },
-            error: function(jqXHR, text, eror) {
-                console.log(eror.text);
-            }
-        });
-
-    }
-</script>
-
-
-
+        }
+    </script> 
 </body>
-
 </html>

@@ -6,18 +6,18 @@
                         </div>
 
                         <div class="card-body pt-2">
-                            <div class="container">
+                            <div class="container"> 
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group mb-1">
                                             <label for="input1">Tanggal dan Waktu Peminjaman</label>
-                                            <input type="text" class="form-control" value="<?= $header['tanggal_pinjam'] ?>" readonly>
+                                            <input type="text" class="form-control form-control-sm" value="<?= $header['tanggal_pinjam'] ?>" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group mb-1">
                                             <label for="input2">Penerima</label>
-                                            <input type="text" class="form-control" value="<?= $header['nama'] ?>" readonly>
+                                            <input type="text" class="form-control form-control-sm" value="<?= $header['nama'] ?>" readonly>
                                         </div>
                                     </div>
 
@@ -26,13 +26,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group mb-1">
                                             <label for="input1">Tanggal dan Waktu Pengembalian</label>
-                                            <input type="text" class="form-control" value="<?= $header['tanggal_kembali'] ?>" readonly>
+                                            <input type="text" class="form-control form-control-sm" value="<?= $header['tanggal_kembali'] ?>" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group mb-1">
                                             <label for="input2">Status</label>
-                                            <input type="text" class="form-control" value="<?php if ($header['status'] == 1) {
+                                            <input type="text" class="form-control form-control-sm" value="<?php if ($header['status'] == 1) {
 
                                                                                                 echo "Sedang dipinjam";
                                                                                             } else {
@@ -45,7 +45,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="input2">Keterangan</label>
-                                            <input type="text" class="form-control" value="<?= $header['keterangan'] ?>" readonly>
+                                            <input type="text" class="form-control form-control-sm" value="<?= $header['keterangan'] ?>" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -53,17 +53,18 @@
 
                             <div class="container">                                
                                 <div class="row">
-                                    <div class="col mb-1 p-0" style="text-align: left;">
-                                        <a href="<?= base_url('barang_pinjam') ?>" class="btn btn-primary btn-sm">kembali</a>
+                                    <div class="col-md-6" style="text-align: left;">
+                                        <a href="<?= base_url('barang_pinjam') ?>" class="btn btn-secondary btn-sm">kembali</a>
                                     </div>
-                                    <div class="col mb-1 p-0" style="text-align: right;">
-                                        <?php if ($header['status'] == 1) : ?>
-                                            <form action="<?= base_url('barang_pinjam/updatestatus') ?>" method="post" enctype="multipart/form-data">
-                                                <input type="hidden" name="id_ms_peminjaman" value="<?= $header['id_ms_peminjaman'] ?>" hidden>
-                                                <button type="submit" class="btn btn-primary btn-sm">update status</button>
-                                            </form>
-                                        <?php endif; ?>
-
+                                    <div class="col-md-6" style="text-align: right;">
+                                        <form action="<?= base_url('barang_pinjam/updatestatus') ?>" method="post" enctype="multipart/form-data">
+                                            <?php if ($header['status'] == 1) : ?>
+                                            <input type="hidden" name="id_ms_peminjaman" value="<?= $header['id_ms_peminjaman'] ?>" hidden>
+                                            <button type="submit" class="btn btn-primary btn-sm">update status</button>
+                                            <?php endif; ?>
+                                            <a href="" class="btn btn-success btn-sm"><i class="fa fa-file-excel"></i> Export to Excel</a>
+                                            <a href="" class="btn btn-info btn-sm" target="_blank"><i class="fa fa-print"></i> Print</a>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

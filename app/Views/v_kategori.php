@@ -27,7 +27,7 @@
                                                 <td class="p-1 pl-3"><?= $sat['nama_kategori'] ?></td>
                                                 <td class="p-1 pl-3" style="text-align: center;">
                                                     <a href="<?= base_url('kategori/indexupdate/' . $sat['id_kategori']) ?>" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Update"><i class="fas fa-pencil-alt"></i></a>
-                                                    <a href="<?= base_url('kategori/deletekategori/' . $sat['id_kategori']) ?>" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="return  confirm(' Menghapus data akan menghapus barang yang bersangkutan Apakah anda yakin menghapus? ')"><i class="fas fa-trash"></i></a>
+                                                    <a href="<?= base_url('kategori/deletekategori/' . $sat['id_kategori']) ?>" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus"><i class="fas fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -102,6 +102,25 @@
                             timer: 1500
                         })
                     <?php } ?>
+                </script>
+                <script>
+                    document.querySelectorAll('.btn-danger').forEach(function(button) {
+                        button.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            const url = this.getAttribute('href');
+
+                            Swal.fire({
+                                title: "Menghapus data akan menghapus riwayat transaksi yang bersangkutan. Apakah anda yakin ingin menghapus?",
+                                showCancelButton: true,
+                                confirmButtonText: "Hapus",
+                                cancelButtonText: "Batal"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                        window.location.href = url;
+                                }
+                            });
+                        });
+                    });
                 </script>
 
                 </body>

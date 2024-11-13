@@ -22,4 +22,8 @@ class BarangKeluarModel extends Model
             ->join('satuan', 'satuan.id_satuan=barang.id_satuan')
             ->where('id_ms_barang_keluar', $id)->findAll();
     }
+    public function getBarangKeluarCount()
+    {
+        return $this->countAll();
+    }
 }

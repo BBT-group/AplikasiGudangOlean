@@ -32,9 +32,16 @@ class Barang_Keluar extends BaseController
 
     public function index()
     {
+        $keyword = $this->request->getVar('search');
+        if ($keyword) {
+            $barang = $this->barangModel->getBarangByName($keyword);
+        } else {
+            $barang = $this->barangModel->getBarangWithKategori();
+        }
         $data = [
             'barang' => session()->get('datalist_keluar'),
-            'kategori' => $this->kategoriModel->findAll()
+            'kategori' => $this->kategoriModel->findAll(),
+            'barangs' => $barang->findAll(),
         ];
         echo view('v_header');
         return view('v_barang_keluar', $data);
@@ -53,7 +60,7 @@ class Barang_Keluar extends BaseController
         ];
         echo view('v_header');
         // ganti url ke detail
-        return view('admin\detailbarangkeluar', $data);
+        return view('admin/detailbarangkeluar', $data);
     }
 
 
@@ -105,6 +112,7 @@ class Barang_Keluar extends BaseController
                 'nama' => $this->request->getVar('nama'),
                 'satuan' => $this->request->getVar('satuan'),
                 'stok' => 1,
+                'stok_awal' =>  $this->request->getVar('stok')
             ];
 
             $this->dataList[] = $data2;
@@ -288,7 +296,7 @@ class Barang_Keluar extends BaseController
                 'satuan' => $a['nama_satuan'],
                 // 'merk' => $a('merk'),
                 'stok' => 1,
-                // 'id_kategori' => $a('id_kategori'),
+                'stok_awal' =>  $a['stok'],
             ];
             $this->dataList[] = $data2;
             session()->set('datalist_keluar', $this->dataList);

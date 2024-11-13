@@ -30,8 +30,14 @@ class Barang_Pinjam extends BaseController
 
     public function index()
     {
-
+        $keyword = $this->request->getVar('search');
+        if ($keyword) {
+            $barang = $this->inventarisModel->getByName($keyword);
+        } else {
+            $barang = $this->inventarisModel;
+        }
         $data = [
+            'barang' => $barang->findAll(),
             'pinjam' => session()->get('datalist_pinjam'),
         ];
         echo view('v_header');
@@ -47,7 +53,7 @@ class Barang_Pinjam extends BaseController
             'barang' => $this->peminjamanModel->getByMasterId($id)
         ];
         echo view('v_header');
-        return view('admin\detailpeminjaman', $data);
+        return view('admin/detailpeminjaman', $data);
     }
 
     public function index2()
@@ -143,6 +149,7 @@ class Barang_Pinjam extends BaseController
                 'nama_inventaris' => $this->request->getVar('nama_inventaris'),
                 // 'jenis' => $this->request->getVar('jenis'),
                 'stok' => 1,
+                'stok_awal' =>  $this->request->getVar('stok'),
             ];
             $this->dataList[] = $data2;
             session()->set('datalist_pinjam', $this->dataList);
@@ -287,6 +294,7 @@ class Barang_Pinjam extends BaseController
                 'id_inventaris' => $idInventaris,
                 'nama_inventaris' => $a['nama_inventaris'],
                 'stok' => 1,
+                'stok_awal' => $a['stok'],
             ];
             $this->dataList[] = $data2;
             session()->set('datalist_pinjam', $this->dataList);

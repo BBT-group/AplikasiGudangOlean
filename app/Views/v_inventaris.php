@@ -38,7 +38,7 @@
                                                     <a href="<?= base_url('inventaris/indexdetail/' . $item['id_inventaris']) ?>" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Detail"><i class="fas fa-clone"></i></a>
                                                     <?php if (session()->role == 'admin') : ?>
                                                         <a href="<?= base_url('inventaris/indexupdate/' . $item['id_inventaris']) ?>" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Update"><i class="fas fa-pencil-alt"></i></a>
-                                                        <a href="<?= base_url('inventaris/deletealat/' . $item['id_inventaris']) ?>" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="return confirm(' Menghapus data akan menghapus barang yang bersangkutan Apakah anda yakin menghapus? ')"><i class="fas fa-trash"></i></a>
+                                                        <a href="<?= base_url('inventaris/deletealat/' . $item['id_inventaris']) ?>" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus" id="hapus"><i class="fas fa-trash"></i></a>
                                                     <?php endif; ?>
                                                 </td>
                                             </tr>
@@ -100,7 +100,26 @@
                             showConfirmButton: false,
                             timer: 1500
                         })
-                    <?php } ?>
+                    <?php } ?>                    
+                </script>
+                <script>
+                    document.querySelectorAll('.btn-danger').forEach(function(button) {
+                        button.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            const url = this.getAttribute('href');
+
+                            Swal.fire({
+                                title: "Menghapus data alat akan menghapus riwayat transaksi yang bersangkutan. Apakah anda yakin ingin menghapus?",
+                                showCancelButton: true,
+                                confirmButtonText: "Hapus",
+                                cancelButtonText: "Batal"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                        window.location.href = url;
+                                }
+                            });
+                        });
+                    });
                 </script>
                 <script>
                     $(function() {
